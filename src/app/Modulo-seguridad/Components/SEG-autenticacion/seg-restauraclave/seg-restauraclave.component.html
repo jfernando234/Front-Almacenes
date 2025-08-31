@@ -1,0 +1,49 @@
+<div class="restaura-clave">
+
+    <form class="custom-form" [formGroup]="formulario"> 
+      <span class="title">COMACSA | Sistema WEB</span>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Usuario*</mat-label>
+       <input
+       autocomplete="off"
+        type="text"
+        placeholder="Usuario"
+        formControlName="login" matInput/>
+      </mat-form-field>
+
+        <mat-form-field  appearance="outline">
+        <mat-label>Email*</mat-label>
+        <input
+        autocomplete="off"
+        type="email"
+        placeholder="Email"
+        formControlName="correoInstitucional" matInput/>
+        </mat-form-field>
+        
+        <mat-form-field appearance="outline">
+        <mat-label>DNI*</mat-label>
+        <input autocomplete="off" type="text" placeholder="DNI"
+        formControlName="numeroDocumento" matInput/>
+        </mat-form-field>
+
+        <div>
+          <button mat-flat-button type="submit" [disabled]="!formulario.valid" (click)="restauraClave()" >Restaurar Contraseña</button>
+          <button mat-flat-button (click)="cancelar()" >Cancelar</button>
+      </div>
+
+      <!--div class="boton-principal">
+      <button type="submit" [disabled]="!formulario.valid" (click)="restauraClave()">Restaurar Contraseña</button>
+      <button type="submit" (click)="cancelar()">Cancelar</button>
+      </div-->
+      <br/>
+      
+            <div class="pie-login">
+        &copy; 2022 COMACSA | Software Integrado | Versión 1.0
+      </div>
+      
+    </form>
+    
+  </div>
+  
+  

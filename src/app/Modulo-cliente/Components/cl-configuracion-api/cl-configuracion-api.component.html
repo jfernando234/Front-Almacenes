@@ -1,0 +1,60 @@
+<div class="contenedor-principal">
+    
+    <h3 class="titulo">Configuracion API</h3>
+    <p><strong>Credenciales</strong></p>
+    <p>Aquí podrá configurar sus credenciales de seguridad.</p>
+    
+    <div class="contenedor_tabla">
+        <mat-expansion-panel [expanded]="false" hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    API PayIn
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="contenedor">
+                <mat-form-field class="inputgroup" appearance="outline">
+                    <mat-label>Codigo Merchant</mat-label>
+                    <input [readonly]="true" type="text" [(ngModel)]="codigo_merchant" autocomplete="off" matInput />
+                </mat-form-field><br>
+            
+                <mat-form-field class="inputgroup" appearance="outline">
+                    <mat-label>secretUser</mat-label>
+                    <input [readonly]="true" type="text" [(ngModel)]="secretUserPI" autocomplete="off" matInput />
+                </mat-form-field><br>
+            
+                <mat-form-field class="inputgroup" appearance="outline">
+                    <mat-label>secretPass</mat-label>
+                    <input [readonly]="true" type="text" [(ngModel)]="secretPassPI" autocomplete="off" matInput />
+                </mat-form-field><br><br>
+                <a><mat-icon>assignment</mat-icon>Ver documentación</a>
+            </div>
+        </mat-expansion-panel>
+        <mat-expansion-panel [expanded]="true" hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    API PayOut
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="contenedor">
+                <mat-form-field class="inputgroup" appearance="outline">
+                    <mat-label>Codigo Merchant</mat-label>
+                    <input [readonly]="true" type="text" [(ngModel)]="codigo_merchant" autocomplete="off" matInput />
+                </mat-form-field><br>
+            
+                <mat-form-field class="inputgroup" appearance="outline">
+                    <mat-label>secretUser</mat-label>
+                    <input [readonly]="true" type="text" [(ngModel)]="secretUserPO" autocomplete="off" matInput />
+                </mat-form-field><br>
+            
+                <mat-form-field class="inputgroup" appearance="outline">
+                    <mat-label>secretPass</mat-label>
+                    <input [readonly]="true" type="text" [(ngModel)]="secretPassPO" autocomplete="off" matInput />
+                </mat-form-field><br><br>
+                <a><mat-icon>assignment</mat-icon>Ver documentación</a>
+            </div>
+        </mat-expansion-panel>
+
+    </div>
+
+</div>
+

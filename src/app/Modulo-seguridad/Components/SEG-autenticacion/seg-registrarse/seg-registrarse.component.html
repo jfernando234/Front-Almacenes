@@ -1,0 +1,96 @@
+<form [formGroup]="form">
+    <div class="contenedor">
+        <div class="sub-conetenedor">
+            <mat-expansion-panel class="expansion-content"  [expanded]="true" hideToggle>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                    <h3 class="titulo">Registrar Usuario</h3>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <mat-form-field class="inputgroup" appearance="outline">
+                    <mat-label>Tipo Documento</mat-label>
+                    <mat-select (selectionChange)="selTipoDocumento()" [(value)]="selectedTD">
+                        <mat-option *ngFor="let item of tipo_Documento" [value]="item.idTipoDocumento">{{item.tipoDocumento}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="inputgroup" appearance="outline">
+                    <mat-label>Nº de Documento</mat-label>                            
+                    <input (input)="onInputChange($event)" 
+                    type="text" formControlName="numeroDocumento" autocomplete="off" matInput />
+                    <mat-error *ngIf="form.invalid">{{obtenerErrorCampo('numeroDocumento')}} </mat-error>
+                </mat-form-field><br/>
+
+                <div *ngIf="persona_natural_b == true">
+                    <mat-form-field class="inputgroup" appearance="outline">
+                        <mat-label>Género</mat-label>
+                        <mat-select formControlName="genero">
+                            <mat-option *ngFor="let item of tipoGenero" [value]="item">{{item.desTipoGenero}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field class="inputgroup" appearance="outline">
+                        <mat-label>Apellido Paterno</mat-label>
+                        <input  type="text" formControlName="primerApellido" autocomplete="off" matInput />
+                    </mat-form-field>
+
+                    <mat-form-field class="inputgroup" appearance="outline">
+                        <mat-label>Apellido Materno</mat-label>
+                        <input  type="text" formControlName="segundoApellido" autocomplete="off" matInput />
+                    </mat-form-field><br/>
+
+                    <mat-form-field class="inputgroup" appearance="outline">
+                        <mat-label>Nombres</mat-label>
+                        <input  type="text" formControlName="nombres" autocomplete="off" matInput />
+                    </mat-form-field>
+
+                    <mat-form-field class="inputgroup" appearance="outline">
+                        <mat-label>Fecha de Nacimiento</mat-label>
+                        <input type="date" formControlName="fechaNacimiento" autocomplete="off" matInput />
+                    </mat-form-field><br/>
+                </div>
+
+                <div *ngIf="persona_natural_b == false">
+                    <mat-form-field class="inputgroup" appearance="outline">
+                        <mat-label>Razón Social</mat-label>
+                        <input type="text" formControlName="razon" autocomplete="off" matInput />
+                    </mat-form-field>
+                    <p></p>
+
+                </div>
+
+                <mat-form-field class="inputgroup" appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input type="email" formControlName="correo" autocomplete="off" matInput />
+                </mat-form-field>
+
+                <mat-form-field class="inputgroup" appearance="outline">
+                    <mat-label>Celular</mat-label>
+                    <input type="number" formControlName="celular" placeholder="999999999" autocomplete="off" matInput />
+                </mat-form-field>
+
+                <mat-form-field class="inputgroup" appearance="outline">
+                    <mat-label>Login (Merchant)</mat-label>
+                    <input type="text" formControlName="login" autocomplete="off" matInput />
+                </mat-form-field><br/>
+
+                <mat-form-field class="inputgroup" appearance="outline">
+                    <mat-label>Contraseña</mat-label>
+                    <input type="password" formControlName="password" autocomplete="off" matInput />
+                </mat-form-field><br/>
+
+                <mat-form-field class="inputgroup" appearance="outline">
+                    <mat-label>Confirmar Contraseña</mat-label>
+                    <input type="password" formControlName="password2" autocomplete="off" matInput />
+                </mat-form-field><br/>
+
+                <div class="boton-principal">
+                    <button mat-flat-button type="submit" [disabled]="!form.valid" class="boton-graba" (click)="grabar()" >Registrarse</button>
+                    <button mat-flat-button (click)="cancelar()" class="boton-cancel" >Cancelar</button>
+                </div>
+
+            </mat-expansion-panel>
+        </div>    
+    </div>
+</form>

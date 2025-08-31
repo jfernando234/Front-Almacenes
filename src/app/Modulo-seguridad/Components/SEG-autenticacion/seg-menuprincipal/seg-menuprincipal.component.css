@@ -1,0 +1,301 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  z-index: 1;
+}
+
+.container-user{
+position: absolute;
+background-color:  white;
+float:right;
+z-index: 2;
+top: 50px;
+right: 0;
+width: auto;
+margin-right: 5px;
+color:black;
+}
+
+.icon-user-menu{
+text-align: center;
+}
+
+.icon-flech-user{
+position: relative;
+top: 5px;
+}
+
+mat-toolbar .menu-user{
+width: 100%;
+text-align: right;
+padding: 0;
+margin-right: 0;
+cursor: pointer;
+font-size: 12px;    
+justify-content: center;
+}
+
+mat-toolbar
+.toolbar-buttom {
+position:fixed;
+left:0px;
+bottom:0px;
+height:50px;
+width:100%;
+padding: 0;
+}
+
+
+.sidenav-container {
+flex: 1;
+}
+
+.is-mobile .sidenav-container {
+flex: 1 0 auto;
+}
+mat-sidenav{
+width: 50%;
+max-width: 270px;
+background-color: white;
+color: 2864fc;
+
+overflow: auto;
+}
+mat-sidenav-content{
+overflow: auto;
+height: 100%;
+box-sizing: border-box;
+/*background-color: #f15b1e;*/
+}
+
+.mat-sidenav.user{
+flex: 1;
+width: 80%;
+max-width: 250px;
+max-height: 150px;
+right: 0
+}
+
+
+
+::ng-deep .mat-expansion-panel-header {
+  height: 48px !important;
+}
+
+::ng-deep .mat-expansion-panel .mat-list-item {
+  padding-left: 15px !important;
+}
+
+::ng-deep .mat-nav-list .is-active {
+  background-color: rgb(204, 204, 204)!important;
+  border-left     : 8px solid rgb(139, 137, 133);
+  width           : calc(100% - 8px)!important;;
+}
+
+::ng-deep .mat-list-base {
+  padding-top: 0 !important;
+}
+
+::ng-deep .mat-nav-list .mat-list-item.is-active .mat-list-item-content {
+  padding: 0 8px;
+} 
+
+.container {
+display: flex;
+flex-direction: column;
+position: absolute;
+top: 0;
+bottom: 0;
+left: 0;
+right: 0;
+width: 100%;
+padding: 0;
+border: 0;
+}
+mat-toolbar .menu-user{
+width: 100%;
+text-align: right;
+padding: 0;
+margin-right: 0;
+cursor: pointer;
+}
+
+mat-toolbar
+.toolbar-buttom {
+position:fixed;
+left:0px;
+bottom:0px;
+height:50px;
+width:100%;
+padding: 0;
+}
+
+::ng-deep .mat-list-base {
+padding-top: 0 !important;
+}
+
+::ng-deep .mat-nav-list .mat-list-item.is-active .mat-list-item-content {
+padding: 0 8px;
+} 
+
+.accordion {
+display: block;
+max-width: 500px;
+color:#111746
+}
+
+.accordion-item {
+display: block;
+border: solid 1px #ccc;
+
+}
+
+.accordion-item + .accordion-item {
+border-top: none;
+}
+
+.accordion-item-header {
+display: flex;
+/*align-content: center;
+justify-content: left;*/
+}
+
+.accordion-item-description {
+font-size: 0.85em;
+color: #999;
+}
+
+.accordion-item-header,
+.accordion-item-body {
+padding: 5px;
+color: black;
+text-align: center;
+}
+
+.accordion-item-header:hover {
+cursor: pointer;
+/*background-color: #eee;*/
+color: #959aa3;
+}
+
+.accordion-item:first-child {
+border-top-left-radius: 4px;
+border-top-right-radius: 4px;
+}
+
+.accordion-item:last-child {
+border-bottom-left-radius: 4px;
+border-bottom-right-radius: 4px;
+}
+
+ul{
+flex: 1;
+height: auto;
+width: auto;
+padding: 0;
+border-radius: 3px;
+border: 1px solid #ccc;
+margin-right: 1rem;
+text-align: left;
+float:right;
+margin: 0;
+list-style-type: none;  
+overflow-y: auto;
+padding-bottom: 0.5rem;
+padding-top: 0.5rem;
+}
+
+ul li{
+cursor: pointer;    
+padding: 2px 10px;
+font-size: 18px;
+margin-top: 0.5rem;
+}
+ul li:hover{
+background-color: white;
+color: #abaec1;
+}
+a{
+cursor: pointer;
+vertical-align: middle;
+margin-left: 1rem;
+}
+.icon-user mat-icon{
+font-size: 45px;
+
+color: #08c3bc; 
+}
+h6{
+font-size: 16px;
+}
+.input-acceso{
+background-color: white;
+border: white solid 1px;
+/*margin-left: 1rem;*/
+margin-left: 16px;
+margin-top: 5px;
+margin-bottom: 5px;
+color: black;
+width: 230px;
+height: 30px;
+border-radius: 5px;
+font-size: 14px;
+}
+.toolbar-pie{
+width: 100%;
+display: flex;
+}
+.abiente-desa{
+width: 100%;
+text-align: right;
+font-size: 16px;
+}
+.perfil{
+text-align: center;
+color: white;
+}
+.cambia-perfil{
+font-size: 12px;
+text-decoration: underline;
+margin: 0;
+padding: 0;
+}
+.imagen{
+width: 100px;
+height: 100px;
+-moz-border-radius: 50%;
+-webkit-border-radius: 50%;
+border-radius: 50%;
+background: white;
+margin-top: auto;
+}
+
+mat-toolbar .img-logo{
+width: 50%;
+max-width: 270px;
+text-align: left;
+cursor: pointer;
+font-size: 12px;
+justify-content: center;
+background-color: #f3f4fa;
+}
+.menu-pie{
+display: flex;
+height: 50px;
+position: fixed;
+background-color: #fff;
+z-index: 2;
+bottom: 0;
+right: 0;
+width: auto;
+margin-right: 5px;
+cursor: pointer;
+}

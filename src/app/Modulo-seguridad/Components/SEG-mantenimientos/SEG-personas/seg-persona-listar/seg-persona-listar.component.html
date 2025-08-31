@@ -1,0 +1,56 @@
+<div class="contenedor-principal">
+    <h3 class="titulo">Lista de Personas</h3>
+
+    <div class="contenedor-filtro">
+        <mat-form-field appearance="standard" class="filtro" appearance="outline">
+            <mat-label>Búsqueda</mat-label>
+            <input matInput (keyup)="filtro($event)" placeholder="Búsqueda" autocomplete="off" #input>
+          </mat-form-field>
+          <button class="boton-filtro" [disabled]="buttonAcces.btnNuevo" mat-flat-button (click)="nuevaPersona()" >Nueva Persona</button>
+        </div>
+
+    <div class="contenedor_tabla">   
+    <ng-container class="mat-elevation-z8">
+    
+        <table mat-table [dataSource]="dataSource" matSort class="listado">
+        <ng-container matColumnDef="numeroDocumento">
+            <th mat-header-cell *matHeaderCellDef>DOCUMENTO</th>
+            <td mat-cell *matCellDef="let element"> {{element.numeroDocumento}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="apellidosyNombres">
+            <th mat-header-cell *matHeaderCellDef>NOMBRES</th>
+            <td mat-cell *matCellDef="let element"> {{element.apellidosyNombres}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="fechaNacimiento">
+            <th mat-header-cell *matHeaderCellDef>FECHA NACIMIENTO</th>
+            <td mat-cell *matCellDef="let element"> {{element.fechaNacimiento | date:'dd/MM/yyyy' }} </td>
+        </ng-container>
+        
+        <ng-container matColumnDef="correo">
+            <th mat-header-cell *matHeaderCellDef>CORREO</th>
+            <td mat-cell *matCellDef="let element"> {{element.correo}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef>ACCIONNES</th>
+            <td mat-cell *matCellDef="let element">
+                <div class="btn-aciones">
+                <button [disabled]="buttonAcces.btnEditar" (click)="actualizaPersona(element.idPersona)"  title="Editar" mat-flat-button><mat-icon class='edit'>create</mat-icon></button>
+                <button [disabled]="buttonAcces.btnEliminar" (click)="eliminaPersona(element.idPersona)" title="Eliminar" mat-flat-button><mat-icon class="delete">delete_sweep</mat-icon></button>
+                </div>
+            </td>
+            
+        </ng-container>
+
+        <tr class="tabla-cabecera" mat-header-row *matHeaderRowDef="columnasMostrar"></tr>
+        <tr class="tabla-cuerpo" mat-row *matRowDef="let row; columns: columnasMostrar"></tr>
+        </table> 
+            <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" showFirstLastButtons aria-label="Seleccione página"></mat-paginator>
+    </ng-container>
+    </div>      
+    <!--div class="boton-principal">
+        <button mat-flat-button (click)="nuevaPersona()" >Nueva Persona</button>
+    </div-->
+</div>

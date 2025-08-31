@@ -1,0 +1,89 @@
+<form [formGroup]="form">
+    <h3 class="titulo">Editar Usuario</h3>
+    <mat-expansion-panel [expanded]="true" hideToggle>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+            Datos de Usuario
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-form-field class="inputgroup" appearance="outline">    
+            <mat-label>Documento</mat-label>
+            <input type="text" [readonly]="true" formControlName="numeroDocumento" autocomplete="off" matInput/>    
+        </mat-form-field>
+
+        <br/>
+
+        <mat-form-field class="invisible" appearance="outline">
+            <input type="text" [readonly]="true" formControlName="idPersona" autocomplete="off" matInput />
+        </mat-form-field>
+
+        <mat-form-field class="inputgroup" appearance="outline">
+            <mat-label>Apellido Paterno*</mat-label>
+            <input type="text" [readonly]="true" formControlName="primerApellido" autocomplete="off" matInput />
+        </mat-form-field>
+
+        <mat-form-field class="inputgroup" appearance="outline">
+            <mat-label>Apellido Materno*</mat-label>
+            <input type="text" [readonly]="true" formControlName="segundoApellido" autocomplete="off" matInput />
+        </mat-form-field>
+
+        <mat-form-field class="inputgroup" appearance="outline">
+            <mat-label>Nombres*</mat-label>
+            <input type="text" [readonly]="true" formControlName="nombres" autocomplete="off" matInput />
+        </mat-form-field><br/>
+
+        <mat-form-field class="inputgroup" appearance="outline">
+            <mat-label>Email*</mat-label>
+            <input type="email" [readonly]="false" formControlName="correoInstitucional" autocomplete="off" matInput />
+        </mat-form-field>
+
+    <!--mat-form-field class="inputgroup" appearance="outline">
+            <mat-label>Perfil</mat-label>
+            <mat-select [formControl]="perfilControl" name="perfil">
+            <mat-option *ngFor="let data of listaPerfil" [value]="data.id">
+                {{data.descripcion}}
+            </mat-option>
+            </mat-select>
+    </mat-form-field-->
+        <p></p>
+    </mat-expansion-panel>
+    <br/>
+    <mat-expansion-panel [expanded]="true" hideToggle class="contenedor">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+            Ingreso de Perfiles
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div class="contenedor-perfil">
+            
+            <ul>
+                <div class="titulo-contenedor">
+                    Lista
+                </div>
+                
+                <li *ngFor="let item of listaPerfil; let index = index" 
+                (dblclick)="seleccionaPerfil(item,index)">{{item.nombrePerfil}}</li>
+            </ul>
+            <div class="contenedor-boton">
+                 <button mat-button type="button" (click)="seleccionaTodo()"> >> </button>
+                 <button mat-button type="button" (click)="deseleccionaTodo()"> << </button>
+            </div>
+            
+            <ul>
+                <div class="titulo-contenedor">
+                    Seleccionado
+                </div>
+                <li *ngFor="let item of listaPerfil_new; let index = index"
+                (dblclick)="deseleccionaPerfil(item,index)">{{item.nombrePerfil}}</li>
+            </ul>    
+         </div>
+
+    </mat-expansion-panel>
+
+    <div class="boton-principal">
+        <button mat-flat-button type="submit" [disabled]="!form.valid" class="boton-graba" (click)="grabar()" >Grabar</button>
+        <button mat-flat-button (click)="cancelar()" class="boton-cancel">Cancelar</button>
+    </div>
+</form>

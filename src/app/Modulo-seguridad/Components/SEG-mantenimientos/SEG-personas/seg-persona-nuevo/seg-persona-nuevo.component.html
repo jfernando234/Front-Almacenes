@@ -1,0 +1,62 @@
+<form [formGroup]="form">
+    <h3 class="titulo">Registro de Persona</h3>
+    <mat-expansion-panel  [expanded]="true" hideToggle>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+            Datos de Persona
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-form-field class="inputgroup" appearance="outline">
+            <mat-label>Tipo Documento</mat-label>
+            <mat-select (selectionChange)="selTipoDocumento()" formControlName="tipoDocumento">
+                <mat-option *ngFor="let item of tipo_Documento" [value]="item">{{item.tipoDocumento}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="inputgroup" appearance="outline">
+            <mat-label>Nº de Documento*</mat-label>                            
+            <input type="text" formControlName="numeroDocumento" autocomplete="off" matInput />
+            <mat-error *ngIf="form.invalid">{{obtenerErrorCampo('numeroDocumento')}} </mat-error>
+        </mat-form-field><br/>
+
+        <mat-form-field class="inputgroup" appearance="outline">
+            <mat-label>Apellido Paterno*</mat-label>
+            <input type="text" formControlName="primerApellido" autocomplete="off" matInput />
+        </mat-form-field>
+
+        <mat-form-field class="inputgroup" appearance="outline">
+            <mat-label>Apellido Materno*</mat-label>
+            <input type="text" formControlName="segundoApellido" autocomplete="off" matInput />
+        </mat-form-field><br/>
+
+        <mat-form-field class="inputgroup" appearance="outline">
+            <mat-label>Nombres*</mat-label>
+            <input type="text" formControlName="nombres" autocomplete="off" matInput />
+        </mat-form-field><br/>
+
+        <mat-form-field class="inputgroup" appearance="outline">
+            <mat-label>Email*</mat-label>
+            <input type="email" formControlName="correo" autocomplete="off" matInput />
+        </mat-form-field>
+
+        <mat-form-field class="inputgroup" appearance="outline">
+            <mat-label>Fecha de Nacimiento</mat-label>
+            <input type="date" formControlName="fechaNacimiento" autocomplete="off" matInput />
+        </mat-form-field><br/>
+
+        <mat-form-field class="inputgroup" appearance="outline">
+            <mat-label>Género</mat-label>
+            <mat-select (selectionChange)="selTipoDocumento()" formControlName="genero">
+                <mat-option *ngFor="let item of tipoGenero" [value]="item">{{item.desTipoGenero}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+    </mat-expansion-panel>
+
+    <div class="boton-principal">
+        <button mat-flat-button type="submit" [disabled]="!form.valid" class="boton-graba" (click)="grabar()" >Grabar</button>
+        <button mat-flat-button (click)="cancelar()" class="boton-cancel" >Cancelar</button>
+    </div>
+
+</form>

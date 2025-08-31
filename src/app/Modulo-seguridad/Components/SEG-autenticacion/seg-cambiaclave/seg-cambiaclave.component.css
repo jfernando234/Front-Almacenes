@@ -1,0 +1,39 @@
+* {
+    box-sizing: border-box;
+  }
+  .title{
+    margin-bottom: 0.5rem;
+  }
+  html,
+  body {
+    background: #ecf0f3;
+  }
+  h1 {
+    margin: 0;
+    padding: 0;
+  }
+
+  .restaura-clave {
+    min-height: 100%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+  .custom-form {
+    max-width: 600px;
+    min-width: 600px;
+    width: 30%;
+    /*background: rgba(255, 255, 255, 0.15);*/
+    padding: 2rem 3rem;
+    margin: auto;
+    margin-top: 4rem;
+    border-radius: 1rem;
+    background-color: #fff0;
+    /*box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #ffffff;*/
+    border: black solid 1px;
+    color: black;
+  }
+   mat-form-field {
+    width: 100%;
+    max-width: 500px;
+  }

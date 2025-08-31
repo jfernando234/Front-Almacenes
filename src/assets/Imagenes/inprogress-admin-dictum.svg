@@ -1,0 +1,20 @@
+<svg width="48" height="44" xmlns="http://www.w3.org/2000/svg">
+ <title/>
+
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="46" width="50" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <path stroke="null" fill="#4d73af" id="svg_1" d="m45.472176,24.166106l-2.177066,0l0,2.177066l2.177066,0l0,15.23946l-30.47892,0l0,-15.23946l15.23946,0l0,-2.177066l-15.23946,0a2.177066,2.177066 0 0 0 -2.177066,2.177066l0,15.23946a2.177066,2.177066 0 0 0 2.177066,2.177066l30.47892,0a2.177066,2.177066 0 0 0 2.177066,-2.177066l0,-15.23946a2.177066,2.177066 0 0 0 -2.177066,-2.177066z"/>
+  <path stroke="null" fill="#4d73af" id="svg_2" d="m36.273337,32.104665a0.979761,0.979761 0 0 0 1.381463,0l1.959522,-1.959522a0.979761,0.979761 0 0 0 0.293928,-0.69563l0,-15.676177a0.979761,0.979761 0 0 0 -0.979761,-0.979761l-3.919044,0a0.979761,0.979761 0 0 0 -0.979761,0.979761l0,15.676177a0.979761,0.979761 0 0 0 0.284131,0.69563l1.959522,1.959522zm-0.284131,-12.452763l1.959522,0l0,9.395909l-0.979761,0.979761l-0.979761,-0.979761l0,-9.395909z"/>
+  <path fill="#4d73af" id="svg_3" d="m20.613828,36.827994l9,0l0,-2l-11,0a2,2 0 0 0 2,2z"/>
+  <path fill="#4d73af" id="svg_4" d="m29.76054,32.355818l0,-2l-6,0a2,2 0 0 0 2,2l4,0z"/>
+  <ellipse ry="10" rx="10" id="svg_5" cy="10.932546" cx="10.037099" stroke-width="1.5" fill="#ffde1b"/>
+  <line stroke-linecap="null" stroke-linejoin="null" id="svg_11" y2="12" x2="10" y1="4.6543" x1="10" fill-opacity="null" stroke-opacity="null" stroke-width="null" stroke="#ffffff" fill="none"/>
+  <line stroke-linecap="null" stroke-linejoin="null" id="svg_12" y2="17.539629" x2="14.570924" y1="11.539629" x1="9.834738" fill-opacity="null" stroke-opacity="null" stroke-width="null" stroke="#ffffff" fill="none"/>
+  <line stroke-linecap="null" stroke-linejoin="null" id="svg_13" y2="17.067454" x2="15.178007" y1="11.067454" x1="10.441821" fill-opacity="null" stroke-opacity="null" stroke-width="null" stroke="#ffffff" fill="none"/>
+  <line stroke-linecap="null" stroke-linejoin="null" id="svg_14" y2="12" x2="10.607083" y1="4.6543" x1="10.607083" fill-opacity="null" stroke-opacity="null" stroke-width="null" stroke="#ffffff" fill="none"/>
+ </g>
+</svg>

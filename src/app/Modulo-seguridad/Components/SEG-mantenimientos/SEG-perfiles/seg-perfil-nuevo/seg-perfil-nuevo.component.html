@@ -1,0 +1,98 @@
+<form [formGroup]="form">
+    <h3 class="titulo">Registro de Perfil</h3>
+    <mat-expansion-panel [expanded]="true" hideToggle>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+            Datos de Perfil
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-form-field class="inputgroup" appearance="outline">
+            <mat-label>Perfil*</mat-label>
+            <input type="text" maxlength="100" formControlName="nombrePerfil" autocomplete="off" matInput />
+        </mat-form-field>
+
+        <mat-form-field class="inputgroup-2" appearance="outline">
+            <mat-label>Descripcion*</mat-label>
+            <input type="text" maxlength="200" formControlName="descripcionPerfil" autocomplete="off" matInput />
+        </mat-form-field>
+        <p></p>
+    </mat-expansion-panel>
+    <br/>
+    <mat-expansion-panel [expanded]="true" hideToggle class="contenedor">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+            Ingreso de Opciones
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-form-field class="inputgroup" appearance="outline">
+            
+            <mat-label>Modulo Principal</mat-label>
+            <mat-select [(value)]="selectedModulo" name="perfil" (valueChange)="listarModulosHijo()">
+            <mat-option *ngFor="let data of moduloPadre" [value]="data.idModulo">
+                {{data.nombreModulo}}
+            </mat-option>
+            </mat-select>
+        
+        </mat-form-field>
+
+         <div class="contenedor-menu">
+            <ul>
+                <div class="titulo-contenedor">
+                    Lista de módulos
+                </div>
+                
+                <mat-tree [dataSource]="dataSourceModuloTree" [treeControl]="treeControl" class="example-tree">
+                <mat-tree-node class="mat-tree-node-padre" *matTreeNodeDef="let node" matTreeNodeToggle>
+                <li class="li-tree" (dblclick)="listarAccesos(node)"><span style="padding-left:5px;"></span> {{node.nombreModulo}}</li>
+                </mat-tree-node>
+                <mat-nested-tree-node  *matTreeNodeDef="let node; when: hasChild">
+                    <div class="mat-tree-node" >
+                        <li class="li-tree" >
+                        <a  mat-icon-button matTreeNodeToggle
+                                [attr.aria-label]="'Toggle ' + node.nombreMdulo">
+                        <mat-icon class="mat-icon-rtl-mirror">
+                            {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                        </mat-icon>
+                        </a>
+                        {{node.nombreModulo}}</li>
+                    </div>
+                    <div [class.example-tree-invisible]="!treeControl.isExpanded(node)"
+                        role="group">
+                        <ng-container matTreeNodeOutlet></ng-container>
+                    </div>
+                </mat-nested-tree-node>
+                </mat-tree>            
+            </ul>
+
+            <ul>
+                <div class="titulo-contenedor">
+                    Lista de opciones
+                </div>
+                <div *ngIf="nombreModulo !== ''">
+                    Modulo {{nombreModulo}}
+                </div><br/>
+                  <li *ngFor="let item of accionListaDTO; let index = index"
+                  (dblclick)="seleccionaMenu(item,index)">{{item.accion}}</li>
+            </ul>
+            <div class="contenedor-boton">
+                 <button mat-button type="button" (click)="seleccionaTodo()"> >> </button>
+                 <button mat-button type="button" (click)="deseleccionaTodo()"> << </button>
+            </div>
+            <ul>
+                <div class="titulo-contenedor">
+                    Seleccionado
+                </div>
+                <li *ngFor="let item of accionListaSeleccDTO; let index = index"
+                (dblclick)="deseleccionaOMenu(item,index)"> {{item.nombreModulo}} / {{item.accion}}</li>
+            </ul>    
+         </div>
+
+    </mat-expansion-panel>
+
+    <div class="boton-principal">
+        <button mat-flat-button type="submit" [disabled]="!form.valid" (click)="grabar()" class="boton-graba">Grabar</button>
+        <button mat-flat-button (click)="cancelar()" class="boton-cancel">Cancelar</button>
+    </div>
+</form>

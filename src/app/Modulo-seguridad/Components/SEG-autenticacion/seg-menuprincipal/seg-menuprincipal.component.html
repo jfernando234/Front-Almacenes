@@ -1,0 +1,87 @@
+<div class="container" [class.is-mobile]="mobileQuery.matches" *ngIf="shouldRun">
+  
+  <mat-toolbar  class="toolbar">
+    <div class="img-logo">
+      <img (click)="snav.toggle()" style="width: 80%;margin-top: 30px;" src="assets/Imagenes/logo-pasarela.png">
+    </div>
+
+    <div class="menu-user">    
+      <button mat-icon-button class="icon-user">
+          <mat-icon class="icon-user-logo">people</mat-icon>
+      </button>
+      <a style="color: #42424c;" (click)="verMenuUser()">{{cliente_perfil}}
+        <mat-icon class="icon-flech-user">keyboard_arrow_down</mat-icon>
+      </a>
+    </div> 
+
+  </mat-toolbar>
+  
+  <div *ngIf='viewUserMenu' class="container-user">
+    <ul>
+      <li (click)="cambiaPerfil()"> <mat-icon>https</mat-icon> Cambiar perfil</li>
+      <li (click)="cambiarClave()"> <mat-icon>https</mat-icon> Cambio de contraseña</li>
+      <li (click)="logout()"> <mat-icon>exit_to_app</mat-icon> Cerrar Sesión</li>
+    </ul>
+  </div>
+      
+   
+  <mat-sidenav-container class="sidenav-container"
+                           [style.marginTop.px]="mobileQuery.matches ? 56 : 0">                                   
+      <mat-sidenav #snav 
+      [mode]="mobileQuery.matches ? 'over' : 'side'"
+      [fixedInViewport]="mobileQuery.matches"
+      [opened]="true"
+      fixedTopGap="56">
+
+          <cdk-accordion class="accordion">
+          <cdk-accordion-item  [expanded]="true" [disabled]="true"
+          *ngFor="let item of modeloModuloNew; let index = index;"
+          #accordionItem="cdkAccordionItem"                    
+          [attr.id]="'accordion-header-' + index"
+          [attr.aria-expanded]="accordionItem.expanded"
+          [attr.aria-controls]="'accordion-body-' + index">
+          
+          <div class="accordion-item-header" (click)="selModulo(item)" (click) ="accordionItem.toggle()">
+            <mat-icon>{{item.icono}}</mat-icon><strong>{{ item.nombreModulo }}</strong>
+          </div>
+
+          <div
+            class="accordion-item-body"
+            role="region"
+            [style.display]="accordionItem.expanded ? '' : 'none'"
+            [attr.id]="'accordion-body-' + index"
+            [attr.aria-labelledby]="'accordion-header-' + index">
+            
+            <app-seg-menuitem *ngIf="item.esHijo == true" [menuListaHijo]="item.listarModuloDTO"></app-seg-menuitem>
+          
+          </div>
+        </cdk-accordion-item>
+        </cdk-accordion>
+        <div style="margin-left: 2rem; position: absolute; bottom: 0; color: black; font-size: 14px; font-family: Roboto;display: flex;">
+          <!--p>
+            INFO<br/>
+            Horario de atención:<br/>
+            LUN. - VIE.: 8 am - 6 pm<br/>
+            SAB.: 8 am - 13:00 pm<br/>
+            Contáctanos:<br/>
+            +51 924070933<br/>
+            soporte@payment-latam.com<br/>
+           </p-->
+           <img style="width: 30px;height: 30px; font-weight: bold;" src="assets/Imagenes/interrogacion.png">
+           <p style="margin: 5px;">Help & Support</p>
+        </div>
+      </mat-sidenav>
+  
+      <mat-sidenav-content>
+        <div style="background-color: #fafafa;height: 100%;" (mouseout)="ocultaMenuUser()">
+          <img src="assets/Imagenes/fondo.png" class="img-fluid" style="width: 100%; height: 100%; position: absolute; right: 0; top: 0; z-index: -100; opacity: 0.75;">
+          <router-outlet></router-outlet>
+        </div>
+      </mat-sidenav-content>
+  </mat-sidenav-container>
+  <div class="menu-pie">
+    <div style="position: absolute; right: 0;margin-right: 1rem; margin-top: 10px;">
+      <img (click)="abrirWsp()" style="width: 30px;" src="assets/Imagenes/chat.png">
+    </div>
+  </div>
+</div>

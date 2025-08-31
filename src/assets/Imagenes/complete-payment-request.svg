@@ -1,0 +1,22 @@
+<svg width="48" height="48" xmlns="http://www.w3.org/2000/svg">
+ <title/>
+
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="402" width="582" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <path fill="#4d73af" stroke="null" id="svg_1" d="m10.41943,45.432388l0,-34.654256a0.825101,0.825101 0 0 1 0.825101,-0.825101l20.627533,0l0,4.125507a2.475304,2.475304 0 0 0 2.475304,2.475304l4.125507,0l0,2.475304l1.650203,0l0,-3.300405a0.825101,0.825101 0 0 0 -0.239279,-0.585822l-6.600811,-6.600811a0.825101,0.825101 0 0 0 -0.585822,-0.239279l-21.452635,0a2.475304,2.475304 0 0 0 -2.475304,2.475304l0,34.654256a2.475304,2.475304 0 0 0 2.475304,2.475304l11.551419,0l0,-1.650203l-11.551419,0a0.825101,0.825101 0 0 1 -0.825101,-0.825101zm23.102837,-34.315964l3.787215,3.787215l-2.962114,0a0.825101,0.825101 0 0 1 -0.825101,-0.825101l0,-2.962114z"/>
+  <rect fill="#4d73af" stroke="null" id="svg_3" y="28.615383" x="14.015381" width="7.230771" height="1.446154"/>
+  <path fill="#4d73af" stroke="null" id="svg_6" d="m47.38762,26.91238l-5.869232,-5.869232a0.838462,0.838462 0 0 0 -0.595308,-0.243154l-14.25385,0a2.515385,2.515385 0 0 0 -2.515385,2.515385l0,21.800005a2.515385,2.515385 0 0 0 2.515385,2.515385l18.446158,0a2.515385,2.515385 0 0 0 2.515385,-2.515385l0,-17.607697a0.838462,0.838462 0 0 0 -0.243154,-0.595308zm-5.626078,-3.253232l3.010078,3.010078l-2.171616,0a0.838462,0.838462 0 0 1 -0.838462,-0.838462l0,-2.171616zm4.192309,21.456236a0.838462,0.838462 0 0 1 -0.838462,0.838462l-18.446158,0a0.838462,0.838462 0 0 1 -0.838462,-0.838462l0,-21.800005a0.838462,0.838462 0 0 1 0.838462,-0.838462l13.415388,0l0,3.353847a2.515385,2.515385 0 0 0 2.515385,2.515385l3.353847,0l0,16.769235z"/>
+  <rect fill="#4d73af" stroke="null" id="svg_7" y="24.646154" x="17.246149" width="3.907695" height="1.446154"/>
+  <rect fill="#4d73af" stroke="null" id="svg_8" y="32.953842" x="14.015381" width="7.230771" height="1.446154"/>
+  <rect fill="#4d73af" stroke="null" id="svg_9" y="37.938455" x="14.015381" width="7.230771" height="1.446154"/>
+  <ellipse ry="10" rx="10" id="svg_10" cy="11" cx="10.200007" stroke-width="NaN" fill="#5fbf00"/>
+  <line stroke="#ffffff" stroke-linecap="null" stroke-linejoin="null" id="svg_18" y2="15.118918" x2="9" y1="10.858852" x1="5" fill-opacity="null" stroke-opacity="null" stroke-width="NaN" fill="none"/>
+  <line stroke="#ffffff" stroke-linecap="null" stroke-linejoin="null" id="svg_20" y2="8" x2="16" y1="16" x1="8" fill-opacity="null" stroke-opacity="null" stroke-width="NaN" fill="none"/>
+  <line stroke="#ffffff" stroke-linecap="null" stroke-linejoin="null" id="svg_21" y2="15.765071" x2="8.552382" y1="11.505006" x1="4.292317" fill-opacity="null" stroke-opacity="null" stroke-width="NaN" fill="none"/>
+  <line stroke="#ffffff" stroke-linecap="null" stroke-linejoin="null" id="svg_22" y2="7.353846" x2="15.446154" y1="15.353846" x1="7.446154" fill-opacity="null" stroke-opacity="null" stroke-width="NaN" fill="none"/>
+ </g>
+</svg>
