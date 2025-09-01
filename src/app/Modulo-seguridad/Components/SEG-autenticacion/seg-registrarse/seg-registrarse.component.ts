@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -34,7 +34,7 @@ export class SegRegistrarseComponent implements OnInit {
   persona_natural_b:boolean=false;
   selectedTD:number=2;
 
-  constructor(private fb: FormBuilder,
+  constructor(private fb: UntypedFormBuilder,
   private router:Router,
   private seguridadService: SegMantenimientosService,
   private dialog: MatDialog,
@@ -53,14 +53,14 @@ export class SegRegistrarseComponent implements OnInit {
     {idTipoGenero:1,desTipoGenero:'Hombre'},
   ]
 
-  form! : FormGroup;
+  form! : UntypedFormGroup;
   globalConstants: GlobalsConstants = new GlobalsConstants();
   subscription!: Subscription;
   modeloGrabar: grabaPersonaDTO = new grabaPersonaDTO();
   cantidad_caracter:number=0;
   selectTipoDocumento:any;
   selectTipoGenero:any;
-  control_tipoDocumento: FormControl= new FormControl;
+  control_tipoDocumento: UntypedFormControl= new UntypedFormControl;
   terminosAceptados?:boolean;
 
   ngOnInit(): void {

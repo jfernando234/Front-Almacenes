@@ -1,6 +1,6 @@
 
 import { Component, ElementRef, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -34,21 +34,21 @@ export class SegLoginComponent implements OnInit {
   accesoDirectoSel:accesoDirecto=new accesoDirecto();
   
   constructor(private readonly router: Router,
-              private readonly fb: FormBuilder,
+              private readonly fb: UntypedFormBuilder,
               private readonly loginService: SegLoginService,
               private readonly storageService: StorageService,
               private readonly userContextService: UserContextService,
               private el:ElementRef,
               private dialog: MatDialog) { }
-  formularioLogin!: FormGroup;
+  formularioLogin!: UntypedFormGroup;
 
   ngOnInit(): void {
     this.instanciarFormulario();
   }
   instanciarFormulario() {
     this.formularioLogin = this.fb.group({
-      login: new FormControl('', [Validators.minLength(4),Validators.required ]),
-      clave: new FormControl('', [Validators.minLength(6),Validators.required])
+      login: new UntypedFormControl('', [Validators.minLength(4),Validators.required ]),
+      clave: new UntypedFormControl('', [Validators.minLength(6),Validators.required])
     });
   }
   restauraClave(){

@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { agregaUsuarioPerfilDTO, eliminaUsuarioPerfilDTO, grabaUsuarioDTO, listaPerfilDTO, listaUsuarioDTO, listaUsuarioPerfilDTO } from 'src/app/Modulo-seguridad/Models/seg-mantenimiento.model';
 import swal from'sweetalert2';
@@ -14,7 +14,7 @@ import { StorageService } from 'src/app/Modulo-seguridad/Services/storage.servic
   styleUrls: ['./seg-usuario-actualiza.component.css']
 })
 export class SegUsuarioActualizaComponent implements OnInit,OnDestroy {
-  form! : FormGroup;
+  form! : UntypedFormGroup;
   globalConstants: GlobalsConstants = new GlobalsConstants();
   listaPerfil!:listaPerfilDTO[];
   listaPerfil_new:listaUsuarioPerfilDTO[]=[];
@@ -25,7 +25,7 @@ export class SegUsuarioActualizaComponent implements OnInit,OnDestroy {
   subscription!: Subscription;
   modeloGrabar: grabaUsuarioDTO = new grabaUsuarioDTO();
 
-  constructor(private router: Router, private fb:FormBuilder,
+  constructor(private router: Router, private fb:UntypedFormBuilder,
     private readonly route: ActivatedRoute,
     private seguridadService: SegMantenimientosService,
     private storageService: StorageService) { }

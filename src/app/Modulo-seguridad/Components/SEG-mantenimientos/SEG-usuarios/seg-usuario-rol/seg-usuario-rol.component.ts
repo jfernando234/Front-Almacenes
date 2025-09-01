@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -18,7 +18,7 @@ import { SEGCargaEsperaComponent } from '../../../seg-carga-espera/seg-carga-esp
   styleUrls: ['./seg-usuario-rol.component.css']
 })
 export class SegUsuarioRolComponent implements OnInit {
-  form! : FormGroup;
+  form! : UntypedFormGroup;
   idUsuario: number=0;
   subscription!: Subscription;
   listaRolUsuario: usuarioRolDTO[]=[];
@@ -32,7 +32,7 @@ export class SegUsuarioRolComponent implements OnInit {
   
 
   constructor(private router: Router,
-    private fb:FormBuilder,
+    private fb:UntypedFormBuilder,
     private readonly route: ActivatedRoute,
     private seguridadService: SegMantenimientosService,
     private dialog: MatDialog,) { }

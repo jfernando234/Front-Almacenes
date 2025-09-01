@@ -1,6 +1,6 @@
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -19,8 +19,8 @@ import swal from'sweetalert2';
 
 export class SegPerfilNuevoComponent implements OnInit {
   selectedModulo=0;
-  form! : FormGroup;
-  moduloControl: FormControl= new FormControl;
+  form! : UntypedFormGroup;
+  moduloControl: UntypedFormControl= new UntypedFormControl;
 
   moduloPadre:listarModuloDTO[]=[];
   moduloHijo:listarModuloDTO[]=[];
@@ -47,7 +47,7 @@ export class SegPerfilNuevoComponent implements OnInit {
 
   hasChild = (_: number, node: listarModuloDTO) => !!node.listarModuloDTO && node.listarModuloDTO.length > 0;
   
-  constructor(private fb: FormBuilder,private router:Router,
+  constructor(private fb: UntypedFormBuilder,private router:Router,
   private seguridadService: SegMantenimientosService,
   private storageService: StorageService) { }
   subscription!: Subscription;
