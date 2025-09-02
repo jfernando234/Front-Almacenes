@@ -11,7 +11,7 @@ import { UserContextService } from 'src/app/Modulo-seguridad/Services/user-conte
 import { GlobalsConstants } from 'src/assets/Model/globals-constants.model';
 import swal from'sweetalert2';
 import { SEGCargaEsperaComponent } from '../../seg-carga-espera/seg-carga-espera.component';
-
+import {routes } from 'src/app/Modulo-seguridad/Services/routes'
 @Component({
   selector: 'app-seg-login',
   templateUrl: './seg-login.component.html',
@@ -47,8 +47,8 @@ export class SegLoginComponent implements OnInit {
   }
   instanciarFormulario() {
     this.formularioLogin = this.fb.group({
-      login: new UntypedFormControl('', [Validators.minLength(4),Validators.required ]),
-      clave: new UntypedFormControl('', [Validators.minLength(6),Validators.required])
+      login: new UntypedFormControl('' ),
+      clave: new UntypedFormControl('')
     });
   }
   restauraClave(){
@@ -60,7 +60,7 @@ export class SegLoginComponent implements OnInit {
     //restaura-clave
   }
   login(){
-    
+    /*
     if (this.formularioLogin.value.login.length<4){
       swal.fire("Login", "Ingrese usuario", 'warning');
       return; 
@@ -97,8 +97,11 @@ export class SegLoginComponent implements OnInit {
     (error) => {
     swal.fire(this.globalConstants.msgErrorSummary, 'error' ,'error');
     dialogRef.close();
-  });
+  });*/
+  // Simula datos de usuario autenticado
+    this.router.navigate(['/main/principal']);
   }
+  
   onObtienePermisosPorUsuario(idUsuario:number){
     this.subscription = new Subscription();
     this.subscription = this.loginService.obtienePermisosPorUsuario(idUsuario)

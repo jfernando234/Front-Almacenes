@@ -1,6 +1,6 @@
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { UntypedFormBuilder, FormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { listarModuloDTO } from 'src/app/Modulo-seguridad/Models/seg-login.model';
 import { StorageService } from 'src/app/Modulo-seguridad/Services/storage.service';
