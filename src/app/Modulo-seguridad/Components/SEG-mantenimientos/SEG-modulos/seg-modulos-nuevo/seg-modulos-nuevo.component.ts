@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -23,13 +23,13 @@ export class SegModulosNuevoComponent implements OnInit {
 
   idModuloPadre:number=0;
   buttonAcces: ButtonAcces = new ButtonAcces();
-  form! : FormGroup;
-  perfilControl: FormControl= new FormControl;  
+  form! : UntypedFormGroup;
+  perfilControl: UntypedFormControl= new UntypedFormControl;  
   modeloGrabar: grabarModuloDTO = new grabarModuloDTO();
   globalConstants: GlobalsConstants = new GlobalsConstants();
 
   constructor(
-    private fb: FormBuilder,private router:Router,
+    private fb: UntypedFormBuilder,private router:Router,
     private moduloService: SegMantenimientosService,
     private dialog: MatDialog,
     private accesoOpcionesService: AccesoOpcionesService,

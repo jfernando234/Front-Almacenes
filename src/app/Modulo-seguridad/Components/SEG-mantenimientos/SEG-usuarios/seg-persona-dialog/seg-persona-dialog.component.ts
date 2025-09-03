@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
+import {  MatDialogRef } from '@angular/material/dialog';
+import {  MatPaginator } from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { listaPersonaDTO } from 'src/app/Modulo-seguridad/Models/seg-mantenimiento.model';

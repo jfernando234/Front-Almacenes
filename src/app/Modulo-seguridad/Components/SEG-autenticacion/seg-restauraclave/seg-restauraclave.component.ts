@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, FormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { restauraClaveDTO } from 'src/app/Modulo-seguridad/Models/seg-login.model';
@@ -15,12 +15,12 @@ import swal from'sweetalert2';
 })
 export class SegRestauraclaveComponent implements OnInit {
   modeloGrabar: restauraClaveDTO = new restauraClaveDTO();
-  formulario!: FormGroup;
+  formulario!: UntypedFormGroup;
   globalConstants: GlobalsConstants = new GlobalsConstants();
   subscription!: Subscription;
   
   constructor(private readonly router: Router,
-    private readonly fb: FormBuilder,
+    private readonly fb: UntypedFormBuilder,
     private loginService: SegLoginService,
     private readonly userContextService: UserContextService) { }
   

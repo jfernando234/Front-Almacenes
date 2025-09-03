@@ -1,12 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { agregaUsuarioPerfilDTO, eliminaUsuarioPerfilDTO, grabaUsuarioDTO, listaPerfilDTO, listaUsuarioDTO, listaUsuarioPerfilDTO } from 'src/app/Modulo-seguridad/Models/seg-mantenimiento.model';
 import swal from'sweetalert2';
 import { GlobalsConstants } from 'src/assets/Model/globals-constants.model';
 import { SegMantenimientosService } from 'src/app/Modulo-seguridad/Services/seg-mantenimientos.service';
 import { Subscription } from 'rxjs';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { StorageService } from 'src/app/Modulo-seguridad/Services/storage.service';
 
 @Component({
@@ -15,7 +14,7 @@ import { StorageService } from 'src/app/Modulo-seguridad/Services/storage.servic
   styleUrls: ['./seg-usuario-actualiza.component.css']
 })
 export class SegUsuarioActualizaComponent implements OnInit,OnDestroy {
-  form! : FormGroup;
+  form! : UntypedFormGroup;
   globalConstants: GlobalsConstants = new GlobalsConstants();
   listaPerfil!:listaPerfilDTO[];
   listaPerfil_new:listaUsuarioPerfilDTO[]=[];
@@ -25,8 +24,8 @@ export class SegUsuarioActualizaComponent implements OnInit,OnDestroy {
   idUsuario: number=0;
   subscription!: Subscription;
   modeloGrabar: grabaUsuarioDTO = new grabaUsuarioDTO();
-  
-  constructor(private router: Router, private fb:FormBuilder,
+
+  constructor(private router: Router, private fb:UntypedFormBuilder,
     private readonly route: ActivatedRoute,
     private seguridadService: SegMantenimientosService,
     private storageService: StorageService) { }
@@ -37,10 +36,10 @@ export class SegUsuarioActualizaComponent implements OnInit,OnDestroy {
 
     this.route.params.subscribe((params: Params) => {
       this.idUsuario = params.idUsuario;
-      this.listaUsuarioID();      
+      this.listaUsuarioID();
     });
   }
-  
+
   listaUsuarioID(){
     this.subscription = new Subscription();
     this.subscription = this.seguridadService.getUsuarioID(this.idUsuario)
@@ -52,15 +51,15 @@ export class SegUsuarioActualizaComponent implements OnInit,OnDestroy {
     },
     (error) => {
     });
-    
+
   }
   listarPerfil(){
     this.subscription = new Subscription();
     this.subscription = this.seguridadService.getPerfil()
     .subscribe((resp: listaPerfilDTO[]) => {
       if (resp) {
-          this.listaPerfil = resp;        
-          if (this.listaPerfil_new) {        
+          this.listaPerfil = resp;
+          if (this.listaPerfil_new) {
             let i = this.listaPerfil_new.length-1;
             do {
               const elementIndex = this.listaPerfil.findIndex((obj => obj.idPerfil == this.listaPerfil_new[i].idPerfil));
@@ -101,11 +100,11 @@ export class SegUsuarioActualizaComponent implements OnInit,OnDestroy {
   seleccionaPerfil(item: listaPerfilDTO,index: number){
     this.listaPerfil_new.push(item);
     this.listaPerfil.splice(index,1);
-    
+
     this.modeloGrabaPeril = new agregaUsuarioPerfilDTO();
     this.modeloGrabaPeril.idUsuario=this.idUsuario;
     this.modeloGrabaPeril.idPerfil=item.idPerfil;
-  
+
     this.subscription = new Subscription();
       this.subscription = this.seguridadService.crearUsuarioPerfil(this.modeloGrabaPeril)
       .subscribe((mensaje : any) =>  {
@@ -146,7 +145,7 @@ export class SegUsuarioActualizaComponent implements OnInit,OnDestroy {
     if(!this.form.valid)
     {return;}
       this.modeloGrabar=this.form.value;
-      this.modeloGrabar.idUsuario=this.idUsuario;  
+      this.modeloGrabar.idUsuario=this.idUsuario;
       this.modeloGrabar.listaPerfil=this.listaPerfil_new;
       this.modeloGrabar.idUsuarioLogin=this.storageService.getItemDecrypt('idUsuario');
       console.log(this.modeloGrabar);
@@ -160,7 +159,7 @@ export class SegUsuarioActualizaComponent implements OnInit,OnDestroy {
         this.router.navigate(['main/seg-usuario']);
       }
       else{
-        swal.fire(this.globalConstants.msgErrorSummary, this.globalConstants.Mensaje?.errorMensaje , 'warning');        
+        swal.fire(this.globalConstants.msgErrorSummary, this.globalConstants.Mensaje?.errorMensaje , 'warning');
       }
        },
       (error) => {

@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -17,14 +17,14 @@ import { StorageService } from 'src/app/Modulo-seguridad/Services/storage.servic
 })
 
 export class SegUsuarioNuevoComponent implements OnInit,OnDestroy {
-  form! : FormGroup;
-  perfilControl: FormControl= new FormControl;
+  form! : UntypedFormGroup;
+  perfilControl: UntypedFormControl= new UntypedFormControl;
   listaPerfil!:listaPerfilDTO[];
   listaPerfil_new:listaPerfilDTO[]=[];
   modeloGrabar: grabaUsuarioDTO = new grabaUsuarioDTO();
   globalConstants: GlobalsConstants = new GlobalsConstants();
   
-  constructor(private fb: FormBuilder,private router:Router,
+  constructor(private fb: UntypedFormBuilder,private router:Router,
   private seguridadService: SegMantenimientosService,
   private dialog: MatDialog,
   private storageService: StorageService) { }

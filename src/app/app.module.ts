@@ -9,21 +9,21 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 //ANGULAR MATERIAL
 import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatListModule} from '@angular/material/list'; 
-import {MatInputModule} from '@angular/material/input';
+import { MatListModule} from '@angular/material/list'; 
+import { MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatTableModule } from '@angular/material/table';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatSelectModule} from '@angular/material/select';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule} from '@angular/material/paginator';
+import { MatSelectModule} from '@angular/material/select';
+import { MatDialogModule} from '@angular/material/dialog';
 import {CdkAccordionModule} from '@angular/cdk/accordion';
 import {MatTreeModule} from '@angular/material/tree';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatTabsModule} from '@angular/material/tabs';
-import {MatRadioModule} from '@angular/material/radio';
+import { MatCheckboxModule} from '@angular/material/checkbox';
+import { MatTabsModule} from '@angular/material/tabs';
+import { MatRadioModule} from '@angular/material/radio';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import {MatSortModule} from '@angular/material/sort';
 
@@ -53,7 +53,6 @@ import { SegPerfilActualizaComponent } from './Modulo-seguridad/Components/SEG-m
 import { SegRestauraclaveComponent } from './Modulo-seguridad/Components/SEG-autenticacion/seg-restauraclave/seg-restauraclave.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { MatTableExporterModule } from 'mat-table-exporter';
-import { MatSelectFilterModule } from 'mat-select-filter';
 import { SEGCargaEsperaComponent } from './Modulo-seguridad/Components/seg-carga-espera/seg-carga-espera.component';
 import { SegUsuarioRolComponent } from './Modulo-seguridad/Components/SEG-mantenimientos/SEG-usuarios/seg-usuario-rol/seg-usuario-rol.component';
 import { SegUsuarioRolDetalleDialogComponent } from './Modulo-seguridad/Components/SEG-mantenimientos/SEG-usuarios/seg-usuario-rol-detalle-dialog/seg-usuario-rol-detalle-dialog.component';
@@ -104,7 +103,7 @@ import { ClConfiguracionApiComponent } from './Modulo-cliente/Components/cl-conf
     BrowserAnimationsModule,
     MatSidenavModule,
     MatIconModule,
-    MatButtonModule,
+    
     MatExpansionModule,
     MatToolbarModule,
     MatListModule,
@@ -128,7 +127,6 @@ import { ClConfiguracionApiComponent } from './Modulo-cliente/Components/cl-conf
     MatAutocompleteModule,
     NgxChartsModule,
     MatTableExporterModule,
-    MatSelectFilterModule,
     MatAutocompleteModule,
     MatSortModule
   ],

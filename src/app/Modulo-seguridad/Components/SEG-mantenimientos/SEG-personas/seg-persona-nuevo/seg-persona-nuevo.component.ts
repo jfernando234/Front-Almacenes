@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { grabaPersonaDTO } from 'src/app/Modulo-seguridad/Models/seg-mantenimiento.model';
@@ -26,7 +26,7 @@ interface tipoDocumento{
 
 export class SegPersonaNuevoComponent implements OnInit {
   
-  constructor(private fb: FormBuilder,
+  constructor(private fb: UntypedFormBuilder,
               private router:Router,
               private seguridadService: SegMantenimientosService) { }
   
@@ -38,14 +38,14 @@ export class SegPersonaNuevoComponent implements OnInit {
     {idTipoGenero:true,desTipoGenero:'MASCULINO'},
     {idTipoGenero:false,desTipoGenero:'FEMENINO'}
   ]
-  form! : FormGroup;
+  form! : UntypedFormGroup;
   globalConstants: GlobalsConstants = new GlobalsConstants();
   subscription!: Subscription;
   modeloGrabar: grabaPersonaDTO = new grabaPersonaDTO();
   cantidad_caracter:number=0;
   selectTipoDocumento:any;
   selectTipoGenero:any;
-  control_tipoDocumento: FormControl= new FormControl;
+  control_tipoDocumento: UntypedFormControl= new UntypedFormControl;
 
   ngOnInit(): void {
     this.instanciaForm();

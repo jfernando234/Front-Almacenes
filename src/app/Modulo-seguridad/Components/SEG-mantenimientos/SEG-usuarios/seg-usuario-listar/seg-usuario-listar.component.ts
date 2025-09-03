@@ -1,6 +1,6 @@
 import { Component, OnInit, OnChanges, ViewChild } from '@angular/core';
 import { Route, Router } from '@angular/router';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatPaginator } from '@angular/material/paginator';
 import { SegMantenimientosService } from 'src/app/Modulo-seguridad/Services/seg-mantenimientos.service';
 import { eliminaUsuarioDTO, grabaUsuarioDTO, listaUsuarioDTO } from 'src/app/Modulo-seguridad/Models/seg-mantenimiento.model';
 import { Subscription } from 'rxjs';

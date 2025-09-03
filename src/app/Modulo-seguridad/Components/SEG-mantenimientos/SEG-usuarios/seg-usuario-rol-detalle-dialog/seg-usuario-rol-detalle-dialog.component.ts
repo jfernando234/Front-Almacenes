@@ -1,6 +1,6 @@
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
@@ -20,7 +20,7 @@ export class SegUsuarioRolDetalleDialogComponent implements OnInit {
   constructor(private seguridadService: SegMantenimientosService,
     @Inject(MAT_DIALOG_DATA) public data:usuarioRolDTO,
     private dialog: MatDialog) { }
-  
+
   listaRolDetalle : usuarioRolDetDTO[]=[]
   listaRolDetalleSel : usuarioRolDetDTO[]=[]
   rolDetalleSel : usuarioRolDetDTO= new usuarioRolDetDTO();
@@ -32,7 +32,7 @@ export class SegUsuarioRolDetalleDialogComponent implements OnInit {
   subscription!: Subscription;
 
   ngOnInit(): void {
-    this.listaUsuarioRolDet();   
+    this.listaUsuarioRolDet();
   }
 
   listaUsuarioRolDet(){
@@ -44,7 +44,7 @@ export class SegUsuarioRolDetalleDialogComponent implements OnInit {
     var idUsuarioRol:number=this.data.idUsuarioRol!;
     this.subscription = new Subscription();
     this.subscription = this.seguridadService.getUsuarioRolDet(idRol,idUsuarioRol)
-    .subscribe((data :any) => {      
+    .subscribe((data :any) => {
       this.listaRolDetalle=data;
       this.data.rolDetalle?.forEach((value:any)=>{
         const elementIndex = this.listaRolDetalle.findIndex((obj => obj.idUsuarioRolDet == value.idUsuarioRolDet));
@@ -55,7 +55,7 @@ export class SegUsuarioRolDetalleDialogComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
       dialogRef.close();
     },
-    (error) => {});  
+    (error) => {});
   }
 
   filtro(event: Event) {
@@ -85,7 +85,7 @@ export class SegUsuarioRolDetalleDialogComponent implements OnInit {
   }
   grabar(){
     // if(this.listaRolDetalleSel.length<1){
-    //   swal.fire(this.globalConstants.msgErrorSummary, 'Debe seleccionar una opción' ,'warning'); 
+    //   swal.fire(this.globalConstants.msgErrorSummary, 'Debe seleccionar una opción' ,'warning');
     //   return;
     // };
     // this.dialogRef.close(this.listaRolDetalleSel);

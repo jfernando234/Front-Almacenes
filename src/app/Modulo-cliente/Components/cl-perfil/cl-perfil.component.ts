@@ -6,7 +6,7 @@ import { ButtonAcces } from 'src/assets/Model/acceso-button.model';
 import { AccesoOpcionesService } from 'src/assets/Model/acceso-opciones.service';
 import { ClientePerfilDTO } from '../../Models/cl-perfil.model';
 import { ClPerfilService } from '../../Services/cl-perfil.service';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, FormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { grabaPersonaDTO, listaPersonaDTO, modificaPersonaDTO } from 'src/app/Modulo-seguridad/Models/seg-mantenimiento.model';
 import { SegMantenimientosService } from 'src/app/Modulo-seguridad/Services/seg-mantenimientos.service';
 import swal from'sweetalert2';
@@ -29,7 +29,7 @@ interface tipoDocumento{
   styleUrls: ['./cl-perfil.component.css']
 })
 export class ClPerfilComponent implements OnInit {
-  form! : FormGroup;  
+  form! : UntypedFormGroup;  
   buttonAcces: ButtonAcces = new ButtonAcces();
   subscription!: Subscription;
   listPerfil: ClientePerfilDTO[]=[];
@@ -49,7 +49,7 @@ export class ClPerfilComponent implements OnInit {
   persona_natural_b:boolean=true;
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private clperfilService: ClPerfilService,
     private router: Router,
     private accesoOpcionesService: AccesoOpcionesService,
