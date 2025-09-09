@@ -1,0 +1,88 @@
+<form [formGroup]="form">
+    <h3 class="titulo">Roles por Usuario</h3>
+    <mat-expansion-panel [expanded]="true" hideToggle>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+            Datos de Usuario
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-form-field class="inputgroup" appearance="outline">    
+            <mat-label>Documento</mat-label>
+            <input type="text" formControlName="numeroDocumento" autocomplete="off" matInput/>    
+        </mat-form-field><br/>
+       
+        <mat-form-field class="inputgroup" appearance="outline">
+            <mat-label>Usuario</mat-label>
+            <input type="text" formControlName="login" autocomplete="off" matInput />
+        </mat-form-field>
+
+        <mat-form-field class="inputgroup-2" appearance="outline">
+            <mat-label>Nombres</mat-label>
+            <input type="text" formControlName="apellidosyNombres" autocomplete="off" matInput />
+        </mat-form-field><br/>
+        <p></p>
+    </mat-expansion-panel>
+    <br/>
+
+    <mat-expansion-panel [expanded]="true" hideToggle>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+            Roles
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div class="contenedor_tabla">
+            <ng-container class="mat-elevation-z8">                
+                <table mat-table matTableExporter [dataSource]="dataSource" matSort class="listado">    
+                
+                <ng-container matColumnDef="descPerfil">
+                    <th mat-header-cell *matHeaderCellDef>PERFIL</th>
+                    <td mat-cell *matCellDef="let element"> {{element.descPerfil}} </td>
+                </ng-container> 
+
+                <ng-container matColumnDef="nombreRol">
+                    <th mat-header-cell *matHeaderCellDef>ROL</th>
+                    <td mat-cell *matCellDef="let element"> {{element.nombreRol}} </td>
+                </ng-container>     
+        
+                <ng-container matColumnDef="descripRol">
+                    <th mat-header-cell *matHeaderCellDef>DESCRIPCION</th>
+                    <td mat-cell *matCellDef="let element"> {{element.descripRol}} </td>
+                </ng-container>   
+                
+                <ng-container matColumnDef="nombreModulo">
+                    <th mat-header-cell *matHeaderCellDef>MODULO</th>
+                    <td mat-cell *matCellDef="let element"> {{element.nombreModulo}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="sel">
+                    <th mat-header-cell *matHeaderCellDef class="titulo_grid"></th>
+                    <td mat-cell style="width: 50px; text-align: center;" *matCellDef="let element "> 
+                        <input type="checkbox" [checked]="element.sel" value="1" (change)="selRol($event,element)">
+                    </td>
+                </ng-container>
+                
+                <ng-container matColumnDef="ver">
+                    <th mat-header-cell *matHeaderCellDef>VER</th>
+                    <td mat-cell style="width: 50px; text-align: center; " *matCellDef="let element; let index = index" >
+                        <button *ngIf="element.tiene_detalle" (click)="verDetalle(element,index)" title="Visualizar" mat-flat-button>
+                        <mat-icon class='view'>visibility</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+                
+                <tr class="tabla-cabecera" mat-header-row *matHeaderRowDef="columnasMostrar"></tr>
+                <tr style="height: 25px;" mat-row *matRowDef="let row; columns: columnasMostrar"></tr>
+                </table> 
+                    <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" showFirstLastButtons aria-label="Seleccione página"></mat-paginator>
+            </ng-container>
+            </div>
+            
+    </mat-expansion-panel>
+
+    <div class="boton-principal">
+        <!--button mat-flat-button type="submit" [disabled]="!form.valid" class="boton-graba" (click)="grabar()" >Grabar</button-->
+        <button mat-flat-button (click)="cancelar()" class="boton-primario">Salir</button>
+    </div>
+</form>

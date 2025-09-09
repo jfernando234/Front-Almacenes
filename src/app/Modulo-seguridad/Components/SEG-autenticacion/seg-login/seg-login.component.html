@@ -1,0 +1,53 @@
+<!--div style="height:10%;"></div-->
+<!--div class="imagen-fondo">
+  <img sizes="100%" src="assets/Imagenes/logo2.png" class="img-size">
+ </div--> 
+<div class="login">
+
+  <div class="contenedor-login">
+    
+    <!--div class="imagen-login">
+      <img class="imagen-fondo-login" sizes="100%" src="assets/Imagenes/logo-pasarela.png">
+    </div-->
+
+    <div class="form-login">
+      <form class="custom-form" [formGroup]="formularioLogin">
+          <div class="cuerpo-login">
+            <div class="head-logo">
+              <img class="imagen-fondo-login" src="assets/Imagenes/logo-pasarela.png">
+            </div>
+            <div class="title"><span>Pay-Met | Sistema WEB</span></div>
+            <p></p>
+            <mat-form-field class="input-login" appearance="outline">
+              <mat-label>Usuario</mat-label>
+              <input matInput type="text" formControlName="login" autocomplete="off" placeholder="Usuario">
+              <mat-icon matSuffix>person</mat-icon>
+            </mat-form-field><br>
+
+            <mat-form-field class="input-login" appearance="outline">
+              <mat-label>Clave</mat-label>                
+              <input matInput type="Password" formControlName="clave" placeholder="Clave">
+              <mat-icon matSuffix>lock</mat-icon>
+            </mat-form-field>
+            
+            <div class="boton-ingreso">
+              <button type="submit" style="text-align: center;" mat-flat-button class="boton-primario" (click)="login()">Ingresar</button>
+            </div>
+            <div class="pie-login">
+              <br/>            
+              <!--div class="restaurar-clave">
+                <a (click)="restauraClave()">¿Olvidaste tu contraseña?</a><a (click)="registrarse()">&nbsp;&nbsp;Registrarse</a>
+              </div-->
+          </div>
+          
+          </div><br/>  
+
+      </form>
+    </div>
+
+  </div>
+  </div>
+  <script> document.body.classList.remove('swal2-height-auto'); </script>
+  
+  
+  

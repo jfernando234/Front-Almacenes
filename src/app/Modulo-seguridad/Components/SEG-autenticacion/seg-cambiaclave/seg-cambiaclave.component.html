@@ -1,0 +1,50 @@
+<div class="restaura-clave">
+
+  <form class="custom-form" [formGroup]="formulario"> 
+      <h3 class="titulo">Cambio de contraseña</h3>
+      <mat-form-field appearance="outline">
+        <mat-label>Usuario*</mat-label>
+       <input
+       [readonly]="true"
+       autocomplete="off"
+        type="text"
+        placeholder="Usuario"
+        formControlName="login" matInput/>
+      </mat-form-field>
+
+      <mat-form-field  appearance="outline">
+        <mat-label>Clave Anterior*</mat-label>
+        <input
+        autocomplete="off"
+        type="password"
+        placeholder="Clave Anterior"
+        formControlName="claveAnterior" matInput/>
+      </mat-form-field>
+        
+      <mat-form-field appearance="outline">
+        <mat-label>Clave Nueva*</mat-label>
+        <input autocomplete="off" type="password" placeholder="Clave Nueva"
+        formControlName="claveNueva" matInput/>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Repetir Clave*</mat-label>
+        <input autocomplete="off" type="password" placeholder="Repetir Clave" 
+        formControlName="claveNuevaValida" matInput/>
+      </mat-form-field>
+
+
+      <div class="boton-principal">
+        <button [disabled]="!formulario.valid" mat-flat-button type="submit" class="boton-graba" (click)="cambiarClave()" >Grabar</button>
+        <button mat-flat-button (click)="cancelar()" class="boton-cancel">Cancelar</button>
+      </div>
+
+      <br/>
+            <div class="pie-login">
+      </div>
+      
+  </form>
+    
+  </div>
+  
+  

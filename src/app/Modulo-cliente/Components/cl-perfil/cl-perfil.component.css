@@ -1,0 +1,94 @@
+.contenedor{
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+.contenedor1{
+    width: 25%;
+    height: 300px;
+    padding: 20px;
+}
+.contenedor2{
+    width: 75%;
+    padding: 20px;
+}
+h3{
+    padding-left: 5px;
+}
+.header{
+    display: flex;
+    border-bottom: 1px solid #eee;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    
+    border: 1px solid #eee;
+}
+.body{
+    padding-top: 20px;
+    min-height: 200px;
+    border: 1px solid #eee;
+}
+.body2{
+    padding-top: 20px;
+    min-height: 300px;
+    border: 1px solid #eee;
+}
+.foot-center{
+    text-align: center;
+    padding: 20px 0px;
+    border: 1px solid #eee;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+.foot-right{
+    text-align: right;
+    padding: 20px 20px;
+    border: 1px solid #eee;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+.boton-nuevo{
+    background:#0d86e3;
+    color: white;
+}
+.boton-graba{
+    background:#2ea444;
+    color: white;
+}
+
+ul{
+    overflow-y: auto;
+    list-style-type: none;
+    padding: 0;
+    border-radius: 3px;
+}
+ul li{
+    cursor: pointer;
+    padding: 0px 10px;
+    font-size: 13px;
+    height: 40px;
+}
+ul li:hover{
+    background-color: #efefef;
+}
+mat-tab-group{
+    padding: 0px 20px;
+}
+.contenido-tab {
+    height: 300px;
+    overflow: auto;
+}
+mat-form-field.inputgroup{
+    max-width: 300px;
+    width: 100%;    
+    max-height: 5px ;
+    padding: 25px 10px;
+    margin-left: 1rem;
+}
+mat-form-field.inputgroup2{
+    max-width: 500px;
+    width: 100%;    
+    max-height: 5px ;
+    padding: 25px 10px;
+    margin-left: 1rem;
+}

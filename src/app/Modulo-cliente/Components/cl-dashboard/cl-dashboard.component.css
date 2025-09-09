@@ -1,0 +1,36 @@
+.contenedor{
+    width: 100%;
+    display: flex;
+    margin-left: 1rem;
+}
+
+.dash-deta{
+    min-width: 200px;
+    width: 220px;
+    margin: 0.5rem;
+    cursor: pointer;
+    height: 100px;
+    padding-top: 1rem;
+    border-radius: 10px;
+}
+.dash-payin{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    font-size: 11px;
+    
+}
+p{
+    width: 100%;
+    margin: 0;
+    margin-left: 5px;
+}
+.filtro-busqueda{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+}
+::ng-deep
+.ngx-charts g .grid-panel.odd rect {
+  fill: none;
+}

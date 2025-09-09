@@ -1,0 +1,17 @@
+<div class="contenedor">
+        <div class="header">
+            <h3>Mis Perfiles</h3>
+        </div>
+        <div class="body">
+            <ul>            
+                <li *ngFor="let item of listPerfil; let index = index" (dblclick)="selectPerfil(item)">
+                    <img src="assets/Imagenes/perfil-default.png" class="imagen">
+                    {{item.perfil}}
+                </li>
+            </ul>
+
+        </div>
+        <!--div class="foot-center">
+            <button mat-flat-button type="submit" class="boton-nuevo" >Nuevo Perfil</button>
+        </div-->
+</div>

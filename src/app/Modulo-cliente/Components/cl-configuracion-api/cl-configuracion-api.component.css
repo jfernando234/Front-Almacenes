@@ -1,0 +1,15 @@
+p{
+    margin-left: 1rem;
+}
+.contenedor_tabla{
+    margin: 1rem;
+}
+mat-expansion-panel-header{
+    border: 1px solid black;
+    margin-bottom: 1rem;
+}
+a{
+    margin-left: 2rem;
+    color: blue;
+    cursor: pointer;
+}

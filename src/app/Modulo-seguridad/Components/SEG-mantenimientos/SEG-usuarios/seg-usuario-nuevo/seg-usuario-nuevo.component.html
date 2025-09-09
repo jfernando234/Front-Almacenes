@@ -1,0 +1,82 @@
+<form [formGroup]="form">
+    <h3 class="titulo">Registro de Usuario</h3>
+    <mat-expansion-panel [expanded]="true" hideToggle>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+            Datos de Usuario
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-form-field class="inputgroup" appearance="outline">    
+            <mat-label>Buscar Persona</mat-label>
+            <input [readonly]="true" type="text" formControlName="numeroDocumento" autocomplete="off" matInput/>    
+        </mat-form-field>
+        <a (click)="buscaPersona()"><mat-icon>search</mat-icon></a>
+
+        <br/>
+
+        <mat-form-field class="invisible" appearance="outline">
+            <input [readonly]="true" type="text" formControlName="idPersona" autocomplete="off" matInput />
+        </mat-form-field>
+
+        <mat-form-field class="inputgroup" appearance="outline">
+            <mat-label>Apellido Paterno*</mat-label>
+            <input [readonly]="true" type="text" formControlName="primerApellido" autocomplete="off" matInput />
+        </mat-form-field>
+
+        <mat-form-field class="inputgroup" appearance="outline">
+            <mat-label>Apellido Materno*</mat-label>
+            <input [readonly]="true" type="text" formControlName="segundoApellido" autocomplete="off" matInput />
+        </mat-form-field>
+
+        <mat-form-field class="inputgroup" appearance="outline">
+            <mat-label>Nombres*</mat-label>
+            <input [readonly]="true" type="text" formControlName="nombres" autocomplete="off" matInput />
+        </mat-form-field>
+        <br/>
+        <mat-form-field class="inputgroup" appearance="outline">
+            <mat-label>Email*</mat-label>
+            <input [readonly]="false" type="email" formControlName="correoInstitucional" autocomplete="off" matInput />
+        </mat-form-field>
+
+        <p></p>
+    </mat-expansion-panel>
+    <br/>
+    <mat-expansion-panel [expanded]="true" hideToggle class="contenedor">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+            Ingreso de Perfiles
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+
+         <div class="contenedor-perfil">
+            
+            <ul>
+                <div class="titulo-contenedor">
+                    Lista
+                </div>
+                
+                <li *ngFor="let item of listaPerfil; let index = index" 
+                (dblclick)="seleccionaPerfil(item,index)">{{item.nombrePerfil}}</li>
+            </ul>
+            <div class="contenedor-boton">
+                 <button mat-button type="button" (click)="seleccionaTodo()"> >> </button>
+                 <button mat-button type="button" (click)="deseleccionaTodo()"> << </button>
+            </div>
+            
+            <ul>
+                <div class="titulo-contenedor">
+                    Seleccionado
+                </div>
+                <li *ngFor="let item of listaPerfil_new; let index = index"
+                (dblclick)="deseleccionaPerfil(item,index)">{{item.nombrePerfil}}</li>
+            </ul>    
+         </div>
+
+    </mat-expansion-panel>
+
+    <div class="boton-principal">
+        <button mat-flat-button type="submit" [disabled]="!form.valid" class="boton-graba" (click)="grabar()" >Grabar</button>
+        <button mat-flat-button (click)="cancelar()" class="boton-cancel">Cancelar</button>
+    </div>
+</form>
