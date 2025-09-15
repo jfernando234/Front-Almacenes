@@ -25,6 +25,11 @@ import { ClConfiguracionApiComponent } from './Modulo-cliente/Components/cl-conf
 import { ClDashboardComponent } from './Modulo-cliente/Components/cl-dashboard/cl-dashboard.component';
 import { ClInventarioComponent } from './Modulo-cliente/Components/cl-inventario/cl-inventario.component';
 import { ClProveedoresComponent } from './Modulo-cliente/Components/cl-proveedores/cl-proveedores.component';
+import { ClClientesComponent } from './Modulo-cliente/Components/cl-clientes/cl-clientes.component';
+import { ClOrdenesDeCompraComponent } from './Modulo-cliente/Components/cl-ordenes-de-compra/cl-ordenes-de-compra.component';
+import { ClOrdenesDeVentaComponent } from './Modulo-cliente/Components/cl-ordenes-de-venta/cl-ordenes-de-venta.component';
+import { ClEnviosRecepcionComponent } from './Modulo-cliente/Components/cl-envios-recepcion/cl-envios-recepcion.component';
+import { ClReportesComponent } from './Modulo-cliente/Components/cl-reportes/cl-reportes.component';
 const routes: Routes = [
   { path: 'login', component: SegLoginComponent },
   { path: 'restaura-clave', component: SegRestauraclaveComponent },
@@ -132,6 +137,31 @@ const routes: Routes = [
       {
         path: 'cl-proveedores',
         component: ClProveedoresComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'cl-clientes',
+        component: ClClientesComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'cl-ordenes-de-compra',
+        component: ClOrdenesDeCompraComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'cl-ordenes-de-venta',
+        component: ClOrdenesDeVentaComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'cl-envios-recepcion',
+        component: ClEnviosRecepcionComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'cl-reportes',
+        component: ClReportesComponent,
         canActivate: [AuthGuard],
       },
       {

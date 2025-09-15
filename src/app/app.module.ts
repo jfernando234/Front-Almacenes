@@ -67,6 +67,11 @@ import { ClCambiaperfilDialogComponent } from './Modulo-cliente/Components/cl-ca
 import { ClConfiguracionApiComponent } from './Modulo-cliente/Components/cl-configuracion-api/cl-configuracion-api.component';
 import { ClInventarioComponent } from './Modulo-cliente/Components/cl-inventario/cl-inventario.component';
 import { ClProveedoresComponent } from './Modulo-cliente/Components/cl-proveedores/cl-proveedores.component';
+import { ClClientesComponent } from './Modulo-cliente/Components/cl-clientes/cl-clientes.component';
+import { ClOrdenesDeCompraComponent } from './Modulo-cliente/Components/cl-ordenes-de-compra/cl-ordenes-de-compra.component';
+import { ClOrdenesDeVentaComponent } from './Modulo-cliente/Components/cl-ordenes-de-venta/cl-ordenes-de-venta.component';
+import { ClEnviosRecepcionComponent } from './Modulo-cliente/Components/cl-envios-recepcion/cl-envios-recepcion.component';
+import { ClReportesComponent } from './Modulo-cliente/Components/cl-reportes/cl-reportes.component';
 
 @NgModule({
   declarations: [
@@ -100,6 +105,11 @@ import { ClProveedoresComponent } from './Modulo-cliente/Components/cl-proveedor
     ClConfiguracionApiComponent,
     ClInventarioComponent,
     ClProveedoresComponent,
+    ClClientesComponent,
+    ClOrdenesDeCompraComponent,
+    ClOrdenesDeVentaComponent,
+    ClEnviosRecepcionComponent,
+    ClReportesComponent,
   ],
   bootstrap: [AppComponent],
   imports: [
