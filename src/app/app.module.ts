@@ -72,6 +72,7 @@ import { ClOrdenesDeCompraComponent } from './Modulo-cliente/Components/cl-orden
 import { ClOrdenesDeVentaComponent } from './Modulo-cliente/Components/cl-ordenes-de-venta/cl-ordenes-de-venta.component';
 import { ClEnviosRecepcionComponent } from './Modulo-cliente/Components/cl-envios-recepcion/cl-envios-recepcion.component';
 import { ClReportesComponent } from './Modulo-cliente/Components/cl-reportes/cl-reportes.component';
+import { A11yModule } from "@angular/cdk/a11y";
 
 @NgModule({
   declarations: [
@@ -139,7 +140,8 @@ import { ClReportesComponent } from './Modulo-cliente/Components/cl-reportes/cl-
     // NgxChartsModule,
     MatAutocompleteModule,
     MatSortModule,
-  ],
+    A11yModule
+],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     provideHttpClient(withInterceptorsFromDi()),
