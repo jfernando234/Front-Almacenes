@@ -8,6 +8,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatButtonModule } from "@angular/material/button";
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
     MatIconModule,
     MatInputModule,
     MatAutocompleteModule,
+    MatButtonModule
   ],
   exports: [
     CommonModule,
@@ -32,8 +34,9 @@ import { MatFormFieldModule } from "@angular/material/form-field";
     MatSelectModule,
     MatFormFieldModule,
     MatIconModule,
+    MatButtonModule
   ],
   providers: [{ provide: MAT_DATE_LOCALE, useValue: 'es-PE' }],
 
 })
-export class materialModule {}
+export class MaterialModule {}

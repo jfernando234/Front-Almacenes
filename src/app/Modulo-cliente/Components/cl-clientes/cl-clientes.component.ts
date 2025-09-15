@@ -1,61 +1,82 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormBuilder,Validators,ValidatorFn,AbstractControl } from '@angular/forms';
-import { Cliente } from '../../Models/cliente.model';
+import { DataCliente,ClienteList } from '../../Models/cliente.model';
+import { ClienteService } from '../../Services/cl-clientes.service';
+import { finalize } from 'rxjs/operators';
+import { MatTableDataSource } from '@angular/material/table';
+import { pageSelection } from '../../Models/modelsPag';
 @Component({
   selector: 'app-cl-clientes',
   templateUrl: './cl-clientes.component.html',
   styleUrls: ['./cl-clientes.component.css'],
 })
 export class ClClientesComponent implements OnInit{
-  clientes: any[] = [];
   form!: FormGroup;
-  isFormSubmitted = false;
-  paciente: Cliente = new Cliente();
-  cantidad = 0;
-  constructor() {}
+  serialNumberArray : number[] = [];
+  pageNumberArray: Array<number> = [];
+  ClientesList: ClienteList[] = [];
+  dataSource!: MatTableDataSource<ClienteList>;
+  isLoading = false;
+  public pageSize = 10;
+  public totalData = 0;
+  public currentPage = 1;
+  public fechaInicio = '';
+  public fechaFin = '';
+  public skip = 0;
+  public totalPages = 0;
+  public pageSelection: Array<pageSelection> = [];
+  public limit: number = this.pageSize;
+  constructor(private clienteServiceList: ClienteService) {}
 
-  ngOnInit() {}
-  crearPaciente() {
+  ngOnInit() {
+    this.ObtenerClientes();
 
   }
-  soloNumeros(event: Event) {
-    const input = event.target as HTMLInputElement;
-    const currentValue = input.value;
-    input.value = currentValue.replace(/[^0-9]/g, '');
-  }
-  actualizarCantidad() {
-    this.form.get('numeroDocumento')!.setValue('');
-    const tipoDocumento = this.form.get('tipoDocumentoId')!.value;
-    let maxCaracteres = 0;
-    switch (tipoDocumento) {
-      case '01':
-        maxCaracteres = 8;
-        break;
-      case '06':
-        maxCaracteres = 11;
-        break;
-      default:
-        maxCaracteres = 12;
-        break;
+  ObtenerClientes(){
+    this.ClientesList = [];
+    this.serialNumberArray = [];
+    let fechaInicioFormateado = undefined
+    let fechaFinFormateado = undefined
+    this.isLoading = true
+    if (this.fechaInicio != "") {
+      fechaInicioFormateado = new Date(this.fechaInicio)?.toISOString().split('T')[0];
     }
-    this.cantidad = maxCaracteres;
-    this.form
-      .get('numeroDocumento')
-      ?.setValidators([
-        Validators.required,
-        Validators.maxLength(maxCaracteres),
-        Validators.minLength(maxCaracteres),
-        Validators.pattern('^[0-9]+$'),
-      ]);
-    this.form.get('numeroDocumento')?.updateValueAndValidity();
+    if (this.fechaFin != "") {
+      fechaFinFormateado = new Date(this.fechaFin)?.toISOString().split('T')[0];
+    }
+    this.clienteServiceList.obtenerAllClientes(this.currentPage,this.pageSize,fechaInicioFormateado, fechaFinFormateado)
+    .pipe(finalize(() => this.isLoading = false))
+    .subscribe((data: DataCliente )=>{
+      this.totalData = data.totalData;
+      for (let index = this.skip; index < Math.min(this.limit, data.totalData); index++) {
+          const serialNumber = index + 1;
+          this.serialNumberArray.push(serialNumber);
+      }
+      this.ClientesList = data.data;
+      this.dataSource = new MatTableDataSource(this.ClientesList);
+      this.calculateTotalPages(this.totalData, this.pageSize);
+    })
   }
-  isInvalid(controlName: string) {
-    const control = this.form.get(controlName);
-    return control?.invalid && control?.touched;
-  }
-  isRequerido(controlName: string) {
-    const control = this.form.get(controlName);
-    return control?.errors && control.errors['required'];
-  }
+  limpiar(){
 
+  }
+  buscarPorFecha(){}
+
+  onCreate() {}
+  //Paginacion
+  getMoreData(value: string) {}
+  moveToPage(page: number) {}
+  private calculateTotalPages(totalData: number, pageSize: number): void {
+    this.pageNumberArray = [];
+    this.totalPages = totalData / pageSize;
+    if (this.totalPages % 1 != 0) {
+      this.totalPages = Math.trunc(this.totalPages + 1);
+    }
+    for (let i = 1; i <= this.totalPages; i++) {
+      const limit = pageSize * i;
+      const skip = limit - pageSize;
+      this.pageNumberArray.push(i);
+      this.pageSelection.push({ skip: skip, limit: limit });
+    }
+  }
 }

@@ -30,7 +30,6 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSortModule } from '@angular/material/sort';
-import { MatFormFieldModule } from '@angular/material/form-field';
 
 //COMPONENTES
 import { SegLoginComponent } from './Modulo-seguridad/Components/SEG-autenticacion/seg-login/seg-login.component';
@@ -67,12 +66,13 @@ import { ClCambiaperfilDialogComponent } from './Modulo-cliente/Components/cl-ca
 import { ClConfiguracionApiComponent } from './Modulo-cliente/Components/cl-configuracion-api/cl-configuracion-api.component';
 import { ClInventarioComponent } from './Modulo-cliente/Components/cl-inventario/cl-inventario.component';
 import { ClProveedoresComponent } from './Modulo-cliente/Components/cl-proveedores/cl-proveedores.component';
-import { ClClientesComponent } from './Modulo-cliente/Components/cl-clientes/cl-clientes.component';
 import { ClOrdenesDeCompraComponent } from './Modulo-cliente/Components/cl-ordenes-de-compra/cl-ordenes-de-compra.component';
 import { ClOrdenesDeVentaComponent } from './Modulo-cliente/Components/cl-ordenes-de-venta/cl-ordenes-de-venta.component';
 import { ClEnviosRecepcionComponent } from './Modulo-cliente/Components/cl-envios-recepcion/cl-envios-recepcion.component';
 import { ClReportesComponent } from './Modulo-cliente/Components/cl-reportes/cl-reportes.component';
 import { A11yModule } from "@angular/cdk/a11y";
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { ClClientesComponent } from './Modulo-cliente/Components/cl-clientes/cl-clientes.component';
 
 @NgModule({
   declarations: [
@@ -106,11 +106,11 @@ import { A11yModule } from "@angular/cdk/a11y";
     ClConfiguracionApiComponent,
     ClInventarioComponent,
     ClProveedoresComponent,
-
+    ClClientesComponent,
     ClOrdenesDeCompraComponent,
     ClOrdenesDeVentaComponent,
     ClEnviosRecepcionComponent,
-    ClReportesComponent,
+    ClReportesComponent
   ],
   bootstrap: [AppComponent],
   imports: [

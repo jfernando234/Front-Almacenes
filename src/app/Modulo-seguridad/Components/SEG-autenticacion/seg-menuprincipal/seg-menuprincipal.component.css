@@ -1,15 +1,12 @@
 .container {
   display: flex;
-  flex-direction: column;
-  position: relative;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  padding: 0;
-  border: 0;
-  z-index: 1;
+  flex-direction:
+  column; min-height: 100vh; /* Ocupa toda la altura de la ventana */
+  width: 100%; /* Ocupa todo el ancho */
+  padding: 0; margin: 0; /* Asegúrate de que no haya márgenes predeterminados */
+  box-sizing: border-box;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 
 .container-user{
@@ -39,7 +36,7 @@ text-align: right;
 padding: 0;
 margin-right: 0;
 cursor: pointer;
-font-size: 12px;    
+font-size: 12px;
 justify-content: center;
 }
 
@@ -106,7 +103,7 @@ right: 0
 
 ::ng-deep .mat-nav-list .mat-list-item.is-active .mat-list-item-content {
   padding: 0 8px;
-} 
+}
 
 .container {
 display: flex;
@@ -144,7 +141,7 @@ padding-top: 0 !important;
 
 ::ng-deep .mat-nav-list .mat-list-item.is-active .mat-list-item-content {
 padding: 0 8px;
-} 
+}
 
 .accordion {
 display: block;
@@ -207,14 +204,14 @@ margin-right: 1rem;
 text-align: left;
 float:right;
 margin: 0;
-list-style-type: none;  
+list-style-type: none;
 overflow-y: auto;
 padding-bottom: 0.5rem;
 padding-top: 0.5rem;
 }
 
 ul li{
-cursor: pointer;    
+cursor: pointer;
 padding: 2px 10px;
 font-size: 18px;
 margin-top: 0.5rem;
@@ -231,7 +228,7 @@ margin-left: 1rem;
 .icon-user mat-icon{
 font-size: 45px;
 
-color: #08c3bc; 
+color: #08c3bc;
 }
 h6{
 font-size: 16px;

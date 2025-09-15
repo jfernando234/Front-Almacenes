@@ -1,30 +1,129 @@
-<div class="page-wrapper">
-  <div class="content">
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="card">
-          <div class="card-body">
-            <form (ngSubmit)="crearPaciente()" >
-              <div class="row">
-                <div class="col-12">
-                  <div class="form-heading">
-                    <h4>Datos del Cliente </h4>
-                  </div>
-                  <div class="col-12 col-md-6 col-xl-3">
-                    <div class="form-group local-forms">
-                      <label>Nro. Documento <span class="login-danger">*</span></label>
-                      <div class="input-group">
-                        <input (input)="soloNumeros($event)"
-                          class="form-control" type="text">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
+<div class="row" data-select2-id="46" style="align-items: baseline;">
+    <div class="col-md-2">
+        <div class="form-group local-forms">
+          <label>Desde</label>
+          <input [(ngModel)]="fechaInicio" style='height:48px; background-color: #f4f5fa; border:none;' class="form-control datetimepicker" type="text"
+            placeholder="Desde" matInput >
+
+
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group local-forms">
+          <label>Hasta</label>
+          <input [(ngModel)]="fechaFin" style='height:48px;background-color: #f4f5fa; border:none;' class="form-control datetimepicker" type="text"
+            placeholder="Hasta" matInput >
+
+
+        </div>
+      </div>
+
+    <div class="col-md-5">
+        <div class="col-6 col-md-1 col-xl-1 mt-3">
+            <div class="add-group">
+            <a (click)="limpiar()" href="javascript:;"
+              class="btn btn-primary ms-2"><img
+                  src="assets/img//call-icon-01.svg" alt=""></a>
+            <a (click)="buscarPorFecha()" href="javascript:;"
+                class="btn btn-primary ms-2"><img
+                    src="" alt=""></a>
+            </div>
+            <a  href="javascript:;"
+              class="btn btn-primary ms-2"><img
+                  src="/src/assets/Imagenes/plus.svg" alt=""></a>
+        </div>
+    </div>
+</div>
+<div>
+  <div class="page-table-header mb-2">
+    <div class="row align-items-center">
+      <div class="col">
+        <div class="table-blk" style="justify-content: space-between;" >
+          <h3>Lista de Clientes</h3>
         </div>
       </div>
     </div>
+  </div>
+  <div class="table-responsive">
+    <table class="table border-0 custom-table comman-table datatable mb-0">
+      <thead>
+        <tr>
+          <th>N°</th>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Teléfono</th>
+          <td>DNI</td>
+          <TD>Correo</TD>
+          <th>Dirección</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of ClientesList; let i = index ">
+          <td>
+            {{serialNumberArray[i]}}
+          </td>
+          <td>{{data.nombre}}</td>
+          <td>{{data.apellido}}</td>
+          <td>{{data.telefono}}</td>
+          <td>{{data.dni}}</td>
+          <td>{{data.correo}}</td>
+          <td>{{data.direccion}}</td>
+          <td>
+            <button class="custom-badge status-blue"
+              *ngIf="data.estado=== 0">Pendiente</button>
+            <button class="custom-badge status-green "
+              *ngIf="data.estado=== 1">Cobrado</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="table_footer">
+        <div class="col-sm-12 col-md-3">
+          <div class="dataTables_info" *ngIf="serialNumberArray.length > 0">
+            Mostrando {{ serialNumberArray[0]}} a {{serialNumberArray[serialNumberArray.length - 1]}} de {{totalData}} entradas
+          </div>
+          <div class="dataTables_info" *ngIf="serialNumberArray.length === 0">
+            No hay entradas para mostrar
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-7">
+          <div class="pagination_section">
+            <ul class="pagination">
+              <li class="page-item" [ngClass]="{ disabled: currentPage === 1}">
+                <a (click)="getMoreData('previous')" class="page-link" href="javascript:void(0);"
+                  tabindex="-1">Anterior</a>
+                </li>
+                <ng-container *ngFor="let item of pageNumberArray; let i = index">
+                  <li class="page-item" [class.active]="item === currentPage" [ngClass]="
+                    (pageNumberArray[currentPage - 2] > item && item !== 1 && pageNumberArray.length > 6) ||
+                    (pageNumberArray[currentPage] < item && item !== 1 && pageNumberArray.length > 6 &&
+                      pageNumberArray.length !== item) ? 'hide-page-no' : 'show-page-no' ">
+                      <a (click)="moveToPage(item)" class="page-link" href="javascript:void(0);">
+                        {{ item }}
+                      </a>
+                  </li>
+                  <li class="page-item" *ngIf=" i === 0 && pageNumberArray.length > 6 && currentPage > 2"
+                    [hidden]="currentPage === 1" (click)="moveToPage(currentPage - 2)">
+                      <a class="page-link" href="javascript:void(0);">
+                        ...
+                      </a>
+                  </li>
+                  <li *ngIf=" i === pageNumberArray.length - 2 && pageNumberArray.length > 6" [hidden]="currentPage >=pageNumberArray[pageNumberArray.length - 2] ||totalData <
+                    serialNumberArray[serialNumberArray.length - 1]" class="page-item"
+                    (click)="moveToPage(currentPage + 2)">
+                    <a class="page-link" href="javascript:void(0);">
+                      ...
+                    </a>
+                  </li>
+                </ng-container>
+                  <li class="page-item" [ngClass]="{ disabled: currentPage === pageNumberArray[pageNumberArray.length - 1]
+                    || ClientesList.length === 0 }">
+                    <a (click)="getMoreData('next')" class="page-link" href="javascript:void(0);">Siguiente</a>
+                  </li>
+            </ul>
+          </div>
+        </div>
+      </div>
   </div>
 </div>
