@@ -1,33 +1,36 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule,FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { provideHttpClient, withInterceptorsFromDi }  from '@angular/common/http';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 //ANGULAR MATERIAL
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatListModule} from '@angular/material/list'; 
-import {MatInputModule} from '@angular/material/input';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatTableModule } from '@angular/material/table';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatSelectModule} from '@angular/material/select';
-import {MatDialogModule} from '@angular/material/dialog';
-import {CdkAccordionModule} from '@angular/cdk/accordion';
-import {MatTreeModule} from '@angular/material/tree';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatTabsModule} from '@angular/material/tabs';
-import {MatRadioModule} from '@angular/material/radio';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDialogModule } from '@angular/material/dialog';
+import { CdkAccordionModule } from '@angular/cdk/accordion';
+import { MatTreeModule } from '@angular/material/tree';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatRadioModule } from '@angular/material/radio';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import {MatSortModule} from '@angular/material/sort';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatSortModule } from '@angular/material/sort';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 //COMPONENTES
 import { SegLoginComponent } from './Modulo-seguridad/Components/SEG-autenticacion/seg-login/seg-login.component';
@@ -37,10 +40,8 @@ import { SegPersonaNuevoComponent } from './Modulo-seguridad/Components/SEG-mant
 import { SegPersonaListarComponent } from './Modulo-seguridad/Components/SEG-mantenimientos/SEG-personas/seg-persona-listar/seg-persona-listar.component';
 import { SegModulosListarComponent } from './Modulo-seguridad/Components/SEG-mantenimientos/SEG-modulos/seg-modulos-listar/seg-modulos-listar.component';
 import { SegModulosNuevoComponent } from './Modulo-seguridad/Components/SEG-mantenimientos/SEG-modulos/seg-modulos-nuevo/seg-modulos-nuevo.component';
-import { SegModulosActualizaComponent } from './Modulo-seguridad/Components/SEG-mantenimientos/SEG-modulos/seg-modulos-actualiza/seg-modulos-actualiza.component'
+import { SegModulosActualizaComponent } from './Modulo-seguridad/Components/SEG-mantenimientos/SEG-modulos/seg-modulos-actualiza/seg-modulos-actualiza.component';
 import { SEGModulosDialogComponent } from './Modulo-seguridad/Components/SEG-mantenimientos/SEG-modulos/seg-modulos-dialog/seg-modulos-dialog.component';
-
-
 
 import { SegPersonaDialogComponent } from './Modulo-seguridad/Components/SEG-mantenimientos/SEG-usuarios/seg-persona-dialog/seg-persona-dialog.component';
 import { SegUsuarioListarComponent } from './Modulo-seguridad/Components/SEG-mantenimientos/SEG-usuarios/seg-usuario-listar/seg-usuario-listar.component';
@@ -64,63 +65,74 @@ import { ClPerfilComponent } from './Modulo-cliente/Components/cl-perfil/cl-perf
 
 import { ClCambiaperfilDialogComponent } from './Modulo-cliente/Components/cl-cambiaperfil-dialog/cl-cambiaperfil-dialog.component';
 import { ClConfiguracionApiComponent } from './Modulo-cliente/Components/cl-configuracion-api/cl-configuracion-api.component';
+import { ClInventarioComponent } from './Modulo-cliente/Components/cl-inventario/cl-inventario.component';
+import { ClProveedoresComponent } from './Modulo-cliente/Components/cl-proveedores/cl-proveedores.component';
 
-
-
-@NgModule({ declarations: [
-        AppComponent,
-        SegLoginComponent,
-        SegMenuprincipalComponent,
-        SegUsuarioListarComponent,
-        SegUsuarioNuevoComponent,
-        SegUsuarioActualizaComponent,
-        SegPaginaPrincipalComponent,
-        SegPersonaDialogComponent,
-        SegRestauraclaveComponent,
-        SegMenuitemComponent,
-        SegCambiaclaveComponent,
-        SegPerfilListarComponent,
-        SegPerfilNuevoComponent,
-        SegPerfilActualizaComponent,
-        SegPersonaActualizaComponent,
-        SegPersonaNuevoComponent,
-        SegPersonaListarComponent,
-        SegModulosListarComponent,
-        SegModulosNuevoComponent,
-        SegModulosActualizaComponent,
-        SEGModulosDialogComponent,
-        SEGCargaEsperaComponent,
-        SegUsuarioRolComponent,
-        SegUsuarioRolDetalleDialogComponent,
-        SegRegistrarseComponent,
-        ClPerfilComponent,
-        ClCambiaperfilDialogComponent,
-        ClConfiguracionApiComponent,
-    ],
-    bootstrap: [AppComponent], imports: [BrowserModule,
-        RouterModule,
-        AppRoutingModule,
-        ReactiveFormsModule,
-        BrowserAnimationsModule,
-        MatSidenavModule,
-        MatIconModule,
-        MatButtonModule,
-        MatExpansionModule,
-        MatToolbarModule,
-        MatListModule,
-        MatInputModule,
-        MatFormFieldModule,
-        MatTableModule,
-        MatPaginatorModule,
-        MatSelectModule,
-        MatDialogModule,
-        CdkAccordionModule,
-        MatTreeModule,
-        MatCheckboxModule,
-        MatTabsModule,
-        MatRadioModule,
-        FormsModule,
-        // NgxChartsModule,
-        MatAutocompleteModule,
-        MatSortModule], providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }, provideHttpClient(withInterceptorsFromDi())] })
-export class AppModule { }
+@NgModule({
+  declarations: [
+    AppComponent,
+    SegLoginComponent,
+    SegMenuprincipalComponent,
+    SegUsuarioListarComponent,
+    SegUsuarioNuevoComponent,
+    SegUsuarioActualizaComponent,
+    SegPaginaPrincipalComponent,
+    SegPersonaDialogComponent,
+    SegRestauraclaveComponent,
+    SegMenuitemComponent,
+    SegCambiaclaveComponent,
+    SegPerfilListarComponent,
+    SegPerfilNuevoComponent,
+    SegPerfilActualizaComponent,
+    SegPersonaActualizaComponent,
+    SegPersonaNuevoComponent,
+    SegPersonaListarComponent,
+    SegModulosListarComponent,
+    SegModulosNuevoComponent,
+    SegModulosActualizaComponent,
+    SEGModulosDialogComponent,
+    SEGCargaEsperaComponent,
+    SegUsuarioRolComponent,
+    SegUsuarioRolDetalleDialogComponent,
+    SegRegistrarseComponent,
+    ClPerfilComponent,
+    ClCambiaperfilDialogComponent,
+    ClConfiguracionApiComponent,
+    ClInventarioComponent,
+    ClProveedoresComponent,
+  ],
+  bootstrap: [AppComponent],
+  imports: [
+    BrowserModule,
+    RouterModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatButtonModule,
+    MatExpansionModule,
+    MatToolbarModule,
+    MatListModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSelectModule,
+    MatDialogModule,
+    CdkAccordionModule,
+    MatTreeModule,
+    MatCheckboxModule,
+    MatTabsModule,
+    MatRadioModule,
+    FormsModule,
+    // NgxChartsModule,
+    MatAutocompleteModule,
+    MatSortModule,
+  ],
+  providers: [
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
+    provideHttpClient(withInterceptorsFromDi()),
+  ],
+})
+export class AppModule {}

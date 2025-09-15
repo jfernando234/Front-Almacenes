@@ -23,36 +23,128 @@ import { SegRegistrarseComponent } from './Modulo-seguridad/Components/SEG-auten
 import { ClPerfilComponent } from './Modulo-cliente/Components/cl-perfil/cl-perfil.component';
 import { ClConfiguracionApiComponent } from './Modulo-cliente/Components/cl-configuracion-api/cl-configuracion-api.component';
 import { ClDashboardComponent } from './Modulo-cliente/Components/cl-dashboard/cl-dashboard.component';
-const routes: Routes = [  
+import { ClInventarioComponent } from './Modulo-cliente/Components/cl-inventario/cl-inventario.component';
+import { ClProveedoresComponent } from './Modulo-cliente/Components/cl-proveedores/cl-proveedores.component';
+const routes: Routes = [
   { path: 'login', component: SegLoginComponent },
-  { path: 'restaura-clave', component: SegRestauraclaveComponent},
-  { path: 'registrarse', component: SegRegistrarseComponent},
-  { path: 'cambia-clavenueva', component: SegCambiaclaveComponent},
-  { path: 'main', component: SegMenuprincipalComponent,
-  children: [
-    { path: 'principal', component: SegPaginaPrincipalComponent, canActivate: [AuthGuard] },
-    { path: 'seg-usuario', component: SegUsuarioListarComponent, canActivate: [AuthGuard]},
-    { path: 'seg-usuario-nuevo', component: SegUsuarioNuevoComponent, canActivate: [AuthGuard] },
-    { path: 'seg-usuario-actualiza/:idUsuario', component: SegUsuarioActualizaComponent, canActivate: [AuthGuard]},
-    { path: 'seg-usuario-rol/:idUsuario', component: SegUsuarioRolComponent, canActivate: [AuthGuard]},
-    { path: 'cambia-clave', component: SegCambiaclaveComponent, canActivate: [AuthGuard] },
-    { path: 'seg-perfil', component: SegPerfilListarComponent, canActivate: [AuthGuard]},
-    { path: 'seg-perfil-nuevo', component: SegPerfilNuevoComponent, canActivate: [AuthGuard]},
-    { path: 'seg-perfil-actualiza/:idPerfil', component: SegPerfilActualizaComponent, canActivate: [AuthGuard]},
-    { path: 'seg-persona', component: SegPersonaListarComponent, canActivate: [AuthGuard]},
-    { path: 'seg-persona-nuevo', component: SegPersonaNuevoComponent, canActivate: [AuthGuard] },
-    { path: 'seg-persona-actualiza/:idPersona', component: SegPersonaActualizaComponent, canActivate: [AuthGuard]},
-    { path: 'seg-modulo', component: SegModulosListarComponent, canActivate: [AuthGuard]},
-    { path: 'seg-modulo-nuevo', component: SegModulosNuevoComponent, canActivate: [AuthGuard]},
-    { path: 'seg-modulo-actualiza/:idModulo', component: SegModulosActualizaComponent, canActivate: [AuthGuard]},
-    {path: 'cl-perfil',component:ClPerfilComponent,canActivate:[AuthGuard]},
-    {path: 'cl-configuracion-api',component:ClConfiguracionApiComponent,canActivate:[AuthGuard]},
-    {path: 'cl-dashboard',component:ClDashboardComponent,canActivate:[AuthGuard]},
-    {path: 'registrarse',component:SegRegistrarseComponent,canActivate:[AuthGuard]},
-  ]},
-  { path: '', redirectTo:'login', pathMatch : 'full'},];
+  { path: 'restaura-clave', component: SegRestauraclaveComponent },
+  { path: 'registrarse', component: SegRegistrarseComponent },
+  { path: 'cambia-clavenueva', component: SegCambiaclaveComponent },
+  {
+    path: 'main',
+    component: SegMenuprincipalComponent,
+    children: [
+      {
+        path: 'principal',
+        component: SegPaginaPrincipalComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'seg-usuario',
+        component: SegUsuarioListarComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'seg-usuario-nuevo',
+        component: SegUsuarioNuevoComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'seg-usuario-actualiza/:idUsuario',
+        component: SegUsuarioActualizaComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'seg-usuario-rol/:idUsuario',
+        component: SegUsuarioRolComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'cambia-clave',
+        component: SegCambiaclaveComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'seg-perfil',
+        component: SegPerfilListarComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'seg-perfil-nuevo',
+        component: SegPerfilNuevoComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'seg-perfil-actualiza/:idPerfil',
+        component: SegPerfilActualizaComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'seg-persona',
+        component: SegPersonaListarComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'seg-persona-nuevo',
+        component: SegPersonaNuevoComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'seg-persona-actualiza/:idPersona',
+        component: SegPersonaActualizaComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'seg-modulo',
+        component: SegModulosListarComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'seg-modulo-nuevo',
+        component: SegModulosNuevoComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'seg-modulo-actualiza/:idModulo',
+        component: SegModulosActualizaComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'cl-perfil',
+        component: ClPerfilComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'cl-configuracion-api',
+        component: ClConfiguracionApiComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'cl-dashboard',
+        component: ClDashboardComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'cl-inventario',
+        component: ClInventarioComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'cl-proveedores',
+        component: ClProveedoresComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'registrarse',
+        component: SegRegistrarseComponent,
+        canActivate: [AuthGuard],
+      },
+    ],
+  },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
