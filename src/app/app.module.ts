@@ -106,7 +106,7 @@ import { A11yModule } from "@angular/cdk/a11y";
     ClConfiguracionApiComponent,
     ClInventarioComponent,
     ClProveedoresComponent,
-    ClClientesComponent,
+
     ClOrdenesDeCompraComponent,
     ClOrdenesDeVentaComponent,
     ClEnviosRecepcionComponent,

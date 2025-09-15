@@ -1,5 +1,30 @@
-<div class="content">
-  <div class="card">
-
+<div class="page-wrapper">
+  <div class="content">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-body">
+            <form (ngSubmit)="crearPaciente()" >
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-heading">
+                    <h4>Datos del Cliente </h4>
+                  </div>
+                  <div class="col-12 col-md-6 col-xl-3">
+                    <div class="form-group local-forms">
+                      <label>Nro. Documento <span class="login-danger">*</span></label>
+                      <div class="input-group">
+                        <input (input)="soloNumeros($event)"
+                          class="form-control" type="text">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

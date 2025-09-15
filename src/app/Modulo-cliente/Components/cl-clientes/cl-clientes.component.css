@@ -1,4 +1,18 @@
-/* Estilos básicos para cl-clientes */
-.cl-clientes {
-  padding: 8px;
+.form-group {
+    position: relative;
+}
+.input-group {
+    display: flex;
+}
+.form-control {
+    flex: 1;
+    margin-right: 22.5px; /* Ajusta el espacio a la derecha del campo de entrada */
+}
+.icon-outside {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0px; /* Ajusta la posición según sea necesario */
+    z-index: 2; /* Asegura que la lupa esté en una capa superior */
 }
