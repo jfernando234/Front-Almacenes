@@ -7,7 +7,7 @@ import {
   coerceElement,
   coerceNumberProperty,
   normalizePassiveListenerOptions
-} from "./chunk-7MTVGU47.js";
+} from "./chunk-2HQGSSAJ.js";
 import {
   DOCUMENT
 } from "./chunk-344AXQRL.js";
@@ -2949,4 +2949,4 @@ export {
   HighContrastModeDetector,
   A11yModule
 };
-//# sourceMappingURL=chunk-67K45YUL.js.map
+//# sourceMappingURL=chunk-N2EJQQNL.js.map
