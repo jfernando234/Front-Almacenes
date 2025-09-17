@@ -73,6 +73,8 @@ import { ClReportesComponent } from './Modulo-cliente/Components/cl-reportes/cl-
 import { A11yModule } from "@angular/cdk/a11y";
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ClClientesComponent } from './Modulo-cliente/Components/cl-clientes/cl-clientes.component';
+import { ClAddClientesComponent } from './Modulo-cliente/Components/cl-clientes/cl-add-clientes/cl-add-clientes.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
@@ -110,7 +112,8 @@ import { ClClientesComponent } from './Modulo-cliente/Components/cl-clientes/cl-
     ClOrdenesDeCompraComponent,
     ClOrdenesDeVentaComponent,
     ClEnviosRecepcionComponent,
-    ClReportesComponent
+    ClReportesComponent,
+    ClAddClientesComponent
   ],
   bootstrap: [AppComponent],
   imports: [
@@ -140,7 +143,9 @@ import { ClClientesComponent } from './Modulo-cliente/Components/cl-clientes/cl-
     // NgxChartsModule,
     MatAutocompleteModule,
     MatSortModule,
-    A11yModule
+    A11yModule,
+    ReactiveFormsModule,
+    ModalModule.forRoot()
 ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },

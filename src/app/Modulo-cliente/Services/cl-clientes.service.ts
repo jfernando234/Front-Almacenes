@@ -22,5 +22,7 @@ export class ClienteService {
     }
     return this.http.get<DataCliente>(url);
   }
-
+  crearCliente(formData: FormData): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/Clientes/CreateCliente`, formData);
+  }
 }

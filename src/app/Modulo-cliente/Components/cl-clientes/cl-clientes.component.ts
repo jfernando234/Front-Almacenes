@@ -5,6 +5,8 @@ import { ClienteService } from '../../Services/cl-clientes.service';
 import { finalize } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
 import { pageSelection } from '../../Models/modelsPag';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { ClAddClientesComponent } from './cl-add-clientes/cl-add-clientes.component';
 @Component({
   selector: 'app-cl-clientes',
   templateUrl: './cl-clientes.component.html',
@@ -26,7 +28,8 @@ export class ClClientesComponent implements OnInit{
   public totalPages = 0;
   public pageSelection: Array<pageSelection> = [];
   public limit: number = this.pageSize;
-  constructor(private clienteServiceList: ClienteService) {}
+  bsModalRef?: BsModalRef;
+  constructor(private clienteServiceList: ClienteService,private modalService: BsModalService) {}
 
   ngOnInit() {
     this.ObtenerClientes();
@@ -61,7 +64,26 @@ export class ClClientesComponent implements OnInit{
 
   }
   buscarPorFecha(){}
-
+  private getTableData(): void {
+    this.isLoading = true;
+    this.ClientesList = [];
+    this.serialNumberArray = [];
+    let fechaInicioFormateado = undefined
+    let fechaFinFormateado = undefined
+    this.isLoading = true
+    this.clienteServiceList.obtenerAllClientes(this.currentPage,this.pageSize,fechaInicioFormateado, fechaFinFormateado)
+    .pipe(finalize(() => this.isLoading = false))
+    .subscribe((data: DataCliente )=>{
+      this.totalData = data.totalData;
+      for (let index = this.skip; index < Math.min(this.limit, data.totalData); index++) {
+          const serialNumber = index + 1;
+          this.serialNumberArray.push(serialNumber);
+      }
+      this.ClientesList = data.data;
+      this.dataSource = new MatTableDataSource(this.ClientesList);
+      this.calculateTotalPages(this.totalData, this.pageSize);
+    })
+  }
   onCreate() {}
   //Paginacion
   getMoreData(value: string) {}
@@ -78,5 +100,12 @@ export class ClClientesComponent implements OnInit{
       this.pageNumberArray.push(i);
       this.pageSelection.push({ skip: skip, limit: limit });
     }
+  }
+  //metodo para abrir el modal de crear cliente
+  CrearCliente() {
+    this.bsModalRef = this.modalService.show(ClAddClientesComponent);
+    this.bsModalRef.onHidden?.subscribe(() => {
+      this.getTableData();
+    });
   }
 }

@@ -4,8 +4,6 @@
           <label>Desde</label>
           <input [(ngModel)]="fechaInicio" style='height:48px; background-color: #f4f5fa; border:none;' class="form-control datetimepicker" type="text"
             placeholder="Desde" matInput >
-
-
         </div>
       </div>
       <div class="col-md-2">
@@ -14,23 +12,15 @@
           <input [(ngModel)]="fechaFin" style='height:48px;background-color: #f4f5fa; border:none;' class="form-control datetimepicker" type="text"
             placeholder="Hasta" matInput >
 
-
         </div>
       </div>
 
     <div class="col-md-5">
         <div class="col-6 col-md-1 col-xl-1 mt-3">
             <div class="add-group">
-            <a (click)="limpiar()" href="javascript:;"
-              class="btn btn-primary ms-2"><img
-                  src="assets/img//call-icon-01.svg" alt=""></a>
-            <a (click)="buscarPorFecha()" href="javascript:;"
-                class="btn btn-primary ms-2"><img
-                    src="" alt=""></a>
+              <a (click)="CrearCliente()" class="btn btn-primary add-pluss ms-2"><img
+                src="assets/img/icons/plus.svg" alt=""></a>
             </div>
-            <a  href="javascript:;"
-              class="btn btn-primary ms-2"><img
-                  src="/src/assets/Imagenes/plus.svg" alt=""></a>
         </div>
     </div>
 </div>

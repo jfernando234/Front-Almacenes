@@ -15,7 +15,7 @@ import {
   coerceNumberProperty,
   getRtlScrollAxisType,
   supportsScrollBehavior
-} from "./chunk-7MTVGU47.js";
+} from "./chunk-2HQGSSAJ.js";
 import {
   DOCUMENT
 } from "./chunk-344AXQRL.js";
@@ -70,11 +70,6 @@ import {
   ɵɵviewQuery
 } from "./chunk-AEGSYJ3E.js";
 import {
-  animationFrameScheduler,
-  fromEvent,
-  isObservable
-} from "./chunk-JVMRPRMK.js";
-import {
   auditTime,
   distinctUntilChanged,
   pairwise,
@@ -83,6 +78,11 @@ import {
   switchMap,
   takeUntil
 } from "./chunk-2RSK2634.js";
+import {
+  animationFrameScheduler,
+  fromEvent,
+  isObservable
+} from "./chunk-JVMRPRMK.js";
 import {
   Observable,
   Subject,
@@ -1666,4 +1666,4 @@ export {
   CdkScrollableModule,
   ScrollingModule
 };
-//# sourceMappingURL=chunk-FSH2G7RJ.js.map
+//# sourceMappingURL=chunk-YZNNGY32.js.map
