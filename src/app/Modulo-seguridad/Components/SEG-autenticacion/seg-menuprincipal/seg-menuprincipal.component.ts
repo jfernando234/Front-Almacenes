@@ -1,5 +1,6 @@
 import { MediaMatcher } from '@angular/cdk/layout';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
@@ -16,6 +17,7 @@ import { GlobalsConstants } from 'src/assets/Model/globals-constants.model';
   styleUrls: ['./seg-menuprincipal.component.css']
 })
 export class SegMenuprincipalComponent implements OnInit {
+  @ViewChild('snav') snav!: MatSidenav;
   mobileQuery: MediaQueryList;
   viewUserMenu:boolean = false;
   shouldRun:boolean = true;

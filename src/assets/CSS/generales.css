@@ -19,32 +19,25 @@ margin: auto;
 font-size: 8px;
 }
 
-mat-expansion-panel {
-width: 100%
-}
+
 
 .filtro{
 width: min(70%, 98%);
 max-width: 1000px;
 margin-left: 1rem;
 }
+/*
 .contenedor-principal{
     height: 100%;
 }
 .contenedor-filtro{
     width: 100%;
     /*height: 6%;*/
-}
 
-.contenedor-principal .contenedor_tabla{
-    box-sizing: border-box;
-    height: 500px;
-    overflow: auto;
-    /*scroll-behavior:smooth;*/
-}
+
 
 table.listado th{
-    text-align: center; 
+    text-align: center;
     font-size: 12px;
     color: black;
 }
@@ -56,7 +49,7 @@ table.listado td{
 table.listado tr.tabla-cabecera{
     height: 30px;
     padding: 1rem 8px;
-    background: #eaedf0;  
+    background: #eaedf0;
     /*position: sticky;
     top: 0;*/
 }
@@ -96,7 +89,7 @@ table.listado tr.tabla-cuerpo{
 }
 
 mat-toolbar.toolbar {
-    color: white; ; 
+    color: white; ;
     background-color: #f3f4fa;
     /*background-color: #0d86e3;*/
     min-height: 50px;
@@ -106,7 +99,7 @@ mat-toolbar.toolbar {
 
 
 mat-toolbar.toolbar-pie {
-    color: white; 
+    color: white;
     background-color: #001f50;
     bottom: 0;
     height: 5%;
@@ -114,7 +107,7 @@ mat-toolbar.toolbar-pie {
 }
 
 mat-toolbar.toolbar button {
-    color: white; 
+    color: white;
 }
 
 h3.titulo{
@@ -176,14 +169,14 @@ mat-form-field{
 }
 mat-form-field.inputgroup{
     max-width: 300px;
-    width: 100%;    
+    width: 100%;
     max-height: 5px ;
     padding: 18px 10px;
     margin-left: 1rem;
 }
 form mat-form-field.inputgroup-2{
     min-width: 300px;
-    width: 564px; 
+    width: 564px;
     max-height: 5px ;
     padding: 18px 10px;
     margin-left: 1rem;
@@ -191,7 +184,7 @@ form mat-form-field.inputgroup-2{
 }
 form mat-form-field.inputgroup-3{
     min-width: 300px;
-    width: 900px; 
+    width: 900px;
     max-height: 5px ;
     padding: 18px 10px;
     margin-left: 1rem;
@@ -201,7 +194,7 @@ form mat-form-field.inputgroup-3{
 
 mat-form-field.inputbuscar{
     max-width: 300px;
-    width: 100%;    
+    width: 100%;
     max-height: 5px ;
     margin-left: 1rem;
 }
@@ -217,7 +210,7 @@ mat-form-field.inputbuscar-2{
 
 form mat-form-field.inputgroup-0{
     max-width: 100px;
-    width: 100%;    
+    width: 100%;
     max-height: 5px ;
 
 }
@@ -229,20 +222,20 @@ form mat-form-field.invisible{
     width: 0;
   }
 
-table tr mat-icon.edit {  
+table tr mat-icon.edit {
     font-size: 20px;
     color: #317bcf;
-} 
+}
 
 table tr mat-icon.delete {
     font-size: 20px;
     color: #db4a48;
 }
-table tr mat-icon.view {  
-    font-size: 20px;    
+table tr mat-icon.view {
+    font-size: 20px;
     color: #6ebc3b;
     /*color: #eeee4d;*/
-} 
+}
 
 div.btn-aciones>button.mat-flat-button{
     min-width: 30px;
@@ -252,7 +245,7 @@ div.btn-aciones>button.mat-flat-button{
 
 .mat-column-acciones {
     min-width: 80px;
-    width: 10%;    
+    width: 10%;
     text-align: center;
     padding: 0;
 }
@@ -266,7 +259,7 @@ td.mat-cell {
     border-top-width: 0;
   }
 mat-form-field.mat-form-field.mat-form-field-appearance-outline > div.mat-form-field-wrapper > div.mat-form-field-flex > div.mat-form-field-infix { padding: 0.3em 0px }
-mat-form-field.mat-form-field.mat-form-field-appearance-outline > div.mat-form-field-wrapper > div.mat-form-field-flex > div.mat-form-field-infix > span.mat-form-field-label-wrapper { top: -1.5em; } 
+mat-form-field.mat-form-field.mat-form-field-appearance-outline > div.mat-form-field-wrapper > div.mat-form-field-flex > div.mat-form-field-infix > span.mat-form-field-label-wrapper { top: -1.5em; }
 .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label { transform: translateY(-1.1em) scale(.75); width: 133.33333%; }
 
 div .mat-paginator{
@@ -278,7 +271,7 @@ div .mat-paginator{
 /*table tr .mat-cell {
     padding: 0 8px;
     font-size: 12px;
-} 
+}
 th {
     width: 18%;
 }*/
@@ -287,7 +280,7 @@ th {
 
 /*table.listado tr.tabla-cuerpo:hover{
     height: 15px;
-    background: #eaedf0;  
+    background: #eaedf0;
 }*/
 
 /*.fondo-carga{
