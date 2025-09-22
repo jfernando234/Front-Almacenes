@@ -4,46 +4,48 @@ import { ChartData, ChartOptions } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 @Component({
   selector: 'app-cl-dashboard',
-  standalone: true,
-  imports: [BaseChartDirective],
   templateUrl: './cl-dashboard.component.html',
   styleUrls: ['./cl-dashboard.component.css']
 })
-export class ClDashboardComponent implements OnInit {
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
-  // Gráfico de barras
-  barChartOptions: ChartOptions<'bar'> = {
-    responsive: true,
-    plugins: {
-      legend: { display: true }
+export class ClDashboardComponent {
+ // Bar vertical (Ventas por mes)
+  barData = [
+    { name: 'Enero', value: 100 },
+    { name: 'Febrero', value: 200 },
+    { name: 'Marzo', value: 150 }
+  ];
+  barView: [number, number] = [600, 300];
+  barShowLegend = false;
+  barShowXAxis = true;
+  barShowYAxis = true;
+  barShowXAxisLabel = true;
+  barXAxisLabel = 'Mes';
+  barShowYAxisLabel = true;
+  barYAxisLabel = 'Ventas';
+
+  // Pie (Distribución de usuarios)
+  pieData = [
+    { name: 'Activos', value: 300 },
+    { name: 'Inactivos', value: 100 },
+    { name: 'Pendientes', value: 50 }
+  ];
+  pieView: [number, number] = [400, 300];
+
+  // Line (Usuarios nuevos por semana) -> formato series
+  lineData = [
+    {
+      name: 'Usuarios nuevos',
+      series: [
+        { name: 'Semana 1', value: 50 },
+        { name: 'Semana 2', value: 75 },
+        { name: 'Semana 3', value: 60 },
+        { name: 'Semana 4', value: 90 }
+      ]
     }
-  };
-  barChartData: ChartData<'bar'> = {
-    labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo'],
-    datasets: [
-      { label: 'Ventas', data: [500, 700, 800, 650, 900], backgroundColor: '#007bff' }
-    ]
-  };
-
-  // Gráfico de pastel
-  pieChartData: ChartData<'pie'> = {
-    labels: ['Activos', 'Inactivos', 'Pendientes'],
-    datasets: [
-      { data: [300, 100, 50], backgroundColor: ['#28a745', '#dc3545', '#ffc107'] }
-    ]
-  };
-
-  // Gráfico de líneas
-  lineChartOptions: ChartOptions<'line'> = {
-    responsive: true,
-    plugins: { legend: { display: true } }
-  };
-  lineChartData: ChartData<'line'> = {
-    labels: ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4'],
-    datasets: [
-      { label: 'Usuarios nuevos', data: [50, 75, 60, 90], borderColor: '#17a2b8', fill: false }
-    ]
-  };
+  ];
+  lineView: [number, number] = [800, 300];
+  lineShowXAxis = true;
+  lineShowYAxis = true;
+  lineShowLegend = false;
+  lineShowGridLines = true;
 };

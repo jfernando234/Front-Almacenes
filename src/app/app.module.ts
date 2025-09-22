@@ -79,6 +79,8 @@ import { ClAddClientesComponent } from './Modulo-cliente/Components/cl-clientes/
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { AddInventarioComponent } from './Modulo-cliente/Components/cl-inventario/add-inventario/add-inventario.component';
 import { AddProveedorComponent } from './Modulo-cliente/Components/cl-proveedores/add-proveedor/add-proveedor.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { ClDashboardComponent } from './Modulo-cliente/Components/cl-dashboard/cl-dashboard.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -118,7 +120,8 @@ import { AddProveedorComponent } from './Modulo-cliente/Components/cl-proveedore
     ClReportesComponent,
     ClAddClientesComponent,
     AddInventarioComponent,
-    AddProveedorComponent
+    AddProveedorComponent,
+    ClDashboardComponent
   ],
   bootstrap: [AppComponent],
   imports: [
@@ -153,6 +156,7 @@ import { AddProveedorComponent } from './Modulo-cliente/Components/cl-proveedore
     A11yModule,
     ReactiveFormsModule,
     ModalModule.forRoot(),
+    NgxChartsModule
 ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },

@@ -1,6 +1,6 @@
 /* Limita el ancho máximo del contenedor */
 .container {
-  max-width: 1200px;
+  max-width: 1500px;
   margin: 0 auto;
 }
 
@@ -15,6 +15,14 @@
   font-weight: bold;
   font-size: 1.1rem;
   background-color: #f8f9fa; /* color ligero de fondo */
+}
+
+.card-body {
+  display: flex;
+  justify-content: center; /* centra el gráfico */
+  align-items: center;
+  overflow: hidden;        /* corta cualquier exceso */
+  padding: 1rem;
 }
 
 /* Asegura que los canvas sean responsivos */

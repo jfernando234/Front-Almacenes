@@ -64,7 +64,7 @@ export class ClInventarioComponent {
   limpiar() {
     this.serialNumberArray = [];
     this.InventarioList = [];
-    this.fechaFin = '';
+    this.fechaInicio = '';
     this.fechaFin = '';
 
   }

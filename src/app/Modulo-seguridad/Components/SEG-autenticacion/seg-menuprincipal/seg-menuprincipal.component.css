@@ -154,59 +154,6 @@ mat-toolbar .toolbar-buttom {
   padding: 0 8px;
 }
 
-.accordion {
-  display: block;
-  width: 100%;
-  max-width: none;
-  color: #111746;
-  margin: 0;
-  padding: 0;
-}
-
-.accordion-item {
-  display: block;
-  border: solid 1px #ccc;
-
-}
-
-.accordion-item+.accordion-item {
-  border-top: none;
-}
-
-.accordion-item-header {
-  display: flex;
-  /*align-content: center;
-justify-content: left;*/
-}
-
-.accordion-item-description {
-  font-size: 0.85em;
-  color: #999;
-}
-
-.accordion-item-header,
-.accordion-item-body {
-  padding: 5px;
-  color: black;
-  text-align: center;
-}
-
-.accordion-item-header:hover {
-  cursor: pointer;
-  /*background-color: #eee;*/
-  color: #959aa3;
-}
-
-.accordion-item:first-child {
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
-}
-
-.accordion-item:last-child {
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-}
-
 ul {
   flex: 1;
   height: auto;
@@ -305,7 +252,7 @@ mat-toolbar .img-logo {
   cursor: pointer;
   font-size: 12px;
   justify-content: center;
-  background-color: #f3f4fa;
+  background-color: rgb(104, 187, 255);
   object-fit: contain;
 }
 
@@ -320,4 +267,24 @@ mat-toolbar .img-logo {
   width: 100vw;
   margin: 0;
   cursor: pointer;
+}
+
+.accordion-item-header {
+  margin-left: 10px;
+  display: flex;
+}
+
+.menu-icon {
+  margin-right: 8px; /* espacio entre icono y texto */
+  margin-bottom: 8px;
+  width: 30px;
+  height: 30px;      /* opcional, asegura tamaño consistente */
+}
+
+.texto-menu {
+  font-size: 16px;   /* ajusta según necesites */
+}
+
+.accordion-item-body{
+  margin-top: 25px;
 }

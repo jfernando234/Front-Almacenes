@@ -12,16 +12,16 @@
         <div class="foot-center">
             <button mat-flat-button type="submit" class="boton-nuevo" (click)="nuevoPerfil()">Nuevo Perfil</button>
         </div>
-        
+
     </div>
-    
+
     <div class="contenedor2">
         <form [formGroup]="form" class="formPerfil">
             <div class="header">
                 <h3> {{nombre_perfil}} </h3>
-            </div>   
-            
-            <div class="body2">            
+            </div>
+
+            <div class="body2">
                 <mat-tab-group class="body2">
                     <mat-tab>
                         <ng-template mat-tab-label>
@@ -34,9 +34,9 @@
                                 <mat-option *ngFor="let item of tipo_Documento" [value]="item.idTipoDocumento">{{item.tipoDocumento}}</mat-option>
                             </mat-select>
                         </mat-form-field>
-                
+
                         <mat-form-field class="inputgroup" appearance="outline">
-                            <mat-label>Nº de Documento*</mat-label>                            
+                            <mat-label>Nº de Documento*</mat-label>
                             <input type="text" formControlName="numeroDocumento" autocomplete="off" matInput />
                         </mat-form-field>
 
@@ -47,8 +47,8 @@
                                 <mat-option *ngFor="let item of tipoGenero" [value]="item.idTipoGenero">{{item.desTipoGenero}}</mat-option>
                             </mat-select>
                         </mat-form-field><br/>
-                        
-                        
+
+
                         <mat-form-field class="inputgroup" appearance="outline">
                             <mat-label>Nombres*</mat-label>
                             <input type="text" formControlName="nombres" autocomplete="off" matInput />
@@ -58,7 +58,7 @@
                             <mat-label>Apellido Paterno*</mat-label>
                             <input type="text" formControlName="primerApellido" autocomplete="off" matInput />
                         </mat-form-field>
-                
+
                         <mat-form-field class="inputgroup" appearance="outline">
                             <mat-label>Apellido Materno*</mat-label>
                             <input type="text" formControlName="segundoApellido" autocomplete="off" matInput />
@@ -77,7 +77,7 @@
                                 <input type="text" formControlName="razon" autocomplete="off" matInput />
                             </mat-form-field><br/>
                         </div>
-                    </div>                        
+                    </div>
                     </mat-tab>
 
                     <mat-tab>
@@ -107,11 +107,11 @@
                         <mat-icon></mat-icon>Foto</ng-template><br/>
                     </mat-tab-->
                 </mat-tab-group>
-            </div>   
+            </div>
 
             <div class="foot-right">
                 <button mat-flat-button type="submit" class="boton-graba" (click)="grabaPerfil()">Guardar Perfil</button>
-            </div> 
-        </form> 
+            </div>
+        </form>
     </div>
 </div>
