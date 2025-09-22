@@ -1,6 +1,93 @@
-<div class="cl-inventario">
-  <h2>Inventario</h2>
-  <ul>
-    <li *ngFor="let it of items">{{ it?.nombre || "Artículo" }}</li>
-  </ul>
+<div class="row g-3 align-items-end mb-3">
+  <div class="card-body">
+    <div class="table-header">
+      <!-- Fecha Desde -->
+      <div class="left-filters">
+        <div class="col-md-3">
+          <mat-form-field>
+            <mat-label>Desde</mat-label>
+            <input matInput [(ngModel)]="fechaInicio" [matDatepicker]="pickerInicio" placeholder="Seleccione fecha" />
+            <mat-datepicker-toggle matSuffix [for]="pickerInicio"></mat-datepicker-toggle>
+            <mat-datepicker #pickerInicio></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <!-- Fecha Hasta -->
+        <div class="col-md-3">
+          <mat-form-field>
+            <mat-label>Hasta</mat-label>
+            <input matInput [(ngModel)]="fechaFin" [matDatepicker]="pickerFin" placeholder="Seleccione fecha" />
+            <mat-datepicker-toggle matSuffix [for]="pickerFin"></mat-datepicker-toggle>
+            <mat-datepicker #pickerFin></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="right-actions">
+        <a class="plus-add mb-2">
+          <img src="assets/Imagenes/plus.png" alt="" (click)="CrearPorducto()"/>
+        </a>
+        <a class="refresg-c mb-2">
+          <img src="assets/Imagenes/refresh.png" alt="" />
+        </a>
+      </div>
+    </div>
+    <!-- Título -->
+    <div class="table-header mb-3">
+      <h3 class="mb-0">Lista de Productos</h3>
+    </div>
+    <!-- Tabla -->
+    <div class="table-responsive shadow-sm rounded bg-white">
+      <table class="table table-hover align-middle">
+        <thead class="table-primary">
+          <tr>
+            <th>N°</th>
+            <th>Nombre</th>
+            <th>Precio Entrada</th>
+            <th>Precio Salida</th>
+            <th>stock</th>
+            <th>Correo</th>
+            <th>Fecha Registro</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of InventarioList; let i = index">
+            <td>{{serialNumberArray[i]}}</td>
+            <td>{{data.NombreProducto}}</td>
+            <td>{{data.precioEntrada}}</td>
+            <td>{{data.precioSalida}}</td>
+            <td>{{data.stock}}</td>
+            <td>{{data.fechaRegistro}}</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Paginación -->
+    <div class="table-flooter d-flex justify-content-between  mt-3 flex-wrap">
+      <div *ngIf="serialNumberArray.length > 0">
+        Mostrando {{ serialNumberArray[0] }} a {{ serialNumberArray[serialNumberArray.length - 1] }} de {{ totalData }}
+        entradas
+      </div>
+      <div *ngIf="serialNumberArray.length === 0">
+        No hay entradas para mostrar
+      </div>
+
+      <nav>
+        <ul class="pagination mb-0">
+          <li class="page-item" [class.disabled]="currentPage === 1">
+            <a class="page-link" (click)="getMoreData('previous')">Anterior</a>
+          </li>
+
+          <li class="page-item" *ngFor="let item of pageNumberArray" [class.active]="item === currentPage">
+            <a class="page-link" (click)="moveToPage(item)">{{ item }}</a>
+          </li>
+
+          <li class="page-item"
+            [class.disabled]="currentPage === pageNumberArray[pageNumberArray.length - 1] || InventarioList.length === 0">
+            <a class="page-link" (click)="getMoreData('next')">Siguiente</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
 </div>

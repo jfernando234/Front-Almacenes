@@ -1,22 +1,19 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { Cliente } from 'src/app/Modulo-cliente/Models/cliente.model';
-import { ClienteService } from 'src/app/Modulo-cliente/Services/cl-clientes.service';
 
 @Component({
-  selector: 'app-cl-add-clientes',
-  standalone: false,
-  templateUrl: './cl-add-clientes.component.html',
-  styleUrl: './cl-add-clientes.component.css'
+  selector: 'app-add-proveedor',
+  templateUrl: './add-proveedor.component.html',
+  styleUrl: './add-proveedor.component.css'
 })
-export class ClAddClientesComponent {
-
-  usuario: Cliente = new Cliente();
+export class AddProveedorComponent {
   form!: FormGroup;
   public mostrarErrores = false;
   showPassword = false;
-  constructor(public bsModalRef: BsModalRef, private usuarioService: ClienteService, public fb: FormBuilder) { }
+
+  constructor(public bsModalRef: BsModalRef, public fb: FormBuilder) { }
+
   ngOnInit() {
     this.form = this.fb.group({
       apellido: ['', Validators.required],
@@ -33,14 +30,10 @@ export class ClAddClientesComponent {
       fechaRegistro: [''],
     });
   }
-  CrearCliente(){
-
-  }
 
   Cancelar() {
     this.bsModalRef.hide();
   }
-
   /*Validacion*/
   isInvalid(controlName: string) {
     const control = this.form.get(controlName);

@@ -2,7 +2,7 @@ import {
   ScrollDispatcher,
   ScrollingModule,
   ViewportRuler
-} from "./chunk-ABY4TC2M.js";
+} from "./chunk-D55JVZD3.js";
 import {
   DomPortalOutlet,
   PortalModule,
@@ -15,7 +15,7 @@ import {
 import {
   ESCAPE,
   hasModifierKey
-} from "./chunk-N2EJQQNL.js";
+} from "./chunk-YCONARVX.js";
 import {
   Platform,
   _getEventTarget,
@@ -23,7 +23,7 @@ import {
   coerceArray,
   coerceCssPixelValue,
   supportsScrollBehavior
-} from "./chunk-2HQGSSAJ.js";
+} from "./chunk-SKPNN3YD.js";
 import {
   DOCUMENT,
   Location
@@ -2842,9 +2842,10 @@ export {
   OverlayConfig,
   OverlayContainer,
   OverlayRef,
+  FlexibleConnectedPositionStrategy,
   Overlay,
   CdkOverlayOrigin,
   CdkConnectedOverlay,
   OverlayModule
 };
-//# sourceMappingURL=chunk-WVDM2GMY.js.map
+//# sourceMappingURL=chunk-ADUT5ELD.js.map

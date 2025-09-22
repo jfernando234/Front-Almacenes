@@ -1,0 +1,11 @@
+.card{
+
+}
+.card-body{
+  max-width: 900px;   /* ancho deseado */
+  width: 90%;
+}
+
+.document-submit{
+  margin-top: 15px;
+}

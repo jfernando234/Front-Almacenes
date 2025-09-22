@@ -7,7 +7,7 @@ import {
   coerceElement,
   coerceNumberProperty,
   normalizePassiveListenerOptions
-} from "./chunk-2HQGSSAJ.js";
+} from "./chunk-SKPNN3YD.js";
 import {
   DOCUMENT
 } from "./chunk-344AXQRL.js";
@@ -67,6 +67,7 @@ import {
 } from "./chunk-EIB7IA3J.js";
 
 // node_modules/@angular/cdk/fesm2022/keycodes.mjs
+var BACKSPACE = 8;
 var TAB = 9;
 var ENTER = 13;
 var SHIFT = 16;
@@ -2892,10 +2893,15 @@ var A11yModule = class _A11yModule {
 })();
 
 export {
+  BACKSPACE,
   TAB,
   ENTER,
   ESCAPE,
   SPACE,
+  PAGE_UP,
+  PAGE_DOWN,
+  END,
+  HOME,
   LEFT_ARROW,
   UP_ARROW,
   RIGHT_ARROW,
@@ -2949,4 +2955,4 @@ export {
   HighContrastModeDetector,
   A11yModule
 };
-//# sourceMappingURL=chunk-N2EJQQNL.js.map
+//# sourceMappingURL=chunk-YCONARVX.js.map

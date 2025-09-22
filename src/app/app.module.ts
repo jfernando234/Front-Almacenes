@@ -73,6 +73,12 @@ import { ClReportesComponent } from './Modulo-cliente/Components/cl-reportes/cl-
 import { A11yModule } from "@angular/cdk/a11y";
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ClClientesComponent } from './Modulo-cliente/Components/cl-clientes/cl-clientes.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { ClAddClientesComponent } from './Modulo-cliente/Components/cl-clientes/cl-add-clientes/cl-add-clientes.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { AddInventarioComponent } from './Modulo-cliente/Components/cl-inventario/add-inventario/add-inventario.component';
+import { AddProveedorComponent } from './Modulo-cliente/Components/cl-proveedores/add-proveedor/add-proveedor.component';
 
 @NgModule({
   declarations: [
@@ -110,7 +116,10 @@ import { ClClientesComponent } from './Modulo-cliente/Components/cl-clientes/cl-
     ClOrdenesDeCompraComponent,
     ClOrdenesDeVentaComponent,
     ClEnviosRecepcionComponent,
-    ClReportesComponent
+    ClReportesComponent,
+    ClAddClientesComponent,
+    AddInventarioComponent,
+    AddProveedorComponent
   ],
   bootstrap: [AppComponent],
   imports: [
@@ -126,6 +135,8 @@ import { ClClientesComponent } from './Modulo-cliente/Components/cl-clientes/cl-
     MatToolbarModule,
     MatListModule,
     MatInputModule,
+    MatDatepickerModule, //fecha
+    MatNativeDateModule,
     MatFormFieldModule,
     MatTableModule,
     MatPaginatorModule,
@@ -137,10 +148,13 @@ import { ClClientesComponent } from './Modulo-cliente/Components/cl-clientes/cl-
     MatTabsModule,
     MatRadioModule,
     FormsModule,
+
     // NgxChartsModule,
     MatAutocompleteModule,
     MatSortModule,
-    A11yModule
+    A11yModule,
+    ReactiveFormsModule,
+    ModalModule.forRoot(),
 ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },
