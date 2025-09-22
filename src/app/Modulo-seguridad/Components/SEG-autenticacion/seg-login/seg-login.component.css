@@ -11,14 +11,15 @@
     bottom: auto;
     left: auto;
     background-color: transparent;
-    }
+  }
 
 
   body {
     margin: 0;
     padding: 0;
   }
-  ::ng-deep body.swal2-height-auto{
+
+  ::ng-deep body.swal2-height-auto {
     height: 100% !important;
   }
 
@@ -29,72 +30,81 @@
     left: 512px;
     right: 0;
   }
-  .login{
+
+  .login {
     height: 100%;
-    width: 100%;   
+    width: 100%;
     /*display: flex;*/
     align-items: center;
     text-align: center;
     justify-content: center;
     /*min-height:800px;*/
   }
-  .contenedor-login{
-    display:grid;
+
+  .contenedor-login {
+    display: grid;
     border: solid 0.5px rgb(233, 225, 225);
     min-height: 400px;
     min-width: 400px;
     width: 500px;
     height: 30%;
-    max-height: 400px;    
+    max-height: 400px;
     display: flex;
     border-radius: 1.5rem;
-    box-shadow: inset -1px -5px 15px rgba(255, 255, 255, 0.8), inset 5px 5px 10px
-        rgba(0, 0, 0, 0.1);
+    box-shadow: inset -1px -5px 15px rgba(255, 255, 255, 0.8), inset 5px 5px 10px rgba(0, 0, 0, 0.1);
   }
 
-  .imagen-login{
+  .imagen-login {
     /*border-right: solid 1px black;*/
     border-radius: 1.5rem;
     min-height: 400px;
     height: 10%;
-    width:  50%;
+    width: 50%;
   }
-  .imagen-fondo-login{
-    border-top-left-radius: 1.5rem;
-    border-bottom-left-radius: 1.5rem;
+
+  .imagen-fondo-login {
+    object-fit: contain;
+    height: 150px;
+    width: 100%;
+    margin-bottom: 30px;
+  }
+
+  .form-login {
     height: 100%;
-    width:  100%;
+    width: 100%;
   }
-  .form-login{
-    height: 100%;
-    width:  100%;
-  }
-  .imagen-fondo{
+
+  .imagen-fondo {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     position: relative;
     width: 100%;
-    height: 100%;  
+    height: 100%;
   }
+
   h1 {
     margin: 0;
     padding: 0;
   }
+
   span {
     margin: 0;
     padding: 0;
   }
-  .container{
+
+  .container {
     opacity: 50%;
   }
+
   .login {
     height: 100%;
     width: 100%;
     margin: 0;
     padding: 0;
     display: flex;
-}
+  }
+
   .custom-form {
     width: 100%;
     height: 100%;
@@ -103,7 +113,7 @@
     overflow: hidden;
   }
 
-  .logo{
+  .logo {
     margin-top: auto;
     margin-bottom: auto;
     margin-right: auto;
@@ -113,67 +123,83 @@
     max-width: 300px;
     max-height: 300px;
   }
-  .logo>.img-size{
+
+  .logo>.img-size {
     margin: auto;
     height: 100%;
-    width: 100%;    
+    width: 100%;
   }
-  .input-login{
-    width: 90%;    
-    max-height: 5px ;
+
+  .input-login {
+    width: 90%;
+    max-height: 5px;
     margin-left: 1rem;
     margin-top: 2rem;
     max-width: 300px;
   }
-  .title{
+
+  .title {
     padding: 1rem;
   }
-  .cuerpo-login{
+
+  .cuerpo-login {
     margin: auto;
     height: 70%;
   }
-  .head-logo{
+
+  .head-logo {
     width: 60%;
     height: 70px;
     margin: auto;
   }
 
-  .boton-ingreso{
+  .boton-ingreso {
     margin-top: 2rem;
     width: 100%;
     display: flex;
     justify-content: center;
   }
 
-  .boton-primario{
+  .boton-primario {
     margin-left: 1rem;
-    background:#0d86e3;
+    background-color: #269af8ea;
+    /* color de fondo */
     color: white;
+    border-color:#269af8ea;
+    /* color del texto */
+    border-radius: 8px;
     font-size: 14px;
     width: 150px;
     height: 30px;
     float: left;
-}
-.restaurar-clave{
-  margin-top: 1rem;
-  margin-left: 1rem;
-  color: blue;
-  cursor: pointer;
-  width: 100%;
-  float: left;  
-  font-size: 14px;
-}
-a{
-  float: left;
-}
-.pie-login{
-  float: left;
-  margin-left: 1rem;
-  font-size: 14px;
-}
+  }
 
-.login-version{
-  float: left;
-  margin-left: 1rem;
-  font-size: 14px;
-}
+  .boton-primario:hover {
+    background-color: #73abe6e3;
+  }
+
+  .restaurar-clave {
+    margin-top: 1rem;
+    margin-left: 1rem;
+    color: blue;
+    cursor: pointer;
+    width: 100%;
+    float: left;
+    font-size: 14px;
+  }
+
+  a {
+    float: left;
+  }
+
+  .pie-login {
+    float: left;
+    margin-left: 1rem;
+    font-size: 14px;
+  }
+
+  .login-version {
+    float: left;
+    margin-left: 1rem;
+    font-size: 14px;
+  }

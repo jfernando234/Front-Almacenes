@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
-import { Iproveedor } from '../../Models/provedor';
+import { DataProveedor, Iproveedor } from '../../Models/provedor';
 import { pageSelection } from '../../Models/modelsPag';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { FormBuilder } from '@angular/forms';
 import { AddProveedorComponent } from './add-proveedor/add-proveedor.component';
+import { finalize } from 'rxjs/operators';
+import { MatTableDataSource } from '@angular/material/table';
+import { ProveedorService } from '../../Services/cl-proveedor.service';
 
 @Component({
   selector: 'app-cl-proveedores',
@@ -15,6 +18,8 @@ export class ClProveedoresComponent {
   serialNumberArray: number[] = [];
   pageNumberArray: Array<number> = [];
   bsModalRef?: BsModalRef;
+  isLoading = false;
+  dataSource!: MatTableDataSource<Iproveedor>;
   public pageSize = 10;
   public totalData = 0;
   public currentPage = 1;
@@ -24,9 +29,56 @@ export class ClProveedoresComponent {
   public totalPages = 0;
   public pageSelection: Array<pageSelection> = [];
   public limit: number = this.pageSize;
-  constructor( private modalService: BsModalService) { }
+  constructor(private modalService: BsModalService, private proveedorService: ProveedorService) { }
 
   ngOnInit() {
+  }
+  ObtenerProveedor(){
+    this.serialNumberArray = [];
+    this.ProveedorList = [];
+    let fechaInicioFormateado = undefined
+    let fechaFinFormateado = undefined
+    this.isLoading = true
+
+    if (this.fechaInicio != "") {
+      fechaInicioFormateado = new Date(this.fechaInicio)?.toISOString().split('T')[0];
+    }
+    if (this.fechaFin != "") {
+      fechaFinFormateado = new Date(this.fechaFin)?.toISOString().split('T')[0];
+    }
+    this.proveedorService.obtenerAllProveedores(this.currentPage, this.pageSize, fechaInicioFormateado, fechaFinFormateado)
+    .pipe(finalize(() => this.isLoading = false))
+      .subscribe((data: DataProveedor) => {
+        this.totalData = data.totalData;
+        for (let index = this.skip; index < Math.min(this.limit, data.totalData); index++) {
+          const serialNumber = index + 1;
+          this.serialNumberArray.push(serialNumber);
+        }
+      this.ProveedorList = data.data;
+      this.dataSource = new MatTableDataSource(this.ProveedorList);
+      this.calculateTotalPages(this.totalData, this.pageSize);
+    })
+  }
+  limpiar() {
+    this.serialNumberArray = [];
+    this.ProveedorList = [];
+    this.fechaFin = '';
+    this.fechaFin = '';
+
+  }
+  refresh() {
+    this.limpiar();
+    this.proveedorService.obtenerAllProveedores(1, 10).pipe(finalize(() => this.isLoading = false))
+      .subscribe((data: DataProveedor) => {
+        this.totalData = data.totalData;
+        for (let index = this.skip; index < Math.min(this.limit, data.totalData); index++) {
+          const serialNumber = index + 1;
+          this.serialNumberArray.push(serialNumber);
+        }
+      this.ProveedorList = data.data;
+      this.dataSource = new MatTableDataSource(this.ProveedorList);
+      this.calculateTotalPages(this.totalData, this.pageSize);
+    })
   }
   CrearProveedor() {
     this.bsModalRef = this.modalService.show(AddProveedorComponent);

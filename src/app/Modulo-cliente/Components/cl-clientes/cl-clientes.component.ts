@@ -35,7 +35,7 @@ export class ClClientesComponent implements OnInit {
     this.ObtenerClientes();
 
   }
-  ObtenerClientes() {
+  public ObtenerClientes() {
     this.ClientesList = [];
     this.serialNumberArray = [];
     let fechaInicioFormateado = undefined
@@ -61,8 +61,26 @@ export class ClClientesComponent implements OnInit {
         this.calculateTotalPages(this.totalData, this.pageSize);
       })
   }
-  limpiar() {
-
+  private limpiar() {
+    this.ClientesList = [];
+    this.serialNumberArray = [];
+    this.fechaInicio = '';
+    this.fechaFin = '';
+  }
+  public refresh(){
+    this.limpiar();
+    this.clienteServiceList.obtenerAllClientes(this.currentPage, this.pageSize)
+      .pipe(finalize(() => this.isLoading = false))
+      .subscribe((data: DataCliente) => {
+        this.totalData = data.totalData;
+        for (let index = this.skip; index < Math.min(this.limit, data.totalData); index++) {
+          const serialNumber = index + 1;
+          this.serialNumberArray.push(serialNumber);
+        }
+        this.ClientesList = data.data;
+        this.dataSource = new MatTableDataSource(this.ClientesList);
+        this.calculateTotalPages(this.totalData, this.pageSize);
+      })
   }
   buscarPorFecha() { }
   crearCliente() {

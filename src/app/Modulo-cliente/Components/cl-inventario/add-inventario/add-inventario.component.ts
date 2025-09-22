@@ -16,18 +16,10 @@ export class AddInventarioComponent {
 
   ngOnInit() {
     this.form = this.fb.group({
-      apellido: ['', Validators.required],
+      precioEntrada: ['', Validators.required],
       nombre: ['', Validators.required],
-      telefono: ['', Validators.required],
-      direccion: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      tipoDocumentoIdentidadId: ['', Validators.required],
-      documento: ['', Validators.required],
-      foto: [null, Validators.required],
-      rolId: ['', Validators.required],
-      loginUsuario: ['', Validators.required],
-      passwordUsuario: ['', Validators.required],
-      fechaRegistro: [''],
+      precioSalida: ['', Validators.required],
+      stock: ['', Validators.required],
     });
   }
 

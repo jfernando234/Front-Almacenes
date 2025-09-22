@@ -6,7 +6,8 @@
         <div class="col-md-3">
           <mat-form-field>
             <mat-label>Desde</mat-label>
-            <input matInput [(ngModel)]="fechaInicio" [matDatepicker]="pickerInicio" placeholder="Seleccione fecha" />
+            <input matInput [(ngModel)]="fechaInicio" [matDatepicker]="pickerInicio"
+            placeholder="Seleccione fecha" (ngModelChange)="ObtenerProveedores()"/>
             <mat-datepicker-toggle matSuffix [for]="pickerInicio"></mat-datepicker-toggle>
             <mat-datepicker #pickerInicio></mat-datepicker>
           </mat-form-field>
@@ -15,7 +16,8 @@
         <div class="col-md-3">
           <mat-form-field>
             <mat-label>Hasta</mat-label>
-            <input matInput [(ngModel)]="fechaFin" [matDatepicker]="pickerFin" placeholder="Seleccione fecha" />
+            <input matInput [(ngModel)]="fechaFin" [matDatepicker]="pickerFin"
+            placeholder="Seleccione fecha" (ngModelChange)="ObtenerProveedores()"/>
             <mat-datepicker-toggle matSuffix [for]="pickerFin"></mat-datepicker-toggle>
             <mat-datepicker #pickerFin></mat-datepicker>
           </mat-form-field>
@@ -26,7 +28,7 @@
           <img src="assets/Imagenes/plus.png" alt="" (click)="CrearPorducto()"/>
         </a>
         <a class="refresg-c mb-2">
-          <img src="assets/Imagenes/refresh.png" alt="" />
+          <img src="assets/Imagenes/refresh.png" alt="" (click)="refresh()"/>
         </a>
       </div>
     </div>

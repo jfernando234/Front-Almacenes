@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { pageSelection } from '../../Models/modelsPag';
-import { IInventario } from '../../Models/inventario';
+import { DataInventario, IInventario } from '../../Models/inventario';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { AddInventarioComponent } from './add-inventario/add-inventario.component';
+import { InventarioService } from '../../Services/cl-inventario.service';
+import { finalize } from 'rxjs/operators';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-cl-inventario',
@@ -16,6 +19,8 @@ export class ClInventarioComponent {
   serialNumberArray: number[] = [];
   pageNumberArray: Array<number> = [];
   bsModalRef?: BsModalRef;
+  isLoading = false;
+  dataSource!: MatTableDataSource<IInventario>;
   public pageSize = 10;
   public totalData = 0;
   public currentPage = 1;
@@ -25,10 +30,57 @@ export class ClInventarioComponent {
   public totalPages = 0;
   public pageSelection: Array<pageSelection> = [];
   public limit: number = this.pageSize;
-  constructor( private modalService: BsModalService) { }
+  constructor(private modalService: BsModalService, private inventarioService: InventarioService) { }
 
   ngOnInit() {
     // cargar datos iniciales si aplica
+  }
+
+  ObtenerProveedores() {
+    this.serialNumberArray = [];
+    this.InventarioList = [];
+    let fechaInicioFormateado = undefined
+    let fechaFinFormateado = undefined
+    this.isLoading = true
+
+    if (this.fechaInicio != "") {
+      fechaInicioFormateado = new Date(this.fechaInicio)?.toISOString().split('T')[0];
+    }
+    if (this.fechaFin != "") {
+      fechaFinFormateado = new Date(this.fechaFin)?.toISOString().split('T')[0];
+    }
+    this.inventarioService.obtenerInventario(this.currentPage,this.pageSize,fechaInicioFormateado,fechaFinFormateado).pipe(finalize(() => this.isLoading = false))
+      .subscribe((data: DataInventario) => {
+        this.totalData = data.totalData;
+        for (let index = this.skip; index < Math.min(this.limit, data.totalData); index++) {
+          const serialNumber = index + 1;
+          this.serialNumberArray.push(serialNumber);
+        }
+        this.InventarioList = data.data;
+        this.dataSource = new MatTableDataSource(this.InventarioList);
+        this.calculateTotalPages(this.totalData, this.pageSize);
+      })
+  }
+  limpiar() {
+    this.serialNumberArray = [];
+    this.InventarioList = [];
+    this.fechaFin = '';
+    this.fechaFin = '';
+
+  }
+  refresh() {
+    this.limpiar();
+    this.inventarioService.obtenerInventario(1, 10).pipe(finalize(() => this.isLoading = false))
+      .subscribe((data: DataInventario) => {
+        this.totalData = data.totalData;
+        for (let index = this.skip; index < Math.min(this.limit, data.totalData); index++) {
+          const serialNumber = index + 1;
+          this.serialNumberArray.push(serialNumber);
+        }
+        this.InventarioList = data.data;
+        this.dataSource = new MatTableDataSource(this.InventarioList);
+        this.calculateTotalPages(this.totalData, this.pageSize);
+      })
   }
   CrearPorducto() {
     this.bsModalRef = this.modalService.show(AddInventarioComponent);

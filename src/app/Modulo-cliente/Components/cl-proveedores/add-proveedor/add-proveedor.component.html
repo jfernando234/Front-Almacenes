@@ -4,28 +4,16 @@
       <div class="row">
         <div class="col-12">
           <div class="form-heading">
-            <h4>Nuevo Cliente</h4>
+            <h4>Nuevo Proveedor</h4>
           </div>
         </div>
         <div class="col-12 col-md-12 col-xl-6">
           <div class="form-group local-forms">
-            <label>Apellido <span class="login-danger">*</span></label>
-            <input formControlName="apellido" class="form-control" type="text"
-              [ngClass]="{'is-invalid': isInvalid('apellido')}">
-            <div *ngIf="isInvalid('apellido') || mostrarErrores" class="invalid-feedback">
-              <div *ngIf="isRequerido('apellido')|| mostrarErrores">
-                Debe completar el campo*
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-12 col-md-12 col-xl-6">
-          <div class="form-group local-forms">
-            <label>Nombre <span class="login-danger">*</span></label>
-            <input formControlName="nombre" class="form-control" type="text"
-              [ngClass]="{'is-invalid': isInvalid('nombre')}">
-            <div *ngIf="isInvalid('nombre') || mostrarErrores" class="invalid-feedback">
-              <div *ngIf="isRequerido('nombre')|| mostrarErrores">
+            <label>Razon Social <span class="login-danger">*</span></label>
+            <input formControlName="rozonSocial" class="form-control" type="text"
+              [ngClass]="{'is-invalid': isInvalid('rozonSocial')}">
+            <div *ngIf="isInvalid('rozonSocial') || mostrarErrores" class="invalid-feedback">
+              <div *ngIf="isRequerido('rozonSocial')|| mostrarErrores">
                 Debe completar el campo*
               </div>
             </div>
@@ -69,11 +57,11 @@
         </div>
         <div class="col-12 col-md-12 col-xl-6">
           <div class="form-group local-forms">
-            <label>Número de Documento <span class="login-danger">*</span></label>
-            <input formControlName="documento" class="form-control" type="number"
-              [ngClass]="{'is-invalid': isInvalid('documento')}">
-            <div *ngIf="isInvalid('documento') || mostrarErrores" class="invalid-feedback">
-              <div *ngIf="isRequerido('documento')|| mostrarErrores">
+            <label>Ruc <span class="login-danger">*</span></label>
+            <input formControlName="ruc" class="form-control" type="number"
+              [ngClass]="{'is-invalid': isInvalid('ruc')}">
+            <div *ngIf="isInvalid('ruc') || mostrarErrores" class="invalid-feedback">
+              <div *ngIf="isRequerido('ruc')|| mostrarErrores">
                 Debe completar el campo*
               </div>
             </div>

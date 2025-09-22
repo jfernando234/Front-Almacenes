@@ -306,6 +306,7 @@ mat-toolbar .img-logo {
   font-size: 12px;
   justify-content: center;
   background-color: #f3f4fa;
+  object-fit: contain;
 }
 
 .menu-pie {

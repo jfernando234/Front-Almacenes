@@ -18,6 +18,5 @@ export class proveedor {
     nombre : string;
     direccion : string;
     telefono : number;
-    contacto : string;
     correo: string;
   }

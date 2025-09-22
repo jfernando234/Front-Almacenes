@@ -1,7 +1,7 @@
 
 export const environment = {
   production: true,
-  
+
   //API DE SEGURIDAD
   url_api : 'http://localhost:18548/api/', //LOCAL
   //url_api : 'http://10.10.10.40:8085/DEV/WebApiSeguridad/api/', //DESARROLLO

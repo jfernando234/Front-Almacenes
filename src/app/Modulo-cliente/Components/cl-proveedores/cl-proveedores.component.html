@@ -6,7 +6,8 @@
         <div class="col-md-3">
           <mat-form-field>
             <mat-label>Desde</mat-label>
-            <input matInput [(ngModel)]="fechaInicio" [matDatepicker]="pickerInicio" placeholder="Seleccione fecha" />
+            <input matInput [(ngModel)]="fechaInicio" [matDatepicker]="pickerInicio" placeholder="Seleccione fecha"
+            (ngModelChange)="ObtenerProveedor()"/>
             <mat-datepicker-toggle matSuffix [for]="pickerInicio"></mat-datepicker-toggle>
             <mat-datepicker #pickerInicio></mat-datepicker>
           </mat-form-field>
@@ -15,7 +16,8 @@
         <div class="col-md-3">
           <mat-form-field>
             <mat-label>Hasta</mat-label>
-            <input matInput [(ngModel)]="fechaFin" [matDatepicker]="pickerFin" placeholder="Seleccione fecha" />
+            <input matInput [(ngModel)]="fechaFin" [matDatepicker]="pickerFin" placeholder="Seleccione fecha"
+            (ngModelChange)="ObtenerProveedor()" />
             <mat-datepicker-toggle matSuffix [for]="pickerFin"></mat-datepicker-toggle>
             <mat-datepicker #pickerFin></mat-datepicker>
           </mat-form-field>
@@ -26,7 +28,7 @@
           <img src="assets/Imagenes/plus.png" alt=""(click)="CrearProveedor()" />
         </a>
         <a class="refresg-c mb-2">
-          <img src="assets/Imagenes/refresh.png" alt="" />
+          <img src="assets/Imagenes/refresh.png" alt="" (click)="refresh()"/>
         </a>
       </div>
     </div>
@@ -42,27 +44,21 @@
         <thead class="table-primary">
           <tr>
             <th>N°</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Teléfono</th>
-            <th>DNI</th>
+            <th>Razon Social</th>
             <th>Correo</th>
-            <th>Dirección</th>
-            <th>Estado</th>
+            <th>Direccion</th>
+            <th>Telefono</th>
+            <th>Ruc</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let data of ProveedorList; let i = index">
             <td></td>
             <td>{{ data.nombre }}</td>
-            <td>{{ data.contacto }}</td>
-            <td>{{ data.telefono }}</td>
-            <td>{{ data.ruc }}</td>
             <td>{{ data.correo }}</td>
             <td>{{ data.direccion }}</td>
-            <td>
-
-            </td>
+            <td>{{ data.telefono }}</td>
+            <td>{{ data.ruc }}</td>
           </tr>
         </tbody>
       </table>
