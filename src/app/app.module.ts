@@ -79,7 +79,6 @@ import { ClAddClientesComponent } from './Modulo-cliente/Components/cl-clientes/
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { AddInventarioComponent } from './Modulo-cliente/Components/cl-inventario/add-inventario/add-inventario.component';
 import { AddProveedorComponent } from './Modulo-cliente/Components/cl-proveedores/add-proveedor/add-proveedor.component';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -148,7 +147,6 @@ import { AddProveedorComponent } from './Modulo-cliente/Components/cl-proveedore
     MatTabsModule,
     MatRadioModule,
     FormsModule,
-
     // NgxChartsModule,
     MatAutocompleteModule,
     MatSortModule,

@@ -16,8 +16,8 @@
                 </mat-form-field>
 
                 <mat-form-field class="inputgroup" appearance="outline">
-                    <mat-label>Nº de Documento</mat-label>                            
-                    <input (input)="onInputChange($event)" 
+                    <mat-label>Nº de Documento</mat-label>
+                    <input (input)="onInputChange($event)"
                     type="text" formControlName="numeroDocumento" autocomplete="off" matInput />
                     <mat-error *ngIf="form.invalid">{{obtenerErrorCampo('numeroDocumento')}} </mat-error>
                 </mat-form-field><br/>
@@ -71,11 +71,6 @@
                 </mat-form-field>
 
                 <mat-form-field class="inputgroup" appearance="outline">
-                    <mat-label>Login (Merchant)</mat-label>
-                    <input type="text" formControlName="login" autocomplete="off" matInput />
-                </mat-form-field><br/>
-
-                <mat-form-field class="inputgroup" appearance="outline">
                     <mat-label>Contraseña</mat-label>
                     <input type="password" formControlName="password" autocomplete="off" matInput />
                 </mat-form-field><br/>
@@ -91,6 +86,6 @@
                 </div>
 
             </mat-expansion-panel>
-        </div>    
+        </div>
     </div>
 </form>
