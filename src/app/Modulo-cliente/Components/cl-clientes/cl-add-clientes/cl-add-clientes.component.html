@@ -8,28 +8,17 @@
       </div>
       <div class="col-12 col-md-12 col-xl-6">
         <div class="form-group local-forms w-100">
-          <label>Apellido <span class="login-danger">*</span></label>
-          <input formControlName="apellido" class="form-control" type="text"
-            [ngClass]="{'is-invalid': isInvalid('apellido')}">
-          <div *ngIf="isInvalid('apellido') || mostrarErrores" class="invalid-feedback">
-            <div *ngIf="isRequerido('apellido')|| mostrarErrores">
+          <label>Razon Social <span class="login-danger">*</span></label>
+          <input formControlName="Razon" class="form-control" type="text"
+            [ngClass]="{'is-invalid': isInvalid('Razon')}">
+          <div *ngIf="isInvalid('Razon') || mostrarErrores" class="invalid-feedback">
+            <div *ngIf="isRequerido('Razon')|| mostrarErrores">
               Debe completar el campo*
             </div>
           </div>
         </div>
       </div>
-      <div class="col-12 col-md-12 col-xl-6">
-        <div class="form-group local-forms w-100">
-          <label>Nombre <span class="login-danger">*</span></label>
-          <input formControlName="nombre" class="form-control" type="text"
-            [ngClass]="{'is-invalid': isInvalid('nombre')}">
-          <div *ngIf="isInvalid('nombre') || mostrarErrores" class="invalid-feedback">
-            <div *ngIf="isRequerido('nombre')|| mostrarErrores">
-              Debe completar el campo*
-            </div>
-          </div>
-        </div>
-      </div>
+
       <div class="col-12 col-md-12 col-xl-6">
         <div class="form-group local-forms w-100">
           <label>Teléfono <span class="login-danger ">*</span></label>
@@ -82,7 +71,7 @@
     </div>
     <div class="col-12">
       <div class="document-submit text-end">
-        <button type="submit" (click)="CrearCliente()" class="btn btn-primary submit-form me-2">Guardar</button>
+        <button type="submit" (click)="guardar()" class="btn btn-primary submit-form me-2">Guardar</button>
         <button type="submit" (click)="Cancelar()" class="btn btn-primary cancel-form">Cancelar</button>
       </div>
     </div>

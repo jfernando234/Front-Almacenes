@@ -23,3 +23,12 @@ export interface DataCliente{
   data: ClienteList[];
   totalData: number;
 }
+export interface ICliente {
+  idTipoDocumento: number;
+  numeroDocumento: string;
+  razonSocial: string
+  direccion: string
+  telefono: string
+  correo: string
+  contacto: string
+}

@@ -48,15 +48,15 @@ export class ClClientesComponent implements OnInit {
     if (this.fechaFin != "") {
       fechaFinFormateado = new Date(this.fechaFin)?.toISOString().split('T')[0];
     }
-    this.clienteServiceList.obtenerAllClientes(this.currentPage, this.pageSize, fechaInicioFormateado, fechaFinFormateado)
+    this.clienteServiceList.obtenerAllClientes()
       .pipe(finalize(() => this.isLoading = false))
-      .subscribe((data: DataCliente) => {
-        this.totalData = data.totalData;
-        for (let index = this.skip; index < Math.min(this.limit, data.totalData); index++) {
+      .subscribe((data: ClienteList[]) => {
+
+        for (let index = this.skip; index < Math.min(this.limit, data.length); index++) {
           const serialNumber = index + 1;
           this.serialNumberArray.push(serialNumber);
         }
-        this.ClientesList = data.data;
+        this.ClientesList = data;
         this.dataSource = new MatTableDataSource(this.ClientesList);
         this.calculateTotalPages(this.totalData, this.pageSize);
       })
@@ -69,15 +69,15 @@ export class ClClientesComponent implements OnInit {
   }
   public refresh(){
     this.limpiar();
-    this.clienteServiceList.obtenerAllClientes(this.currentPage, this.pageSize)
+    this.clienteServiceList.obtenerAllClientes()
       .pipe(finalize(() => this.isLoading = false))
-      .subscribe((data: DataCliente) => {
-        this.totalData = data.totalData;
-        for (let index = this.skip; index < Math.min(this.limit, data.totalData); index++) {
+      .subscribe((data: ClienteList[]) => {
+
+        for (let index = this.skip; index < Math.min(this.limit, data.length); index++) {
           const serialNumber = index + 1;
           this.serialNumberArray.push(serialNumber);
         }
-        this.ClientesList = data.data;
+        this.ClientesList = data;
         this.dataSource = new MatTableDataSource(this.ClientesList);
         this.calculateTotalPages(this.totalData, this.pageSize);
       })
