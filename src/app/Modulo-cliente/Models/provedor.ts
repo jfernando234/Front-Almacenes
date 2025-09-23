@@ -13,10 +13,11 @@ export class proveedor {
     data: Iproveedor[];
   }
   export interface Iproveedor {
-    proveedorId:string;
+    proveedorId?:string;
     ruc : string;
     nombre : string;
     direccion : string;
     telefono : number;
     correo: string;
+    contacto: string;
   }

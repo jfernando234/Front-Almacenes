@@ -46,15 +46,14 @@ export class ClProveedoresComponent {
     if (this.fechaFin != "") {
       fechaFinFormateado = new Date(this.fechaFin)?.toISOString().split('T')[0];
     }
-    this.proveedorService.obtenerAllProveedores(this.currentPage, this.pageSize, fechaInicioFormateado, fechaFinFormateado)
+    this.proveedorService.obtenerAllProveedores()
     .pipe(finalize(() => this.isLoading = false))
-      .subscribe((data: DataProveedor) => {
-        this.totalData = data.totalData;
-        for (let index = this.skip; index < Math.min(this.limit, data.totalData); index++) {
+      .subscribe((data: Iproveedor[]) => {
+        for (let index = this.skip; index < Math.min(this.limit, data.length); index++) {
           const serialNumber = index + 1;
           this.serialNumberArray.push(serialNumber);
         }
-      this.ProveedorList = data.data;
+      this.ProveedorList = data
       this.dataSource = new MatTableDataSource(this.ProveedorList);
       this.calculateTotalPages(this.totalData, this.pageSize);
     })
@@ -68,14 +67,14 @@ export class ClProveedoresComponent {
   }
   refresh() {
     this.limpiar();
-    this.proveedorService.obtenerAllProveedores(1, 10).pipe(finalize(() => this.isLoading = false))
-      .subscribe((data: DataProveedor) => {
-        this.totalData = data.totalData;
-        for (let index = this.skip; index < Math.min(this.limit, data.totalData); index++) {
+    this.proveedorService.obtenerAllProveedores()
+    .pipe(finalize(() => this.isLoading = false))
+      .subscribe((data: Iproveedor[]) => {
+        for (let index = this.skip; index < Math.min(this.limit, data.length); index++) {
           const serialNumber = index + 1;
           this.serialNumberArray.push(serialNumber);
         }
-      this.ProveedorList = data.data;
+      this.ProveedorList = data
       this.dataSource = new MatTableDataSource(this.ProveedorList);
       this.calculateTotalPages(this.totalData, this.pageSize);
     })

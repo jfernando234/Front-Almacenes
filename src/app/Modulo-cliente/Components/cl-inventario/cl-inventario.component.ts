@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { pageSelection } from '../../Models/modelsPag';
-import { DataInventario, IInventario } from '../../Models/inventario';
+import { DataInventario, Producto } from '../../Models/inventario';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { AddInventarioComponent } from './add-inventario/add-inventario.component';
 import { InventarioService } from '../../Services/cl-inventario.service';
@@ -14,13 +14,13 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class ClInventarioComponent {
   // Datos y lógica inicial del componente
-  InventarioList: IInventario[] = [];
+  InventarioList: Producto[] = [];
   items: any[] = [];
   serialNumberArray: number[] = [];
   pageNumberArray: Array<number> = [];
   bsModalRef?: BsModalRef;
   isLoading = false;
-  dataSource!: MatTableDataSource<IInventario>;
+  dataSource!: MatTableDataSource<Producto>;
   public pageSize = 10;
   public totalData = 0;
   public currentPage = 1;
@@ -49,14 +49,14 @@ export class ClInventarioComponent {
     if (this.fechaFin != "") {
       fechaFinFormateado = new Date(this.fechaFin)?.toISOString().split('T')[0];
     }
-    this.inventarioService.obtenerInventario(this.currentPage,this.pageSize,fechaInicioFormateado,fechaFinFormateado).pipe(finalize(() => this.isLoading = false))
-      .subscribe((data: DataInventario) => {
-        this.totalData = data.totalData;
-        for (let index = this.skip; index < Math.min(this.limit, data.totalData); index++) {
+    this.inventarioService.obtenerInventario().pipe(finalize(() => this.isLoading = false))
+      .subscribe((data: Producto[]) => {
+
+        for (let index = this.skip; index < Math.min(this.limit, data.length); index++) {
           const serialNumber = index + 1;
           this.serialNumberArray.push(serialNumber);
         }
-        this.InventarioList = data.data;
+        this.InventarioList = data;
         this.dataSource = new MatTableDataSource(this.InventarioList);
         this.calculateTotalPages(this.totalData, this.pageSize);
       })
@@ -70,14 +70,14 @@ export class ClInventarioComponent {
   }
   refresh() {
     this.limpiar();
-    this.inventarioService.obtenerInventario(1, 10).pipe(finalize(() => this.isLoading = false))
-      .subscribe((data: DataInventario) => {
-        this.totalData = data.totalData;
-        for (let index = this.skip; index < Math.min(this.limit, data.totalData); index++) {
+    this.inventarioService.obtenerInventario().pipe(finalize(() => this.isLoading = false))
+      .subscribe((data: Producto[]) => {
+
+        for (let index = this.skip; index < Math.min(this.limit, data.length); index++) {
           const serialNumber = index + 1;
           this.serialNumberArray.push(serialNumber);
         }
-        this.InventarioList = data.data;
+        this.InventarioList = data;
         this.dataSource = new MatTableDataSource(this.InventarioList);
         this.calculateTotalPages(this.totalData, this.pageSize);
       })

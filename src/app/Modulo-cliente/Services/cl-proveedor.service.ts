@@ -3,23 +3,19 @@ import { DataCliente } from "../Models/cliente.model";
 import { Observable } from "rxjs";
 import { environment } from 'src/environments/environment';
 import { HttpClient } from "@angular/common/http";
-import { DataProveedor } from "../Models/provedor";
+import { DataProveedor, Iproveedor } from "../Models/provedor";
 @Injectable({
   providedIn: 'root'
 })
 export class ProveedorService {
   apiUrl = environment.url_api;
   constructor(public http: HttpClient) { }
-  obtenerAllProveedores(page: number, rows: number,
-    fechaInicio?: string, fechaFin?: string
-  ): Observable<DataProveedor> {
-    let url = `${this.apiUrl}/Clientes/GetProveedoresAll?page=${page}&rows=${rows}`
-    if (fechaInicio) {
-      url += `&fechaInicio=${fechaInicio}`;
-    }
-    if (fechaFin) {
-      url += `&fechaFin=${fechaFin}`;
-    }
-    return this.http.get<DataProveedor>(url);
+  obtenerAllProveedores(
+  ): Observable<Iproveedor[]> {
+    let url = `${this.apiUrl}/api/proveedor/ListarAllProveedores`
+    return this.http.get<Iproveedor[]>(url);
+  }
+  registrar(producto: Iproveedor): Observable<any> {
+    return this.http.post(`${this.apiUrl}/proveedor/RegistrarProveedor`, producto);
   }
 }

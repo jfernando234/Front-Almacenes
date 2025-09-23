@@ -15,14 +15,14 @@ export class inventario {
 }
 export interface DataInventario {
   totalData: number;
-  data: IInventario[];
+
 }
-export interface IInventario {
-  inventarioId: string;
+export interface Producto {
+  inventarioId?: string;
   NombreProducto: string;
   precioEntrada: number;
   precioSalida: number;
   stock: number;
-  fechaRegistro: Date;
-  estado: String;
+  fechaRegistro?: Date;
+  estado?: String;
 }
