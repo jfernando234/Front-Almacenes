@@ -34,6 +34,7 @@ export class ClInventarioComponent {
 
   ngOnInit() {
     // cargar datos iniciales si aplica
+    this. ObtenerProveedores();
   }
 
   ObtenerProveedores() {

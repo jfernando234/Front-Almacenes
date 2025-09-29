@@ -32,7 +32,7 @@ export class AddInventarioComponent {
       return;
     }
     const nuevo: Producto = {
-      NombreProducto: this.form.value.nombreProducto,
+      NombreProducto: this.form.value.nombre,
       precioEntrada: this.form.value.precioEntrada,
       precioSalida: this.form.value.precioSalida,
       stock: this.form.value.stock
@@ -40,10 +40,6 @@ export class AddInventarioComponent {
     this.inventarioService.registrar(nuevo)
       .pipe(finalize(() => this.form.reset()))
       .subscribe({
-        next: (res) => {
-          console.log('Producto registrado:', res);
-          alert('Producto registrado correctamente ✅');
-        },
         error: (err) => {
           console.error('Error al registrar:', err);
           alert('Ocurrió un error al registrar el producto ❌');

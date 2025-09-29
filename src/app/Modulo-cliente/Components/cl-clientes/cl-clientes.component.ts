@@ -51,7 +51,7 @@ export class ClClientesComponent implements OnInit {
     this.clienteServiceList.obtenerAllClientes()
       .pipe(finalize(() => this.isLoading = false))
       .subscribe((data: ClienteList[]) => {
-
+        console.log(data);
         for (let index = this.skip; index < Math.min(this.limit, data.length); index++) {
           const serialNumber = index + 1;
           this.serialNumberArray.push(serialNumber);

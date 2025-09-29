@@ -32,6 +32,7 @@ export class ClProveedoresComponent {
   constructor(private modalService: BsModalService, private proveedorService: ProveedorService) { }
 
   ngOnInit() {
+    this.ObtenerProveedor();
   }
   ObtenerProveedor(){
     this.serialNumberArray = [];
@@ -82,9 +83,10 @@ export class ClProveedoresComponent {
   CrearProveedor() {
     this.bsModalRef = this.modalService.show(AddProveedorComponent);
     this.bsModalRef.onHidden?.subscribe(() => {
-
+      this.ObtenerProveedor();
     });
   }
+
   /*paginacion*/
   getMoreData(value: string) { }
   moveToPage(page: number) { }

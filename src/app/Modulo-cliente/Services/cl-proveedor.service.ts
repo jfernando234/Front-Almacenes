@@ -12,10 +12,10 @@ export class ProveedorService {
   constructor(public http: HttpClient) { }
   obtenerAllProveedores(
   ): Observable<Iproveedor[]> {
-    let url = `${this.apiUrl}/api/proveedor/ListarAllProveedores`
+    let url = `${this.apiUrl}proveedor/ListarAllProveedores`
     return this.http.get<Iproveedor[]>(url);
   }
   registrar(producto: Iproveedor): Observable<any> {
-    return this.http.post(`${this.apiUrl}/proveedor/RegistrarProveedor`, producto);
+    return this.http.post(`${this.apiUrl}proveedor/RegistrarProveedor`, producto);
   }
 }

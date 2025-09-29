@@ -45,26 +45,21 @@
           <tr>
             <th>N°</th>
             <th>Nombre</th>
-            <th>Apellido</th>
             <th>Teléfono</th>
             <th>DNI</th>
             <th>Correo</th>
             <th>Dirección</th>
-            <th>Estado</th>
+
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let data of ClientesList; let i = index">
             <td>{{ serialNumberArray[i] }}</td>
-            <td>{{ data.nombre }}</td>
-            <td>{{ data.apellido }}</td>
+            <td>{{ data.contacto }}</td>
             <td>{{ data.telefono }}</td>
             <td>{{ data.dni }}</td>
             <td>{{ data.correo }}</td>
             <td>{{ data.direccion }}</td>
-            <td>
-
-            </td>
           </tr>
         </tbody>
       </table>

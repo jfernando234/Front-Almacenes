@@ -9,10 +9,10 @@
       <div class="col-12 col-md-12 col-xl-6">
         <div class="form-group local-forms">
           <label>Nombre Producto</label>
-          <input formControlName="apellido" class="form-control" type="text"
-            [ngClass]="{'is-invalid': isInvalid('apellido')}">
+          <input formControlName="nombre" class="form-control" type="text"
+            [ngClass]="{'is-invalid': isInvalid('nombre')}">
           <div *ngIf="isInvalid('nombre') || mostrarErrores" class="invalid-feedback">
-            <div *ngIf="isRequerido('apellido')|| mostrarErrores">
+            <div *ngIf="isRequerido('nombre')|| mostrarErrores">
               Debe completar el campo*
             </div>
           </div>
@@ -21,7 +21,7 @@
       <div class="col-12 col-md-12 col-xl-6">
         <div class="form-group local-forms">
           <label>Precio Entrada</label>
-          <input formControlName="precioEntrada" class="form-control" type="text"
+          <input formControlName="precioEntrada" class="form-control"  type="number"
             [ngClass]="{'is-invalid': isInvalid('precioEntrada')}">
           <div *ngIf="isInvalid('precioEntrada') || mostrarErrores" class="invalid-feedback">
             <div *ngIf="isRequerido('precioEntrada')|| mostrarErrores">
@@ -57,8 +57,8 @@
     </div>
     <div class="col-12">
       <div class="document-submit text-end">
-        <button type="submit" class="btn btn-primary submit-form me-2">Guardar</button>
-        <button type="submit" class="btn btn-primary cancel-form">Cancelar</button>
+        <button type="submit" class="btn btn-primary submit-form me-2" (click)="guardar()">Guardar</button>
+        <button type="submit" class="btn btn-primary cancel-form"  (click)="Cancelar()">Cancelar</button>
       </div>
     </div>
   </form>

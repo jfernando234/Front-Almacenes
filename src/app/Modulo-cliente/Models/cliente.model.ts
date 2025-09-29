@@ -10,6 +10,7 @@ export class Cliente{
 }
 
 export interface ClienteList{
+  contacto?: string;
   nombre: string;
   apellido : string;
   dni : string;

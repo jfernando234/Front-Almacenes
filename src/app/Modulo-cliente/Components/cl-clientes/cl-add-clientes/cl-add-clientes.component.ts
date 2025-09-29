@@ -11,7 +11,7 @@ import { ClienteService } from 'src/app/Modulo-cliente/Services/cl-clientes.serv
   templateUrl: './cl-add-clientes.component.html',
   styleUrl: './cl-add-clientes.component.css'
 })
-export class ClAddClientesComponent {
+export class ClAddClientesComponent  {
 
   usuario: Cliente = new Cliente();
   form!: FormGroup;
@@ -22,9 +22,9 @@ export class ClAddClientesComponent {
     this.form = this.fb.group({
       Razon: ['', Validators.required],
       documento: ['', Validators.required],
+      direccion: ['', Validators.required],
       telefono: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      contacto: ['', Validators.required],
 
     });
   }

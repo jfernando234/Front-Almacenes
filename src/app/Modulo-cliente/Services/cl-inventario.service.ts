@@ -11,10 +11,10 @@ export class InventarioService {
   apiUrl = environment.url_api;
   constructor(public http: HttpClient) { }
   obtenerInventario(  ): Observable<Producto[]> {
-    return this.http.get<Producto[]>(`${this.http}/ListarAllProductos`);
+    return this.http.get<Producto[]>(`${this.apiUrl}producto/ListarAllProductos`);
   }
   // ✅ Registrar producto
   registrar(producto: Producto): Observable<any> {
-    return this.http.post(`${this.apiUrl}/RegistrarProducto`, producto);
+    return this.http.post(`${this.apiUrl}producto/RegistrarProducto`, producto);
   }
 }

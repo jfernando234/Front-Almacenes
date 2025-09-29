@@ -57,7 +57,7 @@
       <div class="col-12 col-md-12 col-xl-6">
         <div class="form-group local-forms">
           <label>Ruc <span class="login-danger">*</span></label>
-          <input formControlName="ruc" class="form-control" type="number" [ngClass]="{'is-invalid': isInvalid('ruc')}">
+          <input formControlName="ruc" class="form-control" type="text" [ngClass]="{'is-invalid': isInvalid('ruc')}">
           <div *ngIf="isInvalid('ruc') || mostrarErrores" class="invalid-feedback">
             <div *ngIf="isRequerido('ruc')|| mostrarErrores">
               Debe completar el campo*
@@ -69,7 +69,7 @@
     <div class="col-12">
       <div class="document-submit text-end">
         <button type="submit" class="btn btn-primary submit-form me-2" (click)="guardar()">Guardar</button>
-        <button type="submit" class="btn btn-primary cancel-form">Cancelar</button>
+        <button type="submit" class="btn btn-primary cancel-form" (click)="Cancelar()">Cancelar</button>
       </div>
     </div>
   </form>

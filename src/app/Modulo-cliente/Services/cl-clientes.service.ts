@@ -11,9 +11,9 @@ export class ClienteService {
   apiUrl = environment.url_api;
   constructor(public http: HttpClient) { }
   obtenerAllClientes():Observable<ClienteList[]>{
-    return this.http.get<ClienteList[]>(`${this.http}/cliente/ListarAllClientes`);
+    return this.http.get<ClienteList[]>(`${this.apiUrl}cliente/ListarAllClientes`);
   }
   registrar(producto: ICliente): Observable<any> {
-      return this.http.post(`${this.apiUrl}/cliente/RegistrarCliente`, producto);
+      return this.http.post(`${this.apiUrl}cliente/RegistrarCliente`, producto);
     }
 }

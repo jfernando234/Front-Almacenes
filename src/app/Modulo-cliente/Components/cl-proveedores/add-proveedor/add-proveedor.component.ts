@@ -39,7 +39,7 @@ export class AddProveedorComponent {
       direccion: this.form.value.direccion,
       telefono: this.form.value.telefono,
       correo: this.form.value.email,
-      contacto: 'nuevo'
+      contacto: "nuevo"
     };
     this.proveedoerservice.registrar(nuevo)
       .pipe(finalize(() => this.form.reset()))
