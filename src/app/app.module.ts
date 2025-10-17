@@ -81,6 +81,7 @@ import { AddInventarioComponent } from './Modulo-cliente/Components/cl-inventari
 import { AddProveedorComponent } from './Modulo-cliente/Components/cl-proveedores/add-proveedor/add-proveedor.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { ClDashboardComponent } from './Modulo-cliente/Components/cl-dashboard/cl-dashboard.component';
+import { EditarProveedorComponent } from './Modulo-cliente/Components/cl-proveedores/editar-proveedor/editar-proveedor.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -121,7 +122,8 @@ import { ClDashboardComponent } from './Modulo-cliente/Components/cl-dashboard/c
     ClAddClientesComponent,
     AddInventarioComponent,
     AddProveedorComponent,
-    ClDashboardComponent
+    ClDashboardComponent,
+    EditarProveedorComponent
   ],
   bootstrap: [AppComponent],
   imports: [

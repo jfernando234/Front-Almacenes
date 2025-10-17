@@ -1,0 +1,76 @@
+<div class="card-body">
+  <form [formGroup]="form">
+    <div class="row">
+      <div class="col-12">
+        <div class="form-heading">
+          <h4>Nuevo Proveedor</h4>
+        </div>
+      </div>
+      <div class="col-12 col-md-12 col-xl-6">
+        <div class="form-group local-forms">
+          <label>Razon Social <span class="login-danger">*</span></label>
+          <input formControlName="rozonSocial" class="form-control" type="text"
+            [ngClass]="{'is-invalid': isInvalid('rozonSocial')}">
+          <div *ngIf="isInvalid('rozonSocial') || mostrarErrores" class="invalid-feedback">
+            <div *ngIf="isRequerido('rozonSocial')|| mostrarErrores">
+              Debe completar el campo*
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-12 col-xl-6">
+        <div class="form-group local-forms">
+          <label>Teléfono <span class="login-danger">*</span></label>
+          <input formControlName="telefono" class="form-control" type="number"
+            [ngClass]="{'is-invalid': isInvalid('telefono')}">
+          <div *ngIf="isInvalid('telefono') || mostrarErrores" class="invalid-feedback">
+            <div *ngIf="isRequerido('telefono')|| mostrarErrores">
+              Debe completar el campo*
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-12 col-xl-6">
+        <div class="form-group local-forms">
+          <label>Dirección <span class="login-danger">*</span></label>
+          <input formControlName="direccion" class="form-control" type="text"
+            [ngClass]="{'is-invalid': isInvalid('direccion')}">
+          <div *ngIf="isInvalid('direccion') || mostrarErrores" class="invalid-feedback">
+            <div *ngIf="isRequerido('direccion')|| mostrarErrores">
+              Debe completar el campo*
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-12 col-xl-6">
+        <div class="form-group local-forms">
+          <label>Email <span class="login-danger">*</span></label>
+          <input formControlName="email" class="form-control" type="email"
+            [ngClass]="{'is-invalid': isInvalid('email')}">
+          <div *ngIf="isInvalid('email') || mostrarErrores" class="invalid-feedback">
+            <div *ngIf="isRequerido('email')|| mostrarErrores">
+              Debe completar el campo*
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-12 col-xl-6">
+        <div class="form-group local-forms">
+          <label>Ruc <span class="login-danger">*</span></label>
+          <input formControlName="ruc" class="form-control" type="text" [ngClass]="{'is-invalid': isInvalid('ruc')}">
+          <div *ngIf="isInvalid('ruc') || mostrarErrores" class="invalid-feedback">
+            <div *ngIf="isRequerido('ruc')|| mostrarErrores">
+              Debe completar el campo*
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="document-submit text-end">
+        <button type="submit" class="btn btn-primary submit-form me-2" (click)="editarProveedor()" >Guardar</button>
+        <button type="submit" class="btn btn-primary cancel-form" (click)="Cancelar()">Cancelar</button>
+      </div>
+    </div>
+  </form>
+</div>
