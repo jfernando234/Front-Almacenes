@@ -173,6 +173,7 @@ import { DetalleVentaComponent } from './Modulo-cliente/Components/cl-ordenes-de
     A11yModule,
     ReactiveFormsModule,
     ModalModule.forRoot(),
+    NgxChartsModule,
     NgxChartsModule
 ],
   providers: [
