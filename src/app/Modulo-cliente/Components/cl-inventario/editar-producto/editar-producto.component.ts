@@ -6,15 +6,16 @@ import { Producto } from 'src/app/Modulo-cliente/Models/inventario';
 import { InventarioService } from 'src/app/Modulo-cliente/Services/cl-inventario.service';
 
 @Component({
-  selector: 'app-add-inventario',
-  templateUrl: './add-inventario.component.html',
-  styleUrl: './add-inventario.component.css'
+  selector: 'app-editar-producto',
+
+  templateUrl: './editar-producto.component.html',
+  styleUrl: './editar-producto.component.css'
 })
-export class AddInventarioComponent {
+export class EditarProductoComponent {
   form!: FormGroup;
   public mostrarErrores = false;
   showPassword = false;
-
+  Seleccionado: any;
   constructor(public bsModalRef: BsModalRef, public fb: FormBuilder, private inventarioService: InventarioService) { }
 
   ngOnInit() {

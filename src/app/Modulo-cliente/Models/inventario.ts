@@ -18,8 +18,9 @@ export interface DataInventario {
 
 }
 export interface Producto {
+  productoId?: number;
   inventarioId?: string;
-  NombreProducto: string;
+  nombreProducto: string;
   precioEntrada: number;
   precioSalida: number;
   stock: number;

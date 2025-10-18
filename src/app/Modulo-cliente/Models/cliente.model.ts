@@ -10,10 +10,11 @@ export class Cliente{
 }
 
 export interface ClienteList{
+  idCliente: number;
   contacto?: string;
   nombre: string;
   apellido : string;
-  dni : string;
+  numeroDocumento : string;
   correo: string;
   telefono: number;
   direccion: string;
@@ -25,11 +26,13 @@ export interface DataCliente{
   totalData: number;
 }
 export interface ICliente {
+  idCliente?: number;
+  contacto: string;
   idTipoDocumento: number;
   numeroDocumento: string;
   razonSocial: string
   direccion: string
   telefono: string
   correo: string
-  contacto: string
+
 }

@@ -82,6 +82,12 @@ import { AddProveedorComponent } from './Modulo-cliente/Components/cl-proveedore
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { ClDashboardComponent } from './Modulo-cliente/Components/cl-dashboard/cl-dashboard.component';
 import { EditarProveedorComponent } from './Modulo-cliente/Components/cl-proveedores/editar-proveedor/editar-proveedor.component';
+import { ClEditarClienteComponent } from './Modulo-cliente/Components/cl-clientes/cl-editar-cliente/cl-editar-cliente.component';
+import { EditarProductoComponent } from './Modulo-cliente/Components/cl-inventario/editar-producto/editar-producto.component';
+import { ListarCompraComponent } from './Modulo-cliente/Components/cl-ordenes-de-compra/listar-compra/listar-compra.component';
+import { AddCompraComponent } from './Modulo-cliente/Components/cl-ordenes-de-compra/add-compra/add-compra.component';
+import { AddVentaComponent } from './Modulo-cliente/Components/cl-ordenes-de-venta/add-venta/add-venta.component';
+import { ListarVentaComponent } from './Modulo-cliente/Components/cl-ordenes-de-venta/listar-venta/listar-venta.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -123,7 +129,12 @@ import { EditarProveedorComponent } from './Modulo-cliente/Components/cl-proveed
     AddInventarioComponent,
     AddProveedorComponent,
     ClDashboardComponent,
-    EditarProveedorComponent
+    EditarProveedorComponent,
+    ClEditarClienteComponent,
+    EditarProductoComponent,
+    ListarCompraComponent,
+    AddCompraComponent,AddVentaComponent,
+    ListarVentaComponent
   ],
   bootstrap: [AppComponent],
   imports: [

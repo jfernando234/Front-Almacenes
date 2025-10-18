@@ -12,7 +12,7 @@ export class EditarProveedorComponent {
   form!: FormGroup;
   public mostrarErrores = false;
   showPassword = false;
-
+  proveedorSeleccionado: any;
   constructor(public bsModalRef: BsModalRef, public fb: FormBuilder, private proveedoerservice: ProveedorService) { }
 
   ngOnInit() {

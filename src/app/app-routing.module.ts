@@ -30,6 +30,11 @@ import { ClOrdenesDeCompraComponent } from './Modulo-cliente/Components/cl-orden
 import { ClOrdenesDeVentaComponent } from './Modulo-cliente/Components/cl-ordenes-de-venta/cl-ordenes-de-venta.component';
 import { ClEnviosRecepcionComponent } from './Modulo-cliente/Components/cl-envios-recepcion/cl-envios-recepcion.component';
 import { ClReportesComponent } from './Modulo-cliente/Components/cl-reportes/cl-reportes.component';
+import { AddCompraComponent } from './Modulo-cliente/Components/cl-ordenes-de-compra/add-compra/add-compra.component';
+import { ListarCompraComponent } from './Modulo-cliente/Components/cl-ordenes-de-compra/listar-compra/listar-compra.component';
+import { ListarVentaComponent } from './Modulo-cliente/Components/cl-ordenes-de-venta/listar-venta/listar-venta.component';
+import { AddVentaComponent } from './Modulo-cliente/Components/cl-ordenes-de-venta/add-venta/add-venta.component';
+
 const routes: Routes = [
   { path: 'login', component: SegLoginComponent },
   { path: 'restaura-clave', component: SegRestauraclaveComponent },
@@ -148,11 +153,21 @@ const routes: Routes = [
         path: 'cl-ordenes-de-compra',
         component: ClOrdenesDeCompraComponent,
         canActivate: [AuthGuard],
+        children: [
+          { path: '', redirectTo: 'compras/listar', pathMatch: 'full' },
+          { path: 'compras/listar', component: ListarCompraComponent },
+          { path: 'compras/nueva', component: AddCompraComponent }
+        ]
       },
       {
         path: 'cl-ordenes-de-venta',
         component: ClOrdenesDeVentaComponent,
         canActivate: [AuthGuard],
+        children: [
+          { path: '', redirectTo: 'ventas/listar', pathMatch: 'full' },
+          { path: 'ventas/listar', component: ListarVentaComponent  },
+          { path: 'ventas/nueva', component: AddVentaComponent }
+        ]
       },
       {
         path: 'cl-envios-recepcion',
@@ -177,4 +192,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

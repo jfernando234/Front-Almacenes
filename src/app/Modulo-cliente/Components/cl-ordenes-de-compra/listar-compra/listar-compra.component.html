@@ -7,7 +7,7 @@
           <mat-form-field>
             <mat-label>Desde</mat-label>
             <input matInput [(ngModel)]="fechaInicio" [matDatepicker]="pickerInicio" placeholder="Seleccione fecha"
-              (ngModelChange)="ObtenerProductos()" />
+              (ngModelChange)="ObtenerOrdenesCompra()" />
             <mat-datepicker-toggle matSuffix [for]="pickerInicio"></mat-datepicker-toggle>
             <mat-datepicker #pickerInicio></mat-datepicker>
           </mat-form-field>
@@ -17,14 +17,14 @@
           <mat-form-field>
             <mat-label>Hasta</mat-label>
             <input matInput [(ngModel)]="fechaFin" [matDatepicker]="pickerFin" placeholder="Seleccione fecha"
-              (ngModelChange)="ObtenerProductos()" />
+              (ngModelChange)="ObtenerOrdenesCompra()" />
             <mat-datepicker-toggle matSuffix [for]="pickerFin"></mat-datepicker-toggle>
             <mat-datepicker #pickerFin></mat-datepicker>
           </mat-form-field>
         </div>
       </div>
       <div class="right-actions">
-        <a class="plus-add mb-2" (click)="CrearPorducto()">
+        <a class="plus-add mb-2" (click)="irANuevaCompra()">
           <img src="assets/Imagenes/plus.png" alt="" />
         </a>
         <a class="refresg-c mb-2" (click)="refresh()">
@@ -34,7 +34,7 @@
     </div>
     <!-- Título -->
     <div class="table-header mb-3">
-      <h3 class="mb-0">Lista de Productos</h3>
+      <h3 class="mb-0">Lista de Compras</h3>
     </div>
     <!-- Tabla -->
     <div class="table-responsive shadow-sm rounded bg-white">
@@ -42,36 +42,25 @@
         <thead class="table-primary">
           <tr>
             <th>N°</th>
-            <th>Nombre</th>
-            <th>Precio Entrada</th>
-            <th>Precio Salida</th>
-            <th>stock</th>
-            <th>Fecha Registro</th>
-            <th></th>
+            <th>Fecha</th>
+            <th>Numero Documento </th>
+            <th>Ruc </th>
+            <th>Proveedor</th>
+            <th>Almacen</th>
+            <th>monto</th>
+            <th>Estado Pago</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let data of InventarioList; let i = index">
+          <tr *ngFor="let data of ComprasList; let i = index">
             <td>{{serialNumberArray[i]}}</td>
-            <td>{{data.nombreProducto}}</td>
-            <td>{{data.precioEntrada}}</td>
-            <td>{{data.precioSalida}}</td>
-            <td>{{data.stock}}</td>
-            <td>{{data.fechaRegistro}}</td>
-            <td class="text-end">
-              <div class="dropdown dropdown-action">
-                <a href="javascript:void(0);" class="action-icon dropdown-toggle" data-bs-toggle="dropdown"
-                  aria-expanded="false">
-                  <i class="fa fa-ellipsis-v"></i>
-                </a>
-                <div class="dropdown-menu dropdown-menu-end">
-                  <a class="dropdown-item" (click)="editarProducto(data)"><i
-                      class="fa-solid fa-pen-to-square m-r-5"></i>Editar</a>
-                  <a class="dropdown-item" (click)="eliminarProducto(data.productoId)"><i
-                      class="fa fa-trash-alt m-r-5"></i> Eliminar</a>
-                </div>
-              </div>
-            </td>
+            <td>{{data.fecha}}</td>
+            <td>{{data.numeroDocumento}}</td>
+            <td>{{data.ruc}}</td>
+            <td>{{data.proveedor}}</td>
+            <td>{{data.almacen}}</td>
+            <td>{{data.monto}}</td>
+            <td>{{data.estadoPago}}</td>
           </tr>
         </tbody>
       </table>
@@ -98,7 +87,7 @@
           </li>
 
           <li class="page-item"
-            [class.disabled]="currentPage === pageNumberArray[pageNumberArray.length - 1] || InventarioList.length === 0">
+            [class.disabled]="currentPage === pageNumberArray[pageNumberArray.length - 1] || ComprasList.length === 0">
             <a class="page-link" (click)="getMoreData('next')">Siguiente</a>
           </li>
         </ul>

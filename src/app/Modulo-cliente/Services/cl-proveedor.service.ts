@@ -4,6 +4,7 @@ import { Observable } from "rxjs";
 import { environment } from 'src/environments/environment';
 import { HttpClient } from "@angular/common/http";
 import { DataProveedor, Iproveedor } from "../Models/provedor";
+import { successResponse } from "src/assets/Model/successResponse";
 @Injectable({
   providedIn: 'root'
 })
@@ -17,5 +18,8 @@ export class ProveedorService {
   }
   registrar(producto: Iproveedor): Observable<any> {
     return this.http.post(`${this.apiUrl}proveedor/RegistrarProveedor`, producto);
+  }
+  eliminarProveedor(proveedorId?: string): Observable<successResponse> {
+   return this.http.delete<successResponse>(this.apiUrl + `/Proveedor/DeleteProveedor/${proveedorId}`);
   }
 }

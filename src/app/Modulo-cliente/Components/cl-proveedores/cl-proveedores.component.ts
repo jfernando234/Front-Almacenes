@@ -7,6 +7,9 @@ import { AddProveedorComponent } from './add-proveedor/add-proveedor.component';
 import { finalize } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
 import { ProveedorService } from '../../Services/cl-proveedor.service';
+import Swal from 'sweetalert2';
+import { Subject } from 'rxjs';
+import { EditarProveedorComponent } from './editar-proveedor/editar-proveedor.component';
 
 @Component({
   selector: 'app-cl-proveedores',
@@ -34,7 +37,7 @@ export class ClProveedoresComponent {
   ngOnInit() {
     this.ObtenerProveedor();
   }
-  ObtenerProveedor(){
+  ObtenerProveedor() {
     this.serialNumberArray = [];
     this.ProveedorList = [];
     let fechaInicioFormateado = undefined
@@ -48,16 +51,16 @@ export class ClProveedoresComponent {
       fechaFinFormateado = new Date(this.fechaFin)?.toISOString().split('T')[0];
     }
     this.proveedorService.obtenerAllProveedores()
-    .pipe(finalize(() => this.isLoading = false))
+      .pipe(finalize(() => this.isLoading = false))
       .subscribe((data: Iproveedor[]) => {
         for (let index = this.skip; index < Math.min(this.limit, data.length); index++) {
           const serialNumber = index + 1;
           this.serialNumberArray.push(serialNumber);
         }
-      this.ProveedorList = data
-      this.dataSource = new MatTableDataSource(this.ProveedorList);
-      this.calculateTotalPages(this.totalData, this.pageSize);
-    })
+        this.ProveedorList = data
+        this.dataSource = new MatTableDataSource(this.ProveedorList);
+        this.calculateTotalPages(this.totalData, this.pageSize);
+      })
   }
   limpiar() {
     this.serialNumberArray = [];
@@ -69,16 +72,16 @@ export class ClProveedoresComponent {
   refresh() {
     this.limpiar();
     this.proveedorService.obtenerAllProveedores()
-    .pipe(finalize(() => this.isLoading = false))
+      .pipe(finalize(() => this.isLoading = false))
       .subscribe((data: Iproveedor[]) => {
         for (let index = this.skip; index < Math.min(this.limit, data.length); index++) {
           const serialNumber = index + 1;
           this.serialNumberArray.push(serialNumber);
         }
-      this.ProveedorList = data
-      this.dataSource = new MatTableDataSource(this.ProveedorList);
-      this.calculateTotalPages(this.totalData, this.pageSize);
-    })
+        this.ProveedorList = data
+        this.dataSource = new MatTableDataSource(this.ProveedorList);
+        this.calculateTotalPages(this.totalData, this.pageSize);
+      })
   }
   CrearProveedor() {
     this.bsModalRef = this.modalService.show(AddProveedorComponent);
@@ -86,7 +89,48 @@ export class ClProveedoresComponent {
       this.ObtenerProveedor();
     });
   }
-
+  editarProveedor(proveedor: Iproveedor) {
+    const initialState = {
+      proveedorSeleccionado: proveedor.proveedorId
+    };
+    this.bsModalRef = this.modalService.show(EditarProveedorComponent, { initialState });
+    const proveedorActualizado = new Subject<boolean>();
+    this.bsModalRef.content.proveedorActualizado = proveedorActualizado;
+    proveedorActualizado.subscribe((proveedorEditada: boolean) => {
+      if (proveedorEditada) {
+        this.ObtenerProveedor();
+      }
+    });
+    this.bsModalRef.onHidden?.subscribe(() => {
+      proveedorActualizado.unsubscribe();
+    });
+  }
+  eliminarProveedor(proveedorId?: string) {
+    Swal.fire({
+      title: '¿Seguro que deseas eliminar?',
+      showDenyButton: true,
+      confirmButtonText: 'Eliminar',
+      denyButtonText: `Cancelar`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.proveedorService.eliminarProveedor(proveedorId).subscribe(
+          (response) => {
+            if (response.isSuccess) {
+              Swal.fire('Correcto', 'El proveedor fue eliminado correctamente del sistema', 'success');
+              this.ObtenerProveedor();
+              return;
+            } else {
+              console.error(response.message);
+            }
+          },
+          (error) => {
+            console.error(error);
+          });
+      } else {
+        return;
+      }
+    })
+  }
   /*paginacion*/
   getMoreData(value: string) { }
   moveToPage(page: number) { }

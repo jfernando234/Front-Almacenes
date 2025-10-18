@@ -6,6 +6,9 @@ import { AddInventarioComponent } from './add-inventario/add-inventario.componen
 import { InventarioService } from '../../Services/cl-inventario.service';
 import { finalize } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
+import { EditarProductoComponent } from './editar-producto/editar-producto.component';
+import { Subject } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-cl-inventario',
@@ -34,10 +37,10 @@ export class ClInventarioComponent {
 
   ngOnInit() {
     // cargar datos iniciales si aplica
-    this. ObtenerProveedores();
+    this.ObtenerProductos();
   }
 
-  ObtenerProveedores() {
+  ObtenerProductos() {
     this.serialNumberArray = [];
     this.InventarioList = [];
     let fechaInicioFormateado = undefined
@@ -88,6 +91,48 @@ export class ClInventarioComponent {
     this.bsModalRef.onHidden?.subscribe(() => {
 
     });
+  }
+  editarProducto(producto: Producto) {
+    const initialState = {
+      Seleccionado: producto.productoId
+    };
+    this.bsModalRef = this.modalService.show(EditarProductoComponent, { initialState });
+    const clienteActualizado = new Subject<boolean>();
+    this.bsModalRef.content.proveedorActualizado = clienteActualizado;
+    clienteActualizado.subscribe((proveedorEditada: boolean) => {
+      if (proveedorEditada) {
+        this.ObtenerProductos();
+      }
+    });
+    this.bsModalRef.onHidden?.subscribe(() => {
+      clienteActualizado.unsubscribe();
+    });
+  }
+  eliminarProducto(productoId?: number) {
+    Swal.fire({
+      title: '¿Seguro que deseas eliminar?',
+      showDenyButton: true,
+      confirmButtonText: 'Eliminar',
+      denyButtonText: `Cancelar`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.inventarioService.eliminarProducto(productoId).subscribe(
+          (response) => {
+            if (response.isSuccess) {
+              Swal.fire('Correcto', 'El proveedor fue eliminado correctamente del sistema', 'success');
+              this.ObtenerProductos();
+              return;
+            } else {
+              console.error(response.message);
+            }
+          },
+          (error) => {
+            console.error(error);
+          });
+      } else {
+        return;
+      }
+    })
   }
   /*paginacion*/
   getMoreData(value: string) { }
