@@ -1,0 +1,16 @@
+.plus-add{
+  width: 10px;
+
+}
+.btn-primary{
+  background-color: rgb(134, 214, 224);
+}
+::ng-deep .cdk-overlay-container {
+  z-index: 2000 !important;
+}
+.doctor-search-blk{
+ display: flex;
+}
+.form-control{
+  height: 40px;
+}

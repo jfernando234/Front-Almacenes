@@ -7,6 +7,7 @@ import { Iventas, IventasDetalles, Ventas } from 'src/app/Modulo-cliente/Models/
 import { VentasService } from 'src/app/Modulo-cliente/Services/cl-ventas.service';
 import Swal from 'sweetalert2';
 import { DetalleVentaComponent } from './detalle-venta/detalle-venta.component';
+import { ComprasService } from 'src/app/Modulo-cliente/Services/cl-compras.service';
 
 @Component({
   selector: 'app-add-venta',
@@ -52,7 +53,7 @@ export class AddVentaComponent {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-
+    private Compraservice: ComprasService,
     private ventaService: VentasService,
 
     private modalService: BsModalService,
@@ -60,9 +61,7 @@ export class AddVentaComponent {
 
   ngOnInit(): void {
     let getCheckedTipoBeneficiario = null;
-    this.tipoBeneficiario_LISTA.forEach((o) => {
-      if (o.checked) getCheckedTipoBeneficiario = o.value;
-    });
+
     this.form = this.formBuilder.group({
       tipoDocumentoId: ['', [Validators.required]],
       serie: [{ value: '', disabled: true }, Validators.required],
@@ -84,7 +83,6 @@ export class AddVentaComponent {
       metodoPago: ['Efectivo', Validators.required],
       tipoTarjetaId: [''],
       montoRecibido: ['', Validators.required],
-      tipoMonedaId: ['', [Validators.required]],
       vuelto: [{ value: '', disabled: true }, Validators.required],
       subtotal: [{ value: '', disabled: true }, Validators.required],
       igv: [{ value: '', disabled: true }, Validators.required],
@@ -101,13 +99,6 @@ export class AddVentaComponent {
   updateSerieAndSecuencia(tipoDocumentoId: string): void {
 
   }
-
-  // seleccion checkbox tipo Beneficiario
-  tipoBeneficiario_LISTA = [
-    { name: 'Paciente', value: 'Paciente', checked: false },
-    { name: 'Cliente', value: 'Cliente', checked: false },
-  ];
-
   buscarBeneficiarios() {
     const searchInput = this.multiPacienteSearchInput.nativeElement.value
       ? this.multiPacienteSearchInput.nativeElement.value.toLowerCase()
@@ -245,7 +236,7 @@ export class AddVentaComponent {
 
   agregarProcedimientoProducto() {
     // Verifica si ya hay un producto agregado
-    if (this.dataProductoTable.length > 0) {
+    /*if (this.dataProductoTable.length > 0) {
       Swal.fire({
         icon: 'warning',
         title: 'Detalle de Venta ya agregado',
@@ -253,7 +244,7 @@ export class AddVentaComponent {
         confirmButtonText: 'Aceptar',
       });
       return;
-    }
+    }*/
 
     // Si no hay productos agregados, abre el modal
     this.bsModalRef = this.modalService.show(DetalleVentaComponent);
@@ -262,7 +253,31 @@ export class AddVentaComponent {
   }
 
   agregarDataProducto(): void {
+    this.Compraservice.disparadorOtro.subscribe((response: any) => {
+      if (response.action === 'add') {
+        response.data.forEach((data: any) => {
+          const productoExistente = this.dataProductoTable.find(
+            item => item.productoId === data.productoListProductoId
+          );
+          const precioUnitario = Number(data.productoListPrecio) || 0;
+          const cantidad = Number(data.cantidadIm) || 0;
+          const subtotal = precioUnitario * cantidad;
 
+          if (!productoExistente) {
+            this.dataProductoTable.push({
+              productoId: data.productoListProductoId,
+              nombre: data.productoListNombre,
+              cantidad: cantidad,
+              precioNew: precioUnitario,
+              precioOg: precioUnitario,
+              subtotal: subtotal
+            });
+          }
+        });
+        // Recalcular totales después de agregar productos
+        this.calcularTotal();
+      }
+    });
   }
 
   isInvalidTablet(tamanio: number): boolean {
@@ -324,17 +339,17 @@ export class AddVentaComponent {
   }
 
   calcularVuelto(event: any) {
-    const monto = event.target.value;
-    this.vuelto = monto - this.total;
+    const monto = Number(event.target.value) || 0;
+    this.vuelto = Number((monto - this.total).toFixed(2));
     this.llenarFormCalculo();
   }
 
   llenarFormCalculo() {
     this.form.patchValue({
-      subtotal: this.subtotal,
-      vuelto: this.vuelto,
+      subtotal: Number(this.subtotal).toFixed(2),
+      vuelto: Number(this.vuelto).toFixed(2),
       igv: 0,
-      total: this.total,
+      total: Number(this.total).toFixed(2),
     });
   }
 }

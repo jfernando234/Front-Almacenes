@@ -10,6 +10,7 @@ import { Iproveedor } from 'src/app/Modulo-cliente/Models/provedor';
 import { ComprasService } from 'src/app/Modulo-cliente/Services/cl-compras.service';
 import { ProveedorService } from 'src/app/Modulo-cliente/Services/cl-proveedor.service';
 import Swal from 'sweetalert2';
+import { DetalleCompraComponent } from './detalle-compra/detalle-compra.component';
 
 
 
@@ -38,7 +39,7 @@ export class AddCompraComponent implements OnInit {
   igv = 0;
   total = 0;
   vuelto = 0;
-
+  tipoPago_LISTA: Array<{ tipoPagoId: number; descripcion: string }> = [];
   @ViewChild('multiProveedorSearch') multiProveedorSearchInput!: ElementRef;
 
   ngOnInit(): void {
@@ -63,15 +64,17 @@ export class AddCompraComponent implements OnInit {
       fechaVenc: [''],
     });
     this.agregarDataProducto();
-
     this.form.get('ndias')?.valueChanges.subscribe((dias: number) => {
       this.actualizarFechaVencimiento(dias);
     });
-
+    this.tipoPago_LISTA = [
+      { tipoPagoId: 1, descripcion: 'Credito' },
+      { tipoPagoId: 2, descripcion: 'Contado' },
+    ];
     this.proveedorService.obtenerAllProveedores()
       .subscribe((data: Iproveedor[]) => {
         this.listProveedores = data;
-    });
+      });
 
 
   }
@@ -161,7 +164,7 @@ export class AddCompraComponent implements OnInit {
   isRequerido(controlName: string) {
     const control = this.form.get(controlName);
     return control?.errors && control.errors['required'];
-  }/*
+  }
   isEfectivo(controlName: string): void {
     const tipoPagoId = this.form.get(controlName)?.value;
     const pagoSeleccionado = this.tipoPago_LISTA.find(p => p.tipoPagoId === tipoPagoId);
@@ -173,8 +176,8 @@ export class AddCompraComponent implements OnInit {
     } else {
       this.form.get('efectivo')?.disable();
     }
-  }*/
-  Cancelar() {
+  } *
+    Cancelar() {
     this.CompraAgregada$.next(false);
     this.bsModalRef.hide();
   }
@@ -265,38 +268,39 @@ export class AddCompraComponent implements OnInit {
     this.router.navigate(['main/cl-ordenes-de-compra/compras/nueva']);
   }
 
+
+  agregarProductoCompras() {
+    this.bsModalRef = this.modalService.show(
+      DetalleCompraComponent
+    );
+    this.bsModalRef.setClass('modal-lg');
+  }
   agregarDataProducto() {
-    /*this.comprasDetallesService.disparadorOtro.subscribe((data: any) => {
-      const productoExistente = this.dataProductoTable.find(
-        item => item.codigo === data.productoListCodigo
-      );
-      const precioUnitario = data.productoListPrecio;
-      const cantidad = data.cantidadIm;
-      const subtotal = precioUnitario * cantidad;
-      const igv = +(subtotal * 0.18).toFixed(2);
-      if (productoExistente) {
-        productoExistente.cantidad += data.cantidadIm;
-        productoExistente.subtotal = productoExistente.precioNew * productoExistente.cantidad;
-        productoExistente.igv = +(productoExistente.subtotal * 0.18).toFixed(2);
-      } else {
-        this.dataProductoTable.push({
-          productoId: data.productoListProductoId,
-          codigo: data.productoListCodigo,
-          nombre: data.productoListNombre,
-          cantidad: data.cantidadIm,
-          valorVenta: 0,
-          igv: igv,
-          precioNew: data.productoListPrecio,
-          subtotal: data.productoListPrecio * data.cantidadIm,
+    this.Compraservice.disparadorOtro.subscribe((response: any) => {
+      if (response.action === 'add') {
+        response.data.forEach((data: any) => {
+          const productoExistente = this.dataProductoTable.find(
+            item => item.productoId === data.productoListProductoId
+          );
+          const precioUnitario = data.productoListPrecio;
+          const cantidad = data.cantidadIm;
+          const subtotal = precioUnitario * cantidad;
+          const igv = +(subtotal * 0.18).toFixed(2);
+
+          if (!productoExistente) {
+            this.dataProductoTable.push({
+              productoId: data.productoListProductoId,
+              nombre: data.productoListNombre,
+              cantidad: data.cantidadIm,
+              valorVenta: 0,
+              igv: igv,
+              precioNew: data.productoListPrecio,
+              subtotal: data.productoListPrecio * data.cantidadIm,
+            });
+          }
         });
       }
-    });*/
-  }
-  agregarProductoCompras() {
-    /*this.bsModalRef = this.modalService.show(
-      AgregarComprasDetallesComponent
-    );
-    this.bsModalRef.setClass('modal-lg');*/
+    });
   }
   calcularSubTotal(dataProducto: any): void {
     dataProducto.subtotal = dataProducto.cantidad * dataProducto.precioNew;

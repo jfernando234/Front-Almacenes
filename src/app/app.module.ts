@@ -88,6 +88,8 @@ import { ListarCompraComponent } from './Modulo-cliente/Components/cl-ordenes-de
 import { AddCompraComponent } from './Modulo-cliente/Components/cl-ordenes-de-compra/add-compra/add-compra.component';
 import { AddVentaComponent } from './Modulo-cliente/Components/cl-ordenes-de-venta/add-venta/add-venta.component';
 import { ListarVentaComponent } from './Modulo-cliente/Components/cl-ordenes-de-venta/listar-venta/listar-venta.component';
+import { DetalleCompraComponent } from './Modulo-cliente/Components/cl-ordenes-de-compra/add-compra/detalle-compra/detalle-compra.component';
+import { DetalleVentaComponent } from './Modulo-cliente/Components/cl-ordenes-de-venta/add-venta/detalle-venta/detalle-venta.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -134,7 +136,9 @@ import { ListarVentaComponent } from './Modulo-cliente/Components/cl-ordenes-de-
     EditarProductoComponent,
     ListarCompraComponent,
     AddCompraComponent,AddVentaComponent,
-    ListarVentaComponent
+    ListarVentaComponent,
+    DetalleCompraComponent,
+    DetalleVentaComponent,
   ],
   bootstrap: [AppComponent],
   imports: [

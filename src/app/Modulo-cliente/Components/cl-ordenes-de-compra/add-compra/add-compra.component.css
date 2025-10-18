@@ -1,9 +1,17 @@
-.card-body {
+.conten {
+  width: 99%;
+  overflow-x: hidden;
+}
+
+.fomulario {
   margin-top: 20px;
+  width: 98%;
   margin-left: 20px;
-  margin-right: 25px;
-  background: fixed;
-  background-color: rgb(255, 255, 255);
+  overflow-x: hidden;
+}
+
+.card {
+  margin-top: 10px;
 }
 
 .table-header {
@@ -33,7 +41,6 @@
 
 .table-responsive {
   margin-top: 20px;
-  margin-left: 20px;
   margin-right: 25px;
 }
 
@@ -47,6 +54,26 @@
 .right-actions {
   margin-top: 0;
   margin-bottom: 16px;
+}
+
+.local-forms {
+  position: relative;
+  /* necesario para que el toggle se posicione dentro */
+}
+
+/* Ajusta el input para que no tape el ícono */
+.datetimepicker {
+  padding-right: 3.5rem;
+  /* deja espacio para el ícono */
+}
+
+/* Posiciona correctamente el ícono del datepicker */
+.mat-datepicker-toggle {
+  position: absolute;
+  right: 0.5rem;
+  top: 65%;
+  transform: translateY(-50%);
+  pointer-events: auto;
 }
 
 .right-actions a {

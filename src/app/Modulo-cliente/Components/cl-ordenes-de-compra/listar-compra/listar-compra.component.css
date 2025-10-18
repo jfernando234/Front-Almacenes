@@ -26,7 +26,25 @@
   flex-wrap: wrap;
   /* permiten que se envuelvan en pantallas pequeñas */
 }
+.local-forms {
+  position: relative;
+  /* necesario para que el toggle se posicione dentro */
+}
 
+/* Ajusta el input para que no tape el ícono */
+.datetimepicker {
+  padding-right: 3.5rem;
+  /* deja espacio para el ícono */
+}
+
+/* Posiciona correctamente el ícono del datepicker */
+.mat-datepicker-toggle {
+  position: absolute;
+  right: 0.5rem;
+  top: 65%;
+  transform: translateY(-50%);
+  pointer-events: auto;
+}
 .col-md-3 {
   width: auto;
 }

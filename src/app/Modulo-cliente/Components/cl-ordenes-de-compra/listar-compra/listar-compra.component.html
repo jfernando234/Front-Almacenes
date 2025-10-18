@@ -4,23 +4,26 @@
       <!-- Fecha Desde -->
       <div class="left-filters">
         <div class="col-md-3">
-          <mat-form-field>
-            <mat-label>Desde</mat-label>
-            <input matInput [(ngModel)]="fechaInicio" [matDatepicker]="pickerInicio" placeholder="Seleccione fecha"
-              (ngModelChange)="ObtenerOrdenesCompra()" />
-            <mat-datepicker-toggle matSuffix [for]="pickerInicio"></mat-datepicker-toggle>
-            <mat-datepicker #pickerInicio></mat-datepicker>
-          </mat-form-field>
+          <div class="form-group local-forms">
+            <label class="control-label">Desde:</label>
+            <input class="form-control datetimepicker" type="text" [matDatepicker]="pickerInicio" matInput
+              [(ngModel)]="fechaInicio" (ngModelChange)="ObtenerOrdenesCompra()" />
+            <mat-datepicker #pickerInicio matDatepickerFilter="DD/MM/YYYY"></mat-datepicker>
+            <mat-datepicker-toggle matIconSuffix [for]="pickerInicio"
+              matDatepickerFilter="DD/MM/YYYY"></mat-datepicker-toggle>
+          </div>
         </div>
+
         <!-- Fecha Hasta -->
         <div class="col-md-3">
-          <mat-form-field>
-            <mat-label>Hasta</mat-label>
-            <input matInput [(ngModel)]="fechaFin" [matDatepicker]="pickerFin" placeholder="Seleccione fecha"
-              (ngModelChange)="ObtenerOrdenesCompra()" />
-            <mat-datepicker-toggle matSuffix [for]="pickerFin"></mat-datepicker-toggle>
-            <mat-datepicker #pickerFin></mat-datepicker>
-          </mat-form-field>
+          <div class="form-group local-forms">
+            <label class="control-label">Hasta:</label>
+            <input matInput [(ngModel)]="fechaFin" (ngModelChange)="ObtenerOrdenesCompra()"
+              class="form-control datetimepicker" type="text" [matDatepicker]="pickerFin" />
+            <mat-datepicker #pickerFin matDatepickerFilter="DD/MM/YYYY"></mat-datepicker>
+            <mat-datepicker-toggle matIconSuffix [for]="pickerFin"
+              matDatepickerFilter="DD/MM/YYYY"></mat-datepicker-toggle>
+          </div>
         </div>
       </div>
       <div class="right-actions">

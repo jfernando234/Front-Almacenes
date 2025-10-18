@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import Swal from 'sweetalert2';
 
@@ -13,6 +13,7 @@ import { catchError } from 'rxjs/operators';
 })
 export class ComprasService {
   apiUrl = environment.url_api;
+  @Output() disparadorOtro: EventEmitter<any> = new EventEmitter();
   constructor(public http: HttpClient) { }
 
   obtenerCompras(clinicaId: string, page: number, rows: number,

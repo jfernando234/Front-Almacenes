@@ -1,278 +1,248 @@
-<div class="page-wrapper">
-  <div class="card-body">
+<div class="conten">
 
-    <form [formGroup]="form" (ngSubmit)="crearCompra()">
-      <div class="row">
-        <div class="col-sm-12">
-          <div class="card">
-            <div class="card-body mt-2">
+  <form [formGroup]="form" class="fomulario" (ngSubmit)="crearCompra()">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-body mt-2">
+            <div class="row">
+              <div class="col-12">
+                <div class="form-heading">
+                  <h4 class="modal-content">Detalles de Compra</h4>
+                </div>
+              </div>
+              <!-- Fecha Registro -->
+              <div class="col-12 col-md-12 col-xl-2">
+                <div class="form-group local-forms">
+                  <label class="control-label">Fecha Registro:</label>
+                  <input formControlName="fecha" class="form-control datetimepicker" type="text"
+                    [matDatepicker]="picker" [ngClass]="{'is-invalid': isInvalid('fecha') && isFormSubmitted}" />
+                  <mat-datepicker #picker matDatepickerFilter="DD/MM/YYYY"></mat-datepicker>
+                  <mat-datepicker-toggle matIconSuffix [for]="picker"
+                    matDatepickerFilter="DD/MM/YYYY"></mat-datepicker-toggle>
+                  <div *ngIf="isInvalid('fecha') && isFormSubmitted" class="invalid-feedback">
+                    <div *ngIf="isRequerido('fecha')">Debe completar el campo*</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Tipo Documento -->
+              <div class="col-12 col-md-6 col-xl-3">
+                <div class="form-group local-forms">
+                  <label>Documento <span class="login-danger">*</span></label>
+                  <mat-select formControlName="tipoDocumento" class="form-control select"
+                    [ngClass]="{'is-invalid': isInvalid('tipoDocumento') && isFormSubmitted}" placeholder="Seleccionar">
+                    <mat-option [value]="1">Factura</mat-option>
+                    <mat-option [value]="0">Boleta</mat-option>
+                  </mat-select>
+                  <div *ngIf="isInvalid('tipoDocumento') && isFormSubmitted" class="invalid-feedback">
+                    <div *ngIf="isRequerido('tipoDocumento')">Debe completar el campo*</div>
+                  </div>
+                </div>
+              </div>
+              <!-- Numero de Documento-->
+              <div class="col-12 col-md-6 col-xl-2">
+                <div class="form-group local-forms">
+                  <label class="gen-label">N° de Documento<span class="login-danger">*</span></label>
+                  <input formControlName="numDocumento" class="form-control" type="text" />
+                  <div *ngIf="isInvalid('numDocumento') && isFormSubmitted" class="invalid-feedback">
+                    <div *ngIf="isRequerido('numDocumento')">Debe completar el campo*</div>
+                  </div>
+                </div>
+              </div>
+              <!-- Almacen -->
+              <div class="col-12 col-md-12 col-xl-3">
+                <div class="form-group local-forms">
+                  <label>Almacen <span class="login-danger">*</span></label>
+                  <mat-select formControlName="almacenId" class="form-control select" placeholder="Seleccione Almacen"
+                    [ngClass]="{'is-invalid': isInvalid('almacenId') && isFormSubmitted}">
+                    <mat-option *ngFor="let data of almacen_LISTA" [value]="data.almacenId">
+                      {{data.nombreAlmacen}}
+                    </mat-option>
+                  </mat-select>
+                  <div *ngIf="isInvalid('almacenId') && isFormSubmitted" class="invalid-feedback">
+                    <div *ngIf="isRequerido('almacenId')">Debe completar el campo*</div>
+                  </div>
+                </div>
+              </div>
+              <!-- RUC/DNI -->
+              <div class="col-12 col-md-6 col-xl-2">
+                <div class="form-group local-forms">
+                  <label class="gen-label">RUC/DNI<span class="login-danger">*</span></label>
+                  <input formControlName="ruc" class="form-control" type="text" />
+                  <div *ngIf="isInvalid('ruc') && isFormSubmitted" class="invalid-feedback">
+                    <div *ngIf="isRequerido('ruc')">Debe completar el campo*</div>
+                  </div>
+                </div>
+              </div>
+              <!-- Proveedor -->
+              <div class="col-12 col-md-6 col-xl-4">
+                <div class="form-group local-forms">
+                  <label>Proveedor <span class="login-danger">*</span></label>
+                  <mat-select formControlName="proveedorId" class="form-control" placeholder="Seleccione un Proveedor"
+                    (selectionChange)="onChangeProveedor($event)"
+                    [ngClass]="{'is-invalid': isInvalid('proveedorId') && isFormSubmitted}">
+                    <input type="text" class="form-control buscar" autocomplete="off" #multiProveedorSearch matInput
+                      placeholder="Ingrese nombre del Proveedor" (input)="buscarProveedores()">
+                    <mat-option value="" class="d-none"></mat-option>
+                    <mat-option *ngFor="let proveedor of proveedoresParaMostrar()" [value]="proveedor.proveedorId">
+                      {{proveedor.nombre}}
+                    </mat-option>
+                  </mat-select>
+                  <div *ngIf="isInvalid('proveedorId') && isFormSubmitted" class="invalid-feedback">
+                    <div *ngIf="isRequerido('proveedorId')">Debe completar el campo*</div>
+                  </div>
+                </div>
+              </div>
+              <!-- Tipo Compra -->
+              <div class="col-12 col-md-6 col-xl-2">
+                <div class="form-group local-forms">
+                  <label>Tipo Compra<span class="login-danger">*</span></label>
+                  <mat-select formControlName="pago" class="form-control select"
+                    [ngClass]="{'is-invalid': isInvalid('pago')&& isFormSubmitted}"
+                    (selectionChange)="isEfectivo('pago')">
+                    <mat-option *ngFor="let data of tipoPago_LISTA" [value]="data.tipoPagoId">
+                      {{data.descripcion}}
+                    </mat-option>
+                  </mat-select>
+                  <div *ngIf="isInvalid('tipoPago') && isFormSubmitted" class="invalid-feedback">
+                    <div *ngIf="isRequerido('tipoPago')">Debe completar el campo*</div>
+                  </div>
+                </div>
+
+              </div>
+              <!-- Efectivo -->
+              <div class="col-12 col-md-12 col-xl-2">
+                <div class="form-group local-forms">
+                  <label class="gen-label">Efectivo<span class="login-danger">*</span></label>
+                  <input formControlName="efectivo" class="form-control" type="number" />
+                  <div *ngIf="isInvalid('efectivo') && isFormSubmitted" class="invalid-feedback">
+                    <div *ngIf="isRequerido('efectivo')">Debe completar el campo*</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Mostrar estos solo si es Crédito -->
+              <div *ngIf="tipoCompraSeleccionada === 'Credito'" class="col-12 col-md-3 col-xl-2">
+                <div class="form-group local-forms">
+                  <label>Crédito</label>
+                  <input type="text" class="form-control" formControlName="credito" />
+                </div>
+              </div>
+              <div *ngIf="tipoCompraSeleccionada === 'Credito'" class="col-12 col-md-3 col-xl-2">
+                <div class="form-group local-forms">
+                  <label>N° Días</label>
+                  <input type="number" class="form-control" formControlName="ndias" />
+                </div>
+              </div>
+              <div class="col-12 col-md-12 col-xl-2">
+                <div class="form-group local-forms">
+                  <label class="control-label">Fecha Vencimiento:</label>
+                  <input formControlName="fechaVenc" class="form-control datetimepicker" type="text"
+                    [matDatepicker]="pickerp" [ngClass]="{'is-invalid': isInvalid('fechaVenc') && isFormSubmitted}" />
+                  <mat-datepicker #pickerp matDatepickerFilter="DD/MM/YYYY"></mat-datepicker>
+                  <mat-datepicker-toggle matIconSuffix [for]="pickerp"
+                    matDatepickerFilter="DD/MM/YYYY"></mat-datepicker-toggle>
+                  <div *ngIf="isInvalid('fechaVenc') && isFormSubmitted" class="invalid-feedback">
+                    <div *ngIf="isRequerido('fechaVenc')">Debe completar el campo*</div>
+                  </div>
+                </div>
+              </div>
               <div class="row">
-                <div class="col-12">
-                  <div class="form-heading">
-                    <h4 class="modal-content">Detalles de Compra</h4>
-                  </div>
-                </div>
-                <!-- Fecha Registro -->
+                <!-- Guia Remision -->
                 <div class="col-12 col-md-12 col-xl-2">
                   <div class="form-group local-forms">
-                    <label class="control-label">Fecha Registro:</label>
-                    <input formControlName="fecha" class="form-control datetimepicker" type="text"
-                      [matDatepicker]="picker" [ngClass]="{'is-invalid': isInvalid('fecha') && isFormSubmitted}" />
-                    <mat-datepicker #picker matDatepickerFilter="DD/MM/YYYY"></mat-datepicker>
-                    <mat-datepicker-toggle matIconSuffix [for]="picker"
-                      matDatepickerFilter="DD/MM/YYYY"></mat-datepicker-toggle>
-                    <div *ngIf="isInvalid('fecha') && isFormSubmitted" class="invalid-feedback">
-                      <div *ngIf="isRequerido('fecha')">Debe completar el campo*</div>
+                    <label class="gen-label">Guia Remision<span class="login-danger">*</span></label>
+                    <input formControlName="guiaRemision" class="form-control" type="text" />
+                    <div *ngIf="isInvalid('guiaRemision') && isFormSubmitted" class="invalid-feedback">
+                      <div *ngIf="isRequerido('guiaRemision')">Debe completar el campo*</div>
                     </div>
                   </div>
                 </div>
+                <!-- Observacion -->
+                <div class="col-12 col-md-12 col-xl-6">
+                  <div class="form-group local-forms">
+                    <label class="gen-label">Observacion<span class="login-danger">*</span></label>
+                    <input formControlName="observacion" class="form-control" type="text" />
+                    <div *ngIf="isInvalid('observacion') && isFormSubmitted" class="invalid-feedback">
+                      <div *ngIf="isRequerido('observacion')">Debe completar el campo*</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- inicio cargar items -->
 
-                <!-- Tipo Documento -->
-                <div class="col-12 col-md-6 col-xl-3">
-                  <div class="form-group local-forms">
-                    <label>Documento <span class="login-danger">*</span></label>
-                    <mat-select formControlName="tipoDocumento" class="form-control select"
-                      [ngClass]="{'is-invalid': isInvalid('tipoDocumento') && isFormSubmitted}"
-                      placeholder="Seleccionar">
-                      <mat-option>
-                        1
-                      </mat-option>
-                    </mat-select>
-                    <div *ngIf="isInvalid('tipoDocumento') && isFormSubmitted" class="invalid-feedback">
-                      <div *ngIf="isRequerido('tipoDocumento')">Debe completar el campo*</div>
-                    </div>
-                  </div>
-                </div>
-                <!-- Numero de Documento-->
-                <div class="col-12 col-md-6 col-xl-2">
-                  <div class="form-group local-forms">
-                    <label class="gen-label">N° de Documento<span class="login-danger">*</span></label>
-                    <input formControlName="numDocumento" class="form-control" type="text" />
-                    <div *ngIf="isInvalid('numDocumento') && isFormSubmitted" class="invalid-feedback">
-                      <div *ngIf="isRequerido('numDocumento')">Debe completar el campo*</div>
-                    </div>
-                  </div>
-                </div>
-                <!--Moneda-->
-                <div class="col-12 col-md-6 col-xl-2">
-                  <div class="form-group local-forms">
-                    <label>Moneda <span class="login-danger">*</span></label>
-                    <mat-select formControlName="moneda" class="form-control select" placeholder="Seleccionar"
-                      [ngClass]="{'is-invalid': isInvalid('tipoMonedaId') && isFormSubmitted}">
-                      <mat-option >
-                        1
-                      </mat-option>
-                    </mat-select>
-                    <div *ngIf="isInvalid('moneda') && isFormSubmitted" class="invalid-feedback">
-                      <div *ngIf="isRequerido('moneda')">Debe completar el campo*</div>
-                    </div>
-                  </div>
-                </div>
-                <!-- Almacen -->
-                <div class="col-12 col-md-12 col-xl-3">
-                  <div class="form-group local-forms">
-                    <label>Almacen <span class="login-danger">*</span></label>
-                    <mat-select formControlName="almacenId" class="form-control select" placeholder="Seleccione Almacen"
-                      [ngClass]="{'is-invalid': isInvalid('almacenId') && isFormSubmitted}">
-                      <mat-option *ngFor="let data of almacen_LISTA" [value]="data.almacenId">
-                        {{data.nombreAlmacen}}
-                      </mat-option>
-                    </mat-select>
-                    <div *ngIf="isInvalid('almacenId') && isFormSubmitted" class="invalid-feedback">
-                      <div *ngIf="isRequerido('almacenId')">Debe completar el campo*</div>
-                    </div>
-                  </div>
-                </div>
-                <!--Buttoms-->
-                <div class="col-12 col-md-6 col-xl-2">
-                  <div class="form-group local-forms">
-                    <button type="button" class="pull-left btn btn-success btn-margin-right"><i
-                        class="fa fa-plus"></i></button>
-                    <button type="button" class="pull-left btn btn-warning"><i class="fa fa-edit"></i></button>
-                  </div>
-                </div>
-                <!-- RUC/DNI -->
-                <div class="col-12 col-md-6 col-xl-2">
-                  <div class="form-group local-forms">
-                    <label class="gen-label">RUC/DNI<span class="login-danger">*</span></label>
-                    <input formControlName="ruc" class="form-control" type="text" />
-                    <div *ngIf="isInvalid('ruc') && isFormSubmitted" class="invalid-feedback">
-                      <div *ngIf="isRequerido('ruc')">Debe completar el campo*</div>
-                    </div>
-                  </div>
-                </div>
-                <!-- Proveedor -->
-                <div class="col-12 col-md-6 col-xl-7">
-                  <div class="form-group local-forms">
-                    <label>Proveedor <span class="login-danger">*</span></label>
-                    <mat-select formControlName="proveedorId" class="form-control" placeholder="Seleccione un Proveedor"
-                      (selectionChange)="onChangeProveedor($event)"
-                      [ngClass]="{'is-invalid': isInvalid('proveedorId') && isFormSubmitted}">
-                      <input type="text" class="form-control buscar" autocomplete="off" #multiProveedorSearch matInput
-                        placeholder="Ingrese nombre del Proveedor" (input)="buscarProveedores()">
-                      <mat-option value="" class="d-none"></mat-option>
-                      <mat-option *ngFor="let proveedor of proveedoresParaMostrar()" [value]="proveedor.proveedorId">
-                        {{proveedor.nombre}}
-                      </mat-option>
-                    </mat-select>
-                    <div *ngIf="isInvalid('proveedorId') && isFormSubmitted" class="invalid-feedback">
-                      <div *ngIf="isRequerido('proveedorId')">Debe completar el campo*</div>
-                    </div>
-                  </div>
-                </div>
-                <!-- Tipo Compra -->
-                <div class="col-12 col-md-6 col-xl-2">
-                  <div class="form-group local-forms">
-                    <label>Tipo Compra<span class="login-danger">*</span></label>
-                    <mat-select formControlName="pago" class="form-control select"
-                      [ngClass]="{'is-invalid': isInvalid('pago')&& isFormSubmitted}"
-                      >
-                      <mat-option >
-                        2
-                      </mat-option>
-                    </mat-select>
-                    <div *ngIf="isInvalid('tipoPago') && isFormSubmitted" class="invalid-feedback">
-                      <div *ngIf="isRequerido('tipoPago')">Debe completar el campo*</div>
-                    </div>
-                  </div>
+              <div class="card-body">
+                <div class="table-responsive"
+                  [ngClass]="{'is-invalid': isInvalidTablet(dataProductoTable.length) && isFormSubmitted}">
+                  <table id="TableComprasProductos" class="table editable-table table-bordered table-striped m-b-0"
+                    style="cursor: pointer;">
 
-                </div>
-                <!-- Efectivo -->
-                <div class="col-12 col-md-12 col-xl-2">
-                  <div class="form-group local-forms">
-                    <label class="gen-label">Efectivo<span class="login-danger">*</span></label>
-                    <input formControlName="efectivo" class="form-control" type="number" />
-                    <div *ngIf="isInvalid('efectivo') && isFormSubmitted" class="invalid-feedback">
-                      <div *ngIf="isRequerido('efectivo')">Debe completar el campo*</div>
-                    </div>
-                  </div>
-                </div>
+                    <thead>
+                      <tr>
+                        <th colspan="8">
+                          <button (click)="agregarProductoCompras()" type="button"
+                            class="btn btn-primary submit-form me-2" id="ComprasAgregarProductos"><i
+                              class="fa fa-plus"></i>
+                            Agregar</button>
+                        </th>
+                      </tr>
+                      <tr>
+                        <th></th>
+                        <th style="width: 10%;">Nombre</th>
+                        <th style="width: 10%;">Cantidad</th>
+                        <th style="width: 10%;">Valor Venta</th>
+                        <th style="width: 10%;">IGV</th>
+                        <th style="width: 10%;">P. Unit</th>
+                        <th>Sub Total</th>
+                        <th></th>
+                      </tr>
+                    </thead>
 
-                <!-- Mostrar estos solo si es Crédito -->
-                <div *ngIf="tipoCompraSeleccionada === 'Credito'" class="col-12 col-md-3 col-xl-2">
-                  <div class="form-group local-forms">
-                    <label>Crédito</label>
-                    <input type="text" class="form-control" formControlName="credito" />
+                    <tbody id="ComprasBodyProducto">
+                      <tr *ngFor="let dataProducto of dataProductoTable; let item1 = index">
+                        <td></td>
+                        <td>{{dataProducto.nombre}}</td>
+                        <td>{{dataProducto.cantidad}}</td>
+                        <td><input type="text" [(ngModel)]="dataProducto.valorVenta"
+                            [ngModelOptions]="{standalone: true}" class="form-control"></td>
+                        <td>{{dataProducto.igv}}</td>
+                        <td><input type="text" (change)="calcularSubTotal(dataProducto)"
+                            [(ngModel)]="dataProducto.precioNew" [ngModelOptions]="{standalone: true}"
+                            class="form-control">
+                        </td>
+                        <td>{{ dataProducto.subtotal }}</td>
+                        <td>
+                          <div class="btn btn-danger" (click)="eliminarElementoDataProducto(item1)"><i
+                              class="fa-solid fa-x"></i></div>
+                        </td>
+                      </tr>
+                    </tbody>
+                    <tfoot class="">
+                      <tr>
+                      </tr>
+                      <tr>
+                        <th colspan="7" class="text-right">Total </th>
+                        <th>{{this.calcularTotal()}}</th>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+                <div *ngIf="isInvalidTablet(dataProductoTable.length)" class="invalid-feedback">
+                  <div *ngIf="isInvalidTablet(dataProductoTable.length)">
+                    Debe agregar un producto*
                   </div>
                 </div>
-                <div *ngIf="tipoCompraSeleccionada === 'Credito'" class="col-12 col-md-3 col-xl-2">
-                  <div class="form-group local-forms">
-                    <label>N° Días</label>
-                    <input type="number" class="form-control" formControlName="ndias" />
-                  </div>
-                </div>
-                <div class="col-12 col-md-3 col-xl-2">
-                  <div class="form-group local-forms">
-                    <label class="control-label">Fecha Vencimiento:</label>
-                    <input type="date" class="form-control datetimepicker" formControlName="fechaVenc" />
-                    <div *ngIf="isInvalid('fechaVenc') && isFormSubmitted" class="invalid-feedback">
-                      <div *ngIf="isRequerido('fechaVenc')">Debe completar el campo*</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <!-- Guia Remision -->
-                  <div class="col-12 col-md-12 col-xl-2">
-                    <div class="form-group local-forms">
-                      <label class="gen-label">Guia Remision<span class="login-danger">*</span></label>
-                      <input formControlName="guiaRemision" class="form-control" type="text" />
-                      <div *ngIf="isInvalid('guiaRemision') && isFormSubmitted" class="invalid-feedback">
-                        <div *ngIf="isRequerido('guiaRemision')">Debe completar el campo*</div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- Observacion -->
-                  <div class="col-12 col-md-12 col-xl-6">
-                    <div class="form-group local-forms">
-                      <label class="gen-label">Observacion<span class="login-danger">*</span></label>
-                      <input formControlName="observacion" class="form-control" type="text" />
-                      <div *ngIf="isInvalid('observacion') && isFormSubmitted" class="invalid-feedback">
-                        <div *ngIf="isRequerido('observacion')">Debe completar el campo*</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- inicio cargar items -->
-                <div class="row form-group">
-                  <div class="col-12">
-                    <div class="card">
-                      <div class="card-body">
-                        <div class="table-responsive"
-                          [ngClass]="{'is-invalid': isInvalidTablet(dataProductoTable.length) && isFormSubmitted}">
-                          <table id="TableComprasProductos"
-                            class="table editable-table table-bordered table-striped m-b-0" style="cursor: pointer;">
-
-                            <thead>
-                              <tr>
-                                <th colspan="5">
-                                  <button (click)="agregarProductoCompras()" type="button"
-                                    class="btn btn-primary submit-form me-2" id="ComprasAgregarProductos"><i
-                                      class="fa fa-plus"></i>
-                                    Agregar</button>
-                                </th>
-                              </tr>
-                              <tr>
-                                <th></th>
-                                <th style="width: 10%;">Codigo</th>
-                                <th style="width: 10%;">Nombre</th>
-                                <th style="width: 10%;">Cantidad</th>
-                                <th style="width: 10%;">Valor Venta</th>
-                                <th style="width: 10%;">IGV</th>
-                                <th style="width: 10%;">P. Unit</th>
-                                <th>Sub Total</th>
-                                <th></th>
-                              </tr>
-                            </thead>
-
-                            <tbody id="ComprasBodyProducto">
-                              <tr *ngFor="let dataProducto of dataProductoTable; let item1 = index">
-                                <td></td>
-                                <td>{{dataProducto.codigo}}</td>
-                                <td>{{dataProducto.nombre}}</td>
-                                <td>{{dataProducto.cantidad}}</td>
-                                <td><input type="text" [(ngModel)]="dataProducto.valorVenta"
-                                    [ngModelOptions]="{standalone: true}" class="form-control"></td>
-                                <td>{{dataProducto.igv}}</td>
-                                <td><input type="text" (change)="calcularSubTotal(dataProducto)"
-                                    [(ngModel)]="dataProducto.precioNew" [ngModelOptions]="{standalone: true}"
-                                    class="form-control">
-                                </td>
-                                <td>{{ dataProducto.subtotal }}</td>
-                                <td>
-                                  <div class="btn btn-danger" (click)="eliminarElementoDataProducto(item1)"><i
-                                      class="fa-solid fa-x"></i></div>
-                                </td>
-                              </tr>
-                            </tbody>
-                            <tfoot class="">
-                              <tr>
-                              </tr>
-                              <tr>
-                                <th colspan="7" class="text-right">Total </th>
-                                <th>{{this.calcularTotal()}}</th>
-                              </tr>
-                            </tfoot>
-                          </table>
-                        </div>
-                        <div *ngIf="isInvalidTablet(dataProductoTable.length)" class="invalid-feedback">
-                          <div *ngIf="isInvalidTablet(dataProductoTable.length)">
-                            Debe agregar un producto*
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!--Buttoms-->
-                <div class="col-12 col-md-7 mt-1">
-                  <button type="submit" class="btn btn-primary submit-form me-1">Guardar</button>
-                  <button type="button" class="btn btn-primary cancel-form" (click)="cancelar()">Cancelar</button>
-                </div>
+              </div>
+              <!--Buttoms-->
+              <div class="col-12 col-md-7 mt-1">
+                <button type="submit" class="btn btn-primary submit-form me-1">Guardar</button>
+                <button type="button" class="btn btn-primary cancel-form" (click)="cancelar()">Cancelar</button>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </form>
-  </div>
+    </div>
+  </form>
 </div>
