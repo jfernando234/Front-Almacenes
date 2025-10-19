@@ -1,46 +1,105 @@
-# See http://help.github.com/ignore-files/ for more about ignoring files.
+# ---------------------------------------------
+# Node modules
+# ---------------------------------------------
+/node_modules/
 
-# compiled output
-/dist
-/tmp
-/out-tsc
-# Only exists if Bazel was run
-/bazel-out
+# ---------------------------------------------
+# Angular build output
+# ---------------------------------------------
+/dist/
+/out-tsc/
+/tmp/
+.angular/cache/18.2.21/SIGEWEBFE
 
-# dependencies
-/node_modules
+# ---------------------------------------------
+# TypeScript
+# ---------------------------------------------
+*.tsbuildinfo
 
-# profiling files
-chrome-profiler-events*.json
+# ---------------------------------------------
+# JavaScript / map files / typings
+# ---------------------------------------------
+*.js
+*.js.map
+*.d.ts
 
-# IDEs and editors
-/.idea
-.project
-.classpath
-.c9/
-*.launch
-.settings/
-*.sublime-workspace
+# ---------------------------------------------
+# Logs
+# ---------------------------------------------
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
 
-# IDE - VSCode
-.vscode/*
+# ---------------------------------------------
+# Coverage reports
+# ---------------------------------------------
+/coverage/
+
+# ---------------------------------------------
+# IDE / Editor files
+# ---------------------------------------------
+# VSCode
+.vscode/
 !.vscode/settings.json
-!.vscode/tasks.json
 !.vscode/launch.json
+!.vscode/tasks.json
 !.vscode/extensions.json
-.history/*
 
-# misc
-/.sass-cache
-/connect.lock
-/coverage
-/libpeerconnection.log
-npm-debug.log
-yarn-error.log
-testem.log
-/typings
-/angular
+# JetBrains IDEs (WebStorm, IntelliJ, Rider)
+.idea/
+*.iml
 
-# System Files
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# ---------------------------------------------
+# System files
+# ---------------------------------------------
 .DS_Store
 Thumbs.db
+
+# ---------------------------------------------
+# Temporary / backup files
+# ---------------------------------------------
+*.bak
+*.old
+*.orig
+*.tmp
+*.temp
+
+# ---------------------------------------------
+# Angular Material / Angular assets
+# ---------------------------------------------
+# Material prebuilt themes (si los importas desde node_modules, no subir)
+node_modules/@angular/material/prebuilt-themes/
+# Icon fonts (Material Icons, Roboto)
+node_modules/roboto-fontface/
+node_modules/material-design-icons/
+
+# ---------------------------------------------
+# Optional: compiled libraries
+# ---------------------------------------------
+/wwwroot/lib/
+*.dll
+*.so
+*.dylib
+*.a
+*.lib
+*.nupkg
+
+# ---------------------------------------------
+# Optional: ONNX Runtime native frameworks
+# ---------------------------------------------
+**/onnxruntime.framework/
+**/onnxruntime.xcframework/
+
+# ---------------------------------------------
+# Angular CLI / Misc
+# ---------------------------------------------
+/publish/
+out/

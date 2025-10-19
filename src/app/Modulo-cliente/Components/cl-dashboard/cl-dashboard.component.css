@@ -1,2 +1,45 @@
-/* Estilos básicos para cl-envios-recepcion */
-.cl-dashboard { padding: 8px; }
+/* Limita el ancho máximo del contenedor */
+.container {
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+/* Estilo de las tarjetas (cards) */
+.card {
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Encabezados de las tarjetas */
+.card-header {
+  font-weight: bold;
+  font-size: 1.1rem;
+  background-color: #f8f9fa; /* color ligero de fondo */
+}
+
+.card-body {
+  display: flex;
+  justify-content: center; /* centra el gráfico */
+  align-items: center;
+  overflow: hidden;        /* corta cualquier exceso */
+  padding: 1rem;
+}
+
+/* Asegura que los canvas sean responsivos */
+canvas {
+  width: 100% !important;
+  height: 300px !important; /* altura consistente */
+}
+@media (max-width: 768px) {
+  canvas {
+    height: 250px !important;
+  }
+}
+.card {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+}
+.chart-placeholder{
+  text-align: center;
+  color: #888888;
+}

@@ -1,4 +1,97 @@
-/* Estilos para cl-proveedores */
-.cl-proveedores {
-  padding: 1rem;
+.card-body{
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-right: 25px;
+  background: fixed;
+  background-color:  rgba(255, 255, 255, 0.726);
+}
+.table-header{
+  margin-top: 20px;
+  margin-left: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;                 /* espacio entre inputs */
+  flex-wrap: wrap;           /* permiten que se envuelvan en pantallas pequeñas */
+  min-width: 0;
+}
+
+.left-filters {
+  display: flex;
+  align-items: center;
+  gap: 12px;                 /* espacio entre inputs */
+  flex-wrap: wrap;           /* permiten que se envuelvan en pantallas pequeñas */
+}
+
+.col-md-3{
+  width: auto;
+}
+
+.table-responsive{
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-right: 25px;
+}
+
+.table-flooter{
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-right: 25px;
+  margin-bottom: 10px;
+}
+.right-actions{
+  margin-top: 25px;
+}
+.right-actions a {
+  align-items: center;
+  justify-content: center;
+  display: inline-flex;
+  width: 56px;       /* ancho del botón más grande */
+  height: 56px;      /* alto del botón más grande */
+  border-radius: 12px; /* bordes más redondeados */
+  margin-right: 12px; /* más separación entre botones */
+  background: linear-gradient(135deg, #cad7f0 0%, #b0e1f5 100%); /* fondo degradado azul */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  transition: transform 0.15s, box-shadow 0.15s;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+.right-actions a:hover {
+  transform: scale(1.08);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+  background: linear-gradient(135deg, #38c6ff 0%, #4f8cff 100%);
+}
+
+
+.right-actions a img {
+  width: 32px;  /* ícono más grande */
+  height: 32px;
+  border: none;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.10));
+}
+.table-primary{
+  background-color: #214f80;
+}
+.local-forms {
+  position: relative;
+  /* necesario para que el toggle se posicione dentro */
+}
+
+/* Ajusta el input para que no tape el ícono */
+.datetimepicker {
+  padding-right: 3.5rem;
+  /* deja espacio para el ícono */
+}
+
+/* Posiciona correctamente el ícono del datepicker */
+.mat-datepicker-toggle {
+  position: absolute;
+  right: 0.5rem;
+  top: 65%;
+  transform: translateY(-50%);
+  pointer-events: auto;
+}
+.form-control{
+  height: 50px;
 }

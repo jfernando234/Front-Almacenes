@@ -1,3 +1,60 @@
-<div class="cl-dashboard">
-  <h2>Dashboard</h2>
+<div class="container mt-4">
+  <div class="row">
+    <!-- Widgets -->
+    <div class="col-md-6">
+      <div class="card shadow border-danger mt-3">
+        <div class="card-header bg-danger text-white">
+          <i class="fas fa-box-open me-2"></i> Productos con Stock Bajo
+        </div>
+        <div class="card-body">
+          <ngx-charts-bar-horizontal [results]="barStockData" [scheme]="'cool'" [xAxis]="true" [yAxis]="true"
+            [legend]="false" [showDataLabel]="true" [animations]="true">
+          </ngx-charts-bar-horizontal>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-md-6">
+      <div class="card shadow">
+        <div class="card-header">Ventas por mes</div>
+        <div class="card-body">
+          <ngx-charts-bar-vertical [view]="barView" [scheme]="'vivid'" [results]="barData" [legend]="barShowLegend"
+            [xAxis]="barShowXAxis" [yAxis]="barShowYAxis" [xAxisLabel]="barXAxisLabel" [yAxisLabel]="barYAxisLabel">
+          </ngx-charts-bar-vertical>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row mt-4">
+    <!-- Gráficos -->
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">Tendencias de Inventario</div>
+        <div class="card-body">
+          <!-- Chart placeholder (ng2-charts not initialized) -->
+          <div class="chart-placeholder">
+            <ngx-charts-line-chart [view]="lineView" [scheme]="'cool'" [results]="lineData" [xAxis]="lineShowXAxis"
+              [yAxis]="lineShowYAxis" [showGridLines]="lineShowGridLines" [legend]="lineShowLegend">
+            </ngx-charts-line-chart>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">Movimientos Entrada/Salida</div>
+        <div class="card-body">
+          <!-- Chart placeholder (ng2-charts not initialized) -->
+          <div class="chart-placeholder">
+            <ngx-charts-pie-chart [view]="pieView" [scheme]="'natural'" [results]="pieData">
+            </ngx-charts-pie-chart>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -2,19 +2,19 @@ import {
   Overlay,
   OverlayConfig,
   OverlayModule
-} from "./chunk-WVDM2GMY.js";
+} from "./chunk-DHYPDLXB.js";
 import {
   CdkScrollableModule,
   ViewportRuler
-} from "./chunk-ABY4TC2M.js";
+} from "./chunk-5WQXIYGS.js";
 import {
   TemplatePortal
-} from "./chunk-SUORADT4.js";
+} from "./chunk-4QBFQRYV.js";
 import {
   MAT_FORM_FIELD,
   MatFormField
-} from "./chunk-OWWIONFK.js";
-import "./chunk-IRBUIF3O.js";
+} from "./chunk-4I3KAGSX.js";
+import "./chunk-DOPHUIUQ.js";
 import {
   animate,
   group,
@@ -22,11 +22,7 @@ import {
   style,
   transition,
   trigger
-} from "./chunk-S3CATSZV.js";
-import "./chunk-GA6W6SXF.js";
-import {
-  NG_VALUE_ACCESSOR
-} from "./chunk-6VJTAN6R.js";
+} from "./chunk-ZKUF4UUO.js";
 import {
   MAT_OPTGROUP,
   MAT_OPTION_PARENT_COMPONENT,
@@ -37,10 +33,11 @@ import {
   MatOptionSelectionChange,
   _countGroupLabelsBeforeOption,
   _getOptionScrollPosition
-} from "./chunk-OPFNQA5R.js";
+} from "./chunk-INHK6KED.js";
 import {
   Directionality
-} from "./chunk-F3NUXBTX.js";
+} from "./chunk-SCW6NMVR.js";
+import "./chunk-7NFYVLLB.js";
 import {
   ActiveDescendantKeyManager,
   DOWN_ARROW,
@@ -51,17 +48,20 @@ import {
   addAriaReferencedId,
   hasModifierKey,
   removeAriaReferencedId
-} from "./chunk-N2EJQQNL.js";
+} from "./chunk-XNNURGVI.js";
 import {
   BreakpointObserver,
   Breakpoints,
   Platform,
   _getEventTarget
-} from "./chunk-2HQGSSAJ.js";
+} from "./chunk-UJAPOS6P.js";
+import {
+  NG_VALUE_ACCESSOR
+} from "./chunk-SOLRVSQR.js";
 import {
   CommonModule,
   DOCUMENT
-} from "./chunk-344AXQRL.js";
+} from "./chunk-MDLWY62I.js";
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -115,10 +115,7 @@ import {
   ɵɵrestoreView,
   ɵɵtemplate,
   ɵɵviewQuery
-} from "./chunk-AEGSYJ3E.js";
-import {
-  fromEvent
-} from "./chunk-JVMRPRMK.js";
+} from "./chunk-AZRDXN4V.js";
 import {
   delay,
   startWith,
@@ -126,6 +123,9 @@ import {
   take,
   tap
 } from "./chunk-2RSK2634.js";
+import {
+  fromEvent
+} from "./chunk-JVMRPRMK.js";
 import {
   Observable,
   Subject,
@@ -136,7 +136,7 @@ import {
   merge,
   of
 } from "./chunk-UZ7B7W5V.js";
-import "./chunk-EIB7IA3J.js";
+import "./chunk-KBUIKKCC.js";
 
 // node_modules/@angular/material/fesm2022/autocomplete.mjs
 var _c0 = ["panel"];

@@ -1,0 +1,65 @@
+<div class="card-body">
+  <form [formGroup]="form" class="formulario">
+    <div class="row">
+      <div class="col-12">
+        <div class="form-heading">
+          <h4>Nuevo Producto</h4>
+        </div>
+      </div>
+      <div class="col-12 col-md-12 col-xl-6">
+        <div class="form-group local-forms">
+          <label>Nombre Producto</label>
+          <input formControlName="nombre" class="form-control" type="text"
+            [ngClass]="{'is-invalid': isInvalid('nombre')}">
+          <div *ngIf="isInvalid('nombre') || mostrarErrores" class="invalid-feedback">
+            <div *ngIf="isRequerido('nombre')|| mostrarErrores">
+              Debe completar el campo*
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-12 col-xl-6">
+        <div class="form-group local-forms">
+          <label>Precio Entrada</label>
+          <input formControlName="precioEntrada" class="form-control"  type="number"
+            [ngClass]="{'is-invalid': isInvalid('precioEntrada')}">
+          <div *ngIf="isInvalid('precioEntrada') || mostrarErrores" class="invalid-feedback">
+            <div *ngIf="isRequerido('precioEntrada')|| mostrarErrores">
+              Debe completar el campo*
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-12 col-xl-6">
+        <div class="form-group local-forms">
+          <label>Precio Salida <span class="login-danger">*</span></label>
+          <input formControlName="precioSalida" class="form-control" type="number"
+            [ngClass]="{'is-invalid': isInvalid('precioSalida')}">
+          <div *ngIf="isInvalid('precioSalida') || mostrarErrores" class="invalid-feedback">
+            <div *ngIf="isRequerido('precioSalida')|| mostrarErrores">
+              Debe completar el campo*
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-12 col-xl-6">
+        <div class="form-group local-forms">
+          <label>stock</label>
+          <input formControlName="stock" class="form-control" type="number"
+            [ngClass]="{'is-invalid': isInvalid('stock')}">
+          <div *ngIf="isInvalid('stock') || mostrarErrores" class="invalid-feedback">
+            <div *ngIf="isRequerido('stock')|| mostrarErrores">
+              Debe completar el campo*
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="document-submit text-end">
+        <button type="submit" class="btn btn-primary submit-form me-2" (click)="editar()">Guardar</button>
+        <button type="submit" class="btn btn-primary cancel-form"  (click)="Cancelar()">Cancelar</button>
+      </div>
+    </div>
+  </form>
+</div>

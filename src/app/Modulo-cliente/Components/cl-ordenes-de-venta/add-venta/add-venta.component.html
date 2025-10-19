@@ -1,0 +1,278 @@
+<div class="conten">
+
+
+  <!-- Main Row (larger) -->
+  <form (ngSubmit)="crearVenta()" class="fomulario" [formGroup]="form">
+    <div class="row">
+      <div class="col-sm-9">
+        <div class="card">
+          <div class="card-body mt-2">
+            <div class="row">
+              <div class="col-12">
+                <div class="form-heading">
+                  <h4 class="modal-content">Detalles de Venta</h4>
+                </div>
+              </div>
+              <!-- Tipo Documento -->
+              <div class="col-12 col-md-6 col-xl-3">
+                <div class="form-group local-forms">
+                  <label>Documento <span class="login-danger">*</span></label>
+                  <mat-select formControlName="tipoDocumentoId" class="form-control select"
+                    [ngClass]="{'is-invalid': isInvalid('tipoDocumentoId') && isFormSubmitted}"
+                    placeholder="Seleccionar">
+                    <mat-option [value]="1">Factura</mat-option>
+                    <mat-option [value]="2">Boleta</mat-option>
+                  </mat-select>
+                  <div *ngIf="isInvalid('tipoDocumentoId') && isFormSubmitted" class="invalid-feedback">
+                    <div *ngIf="isRequerido('tipoDocumentoId')">Debe completar el campo*</div>
+                  </div>
+                </div>
+              </div>
+              <!-- Serie -->
+              <div class="col-12 col-md-6 col-xl-2">
+                <div class="form-group local-forms">
+                  <label>Serie <span class="login-danger">*</span></label>
+                  <input formControlName="serie" class="form-control" type="text"
+                    [ngClass]="{'is-invalid': isInvalid('serie') && isFormSubmitted}" />
+                  <div *ngIf="isInvalid('serie') && isFormSubmitted" class="invalid-feedback">
+                    <div *ngIf="isRequerido('serie')">Debe completar el campo*</div>
+                  </div>
+                </div>
+              </div>
+              <!-- Secuencia -->
+              <div class="col-12 col-md-6 col-xl-2">
+                <div class="form-group local-forms">
+                  <label>Secuencia <span class="login-danger">*</span></label>
+                  <input formControlName="secuencia" class="form-control" type="text"
+                    [ngClass]="{'is-invalid': isInvalid('secuencia') && isFormSubmitted}" />
+                  <div *ngIf="isInvalid('secuencia') && isFormSubmitted" class="invalid-feedback">
+                    <div *ngIf="isRequerido('secuencia')">Debe completar el campo*</div>
+                  </div>
+                </div>
+              </div>
+              <!-- Fecha Registro -->
+              <div class="col-12 col-md-12 col-xl-2">
+                <div class="form-group local-forms">
+                  <label class="control-label">Fecha Registro:</label>
+                  <input formControlName="fecha" class="form-control datetimepicker" type="text"
+                    [matDatepicker]="picker" [ngClass]="{'is-invalid': isInvalid('fecha') && isFormSubmitted}" />
+                  <mat-datepicker #picker matDatepickerFilter="DD/MM/YYYY"></mat-datepicker>
+                  <mat-datepicker-toggle matIconSuffix [for]="picker"
+                    matDatepickerFilter="DD/MM/YYYY"></mat-datepicker-toggle>
+                  <div *ngIf="isInvalid('fecha') && isFormSubmitted" class="invalid-feedback">
+                    <div *ngIf="isRequerido('fecha')">Debe completar el campo*</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Beneficiarios -->
+              <div class="col-12 col-md-6 col-xl-3">
+                <div class="form-group local-forms">
+                  <label>Cliente <span class="login-danger">*</span></label>
+                  <!--<label for="buscarPor">Paciente <span class="login-danger">*</span></label>-->
+                  <mat-select (selectionChange)="onChangeBeneficiario($event)" formControlName="beneficiarioId"
+                    class="form-control" placeholder="Seleccione un Paciente"
+                    [ngClass]="{'is-invalid': isInvalid('pacienteId') && isFormSubmitted}">
+                    <input type="text" class="form-control buscar" autocomplete="off" #multiUserSearch matInput
+                      placeholder="Ingrese Apellidos o Nombres" (input)="buscarBeneficiarios()">
+                    <mat-option value="" class="d-none"> </mat-option>
+                    <ng-container *ngIf="mostrarOpcionesBeneficiario">
+                      <mat-option *ngFor="let paciente of listPacientes" [value]="paciente.pacienteId">
+                        {{paciente.nombres}} {{paciente.apellidos}}
+                      </mat-option>
+                    </ng-container>
+                  </mat-select>
+                  <div *ngIf="isInvalid('beneficiarioId') && isFormSubmitted" class="invalid-feedback">
+                    <div *ngIf="isRequerido('beneficiarioId')">Debe completar el campo*</div>
+                  </div>
+                </div>
+              </div>
+              <!-- DNI Beneficiaio-->
+              <div class="col-12 col-md-6 col-xl-3">
+                <div class="form-group local-forms">
+                  <label>Dni <span class="login-danger">*</span></label>
+                  <input type="text" formControlName="beneficiarioDocumento" class="form-control" />
+                  <div class="invalid-feedback" *ngIf="isInvalid('beneficiarioDocumento')">Debe completar el campo*
+                  </div>
+                </div>
+              </div>
+              <!-- Direccion Beneficiaio-->
+              <div class="col-12 col-md-6 col-xl-6">
+                <div class="form-group local-forms">
+                  <label>Direccion <span class="login-danger">*</span></label>
+                  <input type="text" formControlName="beneficiarioDireccion" class="form-control" />
+                  <div class="invalid-feedback" *ngIf="isInvalid('beneficiarioDireccion')">Debe completar el campo*
+                  </div>
+                </div>
+              </div>
+              <!-- Tipo Pago -->
+              <div class="col-12 col-md-12 col-xl-3">
+                <div class="form-group local-forms">
+                  <label>Tipo Pago <span class="login-danger">*</span></label>
+                  <mat-select formControlName="tipoPago" class="form-control select" placeholder="Seleccione"
+                    [ngClass]="{'is-invalid': isInvalid('tipoPago')&& isFormSubmitted}">
+                    <mat-option [value]="1">Contado</mat-option>
+                    <mat-option [value]="2">Credito</mat-option>
+                  </mat-select>
+                  <div *ngIf="isInvalid('tipoPago') && isFormSubmitted" class="invalid-feedback">
+                    <div *ngIf="isRequerido('tipoPago')">Debe completar el campo*</div>
+                  </div>
+                </div>
+              </div>
+              <!-- Observacion -->
+              <div class="col-12 col-md-6 col-xl-9">
+                <div class="form-group local-forms">
+                  <label class="gen-label">Observacion </label>
+                  <input formControlName="observacion" class="form-control" type="text" />
+                  <div *ngIf="isInvalid('observacion') && isFormSubmitted" class="invalid-feedback">
+                    <div *ngIf="isRequerido('observacion')">Debe completar el campo*</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Table -->
+
+            <div class="table-responsive">
+              <table id="TableTratamientoProducto" class="table editable-table table-bordered table-striped m-b-0"
+                style="cursor: pointer;">
+                <thead>
+                  <tr>
+                    <th colspan="7">
+                      <button (click)="agregarProcedimientoProducto()" type="button" class="pull-left btn btn-success"
+                        id="TratamientoHistoriaAgregarProducto"><i class="fa fa-plus"></i>
+                        Agregar</button>
+                    </th>
+                  </tr>
+                  <tr>
+                    <th></th>
+                    <th>Descripcion</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unit.</th>
+                    <th>total</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="TratamientoHistoriaBodyProducto">
+                  <tr *ngFor="let dataProducto of dataProductoTable; let item1 = index">
+                    <td></td>
+                    <td>{{dataProducto.nombre}}</td>
+                    <td>{{dataProducto.cantidad}}</td>
+                    <td>
+                      <input type="number" (input)="calcularSubTotal(dataProducto)"
+                        [(ngModel)]="dataProducto.precioNew" [ngModelOptions]="{standalone: true}" class="form-control">
+                    </td>
+                    <td>{{ dataProducto.subtotal }}</td>
+                    <td>
+                      <div class="btn btn-danger" (click)="eliminarElementoDataProducto(item1)"><i
+                          class="fa-solid fa-x"></i></div>
+                    </td>
+                  </tr>
+                </tbody>
+                <tfoot class="">
+                  <tr></tr>
+                  <tr>
+                    <th colspan="5" class="text-right">Total </th>
+                    <th>{{this.calcularTotal()}}</th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!-- Secondary Row (smaller) -->
+      <!-- Metodo de Pago-->
+      <div class="col-sm-3">
+        <div class="card">
+          <div class="card-body mt-2">
+            <div class="row">
+              <!-- Metodo Pago Row -->
+              <div class="col-12 col-md-6 col-xl-12 mt-2">
+                <div class="form-group local-forms">
+                  <label>Metodo <span class="login-danger">*</span></label>
+                  <mat-select formControlName="metodoPago" class="form-control select"
+                    placeholder="Selecciona un Metodo de Pago" (selectionChange)="isEfectivo('metodoPago')"
+                    [ngClass]="{'is-invalid': isInvalid('metodoPago')}">
+                    <mat-option value="Efectivo">EFECTIVO</mat-option>
+                    <mat-option value="Tarjeta">TARJETA</mat-option>
+                    <mat-option value="Credito">CREDITO</mat-option>
+                    <mat-option value="YAPE">YAPE</mat-option>
+                    <mat-option value="Otro">OTRO</mat-option>
+                  </mat-select>
+                  <div *ngIf="isInvalid('metodoPago')" class="invalid-feedback">
+                    <div *ngIf="isRequerido('metodoPago')">Debe completar el campo*</div>
+                  </div>
+                </div>
+              </div>
+              <!-- Tipo Tarjeta Row -->
+              <div class="col-12 col-md-6 col-xl-12 mt-2">
+                <div class="form-group local-forms">
+                  <label class="gen-label">Tarjeta </label>
+                  <mat-select formControlName="tipoTarjetaId" class="form-control select" placeholder="Seleccionar"
+                    [ngClass]="{'is-invalid': isInvalid('tipoTarjetaId') && isFormSubmitted}">
+                    <mat-option [value]="1">Visa</mat-option>
+                    <mat-option [value]="1">Mastercard</mat-option>
+                  </mat-select>
+                  <div *ngIf="isInvalid('tipoTarjetaId') && isFormSubmitted" class="invalid-feedback">
+                    <div *ngIf="isRequerido('tipoTarjetaId')">Debe completar el campo*</div>
+                  </div>
+                </div>
+              </div>
+              <!--Monto Recibido-->
+              <div class="col-12 col-md-6 col-xl-12 mt-2">
+                <div class="form-group local-forms">
+                  <label class="gen-label">Monto Recibido <span class="login-danger">*</span></label>
+                  <input formControlName="montoRecibido" class="form-control" type="number"
+                    (input)="calcularVuelto($event)" />
+                </div>
+                <div *ngIf="isInvalid('montoRecibido') && isFormSubmitted" class="invalid-feedback">
+                  <div *ngIf="isRequerido('montoRecibido')">Debe completar el campo*</div>
+                </div>
+              </div>
+              <!--Vuelto-->
+              <div class="col-12 col-md-6 col-xl-12 mt-2">
+                <div class="form-group local-forms">
+                  <label class="gen-label">Vuelto <span class="login-danger">*</span></label>
+                  <input formControlName="vuelto" class="form-control" type="number" />
+                </div>
+                <hr class="mt-3 mb-4" />
+              </div>
+              <!--Sub-Total-->
+              <div class="col-12 col-md-6 col-xl-12 mt-2">
+                <div class="form-group local-forms">
+                  <label class="gen-label">Sub Total <span class="login-danger">*</span></label>
+                  <input formControlName="subtotal" class="form-control" type="text" />
+                </div>
+              </div>
+              <!--I.G.V-->
+              <div class="col-12 col-md-6 col-xl-12 mt-2">
+                <div class="form-group local-forms">
+                  <label class="gen-label">I.G.V <span class="login-danger">*</span></label>
+                  <input formControlName="igv" class="form-control" type="text" />
+                </div>
+              </div>
+              <!--Total-->
+              <div class="col-12 col-md-6 col-xl-12 mt-2">
+                <div class="form-group local-forms">
+                  <label class="gen-label">Total <span class="login-danger">*</span></label>
+                  <input formControlName="total" class="form-control" type="number"
+                    [ngClass]="{'is-invalid': total===undefined || total===0  && isFormSubmitted}" />
+                  <div *ngIf="total===0 || total===undefined" class="invalid-feedback">
+                    <div *ngIf="total===0 || total===undefined">Debe ser mayor de Cero*</div>
+                  </div>
+                </div>
+              </div>
+              <!--Buttoms-->
+              <div class="col-12 col-md-7 mt-1 d-flex justify-content-between">
+                <button type="submit" class="btn btn-primary submit-form me-2">Guardar</button>
+                <button type="button" class="btn btn-primary cancel-form" (click)="onCancel()">Cancelar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--End Secondary row-->
+    </div>
+  </form>
+</div>

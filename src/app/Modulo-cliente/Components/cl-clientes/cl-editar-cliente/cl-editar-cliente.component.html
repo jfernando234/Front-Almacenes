@@ -1,0 +1,86 @@
+<div class="card-body">
+  <form [formGroup]="form" class="formulario">
+    <div class="row">
+      <div class="col-12">
+        <div class="form-heading">
+          <h4>Nuevo Cliente</h4>
+        </div>
+      </div>
+      <div class="col-12 col-md-12 col-xl-6">
+        <div class="form-group local-forms w-100">
+          <label>Nombre <span class="login-danger">*</span></label>
+          <input formControlName="Razon" class="form-control" type="text"
+            [ngClass]="{'is-invalid': isInvalid('Razon')}">
+          <div *ngIf="isInvalid('Razon') || mostrarErrores" class="invalid-feedback">
+            <div *ngIf="isRequerido('Razon')|| mostrarErrores">
+              Debe completar el campo*
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-12 col-xl-6">
+        <div class="form-group local-forms w-100">
+          <label>Teléfono <span class="login-danger ">*</span></label>
+          <input formControlName="telefono" class="form-control" type="text">
+          <div *ngIf="isInvalid('telefono') || mostrarErrores" class="invalid-feedback">
+            <div *ngIf="isRequerido('telefono')|| mostrarErrores">
+              Debe completar el campo*
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-12 col-xl-6">
+        <div class="form-group local-forms w-100">
+          <label>Dirección <span class="login-danger">*</span></label>
+          <input formControlName="direccion" class="form-control" type="text"
+            [ngClass]="{'is-invalid': isInvalid('direccion')}">
+          <div *ngIf="isInvalid('direccion') || mostrarErrores" class="invalid-feedback">
+            <div *ngIf="isRequerido('direccion')|| mostrarErrores">
+              Debe completar el campo*
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-12 col-xl-6">
+        <div class="form-group local-forms w-100">
+          <label>Email <span class="login-danger">*</span></label>
+          <input formControlName="email" class="form-control" type="email"
+            [ngClass]="{'is-invalid': isInvalid('email')}">
+          <div *ngIf="isInvalid('email') || mostrarErrores" class="invalid-feedback">
+            <div *ngIf="isRequerido('email')|| mostrarErrores">
+              Debe completar el campo*
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-12 col-xl-6">
+        <div class="form-group local-forms w-100">
+          <label>Número de Documento <span class="login-danger">*</span></label>
+          <input formControlName="documento" class="form-control" type="text"
+            [ngClass]="{'is-invalid': isInvalid('documento')}">
+          <div *ngIf="isInvalid('documento') || mostrarErrores" class="invalid-feedback">
+            <div *ngIf="isRequerido('documento')|| mostrarErrores">
+              Debe completar el campo*
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-12 col-xl-6">
+        <div class="form-group local-forms w-100">
+          <label>Estado <span class="login-danger">*</span></label>
+          <mat-select class="form-control select" formControlName="estado">
+            <mat-option [value]="1">Activo</mat-option>
+            <mat-option [value]="0">Inactivo</mat-option>
+          </mat-select>
+        </div>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="document-submit text-end">
+        <button type="submit" class="btn btn-primary submit-form me-2" (click)="editar()">Guardar</button>
+        <button type="submit" (click)="Cancelar()" class="btn btn-primary cancel-form">Cancelar</button>
+      </div>
+    </div>
+  </form>
+</div>

@@ -73,7 +73,23 @@ import { ClReportesComponent } from './Modulo-cliente/Components/cl-reportes/cl-
 import { A11yModule } from "@angular/cdk/a11y";
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ClClientesComponent } from './Modulo-cliente/Components/cl-clientes/cl-clientes.component';
-
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { ClAddClientesComponent } from './Modulo-cliente/Components/cl-clientes/cl-add-clientes/cl-add-clientes.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { AddInventarioComponent } from './Modulo-cliente/Components/cl-inventario/add-inventario/add-inventario.component';
+import { AddProveedorComponent } from './Modulo-cliente/Components/cl-proveedores/add-proveedor/add-proveedor.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { ClDashboardComponent } from './Modulo-cliente/Components/cl-dashboard/cl-dashboard.component';
+import { EditarProveedorComponent } from './Modulo-cliente/Components/cl-proveedores/editar-proveedor/editar-proveedor.component';
+import { ClEditarClienteComponent } from './Modulo-cliente/Components/cl-clientes/cl-editar-cliente/cl-editar-cliente.component';
+import { EditarProductoComponent } from './Modulo-cliente/Components/cl-inventario/editar-producto/editar-producto.component';
+import { ListarCompraComponent } from './Modulo-cliente/Components/cl-ordenes-de-compra/listar-compra/listar-compra.component';
+import { AddCompraComponent } from './Modulo-cliente/Components/cl-ordenes-de-compra/add-compra/add-compra.component';
+import { AddVentaComponent } from './Modulo-cliente/Components/cl-ordenes-de-venta/add-venta/add-venta.component';
+import { ListarVentaComponent } from './Modulo-cliente/Components/cl-ordenes-de-venta/listar-venta/listar-venta.component';
+import { DetalleCompraComponent } from './Modulo-cliente/Components/cl-ordenes-de-compra/add-compra/detalle-compra/detalle-compra.component';
+import { DetalleVentaComponent } from './Modulo-cliente/Components/cl-ordenes-de-venta/add-venta/detalle-venta/detalle-venta.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -110,7 +126,19 @@ import { ClClientesComponent } from './Modulo-cliente/Components/cl-clientes/cl-
     ClOrdenesDeCompraComponent,
     ClOrdenesDeVentaComponent,
     ClEnviosRecepcionComponent,
-    ClReportesComponent
+    ClReportesComponent,
+    ClAddClientesComponent,
+    AddInventarioComponent,
+    AddProveedorComponent,
+    ClDashboardComponent,
+    EditarProveedorComponent,
+    ClEditarClienteComponent,
+    EditarProductoComponent,
+    ListarCompraComponent,
+    AddCompraComponent,AddVentaComponent,
+    ListarVentaComponent,
+    DetalleCompraComponent,
+    DetalleVentaComponent,
   ],
   bootstrap: [AppComponent],
   imports: [
@@ -126,6 +154,8 @@ import { ClClientesComponent } from './Modulo-cliente/Components/cl-clientes/cl-
     MatToolbarModule,
     MatListModule,
     MatInputModule,
+    MatDatepickerModule, //fecha
+    MatNativeDateModule,
     MatFormFieldModule,
     MatTableModule,
     MatPaginatorModule,
@@ -140,7 +170,11 @@ import { ClClientesComponent } from './Modulo-cliente/Components/cl-clientes/cl-
     // NgxChartsModule,
     MatAutocompleteModule,
     MatSortModule,
-    A11yModule
+    A11yModule,
+    ReactiveFormsModule,
+    ModalModule.forRoot(),
+    NgxChartsModule,
+    NgxChartsModule
 ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },

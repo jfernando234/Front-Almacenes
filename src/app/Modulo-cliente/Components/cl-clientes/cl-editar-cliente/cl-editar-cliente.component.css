@@ -1,0 +1,85 @@
+/* Estilos para el modal de proveedor */
+.card {
+  max-width: 600px;
+  margin: 40px auto;
+  border-radius: 12px;
+  border: none;
+  overflow: hidden;
+}
+
+.card-body {
+  padding: 32px 24px 24px 24px;
+  background: #fff;
+}
+.formulario{
+  overflow-x: hidden;
+}
+.form-heading {
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.form-group.local-forms {
+  margin-bottom: 18px;
+}
+
+.form-control {
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  padding: 10px 12px;
+  font-size: 15px;
+}
+
+.form-control.is-invalid {
+  border-color: #dc3545;
+}
+
+.invalid-feedback {
+  color: #dc3545;
+  font-size: 13px;
+}
+
+.login-danger {
+  color: #dc3545;
+}
+
+.document-submit {
+  margin-top: 18px;
+}
+
+.submit-form {
+  background: #1976d2;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 24px;
+  font-size: 15px;
+  color: #fff;
+  transition: background 0.2s;
+}
+
+.submit-form:hover {
+  background: #1565c0;
+}
+
+.cancel-form {
+  background: #e0e0e0;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 24px;
+  font-size: 15px;
+  color: #333;
+  margin-left: 8px;
+  transition: background 0.2s;
+}
+
+.cancel-form:hover {
+  background: #bdbdbd;
+}
+
+::ng-deep .cdk-overlay-container {
+  z-index: 2000 !important;
+}
+
+.form-control select {
+  height: 40px;
+}

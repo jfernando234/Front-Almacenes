@@ -6,9 +6,4 @@ import { Component } from '@angular/core';
   styleUrls: ['./cl-ordenes-de-venta.component.css'],
 })
 export class ClOrdenesDeVentaComponent {
-  ordenesVenta: any[] = [];
-
-  constructor() {}
-
-  ngOnInit() {}
 }

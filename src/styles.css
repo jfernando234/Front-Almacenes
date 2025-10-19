@@ -1,3 +1,14 @@
+.cdk-overlay-pane.mat-select-zindex {
+	z-index: 5000 !important;
+}
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Asegura que el panel de opciones de mat-select se muestre sobre el modal */
+.mat-select-zindex {
+	z-index: 2000 !important;
+}
+.formulario{
+  overflow-x: hidden;
+}

@@ -1,0 +1,50 @@
+.plus-add{
+  width: 10px;
+
+}
+
+::ng-deep .cdk-overlay-container {
+  z-index: 2000 !important;
+}
+.doctor-search-blk{
+ display: flex;
+}
+.form-control{
+  height: 40px;
+}
+.page-wrapper{
+  overflow-x: hidden;
+}
+.conten {
+  width: 99%;
+  overflow-x: hidden;
+}
+.fomulario {
+  margin-top: 20px;
+  width: 98%;
+  margin-left: 20px;
+  overflow-x: hidden;
+}
+.local-forms {
+  position: relative;
+  margin-top: 10px;
+  /* necesario para que el toggle se posicione dentro */
+}
+
+/* Ajusta el input para que no tape el ícono */
+.datetimepicker {
+  padding-right: 3.5rem;
+  /* deja espacio para el ícono */
+}
+
+/* Posiciona correctamente el ícono del datepicker */
+.mat-datepicker-toggle {
+  position: absolute;
+  right: 0.5rem;
+  top: 65%;
+  transform: translateY(-50%);
+  pointer-events: auto;
+}
+.table-responsive{
+  margin-top: 15px;
+}

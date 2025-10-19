@@ -1,8 +1,9 @@
 import { Injectable } from "@angular/core";
-import { DataCliente } from "../Models/cliente.model";
+import { ClienteList, DataCliente, ICliente } from "../Models/cliente.model";
 import { Observable } from "rxjs";
 import { environment } from 'src/environments/environment';
 import { HttpClient } from "@angular/common/http";
+
 @Injectable({
   providedIn: 'root'
 })
@@ -10,17 +11,17 @@ export class ClienteService {
 
   apiUrl = environment.url_api;
   constructor(public http: HttpClient) { }
-  obtenerAllClientes(page:number, rows:number,
-    fechaInicio?: string, fechaFin?: string
-  ):Observable<DataCliente>{
-    let url = `${this.apiUrl}/Clientes/GetCobrosByPaciente?page=${page}&rows=${rows}`
-    if (fechaInicio) {
-      url += `&fechaInicio=${fechaInicio}`;
-    }
-    if (fechaFin) {
-      url += `&fechaFin=${fechaFin}`;
-    }
-    return this.http.get<DataCliente>(url);
+  obtenerAllClientes(): Observable<ClienteList[]> {
+    return this.http.get<ClienteList[]>(`${this.apiUrl}cliente/ListarAllClientes`);
+  }
+  registrar(cleinte: ICliente): Observable<any> {
+    return this.http.post(`${this.apiUrl}cliente/RegistrarCliente`, cleinte);
+  }
+  editarCliente(clienteId: number, cleinte: ICliente): Observable<any> {
+    return this.http.put(`${this.apiUrl}cliente/ActualizarCliente/${clienteId}`, cleinte);
+  }
+  eliminarCliente(ClienteId: number): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}cliente/EliminarCliente/${ClienteId}`, null);
   }
 
 }

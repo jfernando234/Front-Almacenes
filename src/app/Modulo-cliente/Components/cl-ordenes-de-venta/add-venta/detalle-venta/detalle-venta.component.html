@@ -1,0 +1,133 @@
+<div class="content">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card card-table show-entire">
+        <div class="card-body">
+          <!-- Table Header -->
+          <div class="page-table-header">
+            <div class="doctor-table-blk">
+              <h3>Lista de Productos</h3>
+              <br>
+              <div class="row doctor-search-blk w-100">
+                <!--* QUE SEA DINAMICO EL ESCOGER NUMERO DE PAGINAS Y el BUSCADO-->
+                <div class="col-12 col-md-6 col-xl-3 mt-3">
+                  <div class="local-forms top-nav-search table-search-blk w-100">
+                    <label>Mostrar</label>
+                    <mat-select [(value)]="pageSize" (valueChange)="obtenerDatosProductos()"
+                      style="align-items: normal; padding: 10px 15px;" class="form-control" placeholder="Cantidad">
+                      <mat-option value=5>5</mat-option>
+                      <mat-option value=10>10</mat-option>
+                      <mat-option value=15>15</mat-option>
+                    </mat-select>
+                  </div>
+                </div>
+                <div class="col-12 col-md-12 col-xl-3 mt-3">
+                  <div class="local-forms top-nav-search table-search-blk w-100">
+                    <label>Buscar</label>
+                    <input class="form-control" placeholder="Buscar" [(ngModel)]="nombreProducto"
+                      (input)="obtenerDatosProductos()">
+                    <a class="btn"><img src="assets/img/icons/search-normal.svg" alt=""></a>
+                  </div>
+                </div>
+                <!--* QUE SEA DINAMICO EL ESCOGER NUMERO DE PAGINAS-->
+              </div>
+              <div *ngIf="isLoading" class="spinner-container">
+                <div class="custom-spinner"></div>
+              </div>
+              <div *ngIf="!isLoading" class="table-responsive w-100 scrollable-vertical">
+                <table matSort (matSortChange)="sortData($event)"
+                  class="table border-0 custom-table comman-table datatable mb-0">
+                  <thead>
+                    <tr>
+                      <th mat-sort-header="numero">Nº</th>
+                      <th mat-sort-header="productos">Productos</th>
+                      <th mat-sort-header="cantidad">Cant.</th>
+                      <th mat-sort-header="precio">Precio</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let data of productosList; let i = index">
+                      <td>{{i+1}}</td>
+                      <td>{{data.nombreProducto}}</td>
+                      <td><input class="form-control cant-control" type="number" [(ngModel)]="cantidades[i]"
+                          [ngModelOptions]="{standalone: true}" value="1"></td>
+                      <td>S/ {{data.precioEntrada}}</td>
+                      <td>
+                        <button class="btn btn-primary submit-form me-2"
+                          [disabled]="!cantidades[i] || cantidades[i] <= 0" (click)="crearVentaDetallle(i)">
+                          <a class="plus-add mb-2">
+                            <img src="assets/Imagenes/plus.png" alt="" />
+                          </a>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div *ngIf="productosList.length === 0" class="alert alert-warning">
+                No hay productos disponibles.
+              </div>
+              <div *ngIf="!isLoading" class="row">
+                <div class="table_footer">
+                  <div class="col-sm-12 col-md-7">
+                    <div class="dataTables_info">
+                      Mostrando {{ serialNumberArray[0] }} a
+                      {{ serialNumberArray[serialNumberArray.length - 1] }} de
+                      {{ totalData }} entradas
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-7">
+                  <div class="pagination_section">
+                    <ul class="pagination">
+                      <li class="page-item" [ngClass]="{disabled: currentPage === 1}">
+                        <a (click)="getMoreData('previous')" class="page-link" href="javascript:void(0);"
+                          tabindex="-1">Antes</a>
+                      </li>
+                      <ng-container *ngFor="let item of pageNumberArray; let i = index">
+                        <li class="page-item" [class.active]="item === currentPage"
+                          [ngClass]="(pageNumberArray[currentPage - 2] > item &&
+                          item !== 1 && pageNumberArray.length > 6) || (pageNumberArray[currentPage] < item &&item !== 1 &&
+                          pageNumberArray.length > 6 && pageNumberArray.length !== item) ? 'hide-page-no': 'show-page-no'">
+                          <a (click)="moveToPage(item)" class="page-link" href="javascript:void(0);">
+                            {{ item }}
+                          </a>
+                        </li>
+                        <li class="page-item" *ngIf=" i === 0 && pageNumberArray.length > 6 &&currentPage > 2
+                            " [hidden]="currentPage === 1" (click)="moveToPage(currentPage - 2)">
+                          <a class="page-link" href="javascript:void(0);">
+                            ...
+                          </a>
+                        </li>
+                        <li *ngIf=" i === pageNumberArray.length - 2 && pageNumberArray.length > 6
+                            " [hidden]=" currentPage >= pageNumberArray[pageNumberArray.length - 2] ||
+                            totalData < serialNumberArray[serialNumberArray.length - 1]
+                            " class="page-item" (click)="moveToPage(currentPage + 2)">
+                          <a class="page-link" href="javascript:void(0);">
+                            ...
+                          </a>
+                        </li>
+                      </ng-container>
+
+                      <li class="page-item" [ngClass]="{disabled:currentPage === pageNumberArray[pageNumberArray.length - 1] ||
+                          productosList.length === 0}">
+                        <a (click)="getMoreData('next')" class="page-link" href="javascript:void(0);">Siguiente
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row ms-auto">
+              <div class="doctor-submit text-end">
+                <button type="button" (click)="cerrar()" class="btn btn-primary cancel-form me-2">Cancelar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

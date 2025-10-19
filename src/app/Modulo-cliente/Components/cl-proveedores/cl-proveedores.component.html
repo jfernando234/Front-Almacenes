@@ -1,6 +1,113 @@
-<div class="cl-proveedores">
-  <h2>Proveedores</h2>
-  <ul>
-    <li *ngFor="let p of proveedores">{{ p?.nombre || "Proveedor" }}</li>
-  </ul>
+<div class="row g-3 align-items-end mb-3">
+  <div class="card-body">
+    <div class="table-header">
+      <!-- Fecha Desde -->
+      <div class="left-filters">
+        <div class="col-md-3">
+          <div class="form-group local-forms">
+            <label class="control-label">Desde:</label>
+            <input class="form-control datetimepicker" type="text" [matDatepicker]="pickerInicio" matInput
+              [(ngModel)]="fechaInicio"  />
+            <mat-datepicker #pickerInicio matDatepickerFilter="DD/MM/YYYY"></mat-datepicker>
+            <mat-datepicker-toggle matIconSuffix [for]="pickerInicio"
+              matDatepickerFilter="DD/MM/YYYY"></mat-datepicker-toggle>
+          </div>
+        </div>
+
+        <!-- Fecha Hasta -->
+        <div class="col-md-3">
+          <div class="form-group local-forms">
+            <label class="control-label">Hasta:</label>
+            <input matInput [(ngModel)]="fechaFin"
+              class="form-control datetimepicker" type="text" [matDatepicker]="pickerFin" />
+            <mat-datepicker #pickerFin matDatepickerFilter="DD/MM/YYYY"></mat-datepicker>
+            <mat-datepicker-toggle matIconSuffix [for]="pickerFin"
+              matDatepickerFilter="DD/MM/YYYY"></mat-datepicker-toggle>
+          </div>
+        </div>
+      </div>
+      <div class="right-actions">
+        <a class="plus-add mb-2" (click)="CrearProveedor()">
+          <img src="assets/Imagenes/plus.png" />
+        </a>
+        <a class="refresg-c mb-2" (click)="refresh()">
+          <img src="assets/Imagenes/refresh.png" alt="" />
+        </a>
+      </div>
+    </div>
+
+
+    <!-- Título -->
+    <div class="table-header mb-3">
+      <h3 class="mb-0">Lista de Proveedores</h3>
+    </div>
+    <!-- Tabla -->
+    <div class="table-responsive shadow-sm rounded bg-white">
+      <table class="table table-hover align-middle">
+        <thead class="table-primary">
+          <tr>
+            <th>N°</th>
+            <th>Razon Social</th>
+            <th>Correo</th>
+            <th>Direccion</th>
+            <th>Telefono</th>
+            <th>Ruc</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of ProveedorList; let i = index">
+            <td>{{i+1}}</td>
+            <td>{{ data.nombre }}</td>
+            <td>{{ data.correo }}</td>
+            <td>{{ data.direccion }}</td>
+            <td>{{ data.telefono }}</td>
+            <td>{{ data.ruc }}</td>
+            <td class="text-end">
+              <div class="dropdown dropdown-action">
+                <a href="javascript:void(0);" class="action-icon dropdown-toggle" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  <i class="fa fa-ellipsis-v"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end">
+                  <a class="dropdown-item" (click)="editarProveedor(data)"><i
+                      class="fa-solid fa-pen-to-square m-r-5"></i>Editar</a>
+                  <a class="dropdown-item" (click)="eliminarProveedor(data.idProveedor)"><i
+                      class="fa fa-trash-alt m-r-5"></i> Eliminar</a>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Paginación -->
+    <div class="table-flooter d-flex justify-content-between  mt-3 flex-wrap">
+      <div *ngIf="serialNumberArray.length > 0">
+        Mostrando {{ serialNumberArray[0] }} a {{ serialNumberArray[serialNumberArray.length - 1] }} de {{ totalData }}
+        entradas
+      </div>
+      <div *ngIf="serialNumberArray.length === 0">
+        No hay entradas para mostrar
+      </div>
+
+      <nav>
+        <ul class="pagination mb-0">
+          <li class="page-item" [class.disabled]="currentPage === 1">
+            <a class="page-link" (click)="getMoreData('previous')">Anterior</a>
+          </li>
+
+          <li class="page-item" *ngFor="let item of pageNumberArray" [class.active]="item === currentPage">
+            <a class="page-link" (click)="moveToPage(item)">{{ item }}</a>
+          </li>
+
+          <li class="page-item"
+            [class.disabled]="currentPage === pageNumberArray[pageNumberArray.length - 1] || ProveedorList.length === 0">
+            <a class="page-link" (click)="getMoreData('next')">Siguiente</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
 </div>

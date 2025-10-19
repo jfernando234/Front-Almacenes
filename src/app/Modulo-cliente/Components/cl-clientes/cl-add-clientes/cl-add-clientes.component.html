@@ -1,0 +1,92 @@
+<div class="content">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-body">
+          <form [formGroup]="form" class="formulario">
+            <div class="row">
+              <div class="col-12">
+                <div class="form-heading">
+                  <h4>Nuevo Cliente</h4>
+                </div>
+              </div>
+              <div class="col-12 col-md-12 col-xl-12">
+                <div class="form-group local-forms">
+                  <label>Nombre<span class="login-danger">*</span></label>
+                  <input formControlName="razon" class="form-control" type="text"
+                    [ngClass]="{'is-invalid': isInvalid('razon')}">
+                  <div *ngIf="isInvalid('razon') || mostrarErrores" class="invalid-feedback">
+                    <div *ngIf="isRequerido('razon')|| mostrarErrores">
+                      Debe completar el campo*
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-md-12 col-xl-6">
+                <div class="form-group local-forms">
+                  <label>Teléfono <span class="login-danger ">*</span></label>
+                  <input formControlName="telefono" class="form-control" type="text">
+                  <div *ngIf="isInvalid('telefono') || mostrarErrores" class="invalid-feedback">
+                    <div *ngIf="isRequerido('telefono')|| mostrarErrores">
+                      Debe completar el campo*
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-md-12 col-xl-6">
+                <label>Dirección <span class="login-danger">*</span></label>
+                <input formControlName="direccion" class="form-control" type="text"
+                  [ngClass]="{'is-invalid': isInvalid('direccion')}">
+                <div *ngIf="isInvalid('direccion') || mostrarErrores" class="invalid-feedback">
+                  <div *ngIf="isRequerido('direccion')|| mostrarErrores">
+                    Debe completar el campo*
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 col-md-12 col-xl-6">
+                <div class="form-group local-forms">
+                  <label>Email <span class="login-danger">*</span></label>
+                  <input formControlName="email" class="form-control" type="email"
+                    [ngClass]="{'is-invalid': isInvalid('email')}">
+                  <div *ngIf="isInvalid('email') || mostrarErrores" class="invalid-feedback">
+                    <div *ngIf="isRequerido('email')|| mostrarErrores">
+                      Debe completar el campo*
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-md-12 col-xl-6">
+                <div class="form-group local-forms">
+                  <label>Número de Documento <span class="login-danger">*</span></label>
+                  <input formControlName="documento" class="form-control" type="text"
+                    [ngClass]="{'is-invalid': isInvalid('documento')}">
+                  <div *ngIf="isInvalid('documento') || mostrarErrores" class="invalid-feedback">
+                    <div *ngIf="isRequerido('documento')|| mostrarErrores">
+                      Debe completar el campo*
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-md-12 col-xl-6">
+                <div class="form-group local-forms">
+                  <label>Estado <span class="login-danger">*</span></label>
+                  <mat-select [disabled]="true" class="form-control select" formControlName="estado">
+                    <mat-option [value]="1">Activo</mat-option>
+                    <mat-option [value]="0">Inactivo</mat-option>
+                  </mat-select>
+                </div>
+              </div>
+            </div>
+          </form>
+          <div class="col-12">
+            <div class="doctor-submit text-end">
+              <button type="submit" (click)="guardar()" class="btn btn-primary submit-form me-2">Guardar</button>
+              <button type="button" (click)="Cancelar()" class="btn btn-primary cancel-form">Cancelar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
