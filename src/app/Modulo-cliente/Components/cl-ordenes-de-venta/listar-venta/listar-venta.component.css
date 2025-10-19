@@ -26,6 +26,7 @@
   flex-wrap: wrap;
   /* permiten que se envuelvan en pantallas pequeñas */
 }
+
 .local-forms {
   position: relative;
   /* necesario para que el toggle se posicione dentro */
@@ -45,6 +46,7 @@
   transform: translateY(-50%);
   pointer-events: auto;
 }
+
 .col-md-3 {
   width: auto;
 }
@@ -63,8 +65,7 @@
 }
 
 .right-actions {
-  margin-top: 0;
-  margin-bottom: 16px;
+  margin-top: 25px;
 }
 
 .right-actions a {
@@ -105,4 +106,8 @@
 
 .table-primary {
   background-color: #214f80;
+}
+
+.form-control {
+  height: 50px;
 }

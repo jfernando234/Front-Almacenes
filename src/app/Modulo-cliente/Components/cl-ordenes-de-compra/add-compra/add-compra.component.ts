@@ -124,7 +124,7 @@ export class AddCompraComponent implements OnInit {
   }
   onChangeProveedor(event: any): void {
     const proveedor = (this.listProveedoresFiltrados?.length ? this.listProveedoresFiltrados : this.listProveedores)
-      .find((p) => p.proveedorId === event.value);
+      .find((p) => p.idProveedor === event.value);
 
     this.proveedorSeleccionado = proveedor;
     this.form.patchValue({

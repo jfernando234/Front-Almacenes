@@ -39,8 +39,10 @@
   margin-bottom: 10px;
 }
 .right-actions{
-  margin-top: 0;
-  margin-bottom: 16px;
+  margin-top: 25px;
+}
+.content{
+  overflow-x: hidden;
 }
 .right-actions a {
   align-items: center;
@@ -73,4 +75,25 @@
 }
 .table-primary{
   background-color: #214f80;
+}
+.local-forms {
+  position: relative;
+  /* necesario para que el toggle se posicione dentro */
+}
+.form-control{
+  height: 50px;
+}
+/* Ajusta el input para que no tape el ícono */
+.datetimepicker {
+  padding-right: 3.5rem;
+  /* deja espacio para el ícono */
+}
+
+/* Posiciona correctamente el ícono del datepicker */
+.mat-datepicker-toggle {
+  position: absolute;
+  right: 0.5rem;
+  top: 65%;
+  transform: translateY(-50%);
+  pointer-events: auto;
 }

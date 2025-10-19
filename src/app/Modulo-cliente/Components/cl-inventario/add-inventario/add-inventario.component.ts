@@ -4,6 +4,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 import { finalize } from 'rxjs/operators';
 import { Producto } from 'src/app/Modulo-cliente/Models/inventario';
 import { InventarioService } from 'src/app/Modulo-cliente/Services/cl-inventario.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-inventario',
@@ -40,9 +41,12 @@ export class AddInventarioComponent {
     this.inventarioService.registrar(nuevo)
       .pipe(finalize(() => this.form.reset()))
       .subscribe({
+        next: (data) => {
+          Swal.fire('Éxito', 'Producto registrado correctamente', 'success');
+          this.bsModalRef.hide();
+        },
         error: (err) => {
-          console.error('Error al registrar:', err);
-          alert('Ocurrió un error al registrar el producto ❌');
+          Swal.fire('Error', 'No se pudo registrar el producto', 'error');
         }
       });
   }

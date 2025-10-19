@@ -59,7 +59,9 @@
 .submit-form:hover {
 	background: #1565c0;
 }
-
+.formulario{
+  overflow-x: hidden;
+}
 .cancel-form {
 	background: #e0e0e0;
 	border: none;

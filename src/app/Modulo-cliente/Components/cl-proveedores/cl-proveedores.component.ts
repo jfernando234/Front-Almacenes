@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DataProveedor, Iproveedor } from '../../Models/provedor';
+import { DataProveedor, Iproveedor, ListIproveedor } from '../../Models/provedor';
 import { pageSelection } from '../../Models/modelsPag';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { FormBuilder } from '@angular/forms';
@@ -17,12 +17,12 @@ import { EditarProveedorComponent } from './editar-proveedor/editar-proveedor.co
   styleUrls: ['./cl-proveedores.component.css']
 })
 export class ClProveedoresComponent {
-  ProveedorList: Iproveedor[] = [];
+  ProveedorList: ListIproveedor[] = [];
   serialNumberArray: number[] = [];
   pageNumberArray: Array<number> = [];
   bsModalRef?: BsModalRef;
   isLoading = false;
-  dataSource!: MatTableDataSource<Iproveedor>;
+  dataSource!: MatTableDataSource<ListIproveedor>;
   public pageSize = 10;
   public totalData = 0;
   public currentPage = 1;
@@ -52,7 +52,7 @@ export class ClProveedoresComponent {
     }
     this.proveedorService.obtenerAllProveedores()
       .pipe(finalize(() => this.isLoading = false))
-      .subscribe((data: Iproveedor[]) => {
+      .subscribe((data: ListIproveedor[]) => {
         for (let index = this.skip; index < Math.min(this.limit, data.length); index++) {
           const serialNumber = index + 1;
           this.serialNumberArray.push(serialNumber);
@@ -73,7 +73,7 @@ export class ClProveedoresComponent {
     this.limpiar();
     this.proveedorService.obtenerAllProveedores()
       .pipe(finalize(() => this.isLoading = false))
-      .subscribe((data: Iproveedor[]) => {
+      .subscribe((data: ListIproveedor[]) => {
         for (let index = this.skip; index < Math.min(this.limit, data.length); index++) {
           const serialNumber = index + 1;
           this.serialNumberArray.push(serialNumber);
@@ -91,7 +91,7 @@ export class ClProveedoresComponent {
   }
   editarProveedor(proveedor: Iproveedor) {
     const initialState = {
-      proveedorSeleccionado: proveedor.proveedorId
+      proveedorSeleccionado: proveedor
     };
     this.bsModalRef = this.modalService.show(EditarProveedorComponent, { initialState });
     const proveedorActualizado = new Subject<boolean>();
@@ -113,19 +113,15 @@ export class ClProveedoresComponent {
       denyButtonText: `Cancelar`,
     }).then((result) => {
       if (result.isConfirmed) {
-        this.proveedorService.eliminarProveedor(proveedorId).subscribe(
-          (response) => {
-            if (response.isSuccess) {
-              Swal.fire('Correcto', 'El proveedor fue eliminado correctamente del sistema', 'success');
-              this.ObtenerProveedor();
-              return;
-            } else {
-              console.error(response.message);
-            }
+        this.proveedorService.eliminarProveedor(proveedorId).subscribe({
+          next: (res) => {
+            Swal.fire('Eliminado!', 'El Proveedor Eliminado correctamente', 'success');
+            this.ObtenerProveedor();
           },
-          (error) => {
-            console.error(error);
-          });
+          error: (err) => {
+            Swal.fire('Error', 'No se pudo eliminar el proveedor', 'error');
+          }
+        });
       } else {
         return;
       }

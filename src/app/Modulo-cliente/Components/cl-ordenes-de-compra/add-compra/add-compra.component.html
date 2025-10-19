@@ -85,7 +85,7 @@
                     <input type="text" class="form-control buscar" autocomplete="off" #multiProveedorSearch matInput
                       placeholder="Ingrese nombre del Proveedor" (input)="buscarProveedores()">
                     <mat-option value="" class="d-none"></mat-option>
-                    <mat-option *ngFor="let proveedor of proveedoresParaMostrar()" [value]="proveedor.proveedorId">
+                    <mat-option *ngFor="let proveedor of proveedoresParaMostrar()" [value]="proveedor.idProveedor">
                       {{proveedor.nombre}}
                     </mat-option>
                   </mat-select>

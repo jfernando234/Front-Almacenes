@@ -87,7 +87,7 @@ export class ClClientesComponent implements OnInit {
   }
   editarCliente(cliente: ClienteList) {
     const initialState = {
-      clienteSeleccionado: cliente.idCliente
+      clienteSeleccionado: cliente
     };
     this.bsModalRef = this.modalService.show(ClEditarClienteComponent, { initialState });
     const clienteActualizado = new Subject<boolean>();
@@ -113,18 +113,15 @@ export class ClClientesComponent implements OnInit {
       denyButtonText: `Cancelar`,
     }).then((result) => {
       if (result.isConfirmed) {
-        this.clienteServiceList.eliminarCliente(clienteId).subscribe(
-          (response) => {
-            if (response.isSuccess) {
-              Swal.fire('Correcto', 'El proveedor fue eliminado correctamente del sistema', 'success');
+        this.clienteServiceList.eliminarCliente(clienteId)
+          .subscribe({
+            next: (res) => {
+              Swal.fire('Cliente Elminado', 'El cliente ha sido Eliminado correctamente.', 'success');
               this.ObtenerClientes();
-              return;
-            } else {
-              console.error(response.message);
+            },
+            error: (err) => {
+              Swal.fire('Error', 'Hubo un error al Eliminar el cliente.', 'error');
             }
-          },
-          (error) => {
-            console.error(error);
           });
       } else {
         return;

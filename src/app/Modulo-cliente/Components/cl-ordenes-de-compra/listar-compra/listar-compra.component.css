@@ -63,8 +63,7 @@
 }
 
 .right-actions {
-  margin-top: 0;
-  margin-bottom: 16px;
+  margin-top: 25px;
 }
 
 .right-actions a {
@@ -105,4 +104,7 @@
 
 .table-primary {
   background-color: #214f80;
+}
+.form-control{
+  height: 50px;
 }

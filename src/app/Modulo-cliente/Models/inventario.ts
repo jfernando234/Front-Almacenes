@@ -27,3 +27,13 @@ export interface Producto {
   fechaRegistro?: Date;
   estado?: String;
 }
+export interface ListProducto {
+  productoId: number;
+  inventarioId?: string;
+  nombreProducto: string;
+  precioEntrada: number;
+  precioSalida: number;
+  stock: number;
+  fechaRegistro?: Date;
+  estado?: String;
+}

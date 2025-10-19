@@ -27,12 +27,12 @@ export interface DataCliente{
 }
 export interface ICliente {
   idCliente?: number;
-  contacto: string;
-  idTipoDocumento: number;
+  contacto?: string;
+  idTipoDocumento?: number;
   numeroDocumento: string;
   razonSocial: string
   direccion: string
   telefono: string
   correo: string
-
+estado?: number
 }

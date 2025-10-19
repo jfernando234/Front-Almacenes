@@ -4,6 +4,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 import { finalize } from 'rxjs/operators';
 import { Iproveedor } from 'src/app/Modulo-cliente/Models/provedor';
 import { ProveedorService } from 'src/app/Modulo-cliente/Services/cl-proveedor.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-proveedor',
@@ -45,12 +46,11 @@ export class AddProveedorComponent {
       .pipe(finalize(() => this.form.reset()))
       .subscribe({
         next: (res) => {
-          console.log('Producto registrado:', res);
-          alert('Producto registrado correctamente ✅');
+          Swal.fire('Éxito', 'Proveedor registrado correctamente', 'success');
+          this.bsModalRef.hide();
         },
         error: (err) => {
-          console.error('Error al registrar:', err);
-          alert('Ocurrió un error al registrar el producto ❌');
+          Swal.fire('Error', 'No se pudo registrar el proveedor', 'error');
         }
       });
   }

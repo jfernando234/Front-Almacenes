@@ -4,6 +4,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 import { finalize } from 'rxjs/operators';
 import { Producto } from 'src/app/Modulo-cliente/Models/inventario';
 import { InventarioService } from 'src/app/Modulo-cliente/Services/cl-inventario.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-editar-producto',
@@ -25,8 +26,9 @@ export class EditarProductoComponent {
       precioSalida: ['', Validators.required],
       stock: ['', Validators.required],
     });
+    this.cargarDatosProducto();
   }
-  guardar() {
+  editar() {
     this.mostrarErrores = true;
     if (this.form.invalid) {
       console.log('Formulario inválido');
@@ -38,16 +40,27 @@ export class EditarProductoComponent {
       precioSalida: this.form.value.precioSalida,
       stock: this.form.value.stock
     };
-    this.inventarioService.registrar(nuevo)
+    this.inventarioService.editar(this.Seleccionado.idProducto, nuevo)
       .pipe(finalize(() => this.form.reset()))
       .subscribe({
+        next: (data) => {
+          Swal.fire('Éxito', 'Producto editado correctamente', 'success');
+          this.bsModalRef.hide();
+        },
         error: (err) => {
-          console.error('Error al registrar:', err);
-          alert('Ocurrió un error al registrar el producto ❌');
+          Swal.fire('Error', 'No se pudo editar el producto', 'error');
         }
       });
   }
-
+  cargarDatosProducto() {
+    console.log(this.Seleccionado);
+    this.form.patchValue({
+      nombre: this.Seleccionado.nombreProducto,
+      precioEntrada: this.Seleccionado.precioEntrada,
+      precioSalida: this.Seleccionado.precioSalida,
+      stock: this.Seleccionado.stock,
+    });
+  }
   Cancelar() {
     this.bsModalRef.hide();
   }

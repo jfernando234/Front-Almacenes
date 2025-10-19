@@ -1,5 +1,5 @@
 <div class="card-body">
-  <form [formGroup]="form">
+  <form [formGroup]="form" class="formulario">
     <div class="row">
       <div class="col-12">
         <div class="form-heading">
@@ -8,7 +8,7 @@
       </div>
       <div class="col-12 col-md-12 col-xl-6">
         <div class="form-group local-forms w-100">
-          <label>Razon Social <span class="login-danger">*</span></label>
+          <label>Nombre <span class="login-danger">*</span></label>
           <input formControlName="Razon" class="form-control" type="text"
             [ngClass]="{'is-invalid': isInvalid('Razon')}">
           <div *ngIf="isInvalid('Razon') || mostrarErrores" class="invalid-feedback">
@@ -78,7 +78,7 @@
     </div>
     <div class="col-12">
       <div class="document-submit text-end">
-        <button type="submit" class="btn btn-primary submit-form me-2" (click)="guardar()">Guardar</button>
+        <button type="submit" class="btn btn-primary submit-form me-2" (click)="editar()">Guardar</button>
         <button type="submit" (click)="Cancelar()" class="btn btn-primary cancel-form">Cancelar</button>
       </div>
     </div>

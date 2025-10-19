@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { pageSelection } from '../../Models/modelsPag';
-import { DataInventario, Producto } from '../../Models/inventario';
+import { DataInventario, ListProducto, Producto } from '../../Models/inventario';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { AddInventarioComponent } from './add-inventario/add-inventario.component';
 import { InventarioService } from '../../Services/cl-inventario.service';
@@ -17,13 +17,13 @@ import Swal from 'sweetalert2';
 })
 export class ClInventarioComponent {
   // Datos y lógica inicial del componente
-  InventarioList: Producto[] = [];
+  InventarioList: ListProducto[] = [];
   items: any[] = [];
   serialNumberArray: number[] = [];
   pageNumberArray: Array<number> = [];
   bsModalRef?: BsModalRef;
   isLoading = false;
-  dataSource!: MatTableDataSource<Producto>;
+  dataSource!: MatTableDataSource<ListProducto>;
   public pageSize = 10;
   public totalData = 0;
   public currentPage = 1;
@@ -54,7 +54,7 @@ export class ClInventarioComponent {
       fechaFinFormateado = new Date(this.fechaFin)?.toISOString().split('T')[0];
     }
     this.inventarioService.obtenerInventario().pipe(finalize(() => this.isLoading = false))
-      .subscribe((data: Producto[]) => {
+      .subscribe((data: ListProducto[]) => {
 
         for (let index = this.skip; index < Math.min(this.limit, data.length); index++) {
           const serialNumber = index + 1;
@@ -75,7 +75,7 @@ export class ClInventarioComponent {
   refresh() {
     this.limpiar();
     this.inventarioService.obtenerInventario().pipe(finalize(() => this.isLoading = false))
-      .subscribe((data: Producto[]) => {
+      .subscribe((data: ListProducto[]) => {
 
         for (let index = this.skip; index < Math.min(this.limit, data.length); index++) {
           const serialNumber = index + 1;
@@ -94,7 +94,7 @@ export class ClInventarioComponent {
   }
   editarProducto(producto: Producto) {
     const initialState = {
-      Seleccionado: producto.productoId
+      Seleccionado: producto
     };
     this.bsModalRef = this.modalService.show(EditarProductoComponent, { initialState });
     const clienteActualizado = new Subject<boolean>();
@@ -108,7 +108,7 @@ export class ClInventarioComponent {
       clienteActualizado.unsubscribe();
     });
   }
-  eliminarProducto(productoId?: number) {
+  eliminarProducto(productoId: number) {
     Swal.fire({
       title: '¿Seguro que deseas eliminar?',
       showDenyButton: true,
@@ -116,19 +116,16 @@ export class ClInventarioComponent {
       denyButtonText: `Cancelar`,
     }).then((result) => {
       if (result.isConfirmed) {
-        this.inventarioService.eliminarProducto(productoId).subscribe(
-          (response) => {
-            if (response.isSuccess) {
-              Swal.fire('Correcto', 'El proveedor fue eliminado correctamente del sistema', 'success');
-              this.ObtenerProductos();
-              return;
-            } else {
-              console.error(response.message);
-            }
+        this.inventarioService.eliminarProducto(productoId)
+          .subscribe({
+          next: (res) => {
+            Swal.fire('Producto Elminado', 'El Producto ha sido Eliminado correctamente.', 'success');
+            this.ObtenerProductos();
           },
-          (error) => {
-            console.error(error);
-          });
+          error: (err) => {
+            Swal.fire('Error', 'Hubo un error al Eliminar el Producto.', 'error');
+          }
+        });
       } else {
         return;
       }
