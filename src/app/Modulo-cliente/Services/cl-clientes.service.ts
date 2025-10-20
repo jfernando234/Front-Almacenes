@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { ClienteList, DataCliente, ICliente } from "../Models/cliente.model";
+import { Cliente, ClienteDNI, ClienteList, DataCliente, ICliente } from "../Models/cliente.model";
 import { Observable } from "rxjs";
 import { environment } from 'src/environments/environment';
 import { HttpClient } from "@angular/common/http";
@@ -22,6 +22,10 @@ export class ClienteService {
   }
   eliminarCliente(ClienteId: number): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}cliente/EliminarCliente/${ClienteId}`, null);
+  }
+  obtenerClienteDni(dni: string): Observable<ClienteDNI> {
+    const url = `${this.apiUrl}Catalogos/obtenerDNI`;
+    return this.http.get<ClienteDNI>(url, { params: { dni } });
   }
 
 }

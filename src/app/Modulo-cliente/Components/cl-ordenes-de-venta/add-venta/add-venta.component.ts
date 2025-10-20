@@ -8,6 +8,8 @@ import { VentasService } from 'src/app/Modulo-cliente/Services/cl-ventas.service
 import Swal from 'sweetalert2';
 import { DetalleVentaComponent } from './detalle-venta/detalle-venta.component';
 import { ComprasService } from 'src/app/Modulo-cliente/Services/cl-compras.service';
+import { ClienteService } from 'src/app/Modulo-cliente/Services/cl-clientes.service';
+import { debounceTime, distinctUntilChanged, finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-venta',
@@ -55,7 +57,7 @@ export class AddVentaComponent {
     private router: Router,
     private Compraservice: ComprasService,
     private ventaService: VentasService,
-
+    private obtenerClienteDni: ClienteService,
     private modalService: BsModalService,
   ) { }
 
@@ -64,21 +66,11 @@ export class AddVentaComponent {
 
     this.form = this.formBuilder.group({
       tipoDocumentoId: ['', [Validators.required]],
-      serie: [{ value: '', disabled: true }, Validators.required],
-      secuencia: [{ value: '', disabled: true }, Validators.required],
       fecha: [{ value: new Date(), disabled: true }, Validators.required],
-      almacenId: ['', Validators.required],
-      tipoBeneficiario: [getCheckedTipoBeneficiario, [Validators.required]],
-      beneficiarioId: ['', [Validators.required, Validators.maxLength(40)]],
-      beneficiarioDocumento: [
-        { value: '', disabled: true },
-        Validators.required,
-      ],
-      beneficiarioDireccion: [
-        { value: '', disabled: true },
-        Validators.required,
-      ],
       tipoPago: ['', [Validators.required]],
+      documentoCliente: ['', [Validators.required]],
+      nombreCliente: ['', Validators.required],
+      apellidos: ['', Validators.required],
       observacion: [''],
       metodoPago: ['Efectivo', Validators.required],
       tipoTarjetaId: [''],
@@ -91,32 +83,39 @@ export class AddVentaComponent {
 
     this.agregarDataProducto();
 
-
+    this.form.get('documentoCliente')?.valueChanges
+      .pipe(
+        debounceTime(500), // espera mientras escribe
+        distinctUntilChanged() // evita consultas repetidas
+      )
+      .subscribe(value => {
+        if (value?.length === 8) { // valida longitud DNI
+          this.buscarBeneficiarios();
+        }
+      });
     this.isEfectivo('metodoPago');
   }
-
-
-  updateSerieAndSecuencia(tipoDocumentoId: string): void {
-
-  }
   buscarBeneficiarios() {
-    const searchInput = this.multiPacienteSearchInput.nativeElement.value
-      ? this.multiPacienteSearchInput.nativeElement.value.toLowerCase()
-      : '';
-    this.mostrarOpcionesBeneficiario = searchInput.length >= 3;
-    if (this.mostrarOpcionesBeneficiario) {
-      if (!this.listPacientesFiltrados) {
-        this.listPacientesFiltrados = [...this.listPacientes];
-      }
-      this.listPacientes = this.listPacientesFiltrados.filter((paciente) => {
-        const nombres = paciente.nombres.toLowerCase();
-        const apellidos = paciente.apellidos.toLowerCase();
-        if (!searchInput) {
-          return true;
-        }
-        return nombres.includes(searchInput) || apellidos.includes(searchInput);
-      });
+    const documento = this.form.get('documentoCliente')?.value;
+    if (!documento || documento.length < 8) {
+      return; // No buscar si no está completo
     }
+    this.obtenerClienteDni.obtenerClienteDni(documento)
+      .subscribe({
+        next: (res) => {
+          if (!res) {
+            Swal.fire('Aviso', 'No se encontró información para este DNI.', 'warning');
+            return;
+          }
+          this.form.patchValue({
+            nombreCliente: res.nombres,
+            apellidos: res.apellidoPaterno+res.apellidoMaterno
+          });
+        },
+        error: () => {
+        }
+      });
+
   }
 
   onChangeBeneficiario(event: any): void {
@@ -179,8 +178,6 @@ export class AddVentaComponent {
 
     const addVenta: Iventas = {
       tipoDocumentoId: this.form.get('tipoDocumentoId')?.value,
-      serie: this.form.get('serie')?.value,
-      secuencia: this.form.get('secuencia')?.value,
       fecha: this.form.get('fecha')?.value,
       almacenId: this.form.get('almacenId')?.value,
       tipoBeneficiario: this.form.get('tipoBeneficiario')?.value,
@@ -206,28 +203,15 @@ export class AddVentaComponent {
         subtotal: dataProducto.subtotal,
       })),
     };
-    this.ventaService.crearVenta(addVenta).subscribe(
-      (response) => {
-        if (response.isSuccess) {
-          Swal.fire({
-            title: 'Registrando...',
-            allowOutsideClick: false,
-          });
-          Swal.showLoading();
-          Swal.fire(
-            'Correcto',
-            'Venta registrada en el sistema correctamente.',
-            'success',
-          );
-          this.onCancel();
-        } else {
-          console.error(response.message);
+    this.ventaService.crearVenta(addVenta).pipe(finalize(() => this.form.reset()))
+      .subscribe({
+        next: (res) => {
+          Swal.fire('Venta registrada', 'El Venta ha sido registrado correctamente.', 'success');
+        },
+        error: (err) => {
+          Swal.fire('Error', 'Hubo un error al registrar la Venta.', 'error');
         }
-      },
-      (error) => {
-        console.error(error);
-      },
-    );
+      });
   }
 
   onCancel() {

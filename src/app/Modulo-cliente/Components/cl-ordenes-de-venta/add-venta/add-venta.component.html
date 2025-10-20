@@ -28,28 +28,6 @@
                   </div>
                 </div>
               </div>
-              <!-- Serie -->
-              <div class="col-12 col-md-6 col-xl-2">
-                <div class="form-group local-forms">
-                  <label>Serie <span class="login-danger">*</span></label>
-                  <input formControlName="serie" class="form-control" type="text"
-                    [ngClass]="{'is-invalid': isInvalid('serie') && isFormSubmitted}" />
-                  <div *ngIf="isInvalid('serie') && isFormSubmitted" class="invalid-feedback">
-                    <div *ngIf="isRequerido('serie')">Debe completar el campo*</div>
-                  </div>
-                </div>
-              </div>
-              <!-- Secuencia -->
-              <div class="col-12 col-md-6 col-xl-2">
-                <div class="form-group local-forms">
-                  <label>Secuencia <span class="login-danger">*</span></label>
-                  <input formControlName="secuencia" class="form-control" type="text"
-                    [ngClass]="{'is-invalid': isInvalid('secuencia') && isFormSubmitted}" />
-                  <div *ngIf="isInvalid('secuencia') && isFormSubmitted" class="invalid-feedback">
-                    <div *ngIf="isRequerido('secuencia')">Debe completar el campo*</div>
-                  </div>
-                </div>
-              </div>
               <!-- Fecha Registro -->
               <div class="col-12 col-md-12 col-xl-2">
                 <div class="form-group local-forms">
@@ -61,47 +39,6 @@
                     matDatepickerFilter="DD/MM/YYYY"></mat-datepicker-toggle>
                   <div *ngIf="isInvalid('fecha') && isFormSubmitted" class="invalid-feedback">
                     <div *ngIf="isRequerido('fecha')">Debe completar el campo*</div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Beneficiarios -->
-              <div class="col-12 col-md-6 col-xl-3">
-                <div class="form-group local-forms">
-                  <label>Cliente <span class="login-danger">*</span></label>
-                  <!--<label for="buscarPor">Paciente <span class="login-danger">*</span></label>-->
-                  <mat-select (selectionChange)="onChangeBeneficiario($event)" formControlName="beneficiarioId"
-                    class="form-control" placeholder="Seleccione un Paciente"
-                    [ngClass]="{'is-invalid': isInvalid('pacienteId') && isFormSubmitted}">
-                    <input type="text" class="form-control buscar" autocomplete="off" #multiUserSearch matInput
-                      placeholder="Ingrese Apellidos o Nombres" (input)="buscarBeneficiarios()">
-                    <mat-option value="" class="d-none"> </mat-option>
-                    <ng-container *ngIf="mostrarOpcionesBeneficiario">
-                      <mat-option *ngFor="let paciente of listPacientes" [value]="paciente.pacienteId">
-                        {{paciente.nombres}} {{paciente.apellidos}}
-                      </mat-option>
-                    </ng-container>
-                  </mat-select>
-                  <div *ngIf="isInvalid('beneficiarioId') && isFormSubmitted" class="invalid-feedback">
-                    <div *ngIf="isRequerido('beneficiarioId')">Debe completar el campo*</div>
-                  </div>
-                </div>
-              </div>
-              <!-- DNI Beneficiaio-->
-              <div class="col-12 col-md-6 col-xl-3">
-                <div class="form-group local-forms">
-                  <label>Dni <span class="login-danger">*</span></label>
-                  <input type="text" formControlName="beneficiarioDocumento" class="form-control" />
-                  <div class="invalid-feedback" *ngIf="isInvalid('beneficiarioDocumento')">Debe completar el campo*
-                  </div>
-                </div>
-              </div>
-              <!-- Direccion Beneficiaio-->
-              <div class="col-12 col-md-6 col-xl-6">
-                <div class="form-group local-forms">
-                  <label>Direccion <span class="login-danger">*</span></label>
-                  <input type="text" formControlName="beneficiarioDireccion" class="form-control" />
-                  <div class="invalid-feedback" *ngIf="isInvalid('beneficiarioDireccion')">Debe completar el campo*
                   </div>
                 </div>
               </div>
@@ -119,6 +56,38 @@
                   </div>
                 </div>
               </div>
+
+              <!-- DNI Beneficiaio-->
+              <div class="col-12 col-md-6 col-xl-3">
+                <div class="form-group local-forms">
+                  <label>Dni <span class="login-danger">*</span></label>
+                  <input type="text" formControlName="documentoCliente" class="form-control" />
+                  <div class="invalid-feedback" *ngIf="isInvalid('documentoCliente')">Debe completar el campo*
+                  </div>
+                </div>
+              </div>
+              <!-- Beneficiarios -->
+              <div class="col-12 col-md-6 col-xl-3">
+                <div class="form-group local-forms">
+                  <label>Nombre <span class="login-danger">*</span></label>
+                  <!--<label for="buscarPor">Paciente <span class="login-danger">*</span></label>-->
+                  <input formControlName="nombreCliente" type="text" class="form-control buscar" autocomplete="off"
+                    #multiUserSearch matInput >
+                  <div *ngIf="isInvalid('nombreCliente') && isFormSubmitted" class="invalid-feedback">
+                    <div *ngIf="isRequerido('nombreCliente')">Debe completar el campo*</div>
+                  </div>
+                </div>
+              </div>
+              <!-- Direccion Beneficiaio-->
+              <div class="col-12 col-md-6 col-xl-6">
+                <div class="form-group local-forms">
+                  <label>Apellidos <span class="login-danger">*</span></label>
+                  <input type="text" formControlName="apellidos" class="form-control" />
+                  <div class="invalid-feedback" *ngIf="isInvalid('apellidos')">Debe completar el campo*
+                  </div>
+                </div>
+              </div>
+
               <!-- Observacion -->
               <div class="col-12 col-md-6 col-xl-9">
                 <div class="form-group local-forms">
@@ -158,13 +127,12 @@
                     <td>{{dataProducto.nombre}}</td>
                     <td>{{dataProducto.cantidad}}</td>
                     <td>
-                      <input type="number" (input)="calcularSubTotal(dataProducto)"
-                        [(ngModel)]="dataProducto.precioNew" [ngModelOptions]="{standalone: true}" class="form-control">
+                      <input type="number" (input)="calcularSubTotal(dataProducto)" [(ngModel)]="dataProducto.precioNew"
+                        [ngModelOptions]="{standalone: true}" class="form-control">
                     </td>
                     <td>{{ dataProducto.subtotal }}</td>
                     <td>
-                      <div class="btn btn-danger" (click)="eliminarElementoDataProducto(item1)"><i
-                          class="fa-solid fa-x"></i></div>
+                      <div class="btn btn-danger" (click)="eliminarElementoDataProducto(item1)"><mat-icon>close</mat-icon></div>
                     </td>
                   </tr>
                 </tbody>

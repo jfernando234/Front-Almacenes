@@ -25,8 +25,6 @@ export class Ventas {
 export interface Iventas {
   clinicaId?: string;
   tipoDocumentoId: string;
-  serie: string;
-  secuencia: string;
   fecha: Date;
   almacenId: string;
   tipoBeneficiario: string;

@@ -1,5 +1,5 @@
-export class Cliente{
-  nombre= '';
+export class Cliente {
+  nombre = '';
   apellido = '';
   dni = '';
   correo = '';
@@ -9,19 +9,19 @@ export class Cliente{
   NumeroDocumento = '';
 }
 
-export interface ClienteList{
+export interface ClienteList {
   idCliente: number;
   contacto?: string;
   nombre: string;
-  apellido : string;
-  numeroDocumento : string;
+  apellido: string;
+  numeroDocumento: string;
   correo: string;
   telefono: number;
   direccion: string;
   estado: number;
 }
 
-export interface DataCliente{
+export interface DataCliente {
   data: ClienteList[];
   totalData: number;
 }
@@ -34,5 +34,15 @@ export interface ICliente {
   direccion: string
   telefono: string
   correo: string
-estado?: number
+  estado?: number
+}
+export interface ClienteDNI {
+  success: string;
+  message: string;
+  dni: string;
+  apellidoPaterno: string;
+  apellidoMaterno: string;
+  nombres: string;
+  apellido: string;
+  direccion: string;
 }

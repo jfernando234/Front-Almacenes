@@ -53,22 +53,16 @@ export interface ICompras {
   tipoDocumentoId: string;
   numDocumento: number;
   proveedorId: string;
-  almacenId: string;
   efectivo: number;
   saldoCompra: number;
   pago: string;
-  moneda: string;
-  guiaRemision: string;
   observacion: string;
   usuarioCompraId: string;
-  dias?: number;
-  fechaVencimiento?: string | null;
   total: number;
   igv: number;
   subtotal: number;
   pendiente: number;
   estado: number;
-  estaPago: number;
   detalles?: IcompraDetalles[];
 }
 export interface IComprasList {

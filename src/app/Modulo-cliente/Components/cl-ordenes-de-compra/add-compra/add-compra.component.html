@@ -50,21 +50,6 @@
                   </div>
                 </div>
               </div>
-              <!-- Almacen -->
-              <div class="col-12 col-md-12 col-xl-3">
-                <div class="form-group local-forms">
-                  <label>Almacen <span class="login-danger">*</span></label>
-                  <mat-select formControlName="almacenId" class="form-control select" placeholder="Seleccione Almacen"
-                    [ngClass]="{'is-invalid': isInvalid('almacenId') && isFormSubmitted}">
-                    <mat-option *ngFor="let data of almacen_LISTA" [value]="data.almacenId">
-                      {{data.nombreAlmacen}}
-                    </mat-option>
-                  </mat-select>
-                  <div *ngIf="isInvalid('almacenId') && isFormSubmitted" class="invalid-feedback">
-                    <div *ngIf="isRequerido('almacenId')">Debe completar el campo*</div>
-                  </div>
-                </div>
-              </div>
               <!-- RUC/DNI -->
               <div class="col-12 col-md-6 col-xl-2">
                 <div class="form-group local-forms">
@@ -100,7 +85,7 @@
                   <label>Tipo Compra<span class="login-danger">*</span></label>
                   <mat-select formControlName="pago" class="form-control select"
                     [ngClass]="{'is-invalid': isInvalid('pago')&& isFormSubmitted}"
-                    (selectionChange)="isEfectivo('pago')">
+                   >
                     <mat-option *ngFor="let data of tipoPago_LISTA" [value]="data.tipoPagoId">
                       {{data.descripcion}}
                     </mat-option>
@@ -122,32 +107,7 @@
                 </div>
               </div>
 
-              <!-- Mostrar estos solo si es Crédito -->
-              <div *ngIf="tipoCompraSeleccionada === 'Credito'" class="col-12 col-md-3 col-xl-2">
-                <div class="form-group local-forms">
-                  <label>Crédito</label>
-                  <input type="text" class="form-control" formControlName="credito" />
-                </div>
-              </div>
-              <div *ngIf="tipoCompraSeleccionada === 'Credito'" class="col-12 col-md-3 col-xl-2">
-                <div class="form-group local-forms">
-                  <label>N° Días</label>
-                  <input type="number" class="form-control" formControlName="ndias" />
-                </div>
-              </div>
-              <div class="col-12 col-md-12 col-xl-2">
-                <div class="form-group local-forms">
-                  <label class="control-label">Fecha Vencimiento:</label>
-                  <input formControlName="fechaVenc" class="form-control datetimepicker" type="text"
-                    [matDatepicker]="pickerp" [ngClass]="{'is-invalid': isInvalid('fechaVenc') && isFormSubmitted}" />
-                  <mat-datepicker #pickerp matDatepickerFilter="DD/MM/YYYY"></mat-datepicker>
-                  <mat-datepicker-toggle matIconSuffix [for]="pickerp"
-                    matDatepickerFilter="DD/MM/YYYY"></mat-datepicker-toggle>
-                  <div *ngIf="isInvalid('fechaVenc') && isFormSubmitted" class="invalid-feedback">
-                    <div *ngIf="isRequerido('fechaVenc')">Debe completar el campo*</div>
-                  </div>
-                </div>
-              </div>
+
               <div class="row">
 
                 <!-- Observacion -->
