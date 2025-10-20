@@ -48,57 +48,32 @@ export interface IcompraDetalles {
 }
 
 export interface ICompras {
-
-  fecha: Date;
-  tipoDocumentoId: string;
-  numDocumento: number;
-  proveedorId: string;
+  fechaRegistro: Date;
+  idTipoDocumento: number;
+  numeroDocumento: string;
+  idProveedor: number;
+  idTipoCompra: number;
   efectivo: number;
-  saldoCompra: number;
-  pago: string;
+  fechaVencimiento: Date;
   observacion: string;
-  usuarioCompraId: string;
   total: number;
-  igv: number;
-  subtotal: number;
-  pendiente: number;
   estado: number;
-  detalles?: IcompraDetalles[];
 }
 export interface IComprasList {
-  clinicaId: string;
-  usuarioId: string;
-  fecha: Date;
-  tipoDocumentoId: string;
-  numDocumento: number;
-  proveedorId: string;
-  almacenId: string;
+
+  idOrdenCompra: number;
+  fechaRegistro: string
+  idTipoDocumento: number;
+  numeroDocumento: string
+  idProveedor: number;
+  nombreProveedor: string
+  idTipoCompra: number;
   efectivo: number;
-  saldoCompra: number;
-  pago: string;
-  moneda: string;
-  guiaRemision: string;
+  fechaVencimiento: Date;
   observacion: string;
-  loginUsuario: string;
-  usuarioCompraId: string;
-  sedeId: string;
-  dias?: number;
-  fechaVencimiento?: Date;
   total: number;
-  igv: number;
-  subtotal: number;
-  pendiente: number;
   estado: number;
-  estadoPago: number;
-  almacen?: {
-        almacenId?: string
-        nombreAlmacen?: string
-      },
-  proveedor?: {
-        proveedorId?: string,
-        nombre?: string,
-        ruc?: string,
-  }
+
 }
 
 export interface DataCompras {

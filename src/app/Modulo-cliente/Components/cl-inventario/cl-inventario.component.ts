@@ -106,7 +106,12 @@ export class ClInventarioComponent {
     });
     this.bsModalRef.onHidden?.subscribe(() => {
       clienteActualizado.unsubscribe();
+      this.ObtenerProductos();
     });
+  }
+  formatoFecha(fecha: string): string {
+    const [anio, mes, dia] = fecha.toString().split('T')[0].split('-');
+    return `${dia}/${mes}/${anio}`;
   }
   eliminarProducto(productoId: number) {
     Swal.fire({

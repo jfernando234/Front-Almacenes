@@ -4,7 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import Swal from 'sweetalert2';
 
 import { environment } from 'src/environments/environment';
-import { DataCompras, ICompras } from '../Models/Compra';
+import { DataCompras, ICompras, IComprasList } from '../Models/Compra';
 import { successResponse } from 'src/assets/Model/successResponse';
 import { catchError } from 'rxjs/operators';
 
@@ -16,32 +16,25 @@ export class ComprasService {
   @Output() disparadorOtro: EventEmitter<any> = new EventEmitter();
   constructor(public http: HttpClient) { }
 
-  obtenerCompras(clinicaId: string, page: number, rows: number,
-    fechaInicio?: string, fechaFin?: string,
-    proveedorId?: string,
-    estadoPago?: string
-  ): Observable<DataCompras> {
-    let url = this.apiUrl + `/Compras/GetAllCompra?ClinicaId=${clinicaId}&page=${page}&rows=${rows}`;
-    if (fechaInicio) {
-      url += `&fechaInicio=${fechaInicio}`;
-    }
-    if (fechaFin) {
-      url += `&fechaFin=${fechaFin}`;
-    }
+  obtenerCompras(
+  ): Observable<IComprasList[]> {
+    let url = this.apiUrl + `OrdenCompra/ListarAllOrdenesCompra`;
 
-    if (proveedorId && proveedorId !== 'todos') {
-      url += `&ProveedorId=${proveedorId}`;
-    }
-    if (estadoPago && estadoPago !== 'todos') {
-      url += `&estadoPago=${estadoPago}`;
-    }
-
-    return this.http.get<DataCompras>(url);
-
+    return this.http.get<IComprasList[]>(url);
   }
-
+  obtenerComprasFiltro(inicio: any,fin: any
+  ): Observable<IComprasList[]> {
+    let url = this.apiUrl + `OrdenCompra/ListarAllOrdenesCompra`;
+    if (inicio) {
+      url += `?inicio=${inicio}`;
+    }
+    if (fin) {
+      url += `&fin=${fin}`;
+    }
+    return this.http.get<IComprasList[]>(url);
+  }
   crearCompra(compra: ICompras): Observable<successResponse> {
-    return this.http.post<successResponse>(this.apiUrl + `/Compras/SaveCompra`, compra).pipe(
+    return this.http.post<successResponse>(`${this.apiUrl}OrdenCompra/RegistrarOrdenCompra`, compra).pipe(
       catchError(error => {
         Swal.fire('Error', error.error, 'warning');
         return throwError(() => error);
@@ -53,8 +46,8 @@ export class ComprasService {
     return this.http.get<ICompras>(this.apiUrl + `/Compras/GetCompra/${compraId}`);
   }
 
-  eliminarCompra(compraId: string): Observable<successResponse> {
-    return this.http.delete<successResponse>(this.apiUrl + `/Compras/DeleteCompra/${compraId}`);
+  eliminarCompra(compraId: number): Observable<any> {
+    return this.http.put<any>(this.apiUrl + `OrdenCompra/EliminarOrdenCompra/${compraId}`, null);
   }
 
   actualizarCompra(compra: FormData, compraId: string): Observable<successResponse> {

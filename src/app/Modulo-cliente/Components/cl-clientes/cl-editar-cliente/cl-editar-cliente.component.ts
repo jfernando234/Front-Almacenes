@@ -24,7 +24,7 @@ export class ClEditarClienteComponent {
       direccion: ['', Validators.required],
       telefono: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      estado: ['', Validators.required],
+
     });
     this.cargarDatosCliente();
   }
@@ -36,14 +36,16 @@ export class ClEditarClienteComponent {
     }
     const nuevo: ICliente = {
       idCliente: this.clienteSeleccionado.idCliente,
+      idTipoDocumento: 1,
       numeroDocumento: this.form.value.documento,
       razonSocial: this.form.value.Razon,
+      direccion: this.form.value.direccion,
       telefono: this.form.value.telefono,
       correo: this.form.value.email,
-      direccion: this.form.value.direccion,
-      estado: this.form.value.estado
+      contacto: "nuevo",
+      estado: 1
     };
-    this.usuarioService.editarCliente(this.clienteSeleccionado.idCliente, nuevo)
+    this.usuarioService.editarCliente(nuevo)
       .pipe(finalize(() => this.form.reset()))
       .subscribe({
         next: (res) => {

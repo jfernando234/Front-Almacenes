@@ -18,10 +18,10 @@ export class ProveedorService {
   registrar(producto: Iproveedor): Observable<any> {
     return this.http.post(`${this.apiUrl}proveedor/RegistrarProveedor`, producto);
   }
-  editar(idproveedor: number,proveedor: Iproveedor): Observable<any> {
-    return this.http.put(`${this.apiUrl}proveedo/ActualizarProveedor${idproveedor}`, proveedor);
+  editar(proveedor: Iproveedor): Observable<any> {
+    return this.http.put(`${this.apiUrl}proveedor/ModificarProveedor`, proveedor);
   }
-  eliminarProveedor(proveedorId?: string): Observable<successResponse> {
+  eliminarProveedor(proveedorId?: number): Observable<successResponse> {
    return this.http.put<successResponse>(this.apiUrl + `proveedor/EliminarProveedor/${proveedorId}`,null);
   }
 }

@@ -26,7 +26,6 @@ export class ClAddClientesComponent {
       direccion: ['', Validators.required],
       telefono: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      estado: [ 1, Validators.required],
     });
   }
   guardar() {

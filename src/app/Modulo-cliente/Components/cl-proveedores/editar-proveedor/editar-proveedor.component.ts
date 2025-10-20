@@ -16,6 +16,7 @@ export class EditarProveedorComponent {
   public mostrarErrores = false;
   showPassword = false;
   proveedorSeleccionado: any;
+  idproveedor = 0;
   constructor(public bsModalRef: BsModalRef, public fb: FormBuilder, private proveedoerservice: ProveedorService) { }
 
   ngOnInit() {
@@ -36,6 +37,7 @@ export class EditarProveedorComponent {
       return;
     }
     const nuevo: Iproveedor = {
+      idProveedor: this.idproveedor,
       ruc: this.form.value.ruc,
       nombre: this.form.value.rozonSocial,
       direccion: this.form.value.direccion,
@@ -43,7 +45,7 @@ export class EditarProveedorComponent {
       correo: this.form.value.email,
       contacto: "actualizado"
     };
-    this.proveedoerservice.registrar(nuevo)
+    this.proveedoerservice.editar(nuevo)
       .pipe(finalize(() => this.form.reset()))
       .subscribe({
         next: (res) => {
@@ -61,12 +63,14 @@ export class EditarProveedorComponent {
   cargarDatosProveedor() {
     console.log(this.proveedorSeleccionado);
     this.form.patchValue({
+
       rozonSocial: this.proveedorSeleccionado.nombre,
       telefono: this.proveedorSeleccionado.telefono,
       direccion: this.proveedorSeleccionado.direccion,
       email: this.proveedorSeleccionado.correo,
       ruc: this.proveedorSeleccionado.ruc,
     });
+    this.idproveedor = this.proveedorSeleccionado.idProveedor;
   }
   /*Validacion*/
   isInvalid(controlName: string) {

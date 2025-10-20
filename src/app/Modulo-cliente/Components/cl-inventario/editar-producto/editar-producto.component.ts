@@ -16,6 +16,7 @@ export class EditarProductoComponent {
   form!: FormGroup;
   public mostrarErrores = false;
   showPassword = false;
+  public idproducto= 0;
   Seleccionado: any;
   constructor(public bsModalRef: BsModalRef, public fb: FormBuilder, private inventarioService: InventarioService) { }
 
@@ -35,12 +36,13 @@ export class EditarProductoComponent {
       return;
     }
     const nuevo: Producto = {
+      productoId: this.idproducto,
       nombreProducto: this.form.value.nombre,
       precioEntrada: this.form.value.precioEntrada,
       precioSalida: this.form.value.precioSalida,
       stock: this.form.value.stock
     };
-    this.inventarioService.editar(this.Seleccionado.idProducto, nuevo)
+    this.inventarioService.editar(nuevo)
       .pipe(finalize(() => this.form.reset()))
       .subscribe({
         next: (data) => {
@@ -59,7 +61,9 @@ export class EditarProductoComponent {
       precioEntrada: this.Seleccionado.precioEntrada,
       precioSalida: this.Seleccionado.precioSalida,
       stock: this.Seleccionado.stock,
+
     });
+    this.idproducto = this.Seleccionado.productoId
   }
   Cancelar() {
     this.bsModalRef.hide();

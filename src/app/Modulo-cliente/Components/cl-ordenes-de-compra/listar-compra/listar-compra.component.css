@@ -26,6 +26,7 @@
   flex-wrap: wrap;
   /* permiten que se envuelvan en pantallas pequeñas */
 }
+
 .local-forms {
   position: relative;
   /* necesario para que el toggle se posicione dentro */
@@ -45,6 +46,7 @@
   transform: translateY(-50%);
   pointer-events: auto;
 }
+
 .col-md-3 {
   width: auto;
 }
@@ -105,6 +107,31 @@
 .table-primary {
   background-color: #214f80;
 }
-.form-control{
+
+.form-control {
   height: 50px;
+}
+
+.custom-badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  border-color: #28a745;;
+  color: white;
+  text-align: center;
+  display: inline-block;
+}
+
+.status-red {
+  background-color: #dc3545;
+  /* rojo */
+}
+
+.status-blue {
+  background-color: #007bff;
+  /* azul */
+}
+
+.status-green {
+  background-color: #28a745;
+  /* verde */
 }

@@ -13,7 +13,7 @@ export interface DataProveedor {
   data: Iproveedor[];
 }
 export interface Iproveedor {
-  idProveedor?: string;
+  idProveedor?: number;
   ruc: string;
   nombre: string;
   direccion: string;
@@ -22,7 +22,7 @@ export interface Iproveedor {
   contacto: string;
 }
 export interface ListIproveedor {
-  idProveedor: string;
+  idProveedor: number;
   ruc: string;
   nombre: string;
   direccion: string;

@@ -24,10 +24,8 @@ export class ClDashboardComponent {
   ngOnInit(): void {
     // --- Datos simulados ---
     this.stockBajo = [
-      { nombreProducto: 'prueba ', stock: 3, totalMovimientos: 10 },
-      { nombreProducto: 'eqwewqe B', stock: 5, totalMovimientos: 8 },
-      { nombreProducto: 'aqweqe', stock: 2, totalMovimientos: 2 },
-      { nombreProducto: 'Producto 2', stock: 1, totalMovimientos: 0 }
+      { nombreProducto: 'producto 3 ', stock: 3, totalMovimientos: 10 },
+      { nombreProducto: 'Producto 4210 ', stock: 1, totalMovimientos: 8 },
     ];
 
     this.ultimasTransferencias = ['Prod A -> Prod B', 'Prod C -> Prod D'];
@@ -36,9 +34,9 @@ export class ClDashboardComponent {
       value: p.stock
     }));
     this.productosMovidos = [
-      { nombreProducto: 'Producto A', stock: 3, totalMovimientos: 10 },
-      { nombreProducto: 'Producto B', stock: 5, totalMovimientos: 8 },
-      { nombreProducto: 'Producto C', stock: 0, totalMovimientos: 2 }
+      { nombreProducto: 'PRODUCTO MODIFICADO', stock: 156, totalMovimientos: 10 },
+      { nombreProducto: 'TEST qweqe', stock: 12, totalMovimientos: 8 },
+      { nombreProducto: 'Producto', stock: 100, totalMovimientos: 50 }
     ];
 
     // --- Configurar gráficos ---

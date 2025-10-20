@@ -47,26 +47,12 @@ export class AddCompraComponent implements OnInit {
     this.form = this.fb.group({
       fecha: [{ value: new Date(), disabled: true }, Validators.required],
       tipoDocumento: ['', Validators.required],
-      numDocumento: ['', Validators.required],
       ruc: ['', Validators.required],
       proveedorId: ['', Validators.required],
-      almacenId: ['', Validators.required],
-      efectivo: [{ value: 0, disabled: true }, Validators.required],
-      saldoCompra: [''],
-      pago: ['', Validators.required],
-      moneda: ['', Validators.required],
-      guiaRemision: ['', Validators.required],
+      tipoCompra: ['', Validators.required],
       observacion: ['', Validators.required],
-      loginUsuario: [''],
-      //fechaVencimiento: ['', Validators.required],
-      credito: [0],
-      ndias: [0],
-      fechaVenc: [''],
     });
     this.agregarDataProducto();
-    this.form.get('ndias')?.valueChanges.subscribe((dias: number) => {
-      this.actualizarFechaVencimiento(dias);
-    });
     this.tipoPago_LISTA = [
       { tipoPagoId: 1, descripcion: 'Credito' },
       { tipoPagoId: 2, descripcion: 'Contado' },
@@ -165,19 +151,8 @@ export class AddCompraComponent implements OnInit {
     const control = this.form.get(controlName);
     return control?.errors && control.errors['required'];
   }
-  isEfectivo(controlName: string): void {
-    const tipoPagoId = this.form.get(controlName)?.value;
-    const pagoSeleccionado = this.tipoPago_LISTA.find(p => p.tipoPagoId === tipoPagoId);
-    this.tipoCompraSeleccionada = pagoSeleccionado?.descripcion || '';
 
-    // Habilita o deshabilita el campo efectivo según la opción
-    if (this.tipoCompraSeleccionada === 'Credito') {
-      this.form.get('efectivo')?.enable();
-    } else {
-      this.form.get('efectivo')?.disable();
-    }
-  } *
-    Cancelar() {
+  Cancelar() {
     this.CompraAgregada$.next(false);
     this.bsModalRef.hide();
   }
@@ -197,28 +172,24 @@ export class AddCompraComponent implements OnInit {
       return;
     }
     const compra: ICompras = {
-      fecha: this.form.get('fecha')?.value,
-      tipoDocumentoId: this.form.get('tipoDocumento')?.value,
-      numDocumento: this.form.get('numDocumento')?.value,
-      proveedorId: this.form.get('proveedorId')?.value,
-      efectivo: this.form.get('efectivo')?.value || 0,
-      saldoCompra: this.form.get('credito')?.value || 0,
-      pago: '',//no se de donde sale este valor
+      fechaRegistro: this.form.get('fecha')?.value,
+      idTipoDocumento: this.form.get('tipoDocumento')?.value,
+      numeroDocumento: this.form.get('ruc')?.value,
+      idProveedor: this.form.get('proveedorId')?.value,
+      idTipoCompra: this.form.get('tipoCompra')?.value,
+      efectivo: 10,
+      fechaVencimiento: this.form.get('fecha')?.value,
       observacion: this.form.get('observacion')?.value,
-      usuarioCompraId: this.usuarioId,
       total: this.calcularTotal(),
-      igv: this.igv,
-      subtotal: this.subtotal,
-      pendiente: 0,
-      estado: 1,
-      detalles: this.dataProductoTable.map((dataProducto) => ({
+      estado: 1
+      /*detalles: this.dataProductoTable.map((dataProducto) => ({
         productoId: dataProducto.productoId,
         cantidad: dataProducto.cantidad,
         valorVenta: dataProducto.valorVenta,
         igv: dataProducto.igv ?? 0,
         precioUnitario: dataProducto.precioNew,
         subtotal: dataProducto.subtotal,
-      })),
+      })),*/
     };
 
     this.Compraservice.crearCompra(compra).subscribe(
@@ -230,10 +201,10 @@ export class AddCompraComponent implements OnInit {
           })
           Swal.showLoading();
           Swal.close();
-          Swal.fire('Exito', 'Compra Registrada', 'success');
           this.regresar(); //regresar al listado de compras
         } else {
-          Swal.fire('Error', response.message, 'error');
+          Swal.fire('Exito', response.message, 'success');
+          this.regresar();
         }
       },
       (error) => {
@@ -242,7 +213,7 @@ export class AddCompraComponent implements OnInit {
     );
   }
   regresar() {
-    this.router.navigate(['main/cl-ordenes-de-compra/compras/nueva']);
+    this.router.navigate(['main/cl-ordenes-de-compra/compras/listar']);
   }
   calculoTotalSubtotalIgv(total: number) {
     this.subtotal = total;
@@ -259,7 +230,7 @@ export class AddCompraComponent implements OnInit {
     });
   }
   cancelar() {
-    this.router.navigate(['main/cl-ordenes-de-compra/compras/nueva']);
+    this.router.navigate(['main/cl-ordenes-de-compra/compras/listar']);
   }
 
 

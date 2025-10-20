@@ -18,8 +18,8 @@ export class InventarioService {
   registrar(producto: Producto): Observable<any> {
     return this.http.post(`${this.apiUrl}producto/RegistrarProducto`, producto);
   }
-  editar(productoId: number, producto: Producto): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}producto/UpdateProducto/${productoId}`, producto);
+  editar(producto: Producto): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}producto/ModificarProducto/`, producto);
   }
   eliminarProducto(productoId: number): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}producto/EliminarProducto/${productoId}`,null);

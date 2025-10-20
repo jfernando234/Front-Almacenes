@@ -103,9 +103,10 @@ export class ClProveedoresComponent {
     });
     this.bsModalRef.onHidden?.subscribe(() => {
       proveedorActualizado.unsubscribe();
+      this.ObtenerProveedor();
     });
   }
-  eliminarProveedor(proveedorId?: string) {
+  eliminarProveedor(proveedorId?: number) {
     Swal.fire({
       title: '¿Seguro que deseas eliminar?',
       showDenyButton: true,

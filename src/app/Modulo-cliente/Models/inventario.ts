@@ -24,7 +24,7 @@ export interface Producto {
   precioEntrada: number;
   precioSalida: number;
   stock: number;
-  fechaRegistro?: Date;
+  fechaRegistro?: string;
   estado?: String;
 }
 export interface ListProducto {
@@ -34,6 +34,6 @@ export interface ListProducto {
   precioEntrada: number;
   precioSalida: number;
   stock: number;
-  fechaRegistro?: Date;
+  fechaRegistro: string;
   estado?: String;
 }

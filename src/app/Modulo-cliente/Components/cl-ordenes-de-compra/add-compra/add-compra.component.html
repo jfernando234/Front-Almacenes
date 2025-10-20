@@ -40,20 +40,10 @@
                   </div>
                 </div>
               </div>
-              <!-- Numero de Documento-->
-              <div class="col-12 col-md-6 col-xl-2">
-                <div class="form-group local-forms">
-                  <label class="gen-label">N° de Documento<span class="login-danger">*</span></label>
-                  <input formControlName="numDocumento" class="form-control" type="text" />
-                  <div *ngIf="isInvalid('numDocumento') && isFormSubmitted" class="invalid-feedback">
-                    <div *ngIf="isRequerido('numDocumento')">Debe completar el campo*</div>
-                  </div>
-                </div>
-              </div>
               <!-- RUC/DNI -->
               <div class="col-12 col-md-6 col-xl-2">
                 <div class="form-group local-forms">
-                  <label class="gen-label">RUC/DNI<span class="login-danger">*</span></label>
+                  <label class="gen-label">RUC<span class="login-danger">*</span></label>
                   <input formControlName="ruc" class="form-control" type="text" />
                   <div *ngIf="isInvalid('ruc') && isFormSubmitted" class="invalid-feedback">
                     <div *ngIf="isRequerido('ruc')">Debe completar el campo*</div>
@@ -63,7 +53,7 @@
               <!-- Proveedor -->
               <div class="col-12 col-md-6 col-xl-4">
                 <div class="form-group local-forms">
-                  <label>Proveedor <span class="login-danger">*</span></label>
+                  <label>Razon Social <span class="login-danger">*</span></label>
                   <mat-select formControlName="proveedorId" class="form-control" placeholder="Seleccione un Proveedor"
                     (selectionChange)="onChangeProveedor($event)"
                     [ngClass]="{'is-invalid': isInvalid('proveedorId') && isFormSubmitted}">
@@ -83,33 +73,20 @@
               <div class="col-12 col-md-6 col-xl-2">
                 <div class="form-group local-forms">
                   <label>Tipo Compra<span class="login-danger">*</span></label>
-                  <mat-select formControlName="pago" class="form-control select"
-                    [ngClass]="{'is-invalid': isInvalid('pago')&& isFormSubmitted}"
+                  <mat-select formControlName="tipoCompra" class="form-control select"
+                    [ngClass]="{'is-invalid': isInvalid('tipoCompra')&& isFormSubmitted}"
                    >
                     <mat-option *ngFor="let data of tipoPago_LISTA" [value]="data.tipoPagoId">
                       {{data.descripcion}}
                     </mat-option>
                   </mat-select>
-                  <div *ngIf="isInvalid('tipoPago') && isFormSubmitted" class="invalid-feedback">
-                    <div *ngIf="isRequerido('tipoPago')">Debe completar el campo*</div>
+                  <div *ngIf="isInvalid('tipoCompra') && isFormSubmitted" class="invalid-feedback">
+                    <div *ngIf="isRequerido('tipoCompra')">Debe completar el campo*</div>
                   </div>
                 </div>
 
               </div>
-              <!-- Efectivo -->
-              <div class="col-12 col-md-12 col-xl-2">
-                <div class="form-group local-forms">
-                  <label class="gen-label">Efectivo<span class="login-danger">*</span></label>
-                  <input formControlName="efectivo" class="form-control" type="number" />
-                  <div *ngIf="isInvalid('efectivo') && isFormSubmitted" class="invalid-feedback">
-                    <div *ngIf="isRequerido('efectivo')">Debe completar el campo*</div>
-                  </div>
-                </div>
-              </div>
-
-
               <div class="row">
-
                 <!-- Observacion -->
                 <div class="col-12 col-md-12 col-xl-6">
                   <div class="form-group local-forms">

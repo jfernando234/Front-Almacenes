@@ -17,8 +17,8 @@ export class ClienteService {
   registrar(cleinte: ICliente): Observable<any> {
     return this.http.post(`${this.apiUrl}cliente/RegistrarCliente`, cleinte);
   }
-  editarCliente(clienteId: number, cleinte: ICliente): Observable<any> {
-    return this.http.put(`${this.apiUrl}cliente/ActualizarCliente/${clienteId}`, cleinte);
+  editarCliente(cleinte: ICliente): Observable<any> {
+    return this.http.put(`${this.apiUrl}cliente/ModificarCliente`, cleinte);
   }
   eliminarCliente(ClienteId: number): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}cliente/EliminarCliente/${ClienteId}`, null);
