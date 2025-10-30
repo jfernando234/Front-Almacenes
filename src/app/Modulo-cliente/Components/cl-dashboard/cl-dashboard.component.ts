@@ -3,12 +3,15 @@ import { Component, OnInit } from '@angular/core';
 import { ChartData, ChartOptions } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import { Producto } from '../../Models/inventario';
+import { InventarioService } from '../../Services/cl-inventario.service';
 @Component({
   selector: 'app-cl-dashboard',
   templateUrl: './cl-dashboard.component.html',
   styleUrls: ['./cl-dashboard.component.css']
 })
 export class ClDashboardComponent {
+
+  totalProductos = 0;
   /// --- Widgets ---
   stockBajo: any[] = [];
   ultimasTransferencias: string[] = [];
@@ -19,15 +22,13 @@ export class ClDashboardComponent {
   inventarioChartData: ChartData<'line'> = { labels: [], datasets: [] };
   movimientosChartData: ChartData<'bar'> = { labels: [], datasets: [] };
   barStockData: any[] = [];
-  constructor() { }
+  constructor(private inventarioSer: InventarioService) { }
 
   ngOnInit(): void {
-    // --- Datos simulados ---
-    this.stockBajo = [
-      { nombreProducto: 'producto 3 ', stock: 3, totalMovimientos: 10 },
-      { nombreProducto: 'Producto 4210 ', stock: 1, totalMovimientos: 8 },
-    ];
 
+    this.obtenerTotalProductos();
+    this.obtenerStockBajo();
+    // --- Datos simulados ---
     this.ultimasTransferencias = ['Prod A -> Prod B', 'Prod C -> Prod D'];
     this.barStockData = this.stockBajo.map(p => ({
       name: p.nombreProducto,
@@ -94,4 +95,32 @@ export class ClDashboardComponent {
   lineShowYAxis = true;
   lineShowLegend = false;
   lineShowGridLines = true;
+  obtenerTotalProductos() {
+    this.inventarioSer.getTotalProductos().subscribe({
+      next: (data: any) => {
+        this.totalProductos = data.totalInventario; // Asegúrate de que tu backend envíe { total: 100 }
+      },
+      error: (err) => {
+        console.error('Error al obtener total de productos', err);
+      }
+    });
+  }
+  obtenerStockBajo() {
+    this.inventarioSer.getStockBajo().subscribe({
+      next: (data: any[]) => {
+        this.stockBajo = data;
+
+        // Transformamos el array para ngx-charts
+        this.barStockData = this.stockBajo.map(item => ({
+          name: item.nombreProducto,
+          value: item.stock
+        }));
+      },
+      error: (err) => {
+        console.error('Error al obtener productos con stock crítico', err);
+        this.stockBajo = [];
+        this.barStockData = [];
+      }
+    });
+  }
 };

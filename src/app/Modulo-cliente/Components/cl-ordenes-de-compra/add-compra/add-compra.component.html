@@ -25,7 +25,6 @@
                   </div>
                 </div>
               </div>
-
               <!-- Tipo Documento -->
               <div class="col-12 col-md-6 col-xl-3">
                 <div class="form-group local-forms">
@@ -54,39 +53,37 @@
               <div class="col-12 col-md-6 col-xl-4">
                 <div class="form-group local-forms">
                   <label>Razon Social <span class="login-danger">*</span></label>
-                  <mat-select formControlName="proveedorId" class="form-control" placeholder="Seleccione un Proveedor"
-                    (selectionChange)="onChangeProveedor($event)"
-                    [ngClass]="{'is-invalid': isInvalid('proveedorId') && isFormSubmitted}">
+                  <mat-select formControlName="razonSocial" class="form-control" placeholder="Seleccione un Proveedor"
+                    (selectionChange)="onChangeProveedor($event.value)"
+                    [ngClass]="{'is-invalid': isInvalid('razonSocial') && isFormSubmitted}">
                     <input type="text" class="form-control buscar" autocomplete="off" #multiProveedorSearch matInput
-                      placeholder="Ingrese nombre del Proveedor" (input)="buscarProveedores()">
+                      placeholder="Ingrese nombre del Proveedor" (input)="buscarProveedores()" />
                     <mat-option value="" class="d-none"></mat-option>
-                    <mat-option *ngFor="let proveedor of proveedoresParaMostrar()" [value]="proveedor.idProveedor">
-                      {{proveedor.nombre}}
+                    <mat-option *ngFor="let proveedor of proveedoresParaMostrar()" [value]="proveedor">
+                      {{ proveedor.nombre }}
                     </mat-option>
                   </mat-select>
-                  <div *ngIf="isInvalid('proveedorId') && isFormSubmitted" class="invalid-feedback">
-                    <div *ngIf="isRequerido('proveedorId')">Debe completar el campo*</div>
+                  <div *ngIf="isInvalid('razonSocial') && isFormSubmitted" class="invalid-feedback">
+                    <div *ngIf="isRequerido('razonSocial')">Debe completar el campo*</div>
                   </div>
                 </div>
-              </div>
-              <!-- Tipo Compra -->
-              <div class="col-12 col-md-6 col-xl-2">
-                <div class="form-group local-forms">
-                  <label>Tipo Compra<span class="login-danger">*</span></label>
-                  <mat-select formControlName="tipoCompra" class="form-control select"
-                    [ngClass]="{'is-invalid': isInvalid('tipoCompra')&& isFormSubmitted}"
-                   >
-                    <mat-option *ngFor="let data of tipoPago_LISTA" [value]="data.tipoPagoId">
-                      {{data.descripcion}}
-                    </mat-option>
-                  </mat-select>
-                  <div *ngIf="isInvalid('tipoCompra') && isFormSubmitted" class="invalid-feedback">
-                    <div *ngIf="isRequerido('tipoCompra')">Debe completar el campo*</div>
-                  </div>
-                </div>
-
               </div>
               <div class="row">
+                <!-- Tipo Compra -->
+                <div class="col-12 col-md-6 col-xl-2">
+                  <div class="form-group local-forms">
+                    <label>Tipo Compra<span class="login-danger">*</span></label>
+                    <mat-select formControlName="tipoCompra" class="form-control select"
+                      [ngClass]="{'is-invalid': isInvalid('tipoCompra')&& isFormSubmitted}">
+                      <mat-option *ngFor="let data of tipoPago_LISTA" [value]="data.tipoPagoId">
+                        {{data.descripcion}}
+                      </mat-option>
+                    </mat-select>
+                    <div *ngIf="isInvalid('tipoCompra') && isFormSubmitted" class="invalid-feedback">
+                      <div *ngIf="isRequerido('tipoCompra')">Debe completar el campo*</div>
+                    </div>
+                  </div>
+                </div>
                 <!-- Observacion -->
                 <div class="col-12 col-md-12 col-xl-6">
                   <div class="form-group local-forms">

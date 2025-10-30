@@ -46,12 +46,12 @@ import {
   ɵɵresolveWindow
 } from "./chunk-AZRDXN4V.js";
 import {
-  take
-} from "./chunk-2RSK2634.js";
-import {
   animationFrameScheduler,
   fromEvent
 } from "./chunk-JVMRPRMK.js";
+import {
+  take
+} from "./chunk-2RSK2634.js";
 import {
   Subject,
   merge,

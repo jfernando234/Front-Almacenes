@@ -18,7 +18,7 @@ export class ComprasService {
 
   obtenerCompras(
   ): Observable<IComprasList[]> {
-    let url = this.apiUrl + `OrdenCompra/ListarAllOrdenesCompra`;
+    let url = this.apiUrl + `compra/ListarCompra`;
 
     return this.http.get<IComprasList[]>(url);
   }
@@ -34,7 +34,7 @@ export class ComprasService {
     return this.http.get<IComprasList[]>(url);
   }
   crearCompra(compra: ICompras): Observable<successResponse> {
-    return this.http.post<successResponse>(`${this.apiUrl}OrdenCompra/RegistrarOrdenCompra`, compra).pipe(
+    return this.http.post<successResponse>(`${this.apiUrl}compra/RegistrarCompra`, compra).pipe(
       catchError(error => {
         Swal.fire('Error', error.error, 'warning');
         return throwError(() => error);

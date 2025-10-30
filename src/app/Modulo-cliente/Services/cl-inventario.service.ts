@@ -24,4 +24,10 @@ export class InventarioService {
   eliminarProducto(productoId: number): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}producto/EliminarProducto/${productoId}`,null);
   }
+  getTotalProductos(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}producto/AllStock`);
+  }
+  getStockBajo(): Observable<any[]> {
+  return this.http.get<any[]>(`${this.apiUrl}producto/StockCritico`);
+  }
 }

@@ -48,32 +48,31 @@ export interface IcompraDetalles {
 }
 
 export interface ICompras {
-  fechaRegistro: Date;
-  idTipoDocumento: number;
-  numeroDocumento: string;
-  idProveedor: number;
-  idTipoCompra: number;
-  efectivo: number;
-  fechaVencimiento: Date;
+  tipoDocumentoId: number;
+  ruc: string;
+  razonSocial?: string;
   observacion: string;
+  tipoCompraId: number;
   total: number;
-  estado: number;
+  fechaRegistro: Date;
+  detalles: DetalleCompra[];
+}
+
+export interface DetalleCompra {
+  productoId: number,
+  cantidad: number,
+  precioUnitario: number,
+  valorVenta?: number,
+  total: number
 }
 export interface IComprasList {
-
-  idOrdenCompra: number;
-  fechaRegistro: string
-  idTipoDocumento: number;
-  numeroDocumento: string
-  idProveedor: number;
-  nombreProveedor: string
-  idTipoCompra: number;
-  efectivo: number;
-  fechaVencimiento: Date;
+  tipoDocumentoId: number;
+  ruc: string;
+  razonSocial: string;
   observacion: string;
+  tipoCompraId: number;
   total: number;
-  estado: number;
-
+  fechaRegistro: Date;
 }
 
 export interface DataCompras {

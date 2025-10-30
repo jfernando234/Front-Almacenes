@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
-import { finalize } from 'rxjs/operators';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter, finalize } from 'rxjs/operators';
 import { Icompra, IComprasList } from 'src/app/Modulo-cliente/Models/Compra';
 import { pageSelection } from 'src/app/Modulo-cliente/Models/modelsPag';
 import { ListIproveedor } from 'src/app/Modulo-cliente/Models/provedor';
@@ -37,17 +37,20 @@ export class ListarCompraComponent {
   constructor(private router: Router, private Compraservice: ComprasService, private proveedorService: ProveedorService) { }
 
   ngOnInit() {
-    this.ObtenerOrdenesCompra();
+
+    this.obtenerCompraData();
+
+  }
+  cargarProveedores() {
     this.proveedorService.obtenerAllProveedores()
       .pipe(finalize(() => this.isLoading = false))
       .subscribe((data: ListIproveedor[]) => {
         this.ProveedorList = data
         console.log(this.ProveedorList)
       })
-  }
-  ObtenerOrdenesCompra() {
-    this.fechaFin = '';
-    this.fechaInicio = '';
+  };
+
+  obtenerCompraData(): void {
     this.Compraservice.obtenerCompras().pipe(finalize(() => this.isLoading = false))
       .subscribe((data: IComprasList[]) => {
         console.log(data);
@@ -55,24 +58,7 @@ export class ListarCompraComponent {
           const serialNumber = index + 1;
           this.serialNumberArray.push(serialNumber);
         }
-        this.ComprasList = data.map(item => {
-          // buscar el proveedor correspondiente
-          const proveedor = this.ProveedorList.find(p => p.idProveedor === item.idProveedor);
-          return {
-            fechaRegistro: item.fechaRegistro,
-            estado: item.estado,
-            fechaVencimiento: item.fechaVencimiento,
-            idOrdenCompra: item.idOrdenCompra,
-            idProveedor: item.idProveedor,            // si quieres mantener el id
-            nombreProveedor: proveedor ? proveedor.nombre : '', // nombre del proveedor
-            direccion: proveedor ? proveedor.direccion : '',
-            idTipoCompra: item.idTipoCompra,
-            idTipoDocumento: item.idTipoDocumento,
-            numeroDocumento: item.numeroDocumento,
-            observacion: item.observacion,
-            total: item.total
-          };
-        });
+        this.ComprasList = data
         this.dataSource = new MatTableDataSource(this.ComprasList);
         this.calculateTotalPages(this.totalData, this.pageSize);
       })
@@ -82,40 +68,6 @@ export class ListarCompraComponent {
     const fechaLocal = new Date(fecha.getTime() - (tzOffset * 60000));
     const iso = fechaLocal.toISOString();
     return iso.replace('Z', '-05:00'); // Resultado: "2025-10-20T20:48:22.3166667-05:00"
-  }
-
-
-  obtenerComprasFiltro() {
-    const fechaInicioISO = this.formatearFechaZona(new Date(this.fechaInicio));
-    const fechaFinISO = this.formatearFechaZona(new Date(this.fechaFin));
-    this.Compraservice.obtenerComprasFiltro(fechaInicioISO, fechaFinISO).pipe(finalize(() => this.isLoading = false))
-      .subscribe((data: IComprasList[]) => {
-        console.log(data);
-        for (let index = this.skip; index < Math.min(this.limit, data.length); index++) {
-          const serialNumber = index + 1;
-          this.serialNumberArray.push(serialNumber);
-        }
-        this.ComprasList = data.map(item => {
-          // buscar el proveedor correspondiente
-          const proveedor = this.ProveedorList.find(p => p.idProveedor === item.idProveedor);
-          return {
-            fechaRegistro: item.fechaRegistro,
-            estado: item.estado,
-            fechaVencimiento: item.fechaVencimiento,
-            idOrdenCompra: item.idOrdenCompra,
-            idProveedor: item.idProveedor,            // si quieres mantener el id
-            nombreProveedor: proveedor ? proveedor.nombre : '', // nombre del proveedor
-            direccion: proveedor ? proveedor.direccion : '',
-            idTipoCompra: item.idTipoCompra,
-            idTipoDocumento: item.idTipoDocumento,
-            numeroDocumento: item.numeroDocumento,
-            observacion: item.observacion,
-            total: item.total
-          };
-        });
-        this.dataSource = new MatTableDataSource(this.ComprasList);
-        this.calculateTotalPages(this.totalData, this.pageSize);
-      })
   }
 
   eliminarCompra(idcompra: number) {
@@ -130,7 +82,7 @@ export class ListarCompraComponent {
           .subscribe({
             next: (res) => {
               Swal.fire('Compra Eliminada', 'La Compra ha sido Eliminada correctamente.', 'success');
-              this.ObtenerOrdenesCompra();
+              this.obtenerCompraData();
             },
             error: (err) => {
               Swal.fire('Error', 'Hubo un error al Elminar la compra.', 'error');

@@ -45,12 +45,12 @@ export class AddCompraComponent implements OnInit {
   ngOnInit(): void {
 
     this.form = this.fb.group({
-      fecha: [{ value: new Date(), disabled: true }, Validators.required],
       tipoDocumento: ['', Validators.required],
       ruc: ['', Validators.required],
-      proveedorId: ['', Validators.required],
+      razonSocial: ['', Validators.required],
       tipoCompra: ['', Validators.required],
       observacion: ['', Validators.required],
+      fecha: [{ value: new Date(), disabled: true }, Validators.required],
     });
     this.agregarDataProducto();
     this.tipoPago_LISTA = [
@@ -82,9 +82,10 @@ export class AddCompraComponent implements OnInit {
       : '';
 
     this.mostrarOpcionesProveedor = searchInput.length >= 3;
+
     if (this.mostrarOpcionesProveedor) {
-      this.listProveedoresFiltrados = this.listProveedores.filter(
-        (proveedor) => proveedor.nombre.toLowerCase().includes(searchInput)
+      this.listProveedoresFiltrados = this.listProveedores.filter((proveedor) =>
+        proveedor.nombre.toLowerCase().includes(searchInput)
       );
     } else {
       this.listProveedoresFiltrados = [];
@@ -108,13 +109,14 @@ export class AddCompraComponent implements OnInit {
       this.form.get('fechaVenc')?.setValue('', { emitEvent: false });
     }
   }
-  onChangeProveedor(event: any): void {
-    const proveedor = (this.listProveedoresFiltrados?.length ? this.listProveedoresFiltrados : this.listProveedores)
-      .find((p) => p.idProveedor === event.value);
+  onChangeProveedor(proveedor: any): void {
+    if (!proveedor) return;
 
     this.proveedorSeleccionado = proveedor;
+
+    // Actualiza el campo RUC en el formulario
     this.form.patchValue({
-      ruc: proveedor?.ruc || ''
+      ruc: proveedor.ruc
     });
   }
 
@@ -171,25 +173,22 @@ export class AddCompraComponent implements OnInit {
       });
       return;
     }
+    const proveedor = this.form.get('razonSocial')?.value;
+
     const compra: ICompras = {
-      fechaRegistro: this.form.get('fecha')?.value,
-      idTipoDocumento: this.form.get('tipoDocumento')?.value,
-      numeroDocumento: this.form.get('ruc')?.value,
-      idProveedor: this.form.get('proveedorId')?.value,
-      idTipoCompra: this.form.get('tipoCompra')?.value,
-      efectivo: 10,
-      fechaVencimiento: this.form.get('fecha')?.value,
+      tipoDocumentoId: this.form.get('tipoDocumento')?.value,
+      ruc: this.form.get('ruc')?.value,
+      razonSocial:  proveedor ? proveedor.nombre : '',
+      tipoCompraId: this.form.get('tipoCompra')?.value,
       observacion: this.form.get('observacion')?.value,
       total: this.calcularTotal(),
-      estado: 1
-      /*detalles: this.dataProductoTable.map((dataProducto) => ({
+      fechaRegistro: this.form.get('fecha')?.value,
+      detalles: this.dataProductoTable.map((dataProducto) => ({
         productoId: dataProducto.productoId,
         cantidad: dataProducto.cantidad,
-        valorVenta: dataProducto.valorVenta,
-        igv: dataProducto.igv ?? 0,
         precioUnitario: dataProducto.precioNew,
-        subtotal: dataProducto.subtotal,
-      })),*/
+        total: dataProducto.subtotal,
+      })),
     };
 
     this.Compraservice.crearCompra(compra).subscribe(
