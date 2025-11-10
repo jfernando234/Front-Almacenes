@@ -70,12 +70,7 @@
                 Evaluación de desempeño y cumplimiento
               </p>
               <div class="mt-3">
-                <span class="badge bg-success"
-                  >{{
-                    resumenGeneral?.Proveedores?.Total || 0
-                  }}
-                  proveedores</span
-                >
+                <span class="badge bg-success"> Proveedores</span>
               </div>
             </div>
           </div>
@@ -94,12 +89,7 @@
                 Productos bajo nivel mínimo de inventario
               </p>
               <div class="mt-3">
-                <span class="badge bg-warning"
-                  >{{
-                    resumenGeneral?.Inventario?.ProductosCriticos || 0
-                  }}
-                  productos</span
-                >
+                <span class="badge bg-warning"> Productos</span>
               </div>
             </div>
           </div>
@@ -121,9 +111,7 @@
                 Análisis de transacciones y comportamiento
               </p>
               <div class="mt-3">
-                <span class="badge bg-secondary"
-                  >{{ resumenGeneral?.Clientes?.Total || 0 }} clientes</span
-                >
+                <span class="badge bg-secondary">Clientes</span>
               </div>
             </div>
           </div>
@@ -159,13 +147,13 @@
           <h5 class="mb-0">{{ reporteActual.titulo }}</h5>
         </div>
         <div class="report-actions">
-          <button
+          <!-- <button
             *ngIf="reporteCargado"
             class="btn btn-sm btn-outline-primary me-2"
             (click)="exportarCSV()"
           >
-            <i class="fas fa-download"></i> Descargar CSV
-          </button>
+            <!-- <i class="fas fa-download"></i> Descargar CSV 
+          </button> -->
           <!-- <button
             *ngIf="reporteCargado"
             class="btn btn-sm btn-outline-secondary me-2"
@@ -251,7 +239,7 @@
                 <div class="col-md-3">
                   <div class="stat-card">
                     <div class="stat-value">
-                      {{ reporteData?.TotalProductos }}
+                      {{ reporteData?.totalProductos }}
                     </div>
                     <div class="stat-label">Total de Productos</div>
                   </div>
@@ -259,7 +247,7 @@
                 <div class="col-md-3">
                   <div class="stat-card">
                     <div class="stat-value">
-                      {{ reporteData?.TotalUnidades }}
+                      {{ reporteData?.totalUnidades }}
                     </div>
                     <div class="stat-label">Unidades en Stock</div>
                   </div>
@@ -267,7 +255,7 @@
                 <div class="col-md-3">
                   <div class="stat-card">
                     <div class="stat-value">
-                      {{ reporteData?.ValorInventarioTotal | currency }}
+                      {{ reporteData?.valorInventarioTotal | currency }}
                     </div>
                     <div class="stat-label">Valor Total</div>
                   </div>
@@ -275,7 +263,7 @@
                 <div class="col-md-3">
                   <div class="stat-card">
                     <div class="stat-value">
-                      {{ reporteData?.PromedioValorProducto | currency }}
+                      {{ reporteData?.promedioValorProducto | currency }}
                     </div>
                     <div class="stat-label">Valor Promedio</div>
                   </div>
@@ -287,7 +275,7 @@
                 <div class="col-md-3">
                   <div class="stat-card">
                     <div class="stat-value text-danger">
-                      {{ reporteData?.TotalProductosCriticos }}
+                      {{ reporteData?.totalProductosCriticos }}
                     </div>
                     <div class="stat-label">Total en Riesgo</div>
                   </div>
@@ -295,7 +283,7 @@
                 <div class="col-md-3">
                   <div class="stat-card">
                     <div class="stat-value text-danger">
-                      {{ reporteData?.ProductosMuyCriticos }}
+                      {{ reporteData?.productosMuyCriticos }}
                     </div>
                     <div class="stat-label">Muy Crítico</div>
                   </div>
@@ -303,7 +291,7 @@
                 <div class="col-md-3">
                   <div class="stat-card">
                     <div class="stat-value text-warning">
-                      {{ reporteData?.ProductosCriticos }}
+                      {{ reporteData?.productosCriticos }}
                     </div>
                     <div class="stat-label">Crítico</div>
                   </div>
@@ -311,7 +299,7 @@
                 <div class="col-md-3">
                   <div class="stat-card">
                     <div class="stat-value text-info">
-                      {{ reporteData?.ProductosAlerta }}
+                      {{ reporteData?.productosAlerta }}
                     </div>
                     <div class="stat-label">Alerta</div>
                   </div>
@@ -323,7 +311,7 @@
                 <div class="col-md-3">
                   <div class="stat-card">
                     <div class="stat-value">
-                      {{ reporteData?.TotalProveedores }}
+                      {{ reporteData?.totalProveedores }}
                     </div>
                     <div class="stat-label">Total Proveedores</div>
                   </div>
@@ -331,7 +319,7 @@
                 <div class="col-md-3">
                   <div class="stat-card">
                     <div class="stat-value">
-                      {{ reporteData?.TotalOrdenesCompra }}
+                      {{ reporteData?.totalOrdenesCompra }}
                     </div>
                     <div class="stat-label">Órdenes de Compra</div>
                   </div>
@@ -339,7 +327,7 @@
                 <div class="col-md-3">
                   <div class="stat-card">
                     <div class="stat-value">
-                      {{ reporteData?.MontoTotalComprado | currency }}
+                      {{ reporteData?.montoTotalComprado | currency }}
                     </div>
                     <div class="stat-label">Monto Total</div>
                   </div>
@@ -347,7 +335,7 @@
                 <div class="col-md-3">
                   <div class="stat-card">
                     <div class="stat-value">
-                      {{ reporteData?.TasaCumplimientoPromedio }}%
+                      {{ reporteData?.tasaCumplimientoPromedio }}%
                     </div>
                     <div class="stat-label">Cumplimiento Promedio</div>
                   </div>
@@ -359,7 +347,7 @@
                 <div class="col-md-3">
                   <div class="stat-card">
                     <div class="stat-value">
-                      {{ reporteData?.TotalClientes }}
+                      {{ reporteData?.totalClientes }}
                     </div>
                     <div class="stat-label">Total de Clientes</div>
                   </div>
@@ -367,7 +355,7 @@
                 <div class="col-md-3">
                   <div class="stat-card">
                     <div class="stat-value">
-                      {{ reporteData?.ClientesActivos }}
+                      {{ reporteData?.clientesActivos }}
                     </div>
                     <div class="stat-label">Clientes Activos</div>
                   </div>
@@ -375,7 +363,7 @@
                 <div class="col-md-3">
                   <div class="stat-card">
                     <div class="stat-value">
-                      {{ reporteData?.MontoTotalVentas | currency }}
+                      {{ reporteData?.montoTotalVentas | currency }}
                     </div>
                     <div class="stat-label">Monto Total Ventas</div>
                   </div>
@@ -383,7 +371,7 @@
                 <div class="col-md-3">
                   <div class="stat-card">
                     <div class="stat-value">
-                      {{ reporteData?.PromedioVentasCliente | currency }}
+                      {{ reporteData?.promedioVentasCliente | currency }}
                     </div>
                     <div class="stat-label">Promedio por Cliente</div>
                   </div>
@@ -395,7 +383,7 @@
                 <div class="col-md-3">
                   <div class="stat-card">
                     <div class="stat-value">
-                      {{ reporteData?.TotalProductos }}
+                      {{ reporteData?.totalProductos }}
                     </div>
                     <div class="stat-label">Total Productos</div>
                   </div>
@@ -403,7 +391,7 @@
                 <div class="col-md-3">
                   <div class="stat-card">
                     <div class="stat-value text-primary">
-                      {{ reporteData?.ProductosA }}
+                      {{ reporteData?.productosA }}
                     </div>
                     <div class="stat-label">Productos A (80%)</div>
                   </div>
@@ -411,7 +399,7 @@
                 <div class="col-md-3">
                   <div class="stat-card">
                     <div class="stat-value text-info">
-                      {{ reporteData?.ProductosB }}
+                      {{ reporteData?.productosB }}
                     </div>
                     <div class="stat-label">Productos B (15%)</div>
                   </div>
@@ -419,7 +407,7 @@
                 <div class="col-md-3">
                   <div class="stat-card">
                     <div class="stat-value text-secondary">
-                      {{ reporteData?.ProductosC }}
+                      {{ reporteData?.productosC }}
                     </div>
                     <div class="stat-label">Productos C (5%)</div>
                   </div>

@@ -7,21 +7,21 @@ import { ReportesService } from 'src/app/Services/reportes.service';
   styleUrls: ['./cl-reportes.component.css'],
 })
 export class ClReportesComponent implements OnInit {
-  // Estados generales
+  
   cargando: boolean = false;
   reporteCargado: boolean = false;
 
-  // Datos del reporte actual
+  
   reporteData: any = {};
   resumenGeneral: any = {};
 
-  // Información del reporte activo
+  
   reporteActual = {
     tipo: '',
     titulo: 'Seleccione un reporte para visualizar',
   };
 
-  // Filtros para movimientos de stock
+  
   movimientosFilter = {
     fechaInicio: '',
     fechaFin: '',
@@ -29,7 +29,7 @@ export class ClReportesComponent implements OnInit {
     selectedRange: 'Último mes',
   };
 
-  // Definición de reportes
+  
   reportesDisponibles = [
     {
       id: 'valoracion-inventario',
@@ -60,6 +60,8 @@ export class ClReportesComponent implements OnInit {
   ngOnInit(): void {
     this.cargarResumenGeneral();
     this.inicializarFiltros();
+    
+    this.cargarReporte('valoracion-inventario');
   }
 
   /**
@@ -104,7 +106,7 @@ export class ClReportesComponent implements OnInit {
     this.cargando = true;
     this.reporteCargado = false;
 
-    // Encontrar información del reporte
+    
     const reporte = this.reportesDisponibles.find(
       (r) => r.tipo === tipoReporte
     );
@@ -119,11 +121,12 @@ export class ClReportesComponent implements OnInit {
       titulo: reporte.titulo,
     };
 
-    // Cargar datos según el tipo de reporte
+    
     switch (tipoReporte) {
       case 'valoracion-inventario':
         this.reportesService.obtenerValoracionInventario().subscribe(
           (datos: any) => {
+            console.log('Datos de valoración inventario recibidos:', datos);
             this.reporteData = datos;
             this.cargando = false;
             this.reporteCargado = true;
@@ -230,17 +233,21 @@ export class ClReportesComponent implements OnInit {
 
     switch (this.reporteActual.tipo) {
       case 'valoracion-inventario':
-        return this.reporteData.detalles || [];
+        return this.reporteData.Detalles || this.reporteData.detalles || [];
       case 'movimientos-stock':
-        return this.reporteData.movimientos || [];
+        return (
+          this.reporteData.Movimientos || this.reporteData.movimientos || []
+        );
       case 'rendimiento-proveedores':
-        return this.reporteData.proveedores || [];
+        return (
+          this.reporteData.Proveedores || this.reporteData.proveedores || []
+        );
       case 'historial-clientes':
-        return this.reporteData.clientes || [];
+        return this.reporteData.Clientes || this.reporteData.clientes || [];
       case 'stock-critico':
-        return this.reporteData.productos || [];
+        return this.reporteData.Productos || this.reporteData.productos || [];
       case 'analisis-abc':
-        return this.reporteData.productos || [];
+        return this.reporteData.Productos || this.reporteData.productos || [];
       default:
         return [];
     }

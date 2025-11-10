@@ -7,8 +7,8 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class ReportesService {
-  // El environment en este proyecto define 'url_api' que termina con /
-  // Por lo que solo agregamos reportes (sin barra inicial)
+  
+  
   private apiUrl = `${environment.url_api}reportes`;
 
   constructor(private http: HttpClient) {}
@@ -98,7 +98,9 @@ export class ReportesService {
    */
   exportarCSV(datos: any[], nombreArchivo: string): void {
     const csv = this.convertirACSV(datos);
-    const blob = new Blob([csv], { type: 'text/csv' });
+    
+    const BOM = '\uFEFF';
+    const blob = new Blob([BOM + csv], { type: 'text/csv;charset=utf-8;' });
     const url = window.URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
@@ -115,8 +117,8 @@ export class ReportesService {
    * @param nombreArchivo Nombre del archivo a exportar
    */
   exportarExcel(datos: any[], nombreArchivo: string): void {
-    // Esta función requeriría librerías adicionales como xlsx
-    // Por ahora se deja como referencia
+    
+    
     console.log('Exportar a Excel: ' + nombreArchivo);
   }
 
@@ -129,21 +131,101 @@ export class ReportesService {
     }
 
     const headers = Object.keys(datos[0]);
-    const csv = [
-      headers.join(','),
-      ...datos.map((row) =>
-        headers
-          .map((header) => {
-            const value = row[header];
-            // Escapar comillas y envolver en comillas si contiene comas
-            return typeof value === 'string' && value.includes(',')
-              ? `"${value.replace(/"/g, '""')}"`
-              : value;
-          })
-          .join(',')
-      ),
-    ];
+    
+    
+    const headersFormateados = headers.map(header => this.formatearEncabezado(header));
+    
+    
+    const lineaEncabezados = headersFormateados.map(h => `"${h}"`).join(',');
+    
+    
+    const lineasDatos = datos.map((row) =>
+      headers
+        .map((header) => {
+          let value = row[header];
+          
+          
+          if (value === null || value === undefined) {
+            return '""';
+          }
+          
+          
+          value = String(value);
+          
+          
+          value = value.replace(/"/g, '""');
+          return `"${value}"`;
+        })
+        .join(',')
+    );
 
-    return csv.join('\n');
+    
+    return [lineaEncabezados, ...lineasDatos].join('\r\n');
+  }
+
+  /**
+   * Formatea un nombre de propiedad camelCase a un título legible
+   */
+  private formatearEncabezado(header: string): string {
+    const mapeoEncabezados: { [key: string]: string } = {
+      
+      'productoId': 'ID Producto',
+      'nombreProducto': 'Nombre Producto',
+      'stock': 'Stock',
+      'precioEntrada': 'Precio Entrada',
+      'precioSalida': 'Precio Salida',
+      'valorTotal': 'Valor Total',
+      
+      
+      'movimientoId': 'ID Movimiento',
+      'tipoMovimiento': 'Tipo Movimiento',
+      'cantidad': 'Cantidad',
+      'precioUnitario': 'Precio Unitario',
+      'total': 'Total',
+      'fechaMovimiento': 'Fecha Movimiento',
+      'numeroCompra': 'Número Compra',
+      
+      
+      'proveedorId': 'ID Proveedor',
+      'nombreProveedor': 'Nombre Proveedor',
+      'ruc': 'RUC',
+      'telefono': 'Teléfono',
+      'correo': 'Correo',
+      'totalOrdenesCompra': 'Total Órdenes Compra',
+      'promedioOrden': 'Promedio Orden',
+      'calificacionGlobal': 'Calificación',
+      
+      
+      'clienteId': 'ID Cliente',
+      'razonSocial': 'Razón Social',
+      'tipoDocumento': 'Tipo Documento',
+      'numeroDocumento': 'Número Documento',
+      'totalOrdenes': 'Total Órdenes',
+      'montoTotalComprado': 'Monto Total Comprado',
+      'promedioCompra': 'Promedio Compra',
+      'ultimaCompra': 'Última Compra',
+      
+      
+      'stockActual': 'Stock Actual',
+      'stockMinimo': 'Stock Mínimo',
+      'diferencia': 'Diferencia',
+      'urgencia': 'Urgencia',
+      
+      
+      'clasificacion': 'Clasificación',
+      'porcentajeValor': 'Porcentaje Valor',
+      'porcentajeAcumulado': 'Porcentaje Acumulado'
+    };
+
+    
+    if (mapeoEncabezados[header]) {
+      return mapeoEncabezados[header];
+    }
+
+    
+    return header
+      .replace(/([A-Z])/g, ' $1')
+      .replace(/^./, (str) => str.toUpperCase())
+      .trim();
   }
 }
