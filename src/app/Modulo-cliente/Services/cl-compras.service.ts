@@ -4,7 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import Swal from 'sweetalert2';
 
 import { environment } from 'src/environments/environment';
-import { DataCompras, ICompras, IComprasList } from '../Models/Compra';
+import { CompraPorMes, ICompras, IComprasList, ProductoCompras } from '../Models/Compra';
 import { successResponse } from 'src/assets/Model/successResponse';
 import { catchError } from 'rxjs/operators';
 
@@ -22,7 +22,7 @@ export class ComprasService {
 
     return this.http.get<IComprasList[]>(url);
   }
-  obtenerComprasFiltro(inicio: any,fin: any
+  obtenerComprasFiltro(inicio: any, fin: any
   ): Observable<IComprasList[]> {
     let url = this.apiUrl + `OrdenCompra/ListarAllOrdenesCompra`;
     if (inicio) {
@@ -57,5 +57,12 @@ export class ComprasService {
         return throwError(() => error);
       })
     );
+  }
+  getDistribucionComprasPorProducto(): Observable<ProductoCompras[]> {
+    return this.http.get<ProductoCompras[]>(this.apiUrl + `proveedor/TopProductos`);
+  }
+
+  getComprasPorMes(): Observable<CompraPorMes[]> {
+    return this.http.get<CompraPorMes[]>(this.apiUrl + `compra/ComprasPorMes`);
   }
 }

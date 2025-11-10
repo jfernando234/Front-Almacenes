@@ -50,7 +50,7 @@ export class AddCompraComponent implements OnInit {
       razonSocial: ['', Validators.required],
       tipoCompra: ['', Validators.required],
       observacion: ['', Validators.required],
-      fecha: [{ value: new Date(), disabled: true }, Validators.required],
+      fecha: [{ value: new Date(), }, Validators.required],
     });
     this.agregarDataProducto();
     this.tipoPago_LISTA = [

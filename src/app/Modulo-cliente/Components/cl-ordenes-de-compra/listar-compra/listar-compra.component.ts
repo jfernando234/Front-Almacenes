@@ -18,22 +18,28 @@ export class ListarCompraComponent {
   ordenesCompra: any[] = [];
   // Datos y lógica inicial del componente
 
-  ComprasList: any[] = [];
+
   serialNumberArray: number[] = [];
-  pageNumberArray: Array<number> = [];
+
   ProveedorList: ListIproveedor[] = [];
   isLoading = false;
   dataSource!: MatTableDataSource<IComprasList>;
-  public pageSize = 10;
-  public totalData = 0;
-  public currentPage = 1;
+
   public fechaInicio = ''
   public fechaFin = '';
   public skip = 0;
   public totalPages = 0;
   public pageSelection: Array<pageSelection> = [];
-  public limit: number = this.pageSize;
+
   isNuevaCompra = false;
+
+  ComprasList: any[] = [];
+  currentPage = 1;
+  pageSize = 10;
+  totalData = 0;
+  displayList: any[] = [];
+  pageNumberArray: Array<number> = [];
+
   constructor(private router: Router, private Compraservice: ComprasService, private proveedorService: ProveedorService) { }
 
   ngOnInit() {
@@ -41,33 +47,20 @@ export class ListarCompraComponent {
     this.obtenerCompraData();
 
   }
-  cargarProveedores() {
-    this.proveedorService.obtenerAllProveedores()
-      .pipe(finalize(() => this.isLoading = false))
-      .subscribe((data: ListIproveedor[]) => {
-        this.ProveedorList = data
-        console.log(this.ProveedorList)
-      })
-  };
-
   obtenerCompraData(): void {
     this.Compraservice.obtenerCompras().pipe(finalize(() => this.isLoading = false))
       .subscribe((data: IComprasList[]) => {
-        console.log(data);
-        for (let index = this.skip; index < Math.min(this.limit, data.length); index++) {
-          const serialNumber = index + 1;
-          this.serialNumberArray.push(serialNumber);
-        }
-        this.ComprasList = data
-        this.dataSource = new MatTableDataSource(this.ComprasList);
-        this.calculateTotalPages(this.totalData, this.pageSize);
+        this.ComprasList = data;
+        this.totalData = data.length;
+        this.calculateTotalPages();
+        this.moveToPage(1);
       })
   }
   formatearFechaZona(fecha: Date): string {
     const tzOffset = -5 * 60; // Perú GMT-5
     const fechaLocal = new Date(fecha.getTime() - (tzOffset * 60000));
     const iso = fechaLocal.toISOString();
-    return iso.replace('Z', '-05:00'); // Resultado: "2025-10-20T20:48:22.3166667-05:00"
+    return iso.replace('Z', '-05:00');
   }
 
   eliminarCompra(idcompra: number) {
@@ -97,21 +90,29 @@ export class ListarCompraComponent {
     const [anio, mes, dia] = fecha.toString().split('T')[0].split('-');
     return `${dia}/${mes}/${anio}`;
   }
-  getMoreData(value: string) { }
-  moveToPage(page: number) { }
-  private calculateTotalPages(totalData: number, pageSize: number): void {
-    this.pageNumberArray = [];
-    this.totalPages = totalData / pageSize;
-    if (this.totalPages % 1 != 0) {
-      this.totalPages = Math.trunc(this.totalPages + 1);
-    }
-    for (let i = 1; i <= this.totalPages; i++) {
-      const limit = pageSize * i;
-      const skip = limit - pageSize;
-      this.pageNumberArray.push(i);
-      this.pageSelection.push({ skip: skip, limit: limit });
+  getMoreData(direction: 'next' | 'previous'): void {
+    if (direction === 'next' && this.currentPage < this.pageNumberArray.length) {
+      this.moveToPage(this.currentPage + 1);
+    } else if (direction === 'previous' && this.currentPage > 1) {
+      this.moveToPage(this.currentPage - 1);
     }
   }
+
+  moveToPage(page: number): void {
+    this.currentPage = page;
+    const startIndex = (page - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    this.displayList = this.ComprasList.slice(startIndex, endIndex);
+
+    // Opcional: actualizar números de serie
+    this.serialNumberArray = this.displayList.map((_, i) => startIndex + i + 1);
+  }
+
+  calculateTotalPages(): void {
+    const totalPages = Math.ceil(this.totalData / this.pageSize);
+    this.pageNumberArray = Array.from({ length: totalPages }, (_, i) => i + 1);
+  }
+
   irANuevaCompra() {
     this.isNuevaCompra = true;
     this.router.navigate(['main/cl-ordenes-de-compra/compras/nueva']);

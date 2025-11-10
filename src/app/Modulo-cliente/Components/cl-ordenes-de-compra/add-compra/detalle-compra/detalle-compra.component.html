@@ -8,29 +8,6 @@
             <div class="doctor-table-blk">
               <h3>Lista de Productos</h3>
               <br>
-              <div class="row doctor-search-blk w-100">
-                <!--* QUE SEA DINAMICO EL ESCOGER NUMERO DE PAGINAS Y el BUSCADO-->
-                <div class="col-12 col-md-6 col-xl-3 mt-3">
-                  <div class="local-forms top-nav-search table-search-blk w-100">
-                    <label>Mostrar</label>
-                    <mat-select [(value)]="pageSize" (valueChange)="obtenerDatosProductos()"
-                      style="align-items: normal; padding: 10px 15px;" class="form-control" placeholder="Cantidad">
-                      <mat-option value=5>5</mat-option>
-                      <mat-option value=10>10</mat-option>
-                      <mat-option value=15>15</mat-option>
-                    </mat-select>
-                  </div>
-                </div>
-                <div class="col-12 col-md-12 col-xl-3 mt-3">
-                  <div class="local-forms top-nav-search table-search-blk w-100">
-                    <label>Buscar</label>
-                    <input class="form-control" placeholder="Buscar" [(ngModel)]="nombreProducto"
-                      (input)="obtenerDatosProductos()">
-                    <a class="btn"><img src="assets/img/icons/search-normal.svg" alt=""></a>
-                  </div>
-                </div>
-                <!--* QUE SEA DINAMICO EL ESCOGER NUMERO DE PAGINAS-->
-              </div>
               <div *ngIf="isLoading" class="spinner-container">
                 <div class="custom-spinner"></div>
               </div>

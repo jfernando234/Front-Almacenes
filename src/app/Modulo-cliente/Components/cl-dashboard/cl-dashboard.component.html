@@ -1,69 +1,86 @@
 <div class="container mt-4">
-  <div class="row">
-    <div class="col-12 col-md-4 col-lg-3">
-      <div class="card shadow-sm">
-        <div class="card-header text-center">
+  <!-- Primer nivel: Total de Productos y Productos con Stock Bajo -->
+  <div class="row g-3">
+    <!-- Total de Productos -->
+    <div class="col-12 col-md-6 col-lg-6">
+      <div class="card shadow-sm text-center">
+        <div class="card-header">
           Total de Productos
         </div>
-        <div class="card-body flex-column">
+        <div class="card-body d-flex flex-column justify-content-center align-items-center">
           <p class="display-4 mb-0">{{ totalProductos }}</p>
           <small class="text-muted mt-2">Inventario actual</small>
         </div>
       </div>
     </div>
-    <!-- Widgets -->
-    <div class="col-md-6">
-      <div class="card shadow border-danger mt-3">
+
+    <!-- Productos con Stock Bajo -->
+    <div class="col-12 col-md-6 col-lg-6">
+      <div class="card shadow border-danger text-center">
         <div class="card-header bg-danger text-white">
           <i class="fas fa-box-open me-2"></i> Productos con Stock Bajo
         </div>
         <div class="card-body">
-          <ngx-charts-bar-horizontal [results]="barStockData" [scheme]="'cool'" [xAxis]="true" [yAxis]="true"
-            [legend]="false" [showDataLabel]="true" [animations]="true">
+          <ngx-charts-bar-horizontal
+            [results]="barStockData"
+            [scheme]="'cool'"
+            [xAxis]="true"
+            [yAxis]="true"
+            [legend]="false"
+            [showDataLabel]="true"
+            [animations]="true"
+            [view]="[400,300]">
           </ngx-charts-bar-horizontal>
         </div>
       </div>
     </div>
-    <div class="col-md-6">
-      <div class="card shadow">
-        <div class="card-header">Ventas por mes</div>
+  </div>
+
+  <!-- Segundo nivel: Compras por Mes y Distribución de Compras por Producto -->
+  <div class="row g-3 mt-3">
+    <!-- Compras por Mes -->
+    <div class="col-12 col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-header text-center">
+          Compras por Mes
+        </div>
         <div class="card-body">
-          <ngx-charts-bar-vertical [view]="barView" [scheme]="'vivid'" [results]="barData" [legend]="barShowLegend"
-            [xAxis]="barShowXAxis" [yAxis]="barShowYAxis" [xAxisLabel]="barXAxisLabel" [yAxisLabel]="barYAxisLabel">
+          <ngx-charts-bar-vertical
+            [view]="barView"
+            [scheme]="'vivid'"
+            [results]="barData"
+            [gradient]="false"
+            [xAxis]="true"
+            [yAxis]="true"
+            [legend]="false"
+            [showDataLabel]="true">
           </ngx-charts-bar-vertical>
         </div>
       </div>
     </div>
 
-  </div>
-
-  <div class="row mt-4">
-    <!-- Gráficos -->
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-header">Tendencias de Inventario</div>
-        <div class="card-body">
-          <!-- Chart placeholder (ng2-charts not initialized) -->
-          <div class="chart-placeholder">
-            <ngx-charts-line-chart [view]="lineView" [scheme]="'cool'" [results]="lineData" [xAxis]="lineShowXAxis"
-              [yAxis]="lineShowYAxis" [showGridLines]="lineShowGridLines" [legend]="lineShowLegend">
-            </ngx-charts-line-chart>
-          </div>
+    <!-- Distribución de Compras por Producto -->
+    <div class="col-12 col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-header text-center">
+          Gastos de Compras por Producto
         </div>
-      </div>
-    </div>
-
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-header">Movimientos Entrada/Salida</div>
         <div class="card-body">
-          <!-- Chart placeholder (ng2-charts not initialized) -->
           <div class="chart-placeholder">
-            <ngx-charts-pie-chart [view]="pieView" [scheme]="'natural'" [results]="pieData">
+            <ngx-charts-pie-chart
+              [view]="pieViewpie"
+              [scheme]="'natural'"
+              [results]="pieData"
+              [legend]="false"
+              [labels]="false"
+              [doughnut]="true"
+              [explodeSlices]="true"
+              >
             </ngx-charts-pie-chart>
           </div>
         </div>
       </div>
     </div>
+
   </div>
 </div>

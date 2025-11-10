@@ -74,15 +74,12 @@ export interface IComprasList {
   total: number;
   fechaRegistro: Date;
 }
-
-export interface DataCompras {
-
-  data: IComprasList[];
-  totalData: number;
+export interface CompraPorMes {
+  mes: string;
+  totalCompras: number;
 }
 
-export class DetalleCompraResponse {
-  nombre = '';
-  direccion = '';
-  fecha = '';
+export interface ProductoCompras {
+  nombreProducto: string;
+  totalComprado: number;
 }

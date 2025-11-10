@@ -54,7 +54,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let data of InventarioList; let i = index">
+          <tr *ngFor="let data of displayList; let i = index">
             <td>{{serialNumberArray[i]}}</td>
             <td>{{data.nombreProducto}}</td>
             <td>{{data.precioEntrada}}</td>
@@ -82,10 +82,7 @@
 
     <!-- Paginación -->
     <div class="table-flooter d-flex justify-content-between  mt-3 flex-wrap">
-      <div *ngIf="serialNumberArray.length > 0">
-        Mostrando {{ serialNumberArray[0] }} a {{ serialNumberArray[serialNumberArray.length - 1] }} de {{ totalData }}
-        entradas
-      </div>
+
       <div *ngIf="serialNumberArray.length === 0">
         No hay entradas para mostrar
       </div>
@@ -107,5 +104,6 @@
         </ul>
       </nav>
     </div>
+
   </div>
 </div>

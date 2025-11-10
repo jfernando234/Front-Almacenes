@@ -4,42 +4,50 @@
   margin: 0 auto;
 }
 
-/* Estilo de las tarjetas (cards) */
+/* Estilo de las tarjetas */
 .card {
   border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
 }
 
 /* Encabezados de las tarjetas */
 .card-header {
   font-weight: bold;
   font-size: 1.1rem;
-  background-color: #f8f9fa; /* color ligero de fondo */
+  background-color: #f8f9fa;
 }
 
+/* Card Body */
 .card-body {
   display: flex;
-  justify-content: center; /* centra el gráfico */
+  justify-content: center;
   align-items: center;
-  overflow: hidden;        /* corta cualquier exceso */
+  overflow: hidden;
   padding: 1rem;
 }
 
-/* Asegura que los canvas sean responsivos */
-canvas {
+/* Responsividad de gráficos */
+ngx-charts-bar-horizontal,
+ngx-charts-bar-vertical,
+ngx-charts-pie-chart {
   width: 100% !important;
-  height: 300px !important; /* altura consistente */
+  height: 300px !important;
 }
+
 @media (max-width: 768px) {
-  canvas {
+
+  ngx-charts-bar-horizontal,
+  ngx-charts-bar-vertical,
+  ngx-charts-pie-chart {
     height: 250px !important;
   }
 }
-.card {
-  background: #ffffff;
-  border: 1px solid #e0e0e0;
-}
-.chart-placeholder{
+
+
+/* Placeholder para centrado y texto de color */
+.chart-placeholder {
   text-align: center;
   color: #888888;
 }

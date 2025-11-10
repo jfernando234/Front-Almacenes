@@ -17,22 +17,26 @@ import Swal from 'sweetalert2';
 })
 export class ClInventarioComponent {
   // Datos y lógica inicial del componente
-  InventarioList: ListProducto[] = [];
-  items: any[] = [];
+
   serialNumberArray: number[] = [];
-  pageNumberArray: Array<number> = [];
   bsModalRef?: BsModalRef;
   isLoading = false;
   dataSource!: MatTableDataSource<ListProducto>;
-  public pageSize = 10;
-  public totalData = 0;
-  public currentPage = 1;
+
+
   public fechaInicio = '';
   public fechaFin = '';
   public skip = 0;
   public totalPages = 0;
   public pageSelection: Array<pageSelection> = [];
-  public limit: number = this.pageSize;
+
+  InventarioList: ListProducto[] = [];
+  currentPage = 1;
+  pageSize = 10;
+  totalData = 0;
+  displayList: any[] = [];
+  pageNumberArray: Array<number> = [];
+
   constructor(private modalService: BsModalService, private inventarioService: InventarioService) { }
 
   ngOnInit() {
@@ -55,14 +59,10 @@ export class ClInventarioComponent {
     }
     this.inventarioService.obtenerInventario().pipe(finalize(() => this.isLoading = false))
       .subscribe((data: ListProducto[]) => {
-
-        for (let index = this.skip; index < Math.min(this.limit, data.length); index++) {
-          const serialNumber = index + 1;
-          this.serialNumberArray.push(serialNumber);
-        }
         this.InventarioList = data;
-        this.dataSource = new MatTableDataSource(this.InventarioList);
-        this.calculateTotalPages(this.totalData, this.pageSize);
+        this.totalData = data.length;
+        this.calculateTotalPages();
+        this.moveToPage(1);
       })
   }
   limpiar() {
@@ -76,20 +76,16 @@ export class ClInventarioComponent {
     this.limpiar();
     this.inventarioService.obtenerInventario().pipe(finalize(() => this.isLoading = false))
       .subscribe((data: ListProducto[]) => {
-
-        for (let index = this.skip; index < Math.min(this.limit, data.length); index++) {
-          const serialNumber = index + 1;
-          this.serialNumberArray.push(serialNumber);
-        }
         this.InventarioList = data;
-        this.dataSource = new MatTableDataSource(this.InventarioList);
-        this.calculateTotalPages(this.totalData, this.pageSize);
+        this.totalData = data.length;
+        this.calculateTotalPages();
+        this.moveToPage(1);
       })
   }
   CrearPorducto() {
     this.bsModalRef = this.modalService.show(AddInventarioComponent);
     this.bsModalRef.onHidden?.subscribe(() => {
-
+      this.ObtenerProductos();
     });
   }
   editarProducto(producto: Producto) {
@@ -123,33 +119,41 @@ export class ClInventarioComponent {
       if (result.isConfirmed) {
         this.inventarioService.eliminarProducto(productoId)
           .subscribe({
-          next: (res) => {
-            Swal.fire('Producto Elminado', 'El Producto ha sido Eliminado correctamente.', 'success');
-            this.ObtenerProductos();
-          },
-          error: (err) => {
-            Swal.fire('Error', 'Hubo un error al Eliminar el Producto.', 'error');
-          }
-        });
+            next: (res) => {
+              Swal.fire('Producto Elminado', 'El Producto ha sido Eliminado correctamente.', 'success');
+              this.ObtenerProductos();
+            },
+            error: (err) => {
+              Swal.fire('Error', 'Hubo un error al Eliminar el Producto.', 'error');
+            }
+          });
       } else {
         return;
       }
     })
   }
+
   /*paginacion*/
-  getMoreData(value: string) { }
-  moveToPage(page: number) { }
-  private calculateTotalPages(totalData: number, pageSize: number): void {
-    this.pageNumberArray = [];
-    this.totalPages = totalData / pageSize;
-    if (this.totalPages % 1 != 0) {
-      this.totalPages = Math.trunc(this.totalPages + 1);
+  getMoreData(direction: 'next' | 'previous'): void {
+    if (direction === 'next' && this.currentPage < this.pageNumberArray.length) {
+      this.moveToPage(this.currentPage + 1);
+    } else if (direction === 'previous' && this.currentPage > 1) {
+      this.moveToPage(this.currentPage - 1);
     }
-    for (let i = 1; i <= this.totalPages; i++) {
-      const limit = pageSize * i;
-      const skip = limit - pageSize;
-      this.pageNumberArray.push(i);
-      this.pageSelection.push({ skip: skip, limit: limit });
-    }
+  }
+
+  moveToPage(page: number): void {
+    this.currentPage = page;
+    const startIndex = (page - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    this.displayList = this.InventarioList.slice(startIndex, endIndex);
+
+    // Opcional: actualizar números de serie
+    this.serialNumberArray = this.displayList.map((_, i) => startIndex + i + 1);
+  }
+
+  calculateTotalPages(): void {
+    const totalPages = Math.ceil(this.totalData / this.pageSize);
+    this.pageNumberArray = Array.from({ length: totalPages }, (_, i) => i + 1);
   }
 }
