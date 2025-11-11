@@ -53,5 +53,8 @@
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
     "typescript": "~5.4.5"
+  },
+  "volta": {
+    "node": "22.12.0"
   }
 }
