@@ -1,3 +1,621 @@
 <div class="cl-reportes">
-  <h2>Reportes</h2>
+  <div class="container-fluid">
+    <!-- Encabezado de página -->
+    <div class="page-header mb-4">
+      <h1 class="page-title">Reportes e Informes</h1>
+      <p class="text-muted">
+        Análisis y visualización de datos del sistema de gestión de almacenes
+      </p>
+    </div>
+
+    <!-- Cards de accesos rápidos a reportes -->
+    <div class="row mb-4">
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div
+          class="report-card"
+          (click)="cargarReporte('valoracion-inventario')"
+        >
+          <div class="card h-100 cursor-pointer">
+            <div class="card-body">
+              <div class="report-icon">
+                <i class="fas fa-chart-pie"></i>
+              </div>
+              <h5 class="card-title mt-3">Valoración de Inventario</h5>
+              <p class="card-text text-muted small">
+                Análisis del valor total del inventario por producto
+              </p>
+              <div class="mt-3">
+                <span class="badge bg-primary">{{
+                  resumenGeneral?.Inventario?.ValorTotal | currency
+                }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="report-card" (click)="cargarReporte('movimientos-stock')">
+          <div class="card h-100 cursor-pointer">
+            <div class="card-body">
+              <div class="report-icon">
+                <i class="fas fa-exchange-alt"></i>
+              </div>
+              <h5 class="card-title mt-3">Movimientos de Stock</h5>
+              <p class="card-text text-muted small">
+                Registro de entradas y salidas de productos
+              </p>
+              <div class="mt-3">
+                <span class="badge bg-info">{{
+                  movimientosFilter.selectedRange || "Último mes"
+                }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div
+          class="report-card"
+          (click)="cargarReporte('rendimiento-proveedores')"
+        >
+          <div class="card h-100 cursor-pointer">
+            <div class="card-body">
+              <div class="report-icon">
+                <i class="fas fa-truck"></i>
+              </div>
+              <h5 class="card-title mt-3">Rendimiento de Proveedores</h5>
+              <p class="card-text text-muted small">
+                Evaluación de desempeño y cumplimiento
+              </p>
+              <div class="mt-3">
+                <span class="badge bg-success"> Proveedores</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="report-card" (click)="cargarReporte('stock-critico')">
+          <div class="card h-100 cursor-pointer">
+            <div class="card-body">
+              <div class="report-icon">
+                <i class="fas fa-exclamation-triangle"></i>
+              </div>
+              <h5 class="card-title mt-3">Stock Crítico</h5>
+              <p class="card-text text-muted small">
+                Productos bajo nivel mínimo de inventario
+              </p>
+              <div class="mt-3">
+                <span class="badge bg-warning"> Productos</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Otras tarjetas de reportes -->
+    <div class="row mb-4">
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="report-card" (click)="cargarReporte('historial-clientes')">
+          <div class="card h-100 cursor-pointer">
+            <div class="card-body">
+              <div class="report-icon">
+                <i class="fas fa-users"></i>
+              </div>
+              <h5 class="card-title mt-3">Historial de Clientes</h5>
+              <p class="card-text text-muted small">
+                Análisis de transacciones y comportamiento
+              </p>
+              <div class="mt-3">
+                <span class="badge bg-secondary">Clientes</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="report-card" (click)="cargarReporte('analisis-abc')">
+          <div class="card h-100 cursor-pointer">
+            <div class="card-body">
+              <div class="report-icon">
+                <i class="fas fa-chart-bar"></i>
+              </div>
+              <h5 class="card-title mt-3">Análisis ABC</h5>
+              <p class="card-text text-muted small">
+                Clasificación de productos por valor
+              </p>
+              <div class="mt-3">
+                <span class="badge bg-dark">Productos clasificados</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card principal de reporte seleccionado -->
+    <div class="card">
+      <div
+        class="card-header d-flex justify-content-between align-items-center"
+      >
+        <div>
+          <h5 class="mb-0">{{ reporteActual.titulo }}</h5>
+        </div>
+        <div class="report-actions">
+          <!-- <button
+            *ngIf="reporteCargado"
+            class="btn btn-sm btn-outline-primary me-2"
+            (click)="exportarCSV()"
+          >
+            <!-- <i class="fas fa-download"></i> Descargar CSV 
+          </button> -->
+          <!-- <button
+            *ngIf="reporteCargado"
+            class="btn btn-sm btn-outline-secondary me-2"
+            (click)="imprimirReporte()"
+          >
+            <i class="fas fa-print"></i> Imprimir
+          </button> -->
+          <button
+            *ngIf="reporteCargado"
+            class="btn btn-sm btn-outline-info"
+            (click)="actualizarReporte()"
+          >
+            <i class="fas fa-sync"></i> Actualizar
+          </button>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <!-- Filtros según el tipo de reporte -->
+        <div
+          *ngIf="reporteActual.tipo === 'movimientos-stock'"
+          class="row mb-3 pb-3 border-bottom"
+        >
+          <div class="col-md-3">
+            <label class="form-label">Fecha Inicio</label>
+            <input
+              type="date"
+              class="form-control form-control-sm"
+              [(ngModel)]="movimientosFilter.fechaInicio"
+              (change)="aplicarFiltros()"
+            />
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Fecha Fin</label>
+            <input
+              type="date"
+              class="form-control form-control-sm"
+              [(ngModel)]="movimientosFilter.fechaFin"
+              (change)="aplicarFiltros()"
+            />
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Tipo Movimiento</label>
+            <select
+              class="form-select form-select-sm"
+              [(ngModel)]="movimientosFilter.tipoMovimiento"
+              (change)="aplicarFiltros()"
+            >
+              <option value="">Todos</option>
+              <option value="Compra">Compra</option>
+              <option value="Venta">Venta</option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">&nbsp;</label>
+            <button
+              class="btn btn-sm btn-outline-secondary w-100"
+              (click)="limpiarFiltros()"
+            >
+              <i class="fas fa-redo"></i> Limpiar
+            </button>
+          </div>
+        </div>
+
+        <!-- Loading spinner -->
+        <div *ngIf="cargando" class="text-center py-5">
+          <div class="spinner-border text-primary mb-3" role="status">
+            <span class="visually-hidden">Cargando...</span>
+          </div>
+          <p>Cargando reporte...</p>
+        </div>
+
+        <!-- Contenido del reporte -->
+        <div *ngIf="!cargando && reporteCargado">
+          <!-- Resumen de datos -->
+          <div
+            *ngIf="reporteActual.tipo !== 'movimientos-stock'"
+            class="row mb-4"
+          >
+            <ng-container [ngSwitch]="reporteActual.tipo">
+              <!-- Valoración de Inventario -->
+              <ng-container *ngSwitchCase="'valoracion-inventario'">
+                <div class="col-md-3">
+                  <div class="stat-card">
+                    <div class="stat-value">
+                      {{ reporteData?.totalProductos }}
+                    </div>
+                    <div class="stat-label">Total de Productos</div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="stat-card">
+                    <div class="stat-value">
+                      {{ reporteData?.totalUnidades }}
+                    </div>
+                    <div class="stat-label">Unidades en Stock</div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="stat-card">
+                    <div class="stat-value">
+                      {{ reporteData?.valorInventarioTotal | currency }}
+                    </div>
+                    <div class="stat-label">Valor Total</div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="stat-card">
+                    <div class="stat-value">
+                      {{ reporteData?.promedioValorProducto | currency }}
+                    </div>
+                    <div class="stat-label">Valor Promedio</div>
+                  </div>
+                </div>
+              </ng-container>
+
+              <!-- Stock Crítico -->
+              <ng-container *ngSwitchCase="'stock-critico'">
+                <div class="col-md-3">
+                  <div class="stat-card">
+                    <div class="stat-value text-danger">
+                      {{ reporteData?.totalProductosCriticos }}
+                    </div>
+                    <div class="stat-label">Total en Riesgo</div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="stat-card">
+                    <div class="stat-value text-danger">
+                      {{ reporteData?.productosMuyCriticos }}
+                    </div>
+                    <div class="stat-label">Muy Crítico</div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="stat-card">
+                    <div class="stat-value text-warning">
+                      {{ reporteData?.productosCriticos }}
+                    </div>
+                    <div class="stat-label">Crítico</div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="stat-card">
+                    <div class="stat-value text-info">
+                      {{ reporteData?.productosAlerta }}
+                    </div>
+                    <div class="stat-label">Alerta</div>
+                  </div>
+                </div>
+              </ng-container>
+
+              <!-- Rendimiento de Proveedores -->
+              <ng-container *ngSwitchCase="'rendimiento-proveedores'">
+                <div class="col-md-3">
+                  <div class="stat-card">
+                    <div class="stat-value">
+                      {{ reporteData?.totalProveedores }}
+                    </div>
+                    <div class="stat-label">Total Proveedores</div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="stat-card">
+                    <div class="stat-value">
+                      {{ reporteData?.totalOrdenesCompra }}
+                    </div>
+                    <div class="stat-label">Órdenes de Compra</div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="stat-card">
+                    <div class="stat-value">
+                      {{ reporteData?.montoTotalComprado | currency }}
+                    </div>
+                    <div class="stat-label">Monto Total</div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="stat-card">
+                    <div class="stat-value">
+                      {{ reporteData?.tasaCumplimientoPromedio }}%
+                    </div>
+                    <div class="stat-label">Cumplimiento Promedio</div>
+                  </div>
+                </div>
+              </ng-container>
+
+              <!-- Historial de Clientes -->
+              <ng-container *ngSwitchCase="'historial-clientes'">
+                <div class="col-md-3">
+                  <div class="stat-card">
+                    <div class="stat-value">
+                      {{ reporteData?.totalClientes }}
+                    </div>
+                    <div class="stat-label">Total de Clientes</div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="stat-card">
+                    <div class="stat-value">
+                      {{ reporteData?.clientesActivos }}
+                    </div>
+                    <div class="stat-label">Clientes Activos</div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="stat-card">
+                    <div class="stat-value">
+                      {{ reporteData?.montoTotalVentas | currency }}
+                    </div>
+                    <div class="stat-label">Monto Total Ventas</div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="stat-card">
+                    <div class="stat-value">
+                      {{ reporteData?.promedioVentasCliente | currency }}
+                    </div>
+                    <div class="stat-label">Promedio por Cliente</div>
+                  </div>
+                </div>
+              </ng-container>
+
+              <!-- Análisis ABC -->
+              <ng-container *ngSwitchCase="'analisis-abc'">
+                <div class="col-md-3">
+                  <div class="stat-card">
+                    <div class="stat-value">
+                      {{ reporteData?.totalProductos }}
+                    </div>
+                    <div class="stat-label">Total Productos</div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="stat-card">
+                    <div class="stat-value text-primary">
+                      {{ reporteData?.productosA }}
+                    </div>
+                    <div class="stat-label">Productos A (80%)</div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="stat-card">
+                    <div class="stat-value text-info">
+                      {{ reporteData?.productosB }}
+                    </div>
+                    <div class="stat-label">Productos B (15%)</div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="stat-card">
+                    <div class="stat-value text-secondary">
+                      {{ reporteData?.productosC }}
+                    </div>
+                    <div class="stat-label">Productos C (5%)</div>
+                  </div>
+                </div>
+              </ng-container>
+            </ng-container>
+          </div>
+
+          <!-- Tabla de datos -->
+          <div class="table-responsive">
+            <table class="table table-sm table-striped">
+              <thead class="table-light">
+                <tr>
+                  <ng-container [ngSwitch]="reporteActual.tipo">
+                    <!-- Valoración de Inventario -->
+                    <ng-container *ngSwitchCase="'valoracion-inventario'">
+                      <th>Producto</th>
+                      <th class="text-center">Stock</th>
+                      <th class="text-end">Precio Entrada</th>
+                      <th class="text-end">Precio Salida</th>
+                      <th class="text-end">Valor Total</th>
+                    </ng-container>
+
+                    <!-- Movimientos de Stock -->
+                    <ng-container *ngSwitchCase="'movimientos-stock'">
+                      <th>Producto</th>
+                      <th>Tipo</th>
+                      <th class="text-center">Cantidad</th>
+                      <th class="text-end">Precio Unit.</th>
+                      <th class="text-end">Total</th>
+                      <th>Fecha</th>
+                    </ng-container>
+
+                    <!-- Rendimiento de Proveedores -->
+                    <ng-container *ngSwitchCase="'rendimiento-proveedores'">
+                      <th>Proveedor</th>
+                      <th>RUC</th>
+                      <th class="text-center">Órdenes</th>
+                      <th class="text-end">Monto Total</th>
+                      <th>Calificación</th>
+                    </ng-container>
+
+                    <!-- Historial de Clientes -->
+                    <ng-container *ngSwitchCase="'historial-clientes'">
+                      <th>Cliente</th>
+                      <th>Documento</th>
+                      <th class="text-center">Órdenes</th>
+                      <th class="text-end">Monto Total</th>
+                      <th>Última Compra</th>
+                    </ng-container>
+
+                    <!-- Stock Crítico -->
+                    <ng-container *ngSwitchCase="'stock-critico'">
+                      <th>Producto</th>
+                      <th class="text-center">Stock Actual</th>
+                      <th class="text-center">Stock Mínimo</th>
+                      <th class="text-center">Diferencia</th>
+                      <th>Urgencia</th>
+                    </ng-container>
+
+                    <!-- Análisis ABC -->
+                    <ng-container *ngSwitchCase="'analisis-abc'">
+                      <th>Producto</th>
+                      <th class="text-center">Stock</th>
+                      <th class="text-end">Valor Total</th>
+                      <th class="text-end">% Valor</th>
+                      <th class="text-center">Clasificación</th>
+                    </ng-container>
+                  </ng-container>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of obtenerDetalles()">
+                  <ng-container [ngSwitch]="reporteActual.tipo">
+                    <!-- Valoración de Inventario -->
+                    <ng-container *ngSwitchCase="'valoracion-inventario'">
+                      <td>{{ item.nombreProducto }}</td>
+                      <td class="text-center">{{ item.stock }}</td>
+                      <td class="text-end">
+                        {{ item.precioEntrada | currency }}
+                      </td>
+                      <td class="text-end">
+                        {{ item.precioSalida | currency }}
+                      </td>
+                      <td class="text-end">
+                        <strong>{{ item.valorTotal | currency }}</strong>
+                      </td>
+                    </ng-container>
+
+                    <!-- Movimientos de Stock -->
+                    <ng-container *ngSwitchCase="'movimientos-stock'">
+                      <td>{{ item.nombreProducto }}</td>
+                      <td>
+                        <span
+                          class="badge"
+                          [ngClass]="
+                            item.tipoMovimiento === 'Compra'
+                              ? 'bg-success'
+                              : 'bg-danger'
+                          "
+                        >
+                          {{ item.tipoMovimiento }}
+                        </span>
+                      </td>
+                      <td class="text-center">{{ item.cantidad }}</td>
+                      <td class="text-end">
+                        {{ item.precioUnitario | currency }}
+                      </td>
+                      <td class="text-end">{{ item.total | currency }}</td>
+                      <td>{{ item.fechaMovimiento | date : "short" }}</td>
+                    </ng-container>
+
+                    <!-- Rendimiento de Proveedores -->
+                    <ng-container *ngSwitchCase="'rendimiento-proveedores'">
+                      <td>{{ item.nombreProveedor }}</td>
+                      <td>{{ item.ruc }}</td>
+                      <td class="text-center">{{ item.totalOrdenesCompra }}</td>
+                      <td class="text-end">
+                        {{ item.montoTotalComprado | currency }}
+                      </td>
+                      <td>
+                        <span
+                          class="badge"
+                          [ngClass]="
+                            obtenerClaseCalificacion(item.calificacionGlobal)
+                          "
+                        >
+                          {{ item.calificacionGlobal }}
+                        </span>
+                      </td>
+                    </ng-container>
+
+                    <!-- Historial de Clientes -->
+                    <ng-container *ngSwitchCase="'historial-clientes'">
+                      <td>{{ item.razonSocial }}</td>
+                      <td>{{ item.numeroDocumento }}</td>
+                      <td class="text-center">{{ item.totalOrdenes }}</td>
+                      <td class="text-end">
+                        {{ item.montoTotalComprado | currency }}
+                      </td>
+                      <td>{{ item.ultimaCompra | date : "short" }}</td>
+                    </ng-container>
+
+                    <!-- Stock Crítico -->
+                    <ng-container *ngSwitchCase="'stock-critico'">
+                      <td>{{ item.nombreProducto }}</td>
+                      <td class="text-center">
+                        <strong>{{ item.stockActual }}</strong>
+                      </td>
+                      <td class="text-center">{{ item.stockMinimo }}</td>
+                      <td class="text-center">
+                        <strong class="text-danger">{{
+                          item.diferencia
+                        }}</strong>
+                      </td>
+                      <td>
+                        <span
+                          class="badge"
+                          [ngClass]="obtenerClaseUrgencia(item.urgencia)"
+                        >
+                          {{ item.urgencia }}
+                        </span>
+                      </td>
+                    </ng-container>
+
+                    <!-- Análisis ABC -->
+                    <ng-container *ngSwitchCase="'analisis-abc'">
+                      <td>{{ item.nombreProducto }}</td>
+                      <td class="text-center">{{ item.stock }}</td>
+                      <td class="text-end">{{ item.valorTotal | currency }}</td>
+                      <td class="text-end">
+                        {{ item.porcentajeValor | number : "1.2-2" }}%
+                      </td>
+                      <td class="text-center">
+                        <span
+                          class="badge"
+                          [ngClass]="obtenerClaseABC(item.clasificacion)"
+                        >
+                          {{ item.clasificacion }}
+                        </span>
+                      </td>
+                    </ng-container>
+                  </ng-container>
+                </tr>
+
+                <!-- Mensaje si no hay datos -->
+                <tr
+                  *ngIf="!obtenerDetalles() || obtenerDetalles().length === 0"
+                >
+                  <td [attr.colspan]="6" class="text-center text-muted py-4">
+                    No hay datos disponibles para este reporte
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Mensaje inicial -->
+        <div *ngIf="!reporteCargado && !cargando" class="text-center py-5">
+          <i class="fas fa-chart-line fa-4x mb-3 text-muted"></i>
+          <h4>Seleccione un reporte para visualizar</h4>
+          <p class="text-muted">
+            Haga clic en cualquiera de las tarjetas de reportes para ver los
+            datos correspondientes.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
