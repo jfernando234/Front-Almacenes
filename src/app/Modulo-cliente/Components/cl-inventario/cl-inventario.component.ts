@@ -26,6 +26,7 @@ export class ClInventarioComponent {
 
   public fechaInicio: any = '';
   public fechaFin: any = '';
+  public nombreProducto = '';
   public skip = 0;
   public totalPages = 0;
   public pageSelection: Array<pageSelection> = [];
@@ -64,8 +65,8 @@ export class ClInventarioComponent {
     }
 
     let request;
-    if (fechaInicioFormateado && fechaFinFormateado) {
-      request = this.inventarioService.filtrarInventario(fechaInicioFormateado, fechaFinFormateado);
+    if (fechaInicioFormateado || fechaFinFormateado || this.nombreProducto) {
+      request = this.inventarioService.filtrarInventario(fechaInicioFormateado || '', fechaFinFormateado || '', this.nombreProducto);
     } else {
       request = this.inventarioService.obtenerInventario();
     }
@@ -83,6 +84,7 @@ export class ClInventarioComponent {
     this.InventarioList = [];
     this.fechaInicio = '';
     this.fechaFin = '';
+    this.nombreProducto = '';
     this.ObtenerProductos();
   }
   refresh() {

@@ -24,6 +24,7 @@ export class ClProveedoresComponent {
 
   public fechaInicio: any = '';
   public fechaFin: any = '';
+  public nombreProveedor = '';
 
 
   ProveedorList: any[] = [];
@@ -58,8 +59,8 @@ export class ClProveedoresComponent {
     }
 
     let request;
-    if (fechaInicioFormateado && fechaFinFormateado) {
-      request = this.proveedorService.filtrarProveedores(fechaInicioFormateado, fechaFinFormateado);
+    if (fechaInicioFormateado || fechaFinFormateado || this.nombreProveedor) {
+      request = this.proveedorService.filtrarProveedores(fechaInicioFormateado || '', fechaFinFormateado || '', this.nombreProveedor);
     } else {
       request = this.proveedorService.obtenerAllProveedores();
     }
@@ -77,6 +78,7 @@ export class ClProveedoresComponent {
     this.ProveedorList = [];
     this.fechaInicio = '';
     this.fechaFin = '';
+    this.nombreProveedor = '';
     this.ObtenerProveedor();
   }
   refresh() {

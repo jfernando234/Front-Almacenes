@@ -7,7 +7,7 @@
           <div class="form-group local-forms">
             <label class="control-label">Desde:</label>
             <input class="form-control datetimepicker" type="text" [matDatepicker]="pickerInicio" matInput
-              [(ngModel)]="fechaInicio" />
+              [(ngModel)]="fechaInicio" readonly />
             <mat-datepicker #pickerInicio matDatepickerFilter="DD/MM/YYYY"></mat-datepicker>
             <mat-datepicker-toggle matIconSuffix [for]="pickerInicio"
               matDatepickerFilter="DD/MM/YYYY"></mat-datepicker-toggle>
@@ -19,7 +19,7 @@
           <div class="form-group local-forms">
             <label class="control-label">Hasta:</label>
             <input matInput [(ngModel)]="fechaFin" (ngModelChange)="obtenerCompraData()"
-              class="form-control datetimepicker" type="text" [matDatepicker]="pickerFin" />
+              class="form-control datetimepicker" type="text" [matDatepicker]="pickerFin" readonly />
             <mat-datepicker #pickerFin matDatepickerFilter="DD/MM/YYYY"></mat-datepicker>
             <mat-datepicker-toggle matIconSuffix [for]="pickerFin"
               matDatepickerFilter="DD/MM/YYYY"></mat-datepicker-toggle>

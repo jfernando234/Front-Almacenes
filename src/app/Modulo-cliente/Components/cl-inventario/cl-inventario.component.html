@@ -7,7 +7,7 @@
           <div class="form-group local-forms">
             <label class="control-label">Desde:</label>
             <input class="form-control datetimepicker" type="text" [matDatepicker]="pickerInicio" matInput
-              [(ngModel)]="fechaInicio"  />
+              [(ngModel)]="fechaInicio" readonly />
             <mat-datepicker #pickerInicio matDatepickerFilter="DD/MM/YYYY"></mat-datepicker>
             <mat-datepicker-toggle matIconSuffix [for]="pickerInicio"
               matDatepickerFilter="DD/MM/YYYY"></mat-datepicker-toggle>
@@ -18,11 +18,20 @@
         <div class="col-md-3">
           <div class="form-group local-forms">
             <label class="control-label">Hasta:</label>
-            <input matInput [(ngModel)]="fechaFin"
-              class="form-control datetimepicker" type="text" [matDatepicker]="pickerFin" />
+            <input matInput [(ngModel)]="fechaFin" class="form-control datetimepicker" type="text"
+              [matDatepicker]="pickerFin" readonly />
             <mat-datepicker #pickerFin matDatepickerFilter="DD/MM/YYYY"></mat-datepicker>
             <mat-datepicker-toggle matIconSuffix [for]="pickerFin"
               matDatepickerFilter="DD/MM/YYYY"></mat-datepicker-toggle>
+          </div>
+        </div>
+
+        <!-- Buscar -->
+        <div class="col-md-3">
+          <div class="form-group local-forms">
+            <label class="control-label">Buscar:</label>
+            <input class="form-control" type="text" [(ngModel)]="nombreProducto" (keyup.enter)="ObtenerProductos()"
+              placeholder="Nombre producto..." />
           </div>
         </div>
       </div>
@@ -71,7 +80,8 @@
                   <a class="dropdown-item" (click)="editarProducto(data)"><i
                       class="fa-solid fa-pen-to-square m-r-5"></i>Editar</a>
                   <a class="dropdown-item" (click)="eliminarProducto(data.productoId)"><i
-                      class="fa fa-trash-alt m-r-5"></i> Eliminar</a>
+                      class="fa fa-trash-alt m-r-5"></i>
+                    Eliminar</a>
                 </div>
               </div>
             </td>
