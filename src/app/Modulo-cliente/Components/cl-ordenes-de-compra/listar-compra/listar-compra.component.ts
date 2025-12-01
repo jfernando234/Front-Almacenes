@@ -25,8 +25,8 @@ export class ListarCompraComponent {
   isLoading = false;
   dataSource!: MatTableDataSource<IComprasList>;
 
-  public fechaInicio = ''
-  public fechaFin = '';
+  public fechaInicio: any = '';
+  public fechaFin: any = '';
   public skip = 0;
   public totalPages = 0;
   public pageSelection: Array<pageSelection> = [];
@@ -43,18 +43,53 @@ export class ListarCompraComponent {
   constructor(private router: Router, private Compraservice: ComprasService, private proveedorService: ProveedorService) { }
 
   ngOnInit() {
+    // Establecer fechas por defecto: Primer día del mes actual hasta hoy
+    const date = new Date();
+    this.fechaInicio = new Date(date.getFullYear(), date.getMonth(), 1);
+    this.fechaFin = new Date();
 
     this.obtenerCompraData();
-
   }
   obtenerCompraData(): void {
-    this.Compraservice.obtenerCompras().pipe(finalize(() => this.isLoading = false))
+    this.serialNumberArray = [];
+    this.ComprasList = [];
+    let fechaInicioFormateado = undefined;
+    let fechaFinFormateado = undefined;
+    this.isLoading = true;
+
+    if (this.fechaInicio != "") {
+      fechaInicioFormateado = new Date(this.fechaInicio)?.toISOString().split('T')[0];
+    }
+    if (this.fechaFin != "") {
+      fechaFinFormateado = new Date(this.fechaFin)?.toISOString().split('T')[0];
+    }
+
+    let request;
+    if (fechaInicioFormateado && fechaFinFormateado) {
+      request = this.Compraservice.obtenerComprasFiltro(fechaInicioFormateado, fechaFinFormateado);
+    } else {
+      request = this.Compraservice.obtenerCompras();
+    }
+
+    request.pipe(finalize(() => this.isLoading = false))
       .subscribe((data: IComprasList[]) => {
         this.ComprasList = data;
         this.totalData = data.length;
         this.calculateTotalPages();
         this.moveToPage(1);
-      })
+      });
+  }
+
+  limpiar() {
+    this.serialNumberArray = [];
+    this.ComprasList = [];
+    this.fechaInicio = '';
+    this.fechaFin = '';
+    this.obtenerCompraData();
+  }
+
+  refresh() {
+    this.obtenerCompraData();
   }
   formatearFechaZona(fecha: Date): string {
     const tzOffset = -5 * 60; // Perú GMT-5

@@ -22,8 +22,8 @@ export class ClProveedoresComponent {
   isLoading = false;
   dataSource!: MatTableDataSource<ListIproveedor>;
 
-  public fechaInicio = '';
-  public fechaFin = '';
+  public fechaInicio: any = '';
+  public fechaFin: any = '';
 
 
   ProveedorList: any[] = [];
@@ -36,38 +36,51 @@ export class ClProveedoresComponent {
   constructor(private modalService: BsModalService, private proveedorService: ProveedorService) { }
 
   ngOnInit() {
+    // Establecer fechas por defecto: Primer día del mes actual hasta hoy
+    const date = new Date();
+    this.fechaInicio = new Date(date.getFullYear(), date.getMonth(), 1);
+    this.fechaFin = new Date();
+
     this.ObtenerProveedor();
   }
   ObtenerProveedor() {
     this.serialNumberArray = [];
     this.ProveedorList = [];
-    this.isLoading = true
-    this.proveedorService.obtenerAllProveedores()
-      .pipe(finalize(() => this.isLoading = false))
+    let fechaInicioFormateado = undefined;
+    let fechaFinFormateado = undefined;
+    this.isLoading = true;
+
+    if (this.fechaInicio != "") {
+      fechaInicioFormateado = new Date(this.fechaInicio)?.toISOString().split('T')[0];
+    }
+    if (this.fechaFin != "") {
+      fechaFinFormateado = new Date(this.fechaFin)?.toISOString().split('T')[0];
+    }
+
+    let request;
+    if (fechaInicioFormateado && fechaFinFormateado) {
+      request = this.proveedorService.filtrarProveedores(fechaInicioFormateado, fechaFinFormateado);
+    } else {
+      request = this.proveedorService.obtenerAllProveedores();
+    }
+
+    request.pipe(finalize(() => this.isLoading = false))
       .subscribe((data: ListIproveedor[]) => {
-        this.ProveedorList = data
+        this.ProveedorList = data;
         this.totalData = data.length;
         this.calculateTotalPages();
         this.moveToPage(1);
-      })
+      });
   }
   limpiar() {
     this.serialNumberArray = [];
     this.ProveedorList = [];
+    this.fechaInicio = '';
     this.fechaFin = '';
-    this.fechaFin = '';
-
+    this.ObtenerProveedor();
   }
   refresh() {
-    this.limpiar();
-    this.proveedorService.obtenerAllProveedores()
-      .pipe(finalize(() => this.isLoading = false))
-      .subscribe((data: ListIproveedor[]) => {
-        this.ProveedorList = data
-        this.totalData = data.length;
-        this.calculateTotalPages();
-        this.moveToPage(1);
-      })
+    this.ObtenerProveedor();
   }
   CrearProveedor() {
     this.bsModalRef = this.modalService.show(AddProveedorComponent);

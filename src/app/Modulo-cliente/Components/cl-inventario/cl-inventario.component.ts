@@ -24,8 +24,8 @@ export class ClInventarioComponent {
   dataSource!: MatTableDataSource<ListProducto>;
 
 
-  public fechaInicio = '';
-  public fechaFin = '';
+  public fechaInicio: any = '';
+  public fechaFin: any = '';
   public skip = 0;
   public totalPages = 0;
   public pageSelection: Array<pageSelection> = [];
@@ -40,6 +40,11 @@ export class ClInventarioComponent {
   constructor(private modalService: BsModalService, private inventarioService: InventarioService) { }
 
   ngOnInit() {
+    // Establecer fechas por defecto: Primer día del mes actual hasta hoy
+    const date = new Date();
+    this.fechaInicio = new Date(date.getFullYear(), date.getMonth(), 1);
+    this.fechaFin = new Date();
+
     // cargar datos iniciales si aplica
     this.ObtenerProductos();
   }
@@ -47,9 +52,9 @@ export class ClInventarioComponent {
   ObtenerProductos() {
     this.serialNumberArray = [];
     this.InventarioList = [];
-    let fechaInicioFormateado = undefined
-    let fechaFinFormateado = undefined
-    this.isLoading = true
+    let fechaInicioFormateado = undefined;
+    let fechaFinFormateado = undefined;
+    this.isLoading = true;
 
     if (this.fechaInicio != "") {
       fechaInicioFormateado = new Date(this.fechaInicio)?.toISOString().split('T')[0];
@@ -57,30 +62,31 @@ export class ClInventarioComponent {
     if (this.fechaFin != "") {
       fechaFinFormateado = new Date(this.fechaFin)?.toISOString().split('T')[0];
     }
-    this.inventarioService.obtenerInventario().pipe(finalize(() => this.isLoading = false))
+
+    let request;
+    if (fechaInicioFormateado && fechaFinFormateado) {
+      request = this.inventarioService.filtrarInventario(fechaInicioFormateado, fechaFinFormateado);
+    } else {
+      request = this.inventarioService.obtenerInventario();
+    }
+
+    request.pipe(finalize(() => this.isLoading = false))
       .subscribe((data: ListProducto[]) => {
         this.InventarioList = data;
         this.totalData = data.length;
         this.calculateTotalPages();
         this.moveToPage(1);
-      })
+      });
   }
   limpiar() {
     this.serialNumberArray = [];
     this.InventarioList = [];
     this.fechaInicio = '';
     this.fechaFin = '';
-
+    this.ObtenerProductos();
   }
   refresh() {
-    this.limpiar();
-    this.inventarioService.obtenerInventario().pipe(finalize(() => this.isLoading = false))
-      .subscribe((data: ListProducto[]) => {
-        this.InventarioList = data;
-        this.totalData = data.length;
-        this.calculateTotalPages();
-        this.moveToPage(1);
-      })
+    this.ObtenerProductos();
   }
   CrearPorducto() {
     this.bsModalRef = this.modalService.show(AddInventarioComponent);

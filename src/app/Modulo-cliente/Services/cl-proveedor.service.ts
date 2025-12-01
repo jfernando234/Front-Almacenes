@@ -15,6 +15,14 @@ export class ProveedorService {
     let url = `${this.apiUrl}proveedor/ListarAllProveedores`
     return this.http.get<ListIproveedor[]>(url);
   }
+
+  filtrarProveedores(inicio: string, fin: string, nombre: string = ''): Observable<ListIproveedor[]> {
+    let params = `?inicio=${inicio}&fin=${fin}`;
+    if (nombre) {
+      params += `&nombre=${nombre}`;
+    }
+    return this.http.get<ListIproveedor[]>(`${this.apiUrl}proveedor/FiltrarProveedores${params}`);
+  }
   registrar(producto: Iproveedor): Observable<any> {
     return this.http.post(`${this.apiUrl}proveedor/RegistrarProveedor`, producto);
   }
@@ -22,6 +30,6 @@ export class ProveedorService {
     return this.http.put(`${this.apiUrl}proveedor/ModificarProveedor`, proveedor);
   }
   eliminarProveedor(proveedorId?: number): Observable<successResponse> {
-   return this.http.put<successResponse>(this.apiUrl + `proveedor/EliminarProveedor/${proveedorId}`,null);
+    return this.http.put<successResponse>(this.apiUrl + `proveedor/EliminarProveedor/${proveedorId}`, null);
   }
 }
